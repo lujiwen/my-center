@@ -43,12 +43,29 @@ namespace WpfApplication2.View.Pages
             initSystemTreeView();
             if (building != null)
             {
-                cabspage = new CabsPage(this, building);
+                switch(building.Office)
+                {
+                    case "亭子":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "检测车":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break; 
+                    default:
+                        cabspage = new CabsPage(this, building);
+                        page.Content = cabspage;
+                        break;
+                }
+              
             }
             else
             {
                 cabspage = new CabsPage();
+                page.Content = cabspage;
             }
+           
             init();
            
         }
@@ -65,6 +82,7 @@ namespace WpfApplication2.View.Pages
             {
                 cabspage = new CabsPage();
             }
+            page.Content = cabspage;
             init();
 
         }
@@ -81,6 +99,7 @@ namespace WpfApplication2.View.Pages
             {
                 cabspage = new CabsPage();
             }
+            page.Content = cabspage;
             if (isMutilChoose)
             {
                 roomchoose = w.RoomChoosed;
@@ -96,7 +115,7 @@ namespace WpfApplication2.View.Pages
         {
             markers = mainWindow.getMapMarkers();
             currentMarker = mainWindow.getCurrentMarker();
-            page.Content = cabspage;
+           
             initEventListener();
             initLittleMap();
             this.Unloaded += new RoutedEventHandler(SystemPage_Unloaded);
@@ -359,12 +378,12 @@ namespace WpfApplication2.View.Pages
                     if (c.type.Equals(MyCheckBox.CheckBoxType.buildingType)) //插入一个楼的全部柜子
                     {
 
-                        cabspage.insertCab(getPage(), (Building)c.NodeObject);
+                        cabspage.insertCab(getPageFrame(), (Building)c.NodeObject);
                       //  cabspage.selectBuildings.Add((Building)c.NodeObject);
                     }
                     else 
                     {
-                        cabspage.insertCab(getPage(), (Cab)c.NodeObject);
+                        cabspage.insertCab(getPageFrame(), (Cab)c.NodeObject);
                     }
                     
                 }
@@ -382,11 +401,11 @@ namespace WpfApplication2.View.Pages
                     checkAllChild(c.TreeNode, true);
                     if (c.type.Equals(MyCheckBox.CheckBoxType.buildingType)) //插入一个楼的全部柜子
                     {
-                        cabspage.deleteCab(getPage(), (Building)c.NodeObject);
+                        cabspage.deleteCab(getPageFrame(), (Building)c.NodeObject);
                     }
                     else
                     {
-                        cabspage.deleteCab(getPage(), (Cab)c.NodeObject);
+                        cabspage.deleteCab(getPageFrame(), (Cab)c.NodeObject);
                     }
                     checkAllChild(c.TreeNode, false);
                 }
@@ -523,7 +542,7 @@ namespace WpfApplication2.View.Pages
             }
         }
 
-        public Frame getPage()
+        public Frame getPageFrame()
         {
             return page;
         }

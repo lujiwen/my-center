@@ -360,7 +360,6 @@ namespace WpfApplication2.View.Pages
                 mainWindow.setClickPoint(MainMap.FromLocalToLatLng((int)p.X, (int)p.Y));
                 mainWindow.setCurrentMarker(marker.getGmapMarker());
                 Building b = marker.building;
-           //   globalMapForBuiding.TryGetValue("208",out b);
                 SystemPage page = new SystemPage(mainWindow,b);
                 mainWindow.getMainPage().Content = page;
             }

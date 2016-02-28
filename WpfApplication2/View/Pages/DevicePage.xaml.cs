@@ -26,6 +26,7 @@ namespace WpfApplication2.View.Pages
     {
         private Frame systemFrame;
         private Cab cab;
+        private Building building;
         private List<Device> devices;
         private Dictionary<String, List<DeviceUI>> subSystem;
         public DevicePage(Frame fm,Cab c)
@@ -34,7 +35,15 @@ namespace WpfApplication2.View.Pages
             this.systemFrame = fm;
             this.cab = c;
             init();
+        }
 
+        //针对一个监测点是多个设备 没有柜子概念
+        public DevicePage(Frame fm,Building b)
+        {
+            InitializeComponent();
+            this.systemFrame = fm;
+            this.building = b ; //如果没有柜子可以把所有需要显示的设备放在一个柜子里面进行显示
+            init();
         }
 
         public DevicePage(Frame fm)
@@ -42,7 +51,6 @@ namespace WpfApplication2.View.Pages
             InitializeComponent();
             this.systemFrame = fm;
             init();
-
         }
         private void init()
         {
@@ -71,6 +79,16 @@ namespace WpfApplication2.View.Pages
                              break ;
                          case "Quality":
                              deviceUI = new DeviceUIQuality(cab.Devices[i], systemFrame);
+                             break;
+                         case "asm02":
+                             break;
+                         case "jl900":
+                             break;
+                         case "rss131":
+                             break;
+                         case "h3r7000":
+                             break;
+                         case "drywet":
                              break;
                          default:
                              deviceUI = new DeviceUI(cab.Devices[i], systemFrame);

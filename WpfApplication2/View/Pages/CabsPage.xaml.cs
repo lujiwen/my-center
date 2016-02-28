@@ -135,7 +135,7 @@ namespace WpfApplication2.View.Pages
                  for (int i = 0; i < cabs.Count; i++)
                  {
                      WpfApplication2.Model.Vo.Cab cab = cabs[i];
-                     CabUI cabUI = new CabUI(systemPage.getPage(), cab);
+                     CabUI cabUI = new CabUI(systemPage.getPageFrame(), cab);
                      cabListSource.Add(cabUI);
                  }
              }

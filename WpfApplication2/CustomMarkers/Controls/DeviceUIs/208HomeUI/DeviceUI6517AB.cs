@@ -14,7 +14,6 @@ using System.ComponentModel;
 using WpfApplication2.package;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
-
 {
    public  class DeviceUI6517AB : DeviceUI 
     {
