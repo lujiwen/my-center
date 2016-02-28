@@ -90,7 +90,7 @@ namespace WpfApplication2.Controller
             }
             catch(Exception e)
             {
-                LogUtil.Log(1, "数据库连接建立失败！", e.ToString());
+                LogUtil.Log(1,e.ToString() , "数据库连接建立失败！");
                 return;
             }
           
@@ -102,7 +102,7 @@ namespace WpfApplication2.Controller
             }
             catch(Exception e)
             {
-                LogUtil.Log(1,"查询楼宇信息失败",e.ToString() );
+                LogUtil.Log(1,e.ToString(),"查询楼宇信息失败" );
                 return;
             }
 
@@ -118,7 +118,7 @@ namespace WpfApplication2.Controller
                 }
                 catch (Exception e)
                 {
-                    LogUtil.Log(1, "查询柜子信息失败！", e.ToString());
+                    LogUtil.Log(1, e.ToString(), "查询柜子信息失败！");
                     return;
                 }
                    
@@ -136,7 +136,7 @@ namespace WpfApplication2.Controller
                     }
                     catch (Exception e)
                     {
-                        LogUtil.Log(1, "查询设备信息失败！", e.ToString());
+                        LogUtil.Log(1, e.ToString(), "查询设备信息失败！");
                         return;
                     }
                     while (odr3.Read())
