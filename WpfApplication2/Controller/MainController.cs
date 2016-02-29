@@ -12,7 +12,7 @@ using System.Data.OracleClient;
 using System.Configuration;
 using System.IO;
 using System.Threading;
-
+using WpfApplication2.package;
 
 
 namespace WpfApplication2.Controller
@@ -80,28 +80,65 @@ namespace WpfApplication2.Controller
                 AddUpdateAppSettings("firstIn", "1");
                 flag = config.AppSettings.Settings["firstIn"].Value;
                 Console.Write("after: "+flag);
-
              }
 
             DBManager dbOfDevice = new DBManager();
             string errorCode = "";
-            dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-            
+            try
+            {
+                  dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+            }
+            catch(Exception e)
+            {
+                LogUtil.Log(1, "数据库连接建立失败！", e.ToString());
+                return;
+            }
+          
             String sql = "select * from buildinginfo";
-            OracleDataReader odr = dbOfDevice.ReadDeviceInfomationFromDb(sql);
+            OracleDataReader odr = null;
+            try
+            {
+                dbOfDevice.ReadDeviceInfomationFromDb(sql);
+            }
+            catch(Exception e)
+            {
+                LogUtil.Log(1,"查询楼宇信息失败",e.ToString() );
+                return;
+            }
 
             while (odr.Read()) //找所有的building
             {
-                string state = WpfApplication2.Controller.DeviceDataBox_Base.State.Normal.ToString();
+                string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
                 Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
                 String sql2 = "select * from cabinfo where buildingid = " + building.SystemId;
-                OracleDataReader odr2 = dbOfDevice.ReadDeviceInfomationFromDb(sql2);
+                OracleDataReader odr2 = null;
+                try
+                {
+                    dbOfDevice.ReadDeviceInfomationFromDb(sql2);
+                }
+                catch (Exception e)
+                {
+                    LogUtil.Log(1, "查询柜子信息失败！", e.ToString());
+                    return;
+                }
+                   
+
                 while (odr2.Read()) //找每个building对应的cab
                 {
                     // public Cab(string cabId,string buildingId,string name, string office, string home, string ip,string port,List<DeviceDataBox_Comp> devices, string state)
                     Cab cab = new Cab("" + odr2.GetInt32(0), "" + odr2.GetInt32(1), "" + odr2.GetString(2), odr2.GetString(3), odr2.GetString(4), odr2.GetString(5), odr2.GetString(6), new List<Device>(), state);
                     string sql3 = "select * from deviceinfo where cabid = " + cab.CabId;
-                    OracleDataReader odr3 = dbOfDevice.ReadDeviceInfomationFromDb(sql3);
+
+                    OracleDataReader odr3 = null;
+                    try
+                    {
+                        dbOfDevice.ReadDeviceInfomationFromDb(sql3);
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtil.Log(1, "查询设备信息失败！", e.ToString());
+                        return;
+                    }
                     while (odr3.Read())
                     {
                         //public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,

@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows;
 
 //[assembly: log4net.Config.XmlConfigurator(Watch = true)]
-namespace PavilionMonitor
+namespace WpfApplication2.Util
 {
     public class LogUtil
     {

@@ -6,7 +6,7 @@ using System.Xml;
 using System.Windows;
 using System.ComponentModel;
 
-namespace WpfApplication2.Controller
+namespace WpfApplication2.package
 {
     public abstract class Box : INotifyPropertyChanged 
     {
@@ -329,6 +329,39 @@ namespace WpfApplication2.Controller
         private string devId_;
         private string value_;
         private State state_;
+        private string unit_;
+        public string unit
+        {
+            get { return unit_; }
+            set { unit_ = value; }
+        }
+        private string cabId_;
+        public string cabId
+        {
+            get { return cabId_; }
+            set { cabId_ = value; }
+        }
+        private string paralow;
+
+        public string Paralow
+        {
+            get { return paralow; }
+            set { paralow = value; }
+        }
+        private string parahigh;
+
+        public string Parahigh
+        {
+            get { return parahigh; }
+            set { parahigh = value; }
+        }
+        private String correctFactor;
+
+        public String CorrectFactor
+        {
+            get { return correctFactor; }
+            set { correctFactor = value; }
+        }
     }
 
     public class DeviceCommandBox : Box

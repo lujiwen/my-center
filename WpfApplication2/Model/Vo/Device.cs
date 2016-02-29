@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WpfApplication2.Controller;
 using System.ComponentModel;
+using WpfApplication2.package;
 
 namespace WpfApplication2.Model.Vo
 {

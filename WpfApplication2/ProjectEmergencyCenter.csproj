@@ -126,6 +126,9 @@
     <Compile Include="Model\Vo\Device.cs" />
     <Compile Include="Model\Vo\DeviceForShow.cs" />
     <Compile Include="Model\Vo\QueueFixedLength.cs" />
+    <Compile Include="package\DeviceDataASM02Box.cs" />
+    <Compile Include="package\DeviceDataDryWetBox.cs" />
+    <Compile Include="package\DeviceDataJL900Box.cs" />
     <Compile Include="Util\BlockQueue.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ConvertByteAndHex.cs" />
@@ -168,7 +171,7 @@
     <Compile Include="Source\App.cs" />
     <Compile Include="Source\Map.cs" />
     <Compile Include="Util\GlobalMapForShow.cs" />
-    <Compile Include="Util\PackageWorker.cs" />
+    <Compile Include="package\PackageWorker.cs" />
     <Compile Include="Util\StateObject.cs" />
     <Compile Include="View\Pages\CabsPage.xaml.cs">
       <DependentUpon>CabsPage.xaml</DependentUpon>

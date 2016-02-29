@@ -25,6 +25,7 @@ using WpfApplication2.Controller;
 using System.Windows.Threading;
 using System.Threading;
 using System.Net;
+using WpfApplication2.package;
 
 namespace WpfApplication2.View.Pages
 {

@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows;
 using WpfApplication2.View.Windows;
 using System.ComponentModel;
+using WpfApplication2.package;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 

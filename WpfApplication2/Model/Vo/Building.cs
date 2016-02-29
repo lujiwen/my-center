@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WpfApplication2.Controller;
+using WpfApplication2.package;
 using System.ComponentModel;
 
 namespace WpfApplication2.Model.Vo
@@ -24,9 +24,9 @@ namespace WpfApplication2.Model.Vo
             name = "";
             systemId = "-1";
             cabs = new List<Cab>();
-            state = WpfApplication2.Controller.DeviceDataBox_Base.State.Normal.ToString();
+            state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
         }
-
+        
         public Building(string systemId, string name, string office, string location, double lat, double lng, List<Cab> cabs, string state)
         {
             this.systemId = systemId;

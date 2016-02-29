@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WpfApplication2.Controller;
+using WpfApplication2.package;
 using System.ComponentModel;
 using WpfApplication2.Util;
 
@@ -30,7 +30,7 @@ namespace WpfApplication2.Model.Vo
             cabId = "-1";
             buildingId = "-1";
             devices = new List<Device>();
-            state = WpfApplication2.Controller.DeviceDataBox_Base.State.Normal.ToString();
+            state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
         }
 
          public Cab(string cabId, string buildingId, string name, string office, string home, string ip, string port, List<Device> devices, string state)

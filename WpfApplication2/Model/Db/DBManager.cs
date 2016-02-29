@@ -56,7 +56,6 @@ namespace WpfApplication2.Model.Db
             {
                 return false;
             }
-            
         }
 
         public OracleDataReader ReadDeviceInfomationFromDb(String sql)

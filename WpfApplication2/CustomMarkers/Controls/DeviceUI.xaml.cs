@@ -20,7 +20,7 @@ using Visifire.Charts;
 using WpfApplication2.View.Windows;
 using System.ComponentModel;
 using System.Windows.Threading;
-
+using WpfApplication2.package;
 namespace WpfApplication2.Controls 
 {
     /// <summary>

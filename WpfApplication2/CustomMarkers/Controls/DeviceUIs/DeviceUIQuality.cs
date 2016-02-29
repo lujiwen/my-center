@@ -10,6 +10,7 @@ using WpfApplication2.Controller;
 using System.Windows.Data;
 using System.Windows;
 using WpfApplication2.View.Windows;
+using WpfApplication2.package;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
