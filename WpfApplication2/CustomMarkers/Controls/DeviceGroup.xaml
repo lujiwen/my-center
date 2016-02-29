@@ -1,0 +1,14 @@
+﻿<UserControl xmlns:my="clr-namespace:WpfApplication2.CustomMarkers.Controls"  x:Class="WpfApplication2.CustomMarkers.Controls.DeviceGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="130" d:DesignWidth="40">
+    <Grid>
+        <GroupBox Name="device_group" Width="auto">
+            <StackPanel  Orientation="Vertical" Name="info_panel" Width="auto">
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Project208Home.Views.ArtWorks208.Cab324PurificationSys"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="500" >
+    <UserControl.Background>
+        <ImageBrush ImageSource="/WpfApplication2;component/Images/CabsArtWork/324PurificationSys.png" />
+    </UserControl.Background>
+    <Grid Height="250" Width="500">
+        <Grid.Resources>
+            <Style x:Key="channelRectangleStyle" TargetType="Rectangle">
+                <Setter Property="Fill" Value="Green"/>
+            </Style>
+            <Style x:Key="dataTextStyle" TargetType="TextBlock">
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="FontSize" Value="16"/> 
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="White"/>
+                
+            </Style>
+            <Style x:Key="unitLableStyle" TargetType="Label">
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+            <Style x:Key="devInfoLableStyle" TargetType="Label">
+                <Setter Property="Height" Value="55"/>
+                <Setter Property="Width" Value="120"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Green"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style x:Key="pumpEllipseStyle" TargetType="Ellipse">
+                <Setter Property="Width" Value="37"/>
+                <Setter Property="Height" Value="37"/>
+                <Setter Property="Fill" Value="#FF0DA7F9"/>
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="StrokeThickness" Value="4"/>
+                <Setter Property="Margin" Value="5"/>
+                <EventSetter Event="MouseLeftButtonUp" Handler="pumpSwitch_MouseLeftButtonUp"/>
+            </Style>
+        </Grid.Resources>
+        <Canvas Name="artWorkCn">
+            <Rectangle Canvas.Left="2" Canvas.Top="-1" Height="10" Name="rectangle1" Width="500" Style="{StaticResource channelRectangleStyle}"/>
+            <Rectangle Canvas.Left="460" Canvas.Top="9" Height="500" Name="rectangle2" Width="15" Style="{StaticResource channelRectangleStyle}"/>
+            <Rectangle Canvas.Left="233" Canvas.Top="124" Height="15" Name="rectangleSubSys1" Width="155" Style="{StaticResource channelRectangleStyle}"/>
+            <Rectangle Canvas.Left="234" Canvas.Top="191" Height="15" Name="rectangleSubSys2" Width="154" Style="{StaticResource channelRectangleStyle}"/>
+            <Rectangle Canvas.Left="234" Canvas.Top="57" Height="15" Name="rectangleSubSys3" Width="155" Style="{StaticResource channelRectangleStyle}"/>
+            <TextBlock Canvas.Left="250" Canvas.Top="32" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="250" Canvas.Top="97" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"  />
+            <TextBlock Canvas.Left="250" Canvas.Top="163" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"  />
+           
+            <Label Canvas.Left="331" Canvas.Top="28" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Width="65" />
+            <Label Canvas.Left="331" Canvas.Top="91" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Width="65" />
+            <Label Canvas.Left="331" Canvas.Top="158" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Width="65" />
+           
+            <Label Canvas.Left="254" Canvas.Top="49" Content="解体氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="43" Width="128" />
+            <Label Canvas.Left="249" Canvas.Top="115" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="42" Width="133" />
+            <Label Canvas.Left="250" Canvas.Top="180"  Content="解吸氚测量仪"  Style="{StaticResource devInfoLableStyle}" Width="125" Height="43" />
+            <Ellipse Name="subSys1Pumpep"  Canvas.Left="383" Canvas.Top="44" Style="{StaticResource pumpEllipseStyle}"/>
+            <Ellipse Name="subSys2Pumpep"  Canvas.Left="383" Canvas.Top="107" Style="{StaticResource pumpEllipseStyle}"/>
+            <Ellipse Name="subSys3Pumpep"  Canvas.Left="383" Canvas.Top="171" Style="{StaticResource pumpEllipseStyle}" />
+        </Canvas>
+    </Grid>
+</UserControl>

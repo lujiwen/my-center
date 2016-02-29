@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfApplication2.View.Windows.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        xmlns:sys="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
+        xmlns:my="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"
+        xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        Title="历史数据查询" Height="500" Width="850" Background="#FF565656" Foreground="White"  >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Margin="5,10,5,5" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox>起始日期:</TextBox>
+                <!--<sys:DatePicker Name="start_time" ></sys:DatePicker>-->
+                <toolkit:DateTimePicker Name="start_time"  Width="120"   BorderBrush="Black"    />
+                <TextBox Margin="50,0,0,0">起始日期:</TextBox>
+                <!--<sys:DatePicker  Name="end_time"></sys:DatePicker>-->
+                <toolkit:DateTimePicker Name="end_time"  Width="120"  TimeFormat="LongTime"></toolkit:DateTimePicker>
+                <Button Margin="20,5,5,5" Click="Start_Query_Button_Click" Width="54"> 查询</Button>
+            </StackPanel>
+            <my:Chart  Visibility="Visible" Name="history_chart" Width="770" Height="400"  Margin="10,5,10,5" View3D="False" AnimationEnabled="False"  HorizontalAlignment="Center"  AnimatedUpdate="False" Watermark="False" Background="#FF565656" IndicatorEnabled="True"   />
+        </StackPanel>
+    </Grid>
+</Window>

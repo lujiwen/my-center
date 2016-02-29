@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="WpfApplication2.Controls.TrolleyTooltip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent" Height="258" Width="452" IsHitTestVisible="False">
+    <Grid>
+        <Rectangle Stroke="Green" RadiusX="22" RadiusY="22" Fill="AliceBlue"></Rectangle>
+        <Label Name="label1" HorizontalAlignment="Left" Width="105" FontSize="16" Foreground="Navy" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Height="40" VerticalAlignment="Top" Content="所属科室：" Margin="0,10,0,0"></Label>
+        <TextBlock Height="23.64" Name="buildName" Margin="124,19,5.137,0"   VerticalAlignment="Top" Foreground="Red" FontSize="16" FontWeight="Bold" Text="串口设备名+TX系列"></TextBlock>
+        <Label FontSize="16" Foreground="Navy" HorizontalAlignment="Left" Margin="1,104,0,0" Name="label3" VerticalContentAlignment="Center" Width="105" HorizontalContentAlignment="Right" Height="36" VerticalAlignment="Top" Content="工作状态："></Label>
+        <TextBlock FontSize="16" Name="state" FontWeight="Bold" Foreground="Green" Margin="0,112,11,0" Height="24.276" VerticalAlignment="Top"  HorizontalAlignment="Right" Width="324"></TextBlock>
+        <TextBlock FontSize="14" FontWeight="Normal" Foreground="CadetBlue" Height="20.706" Name="TimeGps" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="163" Text="2014年5月8日 15:55:55" TextAlignment="Left" Margin="0,0,10,16"></TextBlock>
+        <TextBlock FontSize="16" Name="position" FontWeight="Bold" Foreground="Maroon" Height="24.276" Margin="116,62,11,0"   Text="基础楼六栋八楼502C" VerticalAlignment="Top" />
+        <Label Content="位置：" FontSize="16" Foreground="Navy" Height="32.712" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="-1,56,0,0" Name="label6" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="106" />
+        <TextBlock FontSize="16" FontWeight="Bold" Foreground="Maroon" Height="24.276" Margin="122,168,5,0" Name="textBlock2" Text="192.168.103.145 ：5002" VerticalAlignment="Top" />
+        <Label Content="分配地址：" FontSize="16" Foreground="Navy" Height="32.712" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="1,162,0,0" Name="label7" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="106" />
+    </Grid>
+</UserControl>

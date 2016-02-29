@@ -1,0 +1,112 @@
+﻿<Window xmlns:my1="clr-namespace:WpfApplication2.CustomMarkers.Controls"  x:Class="WpfApplication2.View.Windows.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="775" Width="888"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    KeyboardNavigation.DirectionalNavigation="Once"
+    xmlns:src="clr-namespace:WpfApplication2"
+    Title="辐射检测系统应急指挥中心" 
+    MinHeight="775" MinWidth="600"   xmlns:my="clr-namespace:WpfApplication2.Controls"
+     >
+    <Window.Resources>
+        <Style x:Key="ZoomUpButton" TargetType="Button">
+            <Setter Property="Width" Value="23.5" />
+            <Setter Property="Height" Value="25.5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="23.5" Height="25.5">
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ZoomDownButton" TargetType="Button">
+            <Setter Property="Width" Value="23.5" />
+            <Setter Property="Height" Value="25.5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="23.5" Height="25.5">
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51" />
+            <RowDefinition Height="634*" />
+        </Grid.RowDefinitions>
+
+        
+        <!--<Canvas Grid.Row="0" HorizontalAlignment="Stretch">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/WpfApplication2;component/Images/background.png" />
+            </Canvas.Background>
+        </Canvas>-->
+        <Canvas   Grid.Row="0" HorizontalAlignment="Stretch" >
+            <Canvas.Background>
+                <ImageBrush ImageSource="/WpfApplication2;component/Images/background.png" />
+            </Canvas.Background>
+            <StackPanel Orientation="Horizontal"  >
+                <!--<StackPanel.Background>
+                    <ImageBrush ImageSource="/WpfApplication2;component/Images/background.png" />
+                </StackPanel.Background>-->
+                <Image Height="51" Name="image1" Stretch="Fill" Width="330" Source="/WpfApplication2;component/Images/title.png" />
+               
+            </StackPanel>
+        </Canvas>
+        
+
+        <Menu FlowDirection="RightToLeft" Background="{x:Null}" VerticalAlignment="Center" Margin="680,10,6,16">
+            <MenuItem Header="退出" Height="25"  VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight" Click="exit"></MenuItem>
+            <MenuItem Header="帮助" Height="25" VerticalAlignment="Center" FontSize="15" HorizontalContentAlignment="Right" FlowDirection="LeftToRight" Click="help_Click">
+                <MenuItem Header="使用手册" />
+                <MenuItem Header="关于" />
+            </MenuItem>
+            <MenuItem Header="设置" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
+                <MenuItem Header="软件设置" Click="soft_settings_Click_1" />
+                <MenuItem Header="参数设置" />
+            </MenuItem>
+            <MenuItem Header="操作" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
+                <MenuItem Header="合并显示" Name="MultiRoomshow" Click="MenuItem_Click" />
+                <MenuItem Header="页面选择" Name="pageChooser" Click="MenuItem_Click" />
+                <MenuItem Header="实时曲线" Click="MenuItem_Click" />
+                <MenuItem Header="历史曲线" Click="MenuItem_Click" />
+                <MenuItem Header="远程控制" Click="MenuItem_Click" />
+                <MenuItem Header="应急状态" Name="emergency_status" Click="MenuItem_Click" />
+                <MenuItem Header="报警静音" Name="alarm_mute" Click="alarmMute" />
+            </MenuItem>
+        </Menu>
+        <Grid  Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" >
+            <Frame Name="MainPage"  NavigationUIVisibility="Hidden" Grid.RowSpan="1"  Grid.Row="0"  ScrollViewer.CanContentScroll="False"   VerticalAlignment="Stretch" VerticalContentAlignment="Top">
+            </Frame>
+            <my1:AlarmBuzzer x:Name="alarmer" Margin="383,332,383,293" Visibility="Hidden" />
+        </Grid>
+    </Grid>
+</Window>
+

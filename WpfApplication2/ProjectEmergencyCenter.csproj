@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F1DBB150-0457-47D9-A7F2-B83981878DFD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfApplication2</RootNamespace>
+    <AssemblyName>WpfApplication2</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AmCharts.Windows.QuickCharts">
+      <HintPath>F:\mianyang\branches\Project208LocalSystem\project208local\Project208Home\lib\AmCharts.Windows.QuickCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicDataDisplay">
+      <HintPath>F:\mianyang\branches\Project208LocalSystem\project208local\Project208Home\lib\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>F:\mianyang\branches\Project208LocalSystem\project208local\Project208Home\lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SiemensSMARTOPCdotNETLib">
+      <HintPath>F:\mianyang\branches\Project208LocalSystem\project208local\Project208Home\lib\SiemensSMARTOPCdotNETLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFSamplesLib">
+      <HintPath>F:\mianyang\branches\Project208LocalSystem\project208local\Project208Home\lib\WPFSamplesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit">
+      <HintPath>E:\share\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFVisifire.Charts, Version=3.0.3.0, Culture=neutral, PublicKeyToken=99d724542e4db593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WPFVisifire.Charts.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomMarkers\Controls\AlarmBuzzer.xaml.cs">
+      <DependentUpon>AlarmBuzzer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab324PurificationSys.xaml.cs">
+      <DependentUpon>Cab324PurificationSys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab324WasteProcessSys.xaml.cs">
+      <DependentUpon>Cab324WasteProcessSys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404HPT500II.xaml.cs">
+      <DependentUpon>Cab404HPT500II.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404MTI.xaml.cs">
+      <DependentUpon>Cab404MTI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404MTIIMTIII.xaml.cs">
+      <DependentUpon>Cab404MTIIMTIII.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab407HPT500I.xaml.cs">
+      <DependentUpon>Cab407HPT500I.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml.cs">
+      <DependentUpon>Cab422ThermalDesorptionSys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml.cs">
+      <DependentUpon>Cab422UnifyThermalDesorptionSys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
+      <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\ArtWorks208\WindowsUtils.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\DeviceUI6517AB.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\DeviceUIXH31253127.cs" />
+    <Compile Include="Model\Connection\BaseConnection.cs" />
+    <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Model\Connection\SocketConnection.cs" />
+    <Compile Include="Model\Connection\UdpConnection.cs" />
+    <Compile Include="Model\Db\DBHelper.cs" />
+    <Compile Include="Model\Db\DBManager.cs" />
+    <Compile Include="Model\Devices\Device6517AB.cs" />
+    <Compile Include="Model\Devices\DevicePresure.cs" />
+    <Compile Include="Model\Devices\DevicePump.cs" />
+    <Compile Include="Model\Devices\DeviceQuality.cs" />
+    <Compile Include="Model\Devices\DeviceXH31253127.cs" />
+    <Compile Include="Model\Vo\AlarmMessage.cs" />
+    <Compile Include="Model\Vo\Building.cs" />
+    <Compile Include="Model\Vo\Cab.cs" />
+    <Compile Include="Model\Vo\Device.cs" />
+    <Compile Include="Model\Vo\DeviceForShow.cs" />
+    <Compile Include="Model\Vo\QueueFixedLength.cs" />
+    <Compile Include="Util\BlockQueue.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\ConvertByteAndHex.cs" />
+    <Compile Include="Util\DragDropAdorner.cs" />
+    <Compile Include="CustomMarkers\Controls\CabUI.xaml.cs">
+      <DependentUpon>CabUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\DeviceGroup.xaml.cs">
+      <DependentUpon>DeviceGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\DeviceInfoPanel.xaml.cs">
+      <DependentUpon>DeviceInfoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\LabelAndText.xaml.cs">
+      <DependentUpon>LabelAndText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\MyCheckBox.cs" />
+    <Compile Include="CustomMarkers\Controls\MyTreeViewItem.cs" />
+    <Compile Include="CustomMarkers\Controls\PositionMarker.xaml.cs">
+      <DependentUpon>PositionMarker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\PowerControl.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUI.xaml.cs">
+      <DependentUpon>DeviceUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="View\Windows\PasswordWindow.xaml.cs">
+      <DependentUpon>PasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Controls\TrolleyTooltip.xaml.cs">
+      <DependentUpon>TrolleyTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\CircleVisual.cs" />
+    <Compile Include="CustomMarkers\Controls\HistoryPanel.xaml.cs">
+      <DependentUpon>HistoryPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMarkers\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App.cs" />
+    <Compile Include="Source\Map.cs" />
+    <Compile Include="Util\GlobalMapForShow.cs" />
+    <Compile Include="Util\PackageWorker.cs" />
+    <Compile Include="Util\StateObject.cs" />
+    <Compile Include="View\Pages\CabsPage.xaml.cs">
+      <DependentUpon>CabsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\DevicePage.xaml.cs">
+      <DependentUpon>DevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\SystemPage.xaml.cs">
+      <DependentUpon>SystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MapWindow.xaml.cs">
+      <DependentUpon>MapWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\MutiHomeChooserWindow.xaml.cs">
+      <DependentUpon>MutiHomeChooserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\PageChooserWindow.xaml.cs">
+      <DependentUpon>PageChooserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\ParametersSettingsWindow.xaml.cs">
+      <DependentUpon>ParametersSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomMarkers\Controls\AlarmBuzzer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab324PurificationSys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab324WasteProcessSys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404HPT500II.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404MTI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404MTIIMTIII.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab407HPT500I.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\ArtWorks208\Sys208CabArtWork.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\CabUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\DeviceUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\DeviceGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomMarkers\Controls\DeviceInfoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomMarkers\Controls\LabelAndText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\PasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomMarkers\Controls\PositionMarker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\TrolleyTooltip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Controls\HistoryPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMarkers\Test.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\CabsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\DevicePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SystemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\HistoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\MapWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\MutiHomeChooserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\PageChooserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\ParametersSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\DeviceUIPump.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\DeviceUIPresure.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\DeviceUIQuality.cs" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\208show.png" />
+    <Resource Include="Images\background.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\headback2.jpg" />
+    <Resource Include="Images\hom1e.png" />
+    <Resource Include="Images\home.png" />
+    <Resource Include="Images\home10 3.png" />
+    <Resource Include="Images\home2.png" />
+    <Resource Include="Images\home3.png" />
+    <Resource Include="Images\home4.png" />
+    <Resource Include="Images\home6.png" />
+    <Resource Include="Images\home8.png" />
+    <Resource Include="Images\home9 2.png" />
+    <Resource Include="Images\home9 3.png" />
+    <Resource Include="Images\home9 4.png" />
+    <Resource Include="Images\home9 5.png" />
+    <Resource Include="Images\home9.png" />
+    <Resource Include="Images\home副本.png" />
+    <Resource Include="Images\icon.png" />
+    <Resource Include="Images\middleBack.jpg" />
+    <Resource Include="Images\running.png" />
+    <Resource Include="Images\stop.png" />
+    <Resource Include="Images\title.png" />
+    <Resource Include="Images\top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GMapProjects\GMap\GMap.NET.Core\GMap.NET.Core.csproj">
+      <Project>{D0C39D9D-BED0-418B-9A5E-713176CAF40C}</Project>
+      <Name>GMap.NET.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMapProjects\GMap\GMap.NET.WindowsPresentation\GMap.NET.WindowsPresentation.csproj">
+      <Project>{644FE7D4-0184-400F-B2D7-99CB41360658}</Project>
+      <Name>GMap.NET.WindowsPresentation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\rack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bigMarkerGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\red-dot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tech_pic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="testData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blue_buzzer.png" />
+    <Resource Include="Images\red_buzzer.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Help\help.html" />
+    <Resource Include="Images\CabsArtWork\407HPT500I.png" />
+    <Resource Include="Images\CabsArtWork\324WasteProcessSys.png" />
+    <Resource Include="Images\CabsArtWork\404HPT500II.png" />
+    <Resource Include="Images\CabsArtWork\404MTI.png" />
+    <Resource Include="Images\CabsArtWork\404MTIIMTIII.png" />
+    <Resource Include="Images\CabsArtWork\422ThermalDesorptionSys.png" />
+    <Resource Include="Images\CabsArtWork\422热解析.png" />
+    <Resource Include="Images\CabsArtWork\324PurificationSys.png" />
+    <Resource Include="Images\ProcessDiagram\waste324.png" />
+    <Resource Include="Images\ProcessDiagram\pure324.png" />
+    <Resource Include="Images\ProcessDiagram\404_HPT-500-II.png" />
+    <Resource Include="Images\ProcessDiagram\404_MTI.png" />
+    <Resource Include="Images\ProcessDiagram\404_MTII_MTIII.png" />
+    <Resource Include="Images\ProcessDiagram\intergrationHot422.png" />
+    <Resource Include="Images\ProcessDiagram\hot422.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

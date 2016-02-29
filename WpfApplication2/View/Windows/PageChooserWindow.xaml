@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfApplication2.View.Windows.PageChooserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="页面选择" Height="300" Width="400" Closing="Window_Closing"   > 
+    <Grid>
+        <StackPanel Orientation="Vertical"  >
+            <Button Name="mapPageBtn"  Height="100"   Margin="10,10" Content="地图页面"  FontSize="20" Click="mapPageBtn_Click" ></Button>
+            <Button Name="cabPageBtn" Height="100"  Margin="10,20" Content="柜子页面" FontSize="20" Click="cabPageBtn_Click" ></Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

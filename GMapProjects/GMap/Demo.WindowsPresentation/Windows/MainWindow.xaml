@@ -1,0 +1,160 @@
+﻿<Window x:Class="Demo.WindowsPresentation.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="775" Width="888"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    KeyboardNavigation.DirectionalNavigation="Once"
+    xmlns:src="clr-namespace:Demo.WindowsPresentation"
+    Title="辐射检测系统应急指挥中心" 
+    MinHeight="775" MinWidth="600" KeyUp="Window_KeyUp" xmlns:my="clr-namespace:Demo.WindowsPresentation.Controls">
+    <Window.Resources>
+        <Style x:Key="ZoomUpButton" TargetType="Button">
+            <Setter Property="Width" Value="23.5" />
+            <Setter Property="Height" Value="25.5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="23.5" Height="25.5">
+                            <Image Source="/Demo.WindowsPresentation;component/Resources/zoom+.png" Stretch="Fill" />
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ZoomDownButton" TargetType="Button">
+            <Setter Property="Width" Value="23.5" />
+            <Setter Property="Height" Value="25.5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="23.5" Height="25.5">
+                            <Image Source="/Demo.WindowsPresentation;component/Resources/zoom-.png" Stretch="Fill" />
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51" />
+            <RowDefinition Height="634*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style  x:Key="myLBStyle" TargetType="ListBoxItem">
+                <Style.Resources>
+                    <SolidColorBrush Color="White" x:Key="{x:Static SystemColors.HighlightBrushKey}" Opacity="0" />
+                    <SolidColorBrush Color="Black" x:Key="{x:Static SystemColors.HighlightTextBrushKey}" />
+                    <SolidColorBrush Color="White" x:Key="{x:Static SystemColors.ControlBrushKey}" Opacity="0" />
+                </Style.Resources>
+            </Style>
+        </Grid.Resources>
+
+        <Canvas Grid.Row="0" HorizontalAlignment="Stretch">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Demo.WindowsPresentation;component/Images/headback2.jpg" />
+            </Canvas.Background>
+            <!--菜单栏-->
+            <Menu Height="51" FlowDirection="RightToLeft" Background="{x:Null}" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Canvas.Right="0">
+                <MenuItem Header="退出" Height="25" VerticalAlignment="Center" FontSize="15"  FlowDirection="LeftToRight">
+
+                </MenuItem>
+                <MenuItem Header="帮助" Height="25" VerticalAlignment="Center" FontSize="15" HorizontalContentAlignment="Right" FlowDirection="LeftToRight">
+                    <MenuItem Header="使用手册" />
+                    <MenuItem Header="关于"  />
+                </MenuItem>
+                <MenuItem Header="设置" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15"  FlowDirection="LeftToRight">
+                    <MenuItem Header="软件设置"  />
+                    <MenuItem Header="参数设置"  />
+                </MenuItem>
+                <MenuItem Header="操作" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15"  FlowDirection="LeftToRight">
+                    <MenuItem Header="实时曲线" />
+                    <MenuItem Header="历史曲线" />
+                    <MenuItem Header="远程控制" />
+                    <MenuItem Header="退出"   />
+                </MenuItem>
+
+
+                <MenuItem Name="deviceCloumns" Header="chic曲线" Width="4" Visibility="Hidden" Height="51">
+                    <MenuItem Header=""/>
+                </MenuItem>
+            </Menu>
+            <Image Canvas.Left="10" Canvas.Top="0" Height="51" Name="image1" Stretch="Fill" Width="330" Source="/Demo.WindowsPresentation;component/Images/headback.png" />
+        </Canvas>
+        <Grid Name="grid1"  Grid.Row="1"  Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <GroupBox Name="mapgroup"  Header="gmap" Margin="5,5,5,5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <src:Map x:Name="MainMap" MapType="GoogleMapChina"  MaxZoom="14" MinZoom="12" />
+        </GroupBox>
+        <GroupBox HorizontalAlignment="Right" Margin="0,7,12,12" VerticalAlignment="Stretch" Header="Zoom" Grid.Column="1">
+            <Grid>
+                <Button x:Name="czuZoomUp" Style="{StaticResource ZoomUpButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="23.5" Height="25.5" Click="czuZoomUp_Click" Margin="15,0,10,0" />
+                <Button Style="{StaticResource ZoomUpButton}" x:Name="czuZoomDown" HorizontalAlignment="Center" Width="23" Height="25" Click="czuZoomDown_Click" Margin="14,117,12,552" />
+                <Slider Height="68" HorizontalAlignment="Left" Margin="15,32,0,0"   Name="zoomSlider" VerticalAlignment="Top" Width="34" Orientation="Vertical" ValueChanged="zoomSlider_ValueChanged" />
+            </Grid>
+        </GroupBox>
+        </Grid>
+
+        <Grid Name="grid2"  Grid.Row="1" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions  >
+                <ColumnDefinition Width="180*" />
+                <ColumnDefinition Width="624*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="506*" />
+                <RowDefinition Height="179*" />
+            </Grid.RowDefinitions>
+
+            <!--子系统柜子列表-->
+            <TreeView Name="SubSystems">
+                <!--<TreeView.Background>
+                 <ImageBrush ImageSource="/Project208Home;component/Images/middleBack.jpg" />
+            </TreeView.Background>-->
+
+                <TreeViewItem Name="Home208"   Header="208室" FontSize="20"  >
+                    <TreeView Name="Home208Cabs" ItemsSource="{Binding Source=Cab}" BorderBrush="White" Margin="2,2,0,0" >
+                        <TreeView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Home}" TextAlignment="Left" HorizontalAlignment="Left"/>
+                            </DataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </TreeViewItem>
+            </TreeView>
+            <src:Map BorderThickness="5" Grid.Row="1"   x:Name="map"    BorderBrush="Black" />
+            <!--每个柜子里设备信息-->
+            <ListBox Name="CabList" Grid.RowSpan="2" Margin="0,5,5,5" ScrollViewer.CanContentScroll="False" Grid.Column="1" ItemContainerStyle="{StaticResource myLBStyle}"  >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Name="uniform" Columns="2"/>  
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+        </Grid>
+    </Grid>
+
+    
+</Window>

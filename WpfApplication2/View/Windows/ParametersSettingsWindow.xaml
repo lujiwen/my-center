@@ -1,0 +1,42 @@
+﻿<Window x:Class="WpfApplication2.View.Windows.ParametersSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="参数设置" Height="450" Width="700" Background="#FF565656" Foreground="White" >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="White" >监测点 ：</Label>
+                <ComboBox Name="Building_Combox" Width="120" SelectionChanged="Building_Combox_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15"  Foreground="White">柜子 ：</Label>
+                <ComboBox Name="Cab_Combox" Width="120" SelectionChanged="Cab_Combox_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="White">设备 ：</Label>
+                <ComboBox Name="Device_Combox" Width="120" SelectionChanged="Device_Combox_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="White">低阈值 ：</Label>
+                <TextBox Name="Low_Threshold" Width="120"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label  Foreground="White">高阈值 ：</Label>
+                <TextBox Name="High_Threshold" Width="120" ></TextBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15" Foreground="White">修正因子：</Label>
+                <TextBox Name="Correct_Factor" Width="120"  ></TextBox>
+            </StackPanel>
+            <StackPanel Margin="20,10" Orientation="Horizontal">
+                <Label FontSize="15"  Foreground="White">参数1：</Label>
+                <TextBox Name="Parameters1" Width="120"  ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="quit" Margin="10,20,50,10" Width="90" Click="quit_Click">取消</Button>
+                <Button Name="ok" Margin="10,20,50,10" Width="90" Click="ok_Click">确定</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
