@@ -201,9 +201,6 @@
     <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\MapWindow.xaml.cs">
-      <DependentUpon>MapWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Windows\MutiHomeChooserWindow.xaml.cs">
       <DependentUpon>MutiHomeChooserWindow.xaml</DependentUpon>
     </Compile>
@@ -316,10 +313,6 @@
     <Page Include="View\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Windows\MapWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\MutiHomeChooserWindow.xaml">
       <SubType>Designer</SubType>

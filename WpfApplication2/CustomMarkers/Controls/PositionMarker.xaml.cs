@@ -6,7 +6,6 @@ using System.Windows.Media;
 using GMap.NET.WindowsPresentation;
 using GMap.NET;
 using WpfApplication2.Controls;
-using WpfApplication2.Windows;
 using System.Windows.Media.Imaging;
 using System;
 using WpfApplication2.View.Pages;
