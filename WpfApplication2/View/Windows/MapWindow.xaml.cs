@@ -174,23 +174,23 @@ namespace WpfApplication2.Windows
             var pos = new PointLatLng(NextDouble(r, MainMap.CurrentViewArea.Top, MainMap.CurrentViewArea.Bottom), NextDouble(r,                                 MainMap.CurrentViewArea.Left, MainMap.CurrentViewArea.Right));
             GMapMarker m = new GMapMarker(pos);
             {
-                var s = new Test((tt++).ToString());
+             //   var s = new Test((tt++).ToString());
 
                 var image = new Image();
                 {
                     RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.LowQuality);
                     image.Stretch = Stretch.None;
-                    image.Opacity = s.Opacity;
+                  //  image.Opacity = s.Opacity;
 
                     image.MouseEnter += new System.Windows.Input.MouseEventHandler(image_MouseEnter);
                     image.MouseLeave += new System.Windows.Input.MouseEventHandler(image_MouseLeave);
 
-                    image.Source = ToImageSource(s);
+                  //  image.Source = ToImageSource(s);
                 }
 
                 m.Shape = image;
 
-                m.Offset = new System.Windows.Point(-s.Width, -s.Height);
+             //   m.Offset = new System.Windows.Point(-s.Width, -s.Height);
             }
             MainMap.Markers.Add(m);
 
