@@ -109,6 +109,10 @@
     <Compile Include="CustomMarkers\Controls\ArtWorks208\WindowsUtils.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIJL900.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIRSS131.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIDryWet.cs" />
     <Compile Include="Model\Connection\BaseConnection.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Connection\SocketConnection.cs" />
@@ -419,9 +423,7 @@
     <Resource Include="Images\blue_buzzer.png" />
     <Resource Include="Images\red_buzzer.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Help\help.html" />
     <Resource Include="Images\CabsArtWork\407HPT500I.png" />

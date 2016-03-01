@@ -20,7 +20,7 @@ namespace WpfApplication2.Model.Db
         //public static string db_sysPassWord = "548983"; //系统密码
         public static string db_userName = "mianyang"; //操作账户名
         public static string db_userPassWord = "mianyang";//操作密码
-        public static string db_ip = "192.168.1.194";//数据库ip
+        public static string db_ip = "192.168.1.101";//数据库ip
         public static string db_port = "1521"; //端口
         public static int dataTable_startIndex = 1; //存储数据的表开始值
         public static int dataTable_endIndex = 15; //存储数据的表结束值

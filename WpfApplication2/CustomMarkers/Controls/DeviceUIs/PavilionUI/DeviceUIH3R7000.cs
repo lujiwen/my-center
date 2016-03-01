@@ -8,15 +8,16 @@ using System.Windows.Controls;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
-    public class DeviceUIRSS131: DeviceUI 
+    public class DeviceUIH3R7000 : DeviceUI 
     {      
         LabelAndText stateLT;
         LabelAndText valueLT;
-        public DeviceUIRSS131(Device d, Frame fm)
+        public DeviceUIH3R7000(Device d, Frame fm)
             : base(d, fm)
         {
             DeviceInUI.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(DeviceInUI_PropertyChanged);
         }
+
         void DeviceInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             //box = (DeviceDataBox_Quality)DeviceInUI.Value;

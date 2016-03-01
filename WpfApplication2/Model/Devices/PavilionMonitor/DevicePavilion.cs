@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using WpfApplication2.package;
+using WpfApplication2.Model.Vo;
 
 
 namespace PavilionMonitor
@@ -16,7 +17,7 @@ namespace PavilionMonitor
     public delegate void UpdateSuccessEvent(Boolean success);
 
     // 子类再派生类，数据更新做到子类上？？？？？？？？？？？？？？？？？？？？？？？？？？ 
-    public class DevicePavilion 
+    public class DevicePavilion : Device
     {
        public UInt32 devId=0;
        public String devPort=" ";

@@ -16,6 +16,7 @@ using WpfApplication2.Model.Vo;
 using WpfApplication2.Util;
 using WpfApplication2.CustomMarkers.Controls.DeviceUIs;
 using Project208Home.Model;
+using WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI;
 
 namespace WpfApplication2.View.Pages
 {
@@ -28,7 +29,7 @@ namespace WpfApplication2.View.Pages
         private Cab cab;
         private Building building;
         private List<Device> devices;
-        private Dictionary<String, List<DeviceUI>> subSystem;
+        private Dictionary<String, List<UserControl>> subSystem;
         public DevicePage(Frame fm,Cab c)
         {
             InitializeComponent();
@@ -62,7 +63,7 @@ namespace WpfApplication2.View.Pages
                 for (int i = 0; i <cab.Devices.Count; i++)
                 {
                     Device d = cab.Devices[i];
-                    DeviceUI deviceUI =null;
+                    UserControl deviceUI =null;
                      switch(d.HandleTypeInSystem)
                      {
                          case "6517AB":
@@ -81,14 +82,19 @@ namespace WpfApplication2.View.Pages
                              deviceUI = new DeviceUIQuality(cab.Devices[i], systemFrame);
                              break;
                          case "asm02":
+                             deviceUI = new DeviceUIASM02(cab.Devices[i], systemFrame);
                              break;
                          case "jl900":
+                             deviceUI = new DeviceUIJL900(cab.Devices[i], systemFrame);
                              break;
                          case "rss131":
+                             deviceUI = new DeviceUIRSS131(cab.Devices[i], systemFrame);
                              break;
                          case "h3r7000":
+                             deviceUI = new DeviceUIH3R7000(cab.Devices[i], systemFrame);
                              break;
                          case "drywet":
+                             deviceUI = new DeviceUIDryWet(cab.Devices[i], systemFrame);
                              break;
                          default:
                              deviceUI = new DeviceUI(cab.Devices[i], systemFrame);
@@ -100,7 +106,7 @@ namespace WpfApplication2.View.Pages
                      }
                      else
                      {
-                         subSystem[d.SubSystemName] = new List<DeviceUI>();
+                         subSystem[d.SubSystemName] = new List<UserControl>();
                          subSystem[d.SubSystemName].Add(deviceUI);
                      }
                   
@@ -116,7 +122,7 @@ namespace WpfApplication2.View.Pages
             foreach (var dic in subSystem)
             {
                 String subname = dic.Key ;
-                List<DeviceUI> devices = dic.Value;
+                List<UserControl> devices = dic.Value;
                 StackPanel panel = new StackPanel();
                 panel.Orientation = Orientation.Vertical;
                 Label subLab = new Label();
