@@ -6,6 +6,7 @@ using System.Data.OracleClient;
 using WpfApplication2.Controller;
 using WpfApplication2.Model.Vo;
 using System.Windows.Forms;
+using WpfApplication2.Util;
 
 namespace WpfApplication2.Model.Db
 {
@@ -26,6 +27,7 @@ namespace WpfApplication2.Model.Db
             catch (Exception ex)
             {
                 strErr = ex.Message;
+                LogUtil.Log(1,strErr,ex.ToString());
                 return false;
             }
            

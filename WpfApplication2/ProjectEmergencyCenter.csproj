@@ -76,46 +76,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomMarkers\Controls\AlarmBuzzer.xaml.cs">
+    <Compile Include="Controls\AlarmBuzzer.xaml.cs">
       <DependentUpon>AlarmBuzzer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab324PurificationSys.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab324PurificationSys.xaml.cs">
       <DependentUpon>Cab324PurificationSys.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab324WasteProcessSys.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab324WasteProcessSys.xaml.cs">
       <DependentUpon>Cab324WasteProcessSys.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404HPT500II.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab404HPT500II.xaml.cs">
       <DependentUpon>Cab404HPT500II.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404MTI.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab404MTI.xaml.cs">
       <DependentUpon>Cab404MTI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab404MTIIMTIII.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab404MTIIMTIII.xaml.cs">
       <DependentUpon>Cab404MTIIMTIII.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab407HPT500I.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab407HPT500I.xaml.cs">
       <DependentUpon>Cab407HPT500I.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml.cs">
       <DependentUpon>Cab422ThermalDesorptionSys.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml.cs">
       <DependentUpon>Cab422UnifyThermalDesorptionSys.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
+    <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\WindowsUtils.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml.cs">
+    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
+    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
+    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml.cs">
       <DependentUpon>DeviceUIASM02.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIJL900.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIRSS131.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIDryWet.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIH3R7000.cs" />
+    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIJL900.cs" />
+    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIRSS131.cs" />
+    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIDryWet.cs" />
+    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIH3R7000.cs" />
     <Compile Include="Model\Connection\BaseConnection.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Connection\SocketConnection.cs" />
@@ -146,36 +146,36 @@
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ConvertByteAndHex.cs" />
     <Compile Include="Util\DragDropAdorner.cs" />
-    <Compile Include="CustomMarkers\Controls\CabUI.xaml.cs">
+    <Compile Include="Controls\CabUI.xaml.cs">
       <DependentUpon>CabUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\DeviceGroup.xaml.cs">
+    <Compile Include="Controls\DeviceGroup.xaml.cs">
       <DependentUpon>DeviceGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\DeviceInfoPanel.xaml.cs">
+    <Compile Include="Controls\DeviceInfoPanel.xaml.cs">
       <DependentUpon>DeviceInfoPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\LabelAndText.xaml.cs">
+    <Compile Include="Controls\LabelAndText.xaml.cs">
       <DependentUpon>LabelAndText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\MyCheckBox.cs" />
-    <Compile Include="CustomMarkers\Controls\MyTreeViewItem.cs" />
-    <Compile Include="CustomMarkers\Controls\PositionMarker.xaml.cs">
+    <Compile Include="Controls\MyCheckBox.cs" />
+    <Compile Include="Controls\MyTreeViewItem.cs" />
+    <Compile Include="Controls\PositionMarker.xaml.cs">
       <DependentUpon>PositionMarker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\PowerControl.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUI.xaml.cs">
+    <Compile Include="Controls\PowerControl.cs" />
+    <Compile Include="Controls\DeviceUI.xaml.cs">
       <DependentUpon>DeviceUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="View\Windows\PasswordWindow.xaml.cs">
       <DependentUpon>PasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\TrolleyTooltip.xaml.cs">
+    <Compile Include="Controls\TrolleyTooltip.xaml.cs">
       <DependentUpon>TrolleyTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\CircleVisual.cs" />
-    <Compile Include="CustomMarkers\Controls\HistoryPanel.xaml.cs">
+    <Compile Include="Controls\CircleVisual.cs" />
+    <Compile Include="Controls\HistoryPanel.xaml.cs">
       <DependentUpon>HistoryPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\App.cs" />
@@ -210,67 +210,67 @@
     <Compile Include="View\Windows\ParametersSettingsWindow.xaml.cs">
       <DependentUpon>ParametersSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomMarkers\Controls\AlarmBuzzer.xaml">
+    <Page Include="Controls\AlarmBuzzer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab324PurificationSys.xaml">
+    <Page Include="Controls\ArtWorks208\Cab324PurificationSys.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab324WasteProcessSys.xaml">
+    <Page Include="Controls\ArtWorks208\Cab324WasteProcessSys.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404HPT500II.xaml">
+    <Page Include="Controls\ArtWorks208\Cab404HPT500II.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404MTI.xaml">
+    <Page Include="Controls\ArtWorks208\Cab404MTI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab404MTIIMTIII.xaml">
+    <Page Include="Controls\ArtWorks208\Cab404MTIIMTIII.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab407HPT500I.xaml">
+    <Page Include="Controls\ArtWorks208\Cab407HPT500I.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml">
+    <Page Include="Controls\ArtWorks208\Cab422ThermalDesorptionSys.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml">
+    <Page Include="Controls\ArtWorks208\Cab422UnifyThermalDesorptionSys.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\ArtWorks208\Sys208CabArtWork.xaml">
+    <Page Include="Controls\ArtWorks208\Sys208CabArtWork.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\CabUI.xaml">
+    <Page Include="Controls\CabUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\DeviceUI.xaml">
+    <Page Include="Controls\DeviceUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\DeviceGroup.xaml">
+    <Page Include="Controls\DeviceGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomMarkers\Controls\DeviceInfoPanel.xaml">
+    <Page Include="Controls\DeviceInfoPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml">
+    <Page Include="Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomMarkers\Controls\LabelAndText.xaml">
+    <Page Include="Controls\LabelAndText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,15 +278,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomMarkers\Controls\PositionMarker.xaml">
+    <Page Include="Controls\PositionMarker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\TrolleyTooltip.xaml">
+    <Page Include="Controls\TrolleyTooltip.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMarkers\Controls\HistoryPanel.xaml">
+    <Page Include="Controls\HistoryPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -346,9 +346,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIPump.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />
+    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPump.cs" />
+    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
+    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
