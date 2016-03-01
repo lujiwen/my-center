@@ -56,7 +56,7 @@ namespace WpfApplication2.View.Pages
         private void init()
         {
             this.Unloaded += new RoutedEventHandler(DevicePage_Unloaded);
-            subSystem = new Dictionary<String, List<DeviceUI>>();
+            subSystem = new Dictionary<String, List<UserControl>>();
             devices = new List<Device>();
             if(cab!=null&&cab.Devices.Count>0)
             {

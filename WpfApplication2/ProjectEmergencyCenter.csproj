@@ -109,10 +109,13 @@
     <Compile Include="CustomMarkers\Controls\ArtWorks208\WindowsUtils.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
-    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml.cs">
+      <DependentUpon>DeviceUIASM02.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIJL900.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIRSS131.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIDryWet.cs" />
+    <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIH3R7000.cs" />
     <Compile Include="Model\Connection\BaseConnection.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Connection\SocketConnection.cs" />
@@ -266,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomMarkers\Controls\DeviceInfoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
