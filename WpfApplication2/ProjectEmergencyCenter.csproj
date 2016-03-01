@@ -106,7 +106,7 @@
     <Compile Include="CustomMarkers\Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMarkers\Controls\ArtWorks208\WindowsUtils.cs" />
+    <Compile Include="Util\WindowsUtils.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
     <Compile Include="CustomMarkers\Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml.cs">
