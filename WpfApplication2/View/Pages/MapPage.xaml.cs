@@ -140,7 +140,7 @@ namespace WpfApplication2.View.Pages
            // MainMap.MapType = MapType.GoogleHybridChina;
              MainMap.MapType = MapType.ArcGIS_Map;
             MainMap.Manager.Mode = AccessMode.ServerAndCache;
-          //  MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
+          //MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
             MainMap.CanDragMap = true;
             MainMap.DragButton = MouseButton.Right;
             currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
@@ -284,15 +284,6 @@ namespace WpfApplication2.View.Pages
             Console.WriteLine("离开详细信息！");
         }
 
-
-        //void info_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    if(IsMouseDown)
-        //    {
-        //        Console.WriteLine("进入详细信息！");
-        //     //   info.Text += "进入详细信息！"+Environment.NewLine;
-        //    }
-        //}
         private void Marker_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.RightButton == MouseButtonState.Pressed)

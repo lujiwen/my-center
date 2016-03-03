@@ -37,6 +37,12 @@ namespace WpfApplication2.Model.Vo
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// lhs亭子的设备类 所需的属性
+        /// </summary>
+        public String devPort = " ";
+        public String devIp = " ";
+        public String devType = " ";  // 子类赋值
        
   /// <summary>
   ///
@@ -206,7 +212,89 @@ namespace WpfApplication2.Model.Vo
                 }
             }
         }
+        public virtual void setDevState(string state)
+        {
+        }
+        //2115房间经过RF1000后的数据格式是否正确
+        public virtual bool isDataRight(byte[] flowBytes, int len)
+        {
+            bool dataright = true;
+            return dataright;
+        }
+        //2115房间经过RF1000后的修改参数的确认信息是否是否正确
+        public virtual bool isParaSetRight(byte[] paraBytes)
+        {
+            bool parasetright = true;
+            //判断数据包长度是否为0x05，否则设置为错误
 
+            return parasetright;
+        }
+
+        /// <summary>
+        /// 亭子数据解析
+        /// </summary>
+        /// <param name="flowBytes"> 原始字节流 </param>
+        public virtual void AnalysisPavilionData(byte[] flowBytes, int len)
+        {
+        }
+        /// <summary>
+        /// 生成插入数据的sql
+        /// </summary>
+        /// <returns></returns>
+        public virtual String getHistoryDataSql()
+        {
+            return "";
+        }
+
+        /// <summary>
+        /// 初始化连接，循环扫描 请求数据 ,
+        /// </summary>
+        /// <returns></returns>
+        public virtual void doWork()
+        {
+
+
+        }
+        /// <summary>
+        /// 亭子设备 数据或参数读取命令生成。
+        /// </summary>
+        /// <returns></returns>
+        public virtual byte[] ToReadDataCommand()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 读参数命令
+        /// </summary>
+        /// <returns></returns>
+        public virtual Byte[] ToReadParaCommands()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 生成设置参数命令
+        /// </summary>
+        /// <returns></returns>
+        public virtual Byte[] ToSetParaCommands()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 更改当前设备参数的值
+        /// </summary>
+        public virtual void ChangeDevPara(float[] values)
+        {
+            return;
+        }
+        /// <summary>
+        /// 生成阿里云中转更新数据的sql
+        /// </summary>
+        /// <returns></returns>
+        public virtual void getAliyunUpdateStr()
+        {
+            return;
+        }
         public Box Value
         {
             get {

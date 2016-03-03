@@ -93,8 +93,8 @@ namespace WpfApplication2.Controller
                 LogUtil.Log(1,e.ToString() , "数据库连接建立失败！");
                 return;
             }
-          
-            String sql = "select * from buildinginfo";
+
+            String sql = "select * from buildinginfo Orders ORDER BY B_ID";
             OracleDataReader odr = null;
             try
             {
@@ -110,7 +110,7 @@ namespace WpfApplication2.Controller
             {
                 string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
                 Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
-                String sql2 = "select * from cabinfo where buildingid = " + building.SystemId;
+                String sql2 = "select * from cabinfo where buildingid = " + building.SystemId + " ORDER BY C_ID";
                 OracleDataReader odr2 = null;
                 try
                 {
@@ -127,7 +127,7 @@ namespace WpfApplication2.Controller
                 {
                     // public Cab(string cabId,string buildingId,string name, string office, string home, string ip,string port,List<DeviceDataBox_Comp> devices, string state)
                     Cab cab = new Cab("" + odr2.GetInt32(0), "" + odr2.GetInt32(1), "" + odr2.GetString(2), odr2.GetString(3), odr2.GetString(4), odr2.GetString(5), odr2.GetString(6), new List<Device>(), state);
-                    string sql3 = "select * from deviceinfo where cabid = " + cab.CabId;
+                    string sql3 = "select * from deviceinfo where cabid = " + cab.CabId + " ORDER BY D_ID";
 
                     OracleDataReader odr3 = null;
                     try

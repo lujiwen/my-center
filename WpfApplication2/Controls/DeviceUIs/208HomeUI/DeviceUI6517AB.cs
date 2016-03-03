@@ -17,7 +17,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
    public  class DeviceUI6517AB : DeviceUI 
     {
-     
        static int x = 1;
        DeviceDataBox_6517AB box;
        LabelAndText stateLT;

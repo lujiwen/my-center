@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using WpfApplication2.Model.Vo;
 
 namespace PavilionMonitor
 {
@@ -14,7 +15,7 @@ namespace PavilionMonitor
      * 界面也得单独设计
      * 
      * ***/
-    class ASM02 : DevicePavilion, INotifyPropertyChanged
+    class ASM02 : Device, INotifyPropertyChanged
     {
 
         private string val_str_set=""; // 存放asm数据字符串
@@ -25,13 +26,13 @@ namespace PavilionMonitor
         }
         public String DevState
         {
-            get { return devState; }
+            get { return State; }
             set
             {
-                devState = value;
+                State = value;
                 if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("DevState"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("State"));
                 }
             }
         }
@@ -810,11 +811,11 @@ namespace PavilionMonitor
         }
 
 
-        public ASM02(UInt32 id, String ip, String port)
-            : base(id, ip, port)
-        {
+        //public ASM02(UInt32 id, String ip, String port)
+        //    : base(id, ip, port)
+        //{
            
-        }
+        //}
 
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;

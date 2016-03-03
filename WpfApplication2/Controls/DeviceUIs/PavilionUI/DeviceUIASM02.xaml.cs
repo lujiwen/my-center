@@ -21,7 +21,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
     /// </summary>
     public partial class DeviceUIASM02 : UserControl
     {
-       private ASM02 asm02;
+       private ASM02 asm02; 
 
        public DeviceUIASM02(Device d, Frame fm)
         {
@@ -29,6 +29,12 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
             this.asm02 = (ASM02)d;
             init();
         }
+       public DeviceUIASM02( )
+       {
+           InitializeComponent();
+          // this.asm02 = (ASM02)d;
+       //    init();
+       }
         private void init()
         {
             initBingdings();

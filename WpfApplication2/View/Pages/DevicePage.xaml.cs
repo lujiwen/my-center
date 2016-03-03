@@ -44,6 +44,7 @@ namespace WpfApplication2.View.Pages
             InitializeComponent();
             this.systemFrame = fm;
             this.building = b ; //如果没有柜子可以把所有需要显示的设备放在一个柜子里面进行显示
+            this.cab = b.Cabs[0];
             init();
         }
 
@@ -81,8 +82,8 @@ namespace WpfApplication2.View.Pages
                          case "Quality":
                              deviceUI = new DeviceUIQuality(cab.Devices[i], systemFrame);
                              break;
-                         case "asm02":
-                             deviceUI = new DeviceUIASM02(cab.Devices[i], systemFrame);
+                         case "ASM02":
+                             deviceUI = new DeviceUIASM02();
                              break;
                          case "jl900":
                              deviceUI = new DeviceUIJL900(cab.Devices[i], systemFrame);
@@ -93,7 +94,7 @@ namespace WpfApplication2.View.Pages
                          case "h3r7000":
                              deviceUI = new DeviceUIH3R7000(cab.Devices[i], systemFrame);
                              break;
-                         case "drywet":
+                         case "DryWet":
                              deviceUI = new DeviceUIDryWet(cab.Devices[i], systemFrame);
                              break;
                          default:
@@ -135,7 +136,7 @@ namespace WpfApplication2.View.Pages
                 devicepanel.Orientation = Orientation.Horizontal;
                 Thickness t = new Thickness(7);
                 devicepanel.Margin = t;
-                foreach (DeviceUI d in devices)
+                foreach (UserControl d in devices)
                 {
                     devicepanel.Children.Add(d);
                 }

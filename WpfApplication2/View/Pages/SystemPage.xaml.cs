@@ -43,7 +43,7 @@
             initSystemTreeView();
             if (building != null)
             {
-                switch(building.Office)
+                switch(building.Name)
                 {
                     case "亭子":
                         devicePage = new DevicePage(this.getPageFrame(), building);

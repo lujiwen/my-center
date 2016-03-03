@@ -36,6 +36,8 @@ namespace WpfApplication2.Controls
        private Device _device;
        private LabelAndText stateLT, valueLT, thresholdLT,typeLT;
        private List<string> label;
+       private bool curveEnable;
+       public bool CurveEnable { get { return curveEnable; } set { curveEnable = value; } }
        public List<string> LabelsToShow { set { label = value; } get { return label; } }
     // private Box box;
        private int maxPointSize;
@@ -112,7 +114,11 @@ namespace WpfApplication2.Controls
                device_name.Text = _device.SubSystemName;
                cab_name.Text = cabs[_device.BuildingId + "_" + _device.CabId].Name; 
            }
-           initDeviceChart();
+            if(curveEnable)
+            {
+                initDeviceChart();
+            }
+           
         }
 
         void DeviceBuzzer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -145,6 +151,7 @@ namespace WpfApplication2.Controls
         private DataSeries dataSeries;
         private void initDeviceChart()
         {
+            device_chart.Visibility = System.Windows.Visibility.Visible;
             title = new Visifire.Charts.Title();
             Axis axisX = new Axis();//图表X轴
             Axis axisY = new Axis(); //图表Y轴
