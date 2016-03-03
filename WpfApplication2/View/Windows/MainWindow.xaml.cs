@@ -61,8 +61,9 @@ namespace WpfApplication2.View.Windows
 
         public MainWindow()
         {
-            init();
+        
             InitializeComponent();
+            init();
         }
 
         /// <summary>
@@ -73,22 +74,37 @@ namespace WpfApplication2.View.Windows
             Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
             markers = new GMapMarker[buildings.Count];
             _buildings = new List<Building>();
-            for (int i = 0; i < buildings.Count;i++ )
-            {
-                Building b= buildings[(i+1)+""];
-                _buildings.Add(b);
-                markers[i] = new GMapMarker(new PointLatLng(b.Lat,b.Lng));
-                markers[i].Tag = b.Name ;
+            try { 
+                for (int i = 0; i < buildings.Count;i++ )
+                {
+                    if (buildings.ContainsKey((i + 1) + ""))
+                    {
+                        Building b = buildings[(i + 1) + ""];
+                        _buildings.Add(b);
+                        markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
+                        markers[i].Tag = b.Name;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }            
             }
+            catch(Exception e)
+            {
+                LogUtil.Log(1,e.Message,e.ToString());
+            }
+            
         }
         private void  init()
         {
             instance = this ;
             MainController c = new MainController();
+            initPoints();
             //弹出窗，选择展示页面
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
             c.alarm += new alarmEventHandler(MainWindowShowAlarm );
-            initPoints();
+            
             isEmergencyStatus = false;
            // alarmer = new AlarmBuzzer();
             isMute = false;

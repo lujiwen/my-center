@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfApplication2.View.Windows;
-using GMap.NET;
-using GMap.NET.WindowsPresentation;
-using WpfApplication2.Controls;
-using WpfApplication2.CustomMarkers;
-using WpfApplication2.Model.Vo;
-using WpfApplication2.Controller;
-using WpfApplication2.CustomMarkers.Controls;
-using WpfApplication2.Util;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using WpfApplication2.View.Windows;
+    using GMap.NET;
+    using GMap.NET.WindowsPresentation;
+    using WpfApplication2.Controls;
+    using WpfApplication2.CustomMarkers;
+    using WpfApplication2.Model.Vo;
+    using WpfApplication2.Controller;
+    using WpfApplication2.CustomMarkers.Controls;
+    using WpfApplication2.Util;
 
-namespace WpfApplication2.View.Pages
-{
+    namespace WpfApplication2.View.Pages
+    {
     /// <summary>
     /// SystemView.xaml 的交互逻辑
     /// </summary>
@@ -148,7 +148,7 @@ namespace WpfApplication2.View.Pages
                     }
                     for (int j = 0; j < b.Cabs.Count;j++ ) // 每个房间的 柜子层
                     {
-                       // WpfApplication2.Model.Vo.Cab cab = new Cab();
+                        // WpfApplication2.Model.Vo.Cab cab = new Cab();
                         Cab c = b.Cabs[j];
                         MyTreeViewItem cabNode = new MyTreeViewItem(c);
                         cabNode.Header = createTreeViewItem(c.Name, new BitmapImage(new Uri("/Images/rack.png", UriKind.Relative)), true, 2, cabNode);
@@ -188,7 +188,7 @@ namespace WpfApplication2.View.Pages
                 mainNode.MouseDoubleClick += new MouseButtonEventHandler(mainNode_MouseDoubleClick);
                 mainNode.IsExpanded = true;
                 system_tree.Items.Add(mainNode);
-             // globalMapFor
+                // globalMapFor
                 for (int i = 0; i < building.Cabs.Count; i++)
                 {
                     WpfApplication2.Model.Vo.Cab cab = building.Cabs[i];
@@ -200,7 +200,7 @@ namespace WpfApplication2.View.Pages
                     Dictionary<String ,List<Device>> subSystemNames = sortSubsystem(cab);
                     foreach(var dic in subSystemNames)
                     {
-                          //  Device device = cab.Devices[j];
+                            //  Device device = cab.Devices[j];
                         MyTreeViewItem subSystemNode = new MyTreeViewItem(dic.Value);
                         subSystemNode.Header = createTreeViewItem(dic.Key, new BitmapImage(new Uri("/Images/home8.png", UriKind.Relative)), false, -1, subSystemNode);
                         subSystemNode.MouseDoubleClick += subSystemNode_MouseLeftButtonDown ;
@@ -221,11 +221,11 @@ namespace WpfApplication2.View.Pages
             }
             else if (page.Content is DevicePage) //当前在设备页面跳转到柜子页面
             {
-                 page.Content = new CabsPage(this, b);
+                    page.Content = new CabsPage(this, b);
             }
         }
 
-       void subSystemNode_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void subSystemNode_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
 
@@ -243,7 +243,7 @@ namespace WpfApplication2.View.Pages
             }
            
         }
-       void cab_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void cab_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
             MyTreeViewItem treeNode = (MyTreeViewItem)sender;
@@ -260,21 +260,21 @@ namespace WpfApplication2.View.Pages
             e.Handled = true;
         }
 
-       public Dictionary<String, List<Device>> sortSubsystem(Cab cab)
+        public Dictionary<String, List<Device>> sortSubsystem(Cab cab)
         {
-           Dictionary<String, List<Device>> subSystemNames = new Dictionary<String, List<Device>>();
-           foreach(Device d in cab.Devices)
-           {
-               if (subSystemNames.ContainsKey(d.SubSystemName))
-               {
-                   subSystemNames[d.SubSystemName].Add(d);
-               }
-               else
-               {
-                   subSystemNames[d.SubSystemName] = new List<Device>();
-                   subSystemNames[d.SubSystemName].Add(d);
-               }
-           }
+            Dictionary<String, List<Device>> subSystemNames = new Dictionary<String, List<Device>>();
+            foreach(Device d in cab.Devices)
+            {
+                if (subSystemNames.ContainsKey(d.SubSystemName))
+                {
+                    subSystemNames[d.SubSystemName].Add(d);
+                }
+                else
+                {
+                    subSystemNames[d.SubSystemName] = new List<Device>();
+                    subSystemNames[d.SubSystemName].Add(d);
+                }
+            }
            
             return subSystemNames ;
         }
@@ -307,19 +307,19 @@ namespace WpfApplication2.View.Pages
                 MyCheckBox.CheckBoxType t =  MyCheckBox.CheckBoxType.unknow ;
                 switch(level)
                 {
-                     case -1:
-                       break;
-                     case 0:                    
-                       break; 
-                     case  1:
-                       t = MyCheckBox.CheckBoxType.buildingType;
-                       break; 
-                     case 2:
-                       t = MyCheckBox.CheckBoxType.cabTyp;
-                       break;
-                     case 3:
-                       t = MyCheckBox.CheckBoxType.deviceType;
-                       break; 
+                        case -1:
+                        break;
+                        case 0:                    
+                        break; 
+                        case  1:
+                        t = MyCheckBox.CheckBoxType.buildingType;
+                        break; 
+                        case 2:
+                        t = MyCheckBox.CheckBoxType.cabTyp;
+                        break;
+                        case 3:
+                        t = MyCheckBox.CheckBoxType.deviceType;
+                        break; 
                 }
                 MyCheckBox cb = new MyCheckBox(t, item);
                 cb.Click += cb_Checked;
@@ -342,7 +342,7 @@ namespace WpfApplication2.View.Pages
                     StackPanel nodePanel = (StackPanel)item.Header;
                     CheckBox c = (CheckBox)nodePanel.Children[2];
                     c.IsChecked = isChecked;
-                  //  c.Checked += new RoutedEventHandler(cb_Checked);
+                    //  c.Checked += new RoutedEventHandler(cb_Checked);
                     checkAllChild(item, isChecked);
                 }
             }
@@ -379,7 +379,7 @@ namespace WpfApplication2.View.Pages
                     {
 
                         cabspage.insertCab(getPageFrame(), (Building)c.NodeObject);
-                      //  cabspage.selectBuildings.Add((Building)c.NodeObject);
+                        //  cabspage.selectBuildings.Add((Building)c.NodeObject);
                     }
                     else 
                     {
@@ -414,7 +414,7 @@ namespace WpfApplication2.View.Pages
                     Console.WriteLine("当前设备页面");
                     checkAllChild(c.TreeNode, false);
                 }
-           //     cabspage.deleteCab();
+            //     cabspage.deleteCab();
             }
         }
 
@@ -433,10 +433,10 @@ namespace WpfApplication2.View.Pages
             map.MaxZoom = 40;
             map.MinZoom = 1;
             map.Zoom = 7;
-           //  map.MapType = MapType.GoogleHybridChina ;
+            //  map.MapType = MapType.GoogleHybridChina ;
             map.MapType = MapType.ArcGIS_Map;
             map.Manager.Mode = AccessMode.ServerAndCache;
-         //   map.BoundsOfMap = new RectLatLng(29.540871 , 104.804598 , 20.025, 20.018); //北纬30.67度，东经104.06度。
+            //   map.BoundsOfMap = new RectLatLng(29.540871 , 104.804598 , 20.025, 20.018); //北纬30.67度，东经104.06度。
             map.CanDragMap = true;
             map.MouseWheel += new MouseWheelEventHandler(map_MouseWheel);
             map.DragButton = MouseButton.Right;
@@ -449,6 +449,10 @@ namespace WpfApplication2.View.Pages
 
                 for (int i = 0; i < markers.Length; i++)
                 {
+                    if(markers[i]!=null)
+                    {
+                        break;
+                    }
                     markers[i].ZIndex = int.MaxValue;
                     trolleyToolTip = new TrolleyTooltip(mainWindow.Buildings[i]);
                     markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, mainWindow.Buildings[i]);

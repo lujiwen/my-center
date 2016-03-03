@@ -1,0 +1,37 @@
+<package><DeviceDataBox_Comp systemId = "2" cabId="2" devId="5" state="Normal" value="23.08" unit="Bg/m^3"  paraMeasure="" paraExec="" /><DeviceDataBox_Comp systemId = "2" cabId="2" devId="6" state="Normal" value="83.1" unit="Bg/m^3"  paraMeasure="" paraExec="" /><DeviceDataBox_Comp systemId = "2" cabId="2" devId="7" state="Normal" value="65.1" unit="Bg/m^3"  paraMeasure="" paraExec="" /><DeviceDataBox_Comp systemId = "2" cabId="2" devId="8" state="Normal" value="123.3" unit="Bg/m^3"  paraMeasure="" paraExec="" /></package>
+
+
+
+<package>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="5" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="6" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="7" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="8" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="11" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="" lowThreshold="" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="12" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="" lowThreshold="" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+</package>
+
+
+<package>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="5" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="6" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="7" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="8" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="11" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="" lowThreshold="" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="12" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="" lowThreshold="" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+</package>
+
+<package>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="11" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="200" lowThreshold="10" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+<DeviceDataBox_Quality systemId = "2" cabId="2" devId="12" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="200" lowThreshold="10" factor="" sumValue="%D1,100%.%D0,9%" sumUnit="Bg/m^3"/>
+</package>
+
+<package>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="5" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="8" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+</package>
+
+<package>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="5" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"  highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+<DeviceDataBox_6517AB systemId = "2" cabId="2" devId="8" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="243" lowThreshold="43" factor="43" voltValue="43"/>
+</package>

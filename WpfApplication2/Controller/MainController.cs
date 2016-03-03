@@ -86,7 +86,7 @@ namespace WpfApplication2.Controller
             string errorCode = "";
             try
             {
-                  dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+                  dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port,                DBHelper.db_name, ref errorCode);
             }
             catch(Exception e)
             {
@@ -98,7 +98,7 @@ namespace WpfApplication2.Controller
             OracleDataReader odr = null;
             try
             {
-                dbOfDevice.ReadDeviceInfomationFromDb(sql);
+               odr = dbOfDevice.ReadDeviceInfomationFromDb(sql);
             }
             catch(Exception e)
             {
@@ -114,7 +114,7 @@ namespace WpfApplication2.Controller
                 OracleDataReader odr2 = null;
                 try
                 {
-                    dbOfDevice.ReadDeviceInfomationFromDb(sql2);
+                    odr2 =  dbOfDevice.ReadDeviceInfomationFromDb(sql2);
                 }
                 catch (Exception e)
                 {
@@ -132,7 +132,7 @@ namespace WpfApplication2.Controller
                     OracleDataReader odr3 = null;
                     try
                     {
-                        dbOfDevice.ReadDeviceInfomationFromDb(sql3);
+                        odr3 = dbOfDevice.ReadDeviceInfomationFromDb(sql3);
                     }
                     catch (Exception e)
                     {
