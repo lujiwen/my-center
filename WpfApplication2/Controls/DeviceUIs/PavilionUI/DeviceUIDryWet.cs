@@ -54,9 +54,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 
        public override void initlabels()
        {
-           cabStateLT = new LabelAndText("状态:", "", Colors.White);
+           cabStateLT = new LabelAndText("盖子状态:", "", Colors.White);
            rainyStateLT = new LabelAndText("下雨状态:", "", Colors.White);
-           rainTimeLT = new LabelAndText("下雨时间:", "",Colors.White);
+           rainTimeLT = new LabelAndText("降雨时间（分钟）:", "",Colors.White);
            
            //实时值绑定
            //Binding valueBingding = new Binding();
