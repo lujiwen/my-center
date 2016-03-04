@@ -127,7 +127,10 @@ namespace WpfApplication2.Controls
         {
             //利用反射机制，进行初始化工艺流程图
             Type tp = Type.GetType("Project208Home.Views.ArtWorks208.Cab" + CabInUI.TypeInSystem);
-
+            if(tp==null)
+            {
+                return;
+            }
             Type[] types = new Type[1];
             types[0] = typeof(Cab);
             //有参构造
