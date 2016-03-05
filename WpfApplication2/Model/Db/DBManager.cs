@@ -20,8 +20,7 @@ namespace WpfApplication2.Model.Db
             Conn = new OracleConnection(str_conn);//定义连接实例
             try
             {
-                Conn.Open();//通过自带的方式打开连接，测试连接实例
-                
+                Conn.Open();//通过自带的方式打开连接，测试连接实例              
                 return true;
             }
             catch (Exception ex)
