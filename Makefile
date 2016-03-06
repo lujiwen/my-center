@@ -3,6 +3,6 @@ add:
 
 commit: add
 	git commit -m "123"
-push:commit
+push:
 	git push -u origin master
 
