@@ -20,7 +20,7 @@ namespace WpfApplication2.Model.Db
         //public static string db_sysPassWord = "548983"; //系统密码
         public static string db_userName = "mianyang"; //操作账户名
         public static string db_userPassWord = "mianyang";//操作密码
-        public static string db_ip = "192.168.1.101";//数据库ip
+        public static string db_ip = "192.168.1.114";//数据库ip
         public static string db_port = "1521"; //端口
         //public static string db_ip = "100.64.48.151";//数据库ip
         //public static string db_port = "15431"; //端口

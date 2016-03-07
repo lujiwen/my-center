@@ -12,3 +12,5 @@
 	然后具体点击事件，实现Click="some_event" 
 	
 	
+### 报表采用 WPF DataGrid
+详见：http://www.cnblogs.com/xiaogangqq123/archive/2012/05/07/2487166.html
