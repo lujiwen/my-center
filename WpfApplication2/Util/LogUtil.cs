@@ -10,6 +10,14 @@ namespace WpfApplication2.Util
 {
     public class LogUtil
     {
+        public enum ERR_CODE { 
+            OK                = 0x00,
+            CONNECTION_OPEN_ERR    = 0x01,
+            BUILDING_READ_ERR = 0x02,
+            DEVICE_READ_ERR   = 0x03,
+            CAB_READ_ERR      = 0x04,
+            CONNECTION_CLOSE_ERR = 0x05,
+        } ;
         /// <summary>
         /// 根据类型，进行日志记录
         /// </summary>

@@ -36,6 +36,7 @@ namespace WpfApplication2.Controller
         public static String tempSendData;
         public event UpdateUI notifyUpdateUI;
         public event alarmEventHandler alarm;
+        private static string FIRST_IN_FLAG = "0";
         public MainController()
         {
             InitialData();
@@ -59,113 +60,169 @@ namespace WpfApplication2.Controller
             get { return dataUpdate; }
         }
 
+        
 
-        public void InitialData()  //初始化数据
+        public bool isFirstIn()
         {
-           
             String path = System.Environment.CurrentDirectory;
             String configFile = path + @"\app.config";
             AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
 
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             String flag = config.AppSettings.Settings["firstIn"].Value;
-             if (flag.Equals("0")) //第一次进入创建数据表和sequence
-             {
-                DBHelper dbInitial = new DBHelper();
-                //dbInitial.createUserAndGrant();
-                //System.Threading.Thread.Sleep(3000);
-                dbInitial.createAllTableAndSequence(0); //创建正常数据库
-                Thread.Sleep(2000);
-                //dbInitial.createAllTableAndSequence(1); //创建应急数据库
-                AddUpdateAppSettings("firstIn", "1");
-                flag = config.AppSettings.Settings["firstIn"].Value;
-                Console.Write("after: "+flag);
-             }
-
-            DBManager dbOfDevice = new DBManager();
-            string errorCode = "";
-            try
+            if (flag.Equals(FIRST_IN_FLAG))
             {
-                  dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port,                DBHelper.db_name, ref errorCode);
+                return true;
+            }
+            else return false;
+        }
+        /// <summary>
+        /// 第一次进入程序初始化数据库
+        /// </summary>
+        private void initDatabase()
+        {
+            DBHelper dbInitial = new DBHelper();
+            String flag = config.AppSettings.Settings["firstIn"].Value;
+            //dbInitial.createUserAndGrant();
+            //System.Threading.Thread.Sleep(3000);
+            dbInitial.createAllTableAndSequence(0); //创建正常数据库
+            Thread.Sleep(2000);
+            //dbInitial.createAllTableAndSequence(1); //创建应急数据库
+            AddUpdateAppSettings("firstIn", "1");
+            flag = config.AppSettings.Settings["firstIn"].Value;
+            Console.Write("after: " + flag);     
+        }
+        
+        private OracleDataReader readBuidingFromDb()
+        {
+            int errCode = 0 ;
+            try{
+                DBManager dbOfDevice = new DBManager();
+                string errorCode = "";
+                errCode = dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+                
+                /////read buildings////
+                String sql = "select * from buildinginfo Orders ORDER BY B_ID";
+                OracleDataReader odr = null;
+                odr = dbOfDevice.ReadDeviceInfomationFromDb(sql);
+                return odr ;
             }
             catch(Exception e)
             {
-                LogUtil.Log(1,e.ToString() , "数据库连接建立失败！");
-                return;
+                 LogUtil.Log(errCode, e.ToString(), "查询设备信息失败！");
             }
+            return null ;
+        }
 
-            String sql = "select * from buildinginfo Orders ORDER BY B_ID";
-            OracleDataReader odr = null;
-            try
-            {
-               odr = dbOfDevice.ReadDeviceInfomationFromDb(sql);
-            }
-            catch(Exception e)
-            {
-                LogUtil.Log(1,e.ToString(),"查询楼宇信息失败" );
-                return;
-            }
-
-            while (odr.Read()) //找所有的building
-            {
+        private　OracleDataReader　readCabFromDb(DBManager dm,OracleDataReader odr)
+        {
+             try{
                 string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
                 Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
                 String sql2 = "select * from cabinfo where buildingid = " + building.SystemId + " ORDER BY C_ID";
                 OracleDataReader odr2 = null;
-                try
-                {
-                    odr2 =  dbOfDevice.ReadDeviceInfomationFromDb(sql2);
-                }
-                catch (Exception e)
-                {
-                    LogUtil.Log(1, e.ToString(), "查询柜子信息失败！");
-                    return;
-                }
-                   
-
-                while (odr2.Read()) //找每个building对应的cab
-                {
-                    // public Cab(string cabId,string buildingId,string name, string office, string home, string ip,string port,List<DeviceDataBox_Comp> devices, string state)
-                    Cab cab = new Cab("" + odr2.GetInt32(0), "" + odr2.GetInt32(1), "" + odr2.GetString(2), odr2.GetString(3), odr2.GetString(4), odr2.GetString(5), odr2.GetString(6), new List<Device>(), state);
-                    string sql3 = "select * from deviceinfo where cabid = " + cab.CabId + " ORDER BY D_ID";
-
-                    OracleDataReader odr3 = null;
-                    try
-                    {
-                        odr3 = dbOfDevice.ReadDeviceInfomationFromDb(sql3);
-                    }
-                    catch (Exception e)
-                    {
-                        LogUtil.Log(1, e.ToString(), "查询设备信息失败！");
-                        return;
-                    }
-                    while (odr3.Read())
-                    {
-                        //public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
-                        //float correctFactor, string dataUnit, float inputArg1, float inputArg2, float inputArg3, string handleTypeInSystem, string state)
-                        Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8),
-                            odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
-                        cab.Devices.Add(device);
-                        GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
-                    }
-                    GlobalMapForShow.globalMapForCab.Add(building.SystemId + "_" + cab.CabId, cab);
-                    odr3.Close();
-                    building.Cabs.Add(cab);
-
-                }
-                odr2.Close();
-                GlobalMapForShow.globalMapForBuiding.Add(building.SystemId, building);
+                odr2 =  dm.ReadDeviceInfomationFromDb(sql2);
+                return odr2 ;
             }
-            odr.Close();
-            dbOfDevice.CloseConnection();
-            //List<Device> devices = GlobalMapForShow.globalMapForCab["2_3"].Devices;
-            //String result = "";
-            //foreach (Device item in devices)
-            //{
-            //    result += item.SubSystemName + "\n";
+            catch(Exception e)
+            {
+                LogUtil.Log((int)LogUtil.ERR_CODE.CAB_READ_ERR, e.ToString(), "查询设备信息失败！");
+                return null;
+            }         
+        }
+
+        private OracleDataReader readDeviceFromDb(DBManager dm,OracleDataReader odr2,Cab cab)
+        {
+              try{                
+                   string sql3 = "select * from deviceinfo where cabid = " + cab.CabId + " ORDER BY D_ID";
+                   OracleDataReader odr3 = null; 
+                   odr3 = dm.ReadDeviceInfomationFromDb(sql3);
+                   return odr3 ;
+                
+            }
+            catch(Exception e)
+            {
+                LogUtil.Log((int)LogUtil.ERR_CODE.DEVICE_READ_ERR, e.ToString(), "查询设备信息失败！");
+                return null;
+            }       
+        }
+        public void InitialData()  //初始化数据
+        {
+            if (isFirstIn()) //第一次进入创建数据表和sequence
+            {
+                initDatabase();
+            }
+            DBManager dbOfDevice = new DBManager();
+            string errorCode = "";
+            int errCode = (int)LogUtil.ERR_CODE.OK;
+            OracleDataReader odr = null;
+            OracleDataReader odr2 = null;
+            OracleDataReader odr3 = null;
+
+            try
+            {
+                errCode = dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+                odr = readBuidingFromDb();
+                if (odr.HasRows)
+                {
+                    string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+                    Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
+                    while (odr.Read()) //找所有的building
+                    {
+                        odr2 = readCabFromDb(dbOfDevice, odr);
+                        if (odr2.HasRows)
+                        {
+                            while (odr2.Read()) //找每个building对应的cab
+                            {
+                                Cab cab = new Cab("" + odr2.GetInt32(0), "" + odr2.GetInt32(1), "" + odr2.GetString(2), odr2.GetString(3), odr2.GetString(4), odr2.GetString(5), odr2.GetString(6), new List<Device>(), state);
+                                odr3 = readDeviceFromDb(dbOfDevice, odr2, cab);
+                                while (odr3.Read())
+                                {
+                                    Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8),                                     odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
+                                    cab.Devices.Add(device);
+                                    GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
+                                }
+                                GlobalMapForShow.globalMapForCab.Add(building.SystemId + "_" + cab.CabId, cab);
+                                odr3.Close();
+                                building.Cabs.Add(cab);
+                            }
+                            odr2.Close();
+                            GlobalMapForShow.globalMapForBuiding.Add(building.SystemId, building);
+                        }
+                    }
+
+                }
+                odr.Close();
+                dbOfDevice.CloseConnection();
+            }
+            catch(Exception e)
+            {
+                LogUtil.Log(1, e.ToString(), "数据库连接建立失败！");
+            }
+                        //}   
+                        //else
+                        //{
+                        //        errCode = (int)LogUtil.ERR_CODE.CAB_READ_ERR;
+                        //        return;
+                        //}        
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    errCode = (int)LogUtil.ERR_CODE.BUILDING_READ_ERR;
+                        //    return;
+                        //}
+
+                        //catch (Exception e)
+                        //{
+                        //    LogUtil.Log(1, e.ToString(), "数据库连接建立失败！");
+                        //    return;
+                        //}
+                        //finally
+                        //{
+                        //}                              
             //}
-            //MessageBox.Show(result);
-            
+                
         }
 
         static void AddUpdateAppSettings(string key, string value)  //第一次进入初始化完成后更新键值对，以后进来就不初始化了。。

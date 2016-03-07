@@ -22,7 +22,7 @@ namespace PavilionMonitor
         public DeviceDataASM02Box asm02_box=new DeviceDataASM02Box();
         public override void setDevState(string state)
         {
-            DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更新
+            DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更
         }
         public String DevState
         {

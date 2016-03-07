@@ -14,7 +14,7 @@ namespace WpfApplication2.Model.Db
     {
         private  OracleConnection Conn;
 
-        public bool OpenConnection(string str_uid, string str_pwd, string str_serveraddr, string str_port, string str_dbname, ref string strErr)
+        public int OpenConnection(string str_uid, string str_pwd, string str_serveraddr, string str_port, string str_dbname, ref string strErr)
         {
             string str_conn = string.Format("user id={0};password={1};data source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST={2})(PORT={3}))(CONNECT_DATA=(SERVICE_NAME={4})))", str_uid, str_pwd, str_serveraddr, str_port, str_dbname);//连接字符串格式化
             Conn = new OracleConnection(str_conn);//定义连接实例
@@ -22,13 +22,13 @@ namespace WpfApplication2.Model.Db
             {
                 Conn.Open();//通过自带的方式打开连接，测试连接实例
                 
-                return true;
+                return (int)LogUtil.ERR_CODE.OK;
             }
             catch (Exception ex)
             {
                 strErr = ex.Message;
                 LogUtil.Log(1,strErr,ex.ToString());
-                return false;
+                return (int)LogUtil.ERR_CODE.CONNECTION_OPEN_ERR;
             }
            
         }
@@ -39,24 +39,17 @@ namespace WpfApplication2.Model.Db
         }
 
 
-        public bool CloseConnection()
+        public int CloseConnection()
         {
-            try
-            {
-                if (Conn != null)
-                {
-                    Conn.Close();
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
 
-            }
-            catch (Exception ex)
+            if (Conn != null)
             {
-                return false;
+                Conn.Close();
+                return (int)LogUtil.ERR_CODE.OK;
+            }
+            else
+            {
+                return (int)LogUtil.ERR_CODE.CONNECTION_CLOSE_ERR;
             }
         }
 
