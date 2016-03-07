@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +5,7 @@ using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.IO;
+using System;
 namespace WpfApplication2.Model.Db
 {
     class DBHelper
@@ -14,16 +14,14 @@ namespace WpfApplication2.Model.Db
         * db常量
         * */
         DBManager initialDB;
-        public static string db_name = "MYDB"; //数据库名
+        public static string db_name = "mydb"; //数据库名
         public static string emergencyDb_name = "emergency_orcl"; //应急数据库名，为方便，与正常数据库的账户和密码端口等均一致
         //public static string db_sysName = "sys";  //系统账户名
         //public static string db_sysPassWord = "548983"; //系统密码
         public static string db_userName = "mianyang"; //操作账户名
         public static string db_userPassWord = "mianyang";//操作密码
-        public static string db_ip = "192.168.1.114";//数据库ip
+        public static string db_ip = "192.168.1.115";//数据库ip
         public static string db_port = "1521"; //端口
-        //public static string db_ip = "100.64.48.151";//数据库ip
-        //public static string db_port = "15431"; //端口
         public static int dataTable_startIndex = 1; //存储数据的表开始值
         public static int dataTable_endIndex = 15; //存储数据的表结束值
         public static bool testFlag = true;// 是否需要插入测试数据
@@ -59,7 +57,7 @@ namespace WpfApplication2.Model.Db
                     initialDB.OpenConnection(db_userName, db_userPassWord, db_ip, db_port, db_name, ref errorCode);
                     break;
                 case 1:
-                    initialDB.OpenConnection(db_userName, db_userPassWord, db_ip, db_port, emergencyDb_name, ref                            errorCode);
+                    initialDB.OpenConnection(db_userName, db_userPassWord, db_ip, db_port, emergencyDb_name, ref errorCode);
                     break;
             }
 
@@ -137,7 +135,7 @@ namespace WpfApplication2.Model.Db
        * */
         public String GenerateSequenceSQL(String tableName, int systemId)
         {
-            String result = "CREATE SEQUENCE " + tableName + systemId + "_sequence" + " INCREMENT BY 1 START WITH 1                                 NOMAXVALUE NOCYCLE CACHE 10";
+            String result = "CREATE SEQUENCE " + tableName + systemId + "_sequence" + " INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE CACHE 10";
 
             return result;
         }

@@ -106,6 +106,7 @@
     <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\ErrorCode.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />

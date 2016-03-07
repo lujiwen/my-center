@@ -1,4 +1,3 @@
-﻿using WpfApplication2.package;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using WpfApplication2.Model.Vo;
+using WpfApplication2.package;
 
 namespace PavilionMonitor
 {
@@ -22,7 +22,7 @@ namespace PavilionMonitor
         public DeviceDataASM02Box asm02_box=new DeviceDataASM02Box();
         public override void setDevState(string state)
         {
-            DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更新
+            DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更
         }
         public String DevState
         {
@@ -1037,3 +1037,4 @@ namespace PavilionMonitor
 
     }
 }
+
