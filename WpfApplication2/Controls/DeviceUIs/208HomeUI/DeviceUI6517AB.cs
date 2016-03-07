@@ -78,3 +78,4 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
     }
 }
+ 
