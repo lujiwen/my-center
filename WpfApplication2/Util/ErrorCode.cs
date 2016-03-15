@@ -13,9 +13,10 @@ namespace WpfApplication2.Util
             CONNECTION_OPEN_ERR = 0x01,
             BUILDING_READ_ERR = 0x02,
             DEVICE_READ_ERR = 0x03,
-            CAB_READ_ERR = 0x04,
+            CAB_READ_ERR = 0x04, 
             CONNECTION_CLOSE_ERR = 0x05,
-            MAP_POINTS_INIT_ERR = 0x06
+            MAP_POINTS_INIT_ERR = 0x06,
+            WIRTE_CONFIG_ERR = 0x07
         } ;
 
         private string errDescription;

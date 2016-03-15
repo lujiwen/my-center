@@ -107,6 +107,7 @@
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\ErrorCode.cs" />
+    <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
@@ -346,7 +347,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPump.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />

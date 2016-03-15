@@ -36,7 +36,7 @@ namespace WpfApplication2.Controller
         public static String tempSendData;
         public event UpdateUI notifyUpdateUI;
         public event alarmEventHandler alarm;
-        private static string FIRST_IN_FLAG = "0";
+       
         public MainController()
         {
             InitialData();
@@ -62,20 +62,7 @@ namespace WpfApplication2.Controller
 
         
 
-        public bool isFirstIn()
-        {
-            String path = System.Environment.CurrentDirectory;
-            String configFile = path + @"\app.config";
-            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
-
-            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            String flag = config.AppSettings.Settings["firstIn"].Value;
-            if (flag.Equals(FIRST_IN_FLAG))
-            {
-                return true;
-            }
-            else return false;
-        }
+        
         /// <summary>
         /// 第一次进入程序初始化数据库
         /// </summary>
@@ -88,7 +75,7 @@ namespace WpfApplication2.Controller
             dbInitial.createAllTableAndSequence(0); //创建正常数据库
             Thread.Sleep(2000);
             //dbInitial.createAllTableAndSequence(1); //创建应急数据库
-            AddUpdateAppSettings("firstIn", "1");
+             Utils.setConfig("firstIn", "1");
             flag = config.AppSettings.Settings["firstIn"].Value;
             Console.Write("after: " + flag);     
         }
@@ -148,7 +135,7 @@ namespace WpfApplication2.Controller
         }
         public void InitialData()  //初始化数据
         {
-            if (isFirstIn()) //第一次进入创建数据表和sequence
+            if (Utils.isFirstIn()) //第一次进入创建数据表和sequence
             {
                 initDatabase();
             }
@@ -162,9 +149,14 @@ namespace WpfApplication2.Controller
             try
             {
                 errCode = dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port,                           DBHelper.db_name, ref errorCode);
+                if(errCode!=(int)ErrorCode.ERR_CODE.OK)
+                {
+                    LogUtil.Log(true, "数据库连接建立异常", (int)ErrorCode.ERR_CODE.CONNECTION_OPEN_ERR);
+                    return;
+                }
                 odr = readBuidingFromDb();
                 if (odr.HasRows)
-                {    
+                {
                     while (odr.Read()) //找所有的building
                     {
                         string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
@@ -178,7 +170,7 @@ namespace WpfApplication2.Controller
                                 odr3 = readDeviceFromDb(dbOfDevice, odr2, cab);
                                 while (odr3.Read())
                                 {
-                                    Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8),                                     odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
+                                    Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8), odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
                                     cab.Devices.Add(device);
                                     GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
                                 }
@@ -190,7 +182,6 @@ namespace WpfApplication2.Controller
                         odr2.Close();
                         GlobalMapForShow.globalMapForBuiding.Add(building.SystemId, building);
                     }
-
                 }
                 odr.Close();
                 dbOfDevice.CloseConnection();
@@ -198,31 +189,7 @@ namespace WpfApplication2.Controller
             catch(Exception e)
             {
                 LogUtil.Log(true, e.Message, (int)ErrorCode.ERR_CODE.MAP_POINTS_INIT_ERR);
-            }
-                        //}   
-                        //else
-                        //{
-                        //        errCode = (int)ErrorCode.ERR_CODE.CAB_READ_ERR;
-                        //        return;
-                        //}        
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    errCode = (int)ErrorCode.ERR_CODE.BUILDING_READ_ERR;
-                        //    return;
-                        //}
-
-                        //catch (Exception e)
-                        //{
-                        //    LogUtil.Log(1, e.ToString(), "数据库连接建立失败！");
-                        //    return;
-                        //}
-                        //finally
-                        //{
-                        //}                              
-            //}
-                
+            }                      
         }
 
         static void AddUpdateAppSettings(string key, string value)  //第一次进入初始化完成后更新键值对，以后进来就不初始化了。。
@@ -336,7 +303,7 @@ namespace WpfApplication2.Controller
                         Alarm(deviceToChange);
                     }
                     GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
-                    GlobalMapForShow.globalMapForBuiding["2"].State = "Normal";
+                    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = "Normal";
                     GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
                     
                

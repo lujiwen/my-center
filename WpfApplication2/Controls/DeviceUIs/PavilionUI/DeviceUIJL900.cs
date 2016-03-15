@@ -46,7 +46,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            keepTimeLT.getValueTextBlock().Text = box.keep_time;
            if(MainWindow.getInstance().IsMute )
            {
-               //DeviceBuzzer.muteBuzzer();
+                DeviceBuzzer.muteBuzzer();
            }
            //if (DeviceInUI.State.Equals("Normal") && !DeviceBuzzer.IsAlarming)
            //{
