@@ -1,16 +1,17 @@
-### my-emegency-center 
+# my-emegency-center
 
 
-###右键点出菜单，需要在xml文件写入类似下面的内容：
+## 鍙抽敭鐐瑰嚭鑿滃崟锛岄渶瑕佸湪xml鏂囦欢鍐欏叆绫讳技涓嬮潰鐨勫唴瀹癸細
+
         <Grid.ContextMenu >
             <ContextMenu Background="#FF565656" BorderBrush="#FF565656" >
-                <MenuItem Header="参数设置"  Background="#FF565656" Click="settings_btn_Click" Foreground="White" />
-                <MenuItem Header="查看历史曲线" Background="#FF565656"  Click="history_btn_Click"  Foreground="White" BorderBrush="#FF565656" />
+                <MenuItem Header="锟斤拷锟斤拷锟斤拷锟斤拷"  Background="#FF565656" Click="settings_btn_Click" Foreground="White" />
+                <MenuItem Header="锟介看锟斤拷史锟斤拷锟斤拷" Background="#FF565656"  Click="history_btn_Click"  Foreground="White" BorderBrush="#FF565656" />
             </ContextMenu>
         </Grid.ContextMenu>
-		
-	然后具体点击事件，实现Click="some_event" 
-	
-	
-### 报表采用 WPF DataGrid
-详见：http://www.cnblogs.com/xiaogangqq123/archive/2012/05/07/2487166.html
+
+	然锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷锟斤拷实锟斤拷Click="some_event"
+
+
+## 鎶ヨ〃閲囩敤 WPF DataGrid
+璇﹁ http://www.cnblogs.com/xiaogangqq123/archive/2012/05/07/2487166.html
