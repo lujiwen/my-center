@@ -106,6 +106,8 @@
     <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\ErrorCode.cs" />
+    <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
@@ -345,7 +347,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPump.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />
@@ -419,6 +423,17 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Help\help.html" />
+    <Resource Include="Help\pictures\baojing_1.png" />
+    <Resource Include="Help\pictures\baojing_2.png" />
+    <Resource Include="Help\pictures\baojing_3.png" />
+    <Resource Include="Help\pictures\baojing_4.png" />
+    <Resource Include="Help\pictures\canshu_shezhi_1.png" />
+    <Resource Include="Help\pictures\canshu_shezhi_2.png" />
+    <Resource Include="Help\pictures\chakan_lishi.png" />
+    <Resource Include="Help\pictures\ditu_zhujiemian_1.png" />
+    <Resource Include="Help\pictures\ditu_zhujiemian_2.png" />
+    <Resource Include="Help\pictures\guizi.png" />
+    <Resource Include="Help\pictures\tongdao.png" />
     <Resource Include="Images\CabsArtWork\407HPT500I.png" />
     <Resource Include="Images\CabsArtWork\324WasteProcessSys.png" />
     <Resource Include="Images\CabsArtWork\404HPT500II.png" />

@@ -92,7 +92,7 @@ namespace WpfApplication2.View.Windows
             }
             catch(Exception e)
             {
-                LogUtil.Log(1,e.Message,e.ToString());
+                LogUtil.Log(true, e.Message , (int)ErrorCode.ERR_CODE.MAP_POINTS_INIT_ERR);
             }
             
         }
@@ -114,7 +114,6 @@ namespace WpfApplication2.View.Windows
 
         void MainWindowShowAlarm(AlarmMessage alarmMsg)
         {
-
             //添加 显示报警信息
             this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate() {
              

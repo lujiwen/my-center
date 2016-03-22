@@ -9,6 +9,8 @@ using System.ComponentModel;
 using WpfApplication2.package;
 using WpfApplication2.View.Windows;
 using System.Windows.Media;
+using System.Windows.Data;
+using System.Windows;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
@@ -58,11 +60,11 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            rainyStateLT = new LabelAndText("下雨状态:", "", Colors.White);
            rainTimeLT = new LabelAndText("降雨时间（分钟）:", "",Colors.White);
            
-           //实时值绑定
-           //Binding valueBingding = new Binding();
-           //valueBingding.Source = DeviceInUI;
-           //valueBingding.Path = new PropertyPath("NowValue");
-           //valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
+           //盖子状态绑定
+           Binding valueBingding = new Binding();
+           valueBingding.Source = DeviceInUI;
+           valueBingding.Path = new PropertyPath("NowValue");
+           cabStateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
 
            ////状态绑定
            //Binding stateBinding = new Binding();

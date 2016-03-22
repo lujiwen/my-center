@@ -21,14 +21,14 @@ namespace WpfApplication2.Model.Db
             try
             {
                 Conn.Open();//通过自带的方式打开连接，测试连接实例
-                
-                return (int)LogUtil.ERR_CODE.OK;
+
+                return (int)ErrorCode.ERR_CODE.OK;
             }
             catch (Exception ex)
             {
                 strErr = ex.Message;
-                LogUtil.Log(1,strErr,ex.ToString());
-                return (int)LogUtil.ERR_CODE.CONNECTION_OPEN_ERR;
+                LogUtil.Log(true,ex.Message,(int)ErrorCode.ERR_CODE.CONNECTION_OPEN_ERR);
+                return (int)ErrorCode.ERR_CODE.CONNECTION_OPEN_ERR;
             }
            
         }
@@ -45,11 +45,11 @@ namespace WpfApplication2.Model.Db
             if (Conn != null)
             {
                 Conn.Close();
-                return (int)LogUtil.ERR_CODE.OK;
+                return (int)ErrorCode.ERR_CODE.OK;
             }
             else
             {
-                return (int)LogUtil.ERR_CODE.CONNECTION_CLOSE_ERR;
+                return (int)ErrorCode.ERR_CODE.CONNECTION_CLOSE_ERR;
             }
         }
 

@@ -40,7 +40,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
             initBingdings();
         }
         
-
         /// <summary>
         /// 初始化界面的数据绑定
         /// </summary>
@@ -51,7 +50,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
             bind_asm02_status.Source = asm02;
             bind_asm02_status.Path = new PropertyPath("DevState");
             ASM02_Status.SetBinding(TextBlock.TextProperty, bind_asm02_status);
-
 
             Binding bind_ab_1 = new Binding();
             bind_ab_1.Source = asm02;
