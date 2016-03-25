@@ -8,16 +8,16 @@ using WpfApplication2.package;
 
 namespace WpfApplication2.package
 {
-    public class DeviceDataASM02Box : DeviceDataBox
+    public class DeviceDataASM02Box : DeviceDataBox_Base
     {
-        public const string classNameASM02String = "DeviceDataASM02Box";
+        public const string classNameString = "DeviceDataASM02Box";
 
         private string val_str_set_; // 需要用 asm02.cs代码中的 AnalysisPavilionData 进行拆分数据 
 
 
         public override string className()
         {
-            return classNameASM02String;
+            return classNameString;
         }
 
         public string val_str_set

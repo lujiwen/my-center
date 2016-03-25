@@ -70,6 +70,24 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
+                else if (elem.Name == DeviceDataASM02Box.classNameString)
+                {
+                    DeviceDataASM02Box box = new DeviceDataASM02Box();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
+                else if (elem.Name == DeviceDataDryWetBox.classNameString)
+                {
+                    DeviceDataDryWetBox box = new DeviceDataDryWetBox();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
+                else if (elem.Name == DeviceDataJL900Box.classNameString)
+                {
+                    DeviceDataJL900Box box = new DeviceDataJL900Box();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
 
             }
 

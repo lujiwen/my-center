@@ -149,5 +149,27 @@ namespace WpfApplication2.package
         protected string high_threshold_;
         protected string low_threshold_;
         protected string factor_;
+
+        private string paralow;
+
+        public string Paralow
+        {
+            get { return paralow; }
+            set { paralow = value; }
+        }
+        private string parahigh;
+
+        public string Parahigh
+        {
+            get { return parahigh; }
+            set { parahigh = value; }
+        }
+        private String correctFactor;
+
+        public String CorrectFactor
+        {
+            get { return correctFactor; }
+            set { correctFactor = value; }
+        }
     }
 }

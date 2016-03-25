@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.ComponentModel;
 
 namespace WpfApplication2.package
 {
-    public class DeviceDataJL900Box :DeviceDataBox
+    public class DeviceDataJL900Box : DeviceDataBox_Base, INotifyPropertyChanged
     {
-        public const string classNameJL900String = "DeviceDataBox_JL900";
-
+        public const string classNameString = "DeviceDataBox_JL900";
+        public event PropertyChangedEventHandler PropertyChanged;
         public override string className()
         {
-            return classNameJL900String;
+            return classNameString;
         }
         private string presure_, real_traffic_, sample_volume_, keep_time_;
 
@@ -62,6 +63,13 @@ namespace WpfApplication2.package
             Paralow = _paraLow;//低阈值
 
         }
+        protected override void fromXmlElementMore(XmlElement element)
+        {
+            presure = element.GetAttribute("presure");
+            real_traffic = element.GetAttribute("real_traffic");
+            sample_volume = element.GetAttribute("sample_volume");
+            keep_time = element.GetAttribute("keep_time");
+        }
         public override XmlElement toXmlElement(XmlDocument doc)
         {
             XmlElement element = doc.CreateElement(className());
@@ -83,6 +91,56 @@ namespace WpfApplication2.package
             element.SetAttribute("factor", CorrectFactor);
 
             return element;
+        }
+       
+        public string Real_traffic
+        {
+            get { return real_traffic; }
+            set
+            {
+                real_traffic = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Real_traffic"));
+                }
+            }
+        }
+        public string Presure
+        {
+            get { return presure; }
+            set
+            {
+                presure = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Presure"));
+                }
+            }
+        }
+
+        public string Sample_volume
+        {
+            get { return sample_volume; }
+            set
+            {
+                sample_volume = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Sample_volume"));
+                }
+            }
+        }
+        public string Keep_time
+        {
+            get { return keep_time; }
+            set
+            {
+                keep_time = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Keep_time"));
+                }
+            }
         }
     }
 }

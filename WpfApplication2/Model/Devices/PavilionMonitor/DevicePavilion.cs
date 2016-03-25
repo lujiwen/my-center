@@ -176,9 +176,5 @@ namespace PavilionMonitor
             get { return use; }
             set { use = value; }
         }
-
-
-
-      
     }
 }

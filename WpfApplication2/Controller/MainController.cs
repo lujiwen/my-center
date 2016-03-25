@@ -161,6 +161,7 @@ namespace WpfApplication2.Controller
                     {
                         string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
                         Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
+                        Console.WriteLine(building.Name);
                         odr2 = readCabFromDb(dbOfDevice, odr);
                         if (odr2.HasRows)
                         {
@@ -268,26 +269,17 @@ namespace WpfApplication2.Controller
 
        public void receiveData(string data)  //收到二级发送过来的数据后触发
         {
-            //PackageGenerator pg = new PackageGenerator();
-            //string anaData = pg.generatePackage();
-            //Console.WriteLine("收到数据：" + data);
             List<Box> boxes = PackageWorker.unpack(data);
             foreach (Box item in boxes)
             {
-                if (item.className() == DeviceCommandEchoBox.classNameString) //控制命令单独处理
-                {
-                    //if (tcpConnection.ConnectState)
-                    //{
-                    //    MessageBox.Show("修改成功");
-                    //    saveCommandToDataBase();  //如果返回成功，则将下发命令的记录存到数据库
-                    //    tcpConnection.exit();
-                    //}
-                }
-                else
+                if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
                 {
                     DeviceDataBox_Base tempItem = (DeviceDataBox_Base)item;
-                   
-                    WpfApplication2.Model.Vo.Device deviceToChange = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
+                    if(tempItem==null)
+                    {
+                        break;
+                    }
+                    Device deviceToChange = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
                     deviceToChange.Value = item;
                     deviceToChange.Type = item.className();
                     deviceToChange.NowValue = tempItem.value;
@@ -302,9 +294,8 @@ namespace WpfApplication2.Controller
                     {
                         Alarm(deviceToChange);
                     }
-                    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
-                    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = "Normal";
-                    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
+                     GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
+                     GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
                     
                
                     /**

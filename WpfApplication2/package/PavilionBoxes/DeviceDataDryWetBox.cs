@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using WpfApplication2.package;
+using System.ComponentModel;
 
 namespace WpfApplication2.package 
 {
-    public class DeviceDataDryWetBox :DeviceDataBox
+    public class DeviceDataDryWetBox : DeviceDataBox_Base, INotifyPropertyChanged
     {
-        public const string classNameDryWetString = "DeviceDataBox_DryWet";
-
+        public const string classNameString = "DeviceDataBox_DryWet";
+        public event PropertyChangedEventHandler PropertyChanged;
         public override string className()
         {
-            return classNameDryWetString;
+            return classNameString;
         }
         private string cab_state_, rainy_state_, rain_time_;
 
@@ -75,6 +76,49 @@ namespace WpfApplication2.package
             element.SetAttribute("factor", CorrectFactor);
 
             return element;
+        }
+        protected override void fromXmlElementMore(XmlElement element)
+        {
+            cab_state = element.GetAttribute("cab_state");
+            rainy_state = element.GetAttribute("rainy_state");
+            rain_time = element.GetAttribute("rain_time");
+        }
+        public string Rain_time
+        {
+            get { return rain_time; }
+            set
+            {
+                rain_time = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Rain_time"));
+                }
+            }
+        }
+        public string Rainy_state
+        {
+            get { return rainy_state; }
+            set
+            {
+                rainy_state = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Rainy_state"));
+                }
+            }
+        }
+
+        public string Cab_state
+        {
+            get { return cab_state; }
+            set
+            {
+                cab_state = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Cab_state"));
+                }
+            }
         }
     }
 }
