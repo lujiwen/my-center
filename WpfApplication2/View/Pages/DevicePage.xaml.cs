@@ -68,38 +68,37 @@ namespace WpfApplication2.View.Pages
                      switch(d.HandleTypeInSystem)
                      {
                          case "6517AB":
-                             deviceUI = new DeviceUI6517AB(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUI6517AB(d, systemFrame);
                              break; 
                          case "Presure":
-                             deviceUI = new DeviceUIPresure(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIPresure(d, systemFrame);
                              break ;
                         case "Pump":
-                             deviceUI = new DeviceUIPump(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIPump(d, systemFrame);
                              break ;
                         case "XH31253127":
-                             deviceUI = new DeviceUIXH31253127(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIXH31253127(d, systemFrame);
                              break ;
                          case "Quality":
-                             deviceUI = new DeviceUIQuality(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIQuality(d, systemFrame);
                              break;
                          case "ASM02":
-                            // deviceUI = new DeviceUIASM02(d, systemFrame);
-                             deviceUI = new DeviceUIJL900(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIASM02(d, systemFrame);
                              break;
                          case "jl900":
-                             deviceUI = new DeviceUIJL900(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIJL900(d, systemFrame);
                              break;
                          case "rss131":
-                             deviceUI = new DeviceUIRSS131(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIRSS131(d, systemFrame);
                              break;
                          case "h3r7000":
-                             deviceUI = new DeviceUIH3R7000(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIH3R7000(d, systemFrame);
                              break;
                          case "DryWet":
-                             deviceUI = new DeviceUIDryWet(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUIDryWet(d, systemFrame);
                              break;
                          default:
-                             deviceUI = new DeviceUI(cab.Devices[i], systemFrame);
+                             deviceUI = new DeviceUI(d, systemFrame);
                              break;
                      }
                      if (subSystem.ContainsKey(d.SubSystemName))

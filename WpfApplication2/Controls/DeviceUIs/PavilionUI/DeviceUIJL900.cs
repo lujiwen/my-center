@@ -27,7 +27,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
           //getChart().SetBinding();
          // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
-           
+           CurveEnable = false;
            //DeviceBuzzer.startAlarm();
        }
 
@@ -39,7 +39,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 
        private void updateLabels()
        {
-           updateChart(box.value);
+          // updateChart(box.presure);
            presureLT.getValueTextBlock().Text = box.presure;
            realTrafficLT.getValueTextBlock().Text = box.real_traffic;
            sampleVolumeLT.getValueTextBlock().Text = box.sample_volume;
@@ -61,18 +61,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            sampleVolumeLT = new LabelAndText("采样体积:", "", "m^3", Colors.White);
            keepTimeLT = new LabelAndText("采样时间:", "", "h", Colors.White);
            //valueLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
-
-           //实时值绑定
-           //Binding valueBingding = new Binding();
-           //valueBingding.Source = DeviceInUI;
-           //valueBingding.Path = new PropertyPath("NowValue");
-           //valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
-
-           ////状态绑定
-           //Binding stateBinding = new Binding();
-           //stateBinding.Source = DeviceInUI;
-           //stateBinding.Path = new PropertyPath("State");
-           //stateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, stateBinding);
 
            getInoPanel().Children.Add(presureLT);
            getInoPanel().Children.Add(realTrafficLT);

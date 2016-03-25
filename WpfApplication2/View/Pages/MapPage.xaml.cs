@@ -139,14 +139,14 @@ namespace WpfApplication2.View.Pages
             MainMap.Zoom = 6;
            // MainMap.MapType = MapType.GoogleHybridChina;
              MainMap.MapType = MapType.ArcGIS_Map;
-            MainMap.Manager.Mode = AccessMode.ServerAndCache;
+            MainMap.Manager.Mode = AccessMode.CacheOnly;
           //MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
             MainMap.CanDragMap = true;
             MainMap.DragButton = MouseButton.Right;
             currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
             {
                 TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-                // trolleyToolTip.setStatus("异常");
+              // trolleyToolTip.setStatus("异常");
              //   currentMarker.Offset = new System.Windows.Point(0,0);
                 currentMarker.ZIndex = int.MaxValue;
                 MainMap.Markers.Add(currentMarker);
@@ -392,6 +392,7 @@ namespace WpfApplication2.View.Pages
 
             Console.WriteLine("main.maxzoom:" + MainMap.MaxZoom + "   MainMap zoom:" + MainMap.Zoom + "MainMap Minzoom" + MainMap.MinZoom);
         }
+
         // center markers on load 
         void MainMap_Loaded(object sender, RoutedEventArgs e)
         {

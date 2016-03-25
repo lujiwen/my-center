@@ -41,8 +41,8 @@ namespace WpfApplication2.Controls
        public List<string> LabelsToShow { set { label = value; } get { return label; } }
     // private Box box;
        private int maxPointSize;
-       public Device DeviceInUI { get { return _device; } 
-       
+       public Device DeviceInUI { 
+           get { return _device; } 
            set { _device = value;
                  _device.Value = value.Value;
            }
@@ -67,7 +67,6 @@ namespace WpfApplication2.Controls
             InitializeComponent();
             initEnventListner();
             this.deviceName = name;
-          //  this.powerBtn = new PowerControl(power);
             this.systemFrame = fm;
         }
         public DeviceUI(Device d)
@@ -79,17 +78,13 @@ namespace WpfApplication2.Controls
         {
             InitializeComponent();
             initEnventListner();
+
             _device = d;
-       //     this.powerBtn = new PowerControl(power);
             this.systemFrame = fm;
             init();
         }
         private void initBindings()
         {
-            if(_device.HandleTypeInSystem.Equals(""))
-            {
-
-            }
             //实时值绑定
             Binding valueBingding = new Binding();
             valueBingding.Source = _device;
@@ -202,6 +197,8 @@ namespace WpfApplication2.Controls
           //  if (NowValue != null)
           //  {
                 //HH:mm:ss 
+             //   if (!curveEnable) return;
+
                 DateTime dt = DateTime.Now;
                 string timeStamp = dt.ToString("HH:mm:ss ");//dt.Hour + ":" + dt.Minute + ":" + dt.Second;
                 if (dataSeries.DataPoints.Count < maxPointSize) //直接添加

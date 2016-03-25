@@ -10,7 +10,6 @@ namespace PavilionMonitor
     // 干湿沉降设备类
     class DryWet : DevicePavilion, INotifyPropertyChanged
     {
-
         private String cab_state="开盖", rainy_state="未下雨"; // 开盖状态，是否下雨？？？
         private int rain_time = 0; // 降雨时间
 

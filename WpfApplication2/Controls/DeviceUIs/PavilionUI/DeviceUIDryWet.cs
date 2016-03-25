@@ -27,7 +27,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
           //getChart().SetBinding();
          // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
-           
+           CurveEnable = false;
            //DeviceBuzzer.startAlarm();
        }
 
@@ -40,7 +40,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        private void updateLabels()
        {
            CurveEnable = false;
-           updateChart(box.value);
+          // updateChart(box.value);
            cabStateLT.getValueTextBlock().Text = box.cab_state;
            rainyStateLT.getValueTextBlock().Text = box.rainy_state;
            rainTimeLT.getValueTextBlock().Text = box.rain_time;

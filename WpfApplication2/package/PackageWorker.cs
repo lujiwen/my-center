@@ -88,9 +88,7 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
-
             }
-
             return boxes;
         }
     }
