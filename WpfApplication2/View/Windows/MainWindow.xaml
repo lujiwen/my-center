@@ -95,9 +95,6 @@
             <MenuItem Header="操作" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
                 <MenuItem Header="合并显示" Name="MultiRoomshow" Click="MenuItem_Click" />
                 <MenuItem Header="页面选择" Name="pageChooser" Click="MenuItem_Click" />
-                <MenuItem Header="实时曲线" Click="MenuItem_Click" />
-                <MenuItem Header="历史曲线" Click="MenuItem_Click" />
-                <MenuItem Header="远程控制" Click="MenuItem_Click" />
                 <MenuItem Header="应急状态" Name="emergency_status" Click="MenuItem_Click" />
                 <MenuItem Header="报警静音" Name="alarm_mute" Click="alarmMute" />
             </MenuItem>

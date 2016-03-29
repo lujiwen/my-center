@@ -105,7 +105,7 @@ namespace WpfApplication2.Controller
         {
              try{
                 string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
-                Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
+                Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state,odr.GetString(6));
                 String sql2 = "select * from cabinfo where buildingid = " + building.SystemId + " ORDER BY C_ID";
                 OracleDataReader odr2 = null;
                 odr2 =  dm.ReadDeviceInfomationFromDb(sql2);
@@ -160,7 +160,7 @@ namespace WpfApplication2.Controller
                     while (odr.Read()) //找所有的building
                     {
                         string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
-                        Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state);
+                        Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state,odr.GetString(6));
                         Console.WriteLine(building.Name);
                         odr2 = readCabFromDb(dbOfDevice, odr);
                         if (odr2.HasRows)
@@ -461,19 +461,24 @@ namespace WpfApplication2.Controller
             }
         }
 
-        public static void changeEmergencyState(int type) //type 0 表示正常状态，1表示应急状态
+        public static bool changeEmergencyState(int type) //type 0 表示正常状态，1表示应急状态
         {
             dataOfDevice.CloseConnection();
             string errorCode = "";
+            int result = 0 ;
             switch(type){
                 case 0:
-                    dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+                   result = (int)dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
                     break;
                 case 1:
-                    dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.emergencyDb_name, ref errorCode);
+                   result = (int)dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.emergencyDb_name, ref errorCode);
                     break;
             }
-            
+            if (result == (int)ErrorCode.ERR_CODE.OK)
+            {
+                return true;
+            }
+            return false;
 
         }
 

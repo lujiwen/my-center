@@ -231,13 +231,24 @@ namespace WpfApplication2.View.Windows
             {
                 str = "应急状态已经关闭";
             }
-            MessageBox.Show(this,str,"通知",MessageBoxButton.OK, MessageBoxImage.Information);
-            resetEmergentStatus(isEmergencyStatus);
+
+            if (resetEmergentStatus(isEmergencyStatus))
+            {
+                MessageBox.Show(this, str, "通知", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                str = "状态切换失败";
+                MessageBox.Show(this, str, "通知", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            MainWindowShowAlarm(new AlarmMessage(str,new DateTime()));
         }
 
-        private void resetEmergentStatus(bool isEmergencyStatus)
+        private bool resetEmergentStatus(bool isEmergencyStatus)
         {
-            MainController.changeEmergencyState(isEmergencyStatus ? 1 : 0);
+           return  MainController.changeEmergencyState(isEmergencyStatus ? 1 : 0);
+            //添加屏幕打印 todo
         }
 
         void w_pageClick()

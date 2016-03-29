@@ -27,7 +27,7 @@ namespace WpfApplication2.Model.Vo
             state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
         }
         
-        public Building(string systemId, string name, string office, string location, double lat, double lng, List<Cab> cabs, string state)
+        public Building(string systemId, string name, string office, string location, double lat, double lng, List<Cab> cabs, string state,string mng)
         {
             this.systemId = systemId;
             this.name = name;
@@ -37,6 +37,7 @@ namespace WpfApplication2.Model.Vo
             this.lng = lng;
             this.cabs = cabs;
             this.state = state;
+            this.manager = mng;
         }
 
         public string Name

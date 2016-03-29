@@ -21,7 +21,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Margin="10,20,50,10" Width="90" Click="Button_Click">取消</Button>
-                <Button  Margin="10,20,50,10" Width="90" Click="Button_Click_1">确定</Button>
+                <Button  Margin="10,20,50,10" Width="90" Click="Confirm_Button_Click">确定</Button>
             </StackPanel>
 
         </StackPanel>

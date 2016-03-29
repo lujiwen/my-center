@@ -21,7 +21,6 @@ namespace WpfApplication2.Model.Db
             try
             {
                 Conn.Open();//通过自带的方式打开连接，测试连接实例
-
                 return (int)ErrorCode.ERR_CODE.OK;
             }
             catch (Exception ex)

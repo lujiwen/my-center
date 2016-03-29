@@ -125,6 +125,10 @@
         {
             Console.WriteLine("SystemPage_Unloaded");
         }
+        /// <summary>
+        /// 由选择多个检测点进来 看到的左侧的树状结构
+        /// </summary>
+        /// <param name="choosedArr"></param>
         private void initSystemTreeView(Boolean[] choosedArr)
         {
             Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
@@ -146,13 +150,11 @@
                     {
                         cabspage.addBuildingToShow(b);
                     }
-                    for (int j = 0; j < b.Cabs.Count;j++ ) // 每个房间的 柜子层
+                    for (int j = 0; j < b.Cabs.Count;j++ ) // 每个房间的柜子层
                     {
-                        // WpfApplication2.Model.Vo.Cab cab = new Cab();
                         Cab c = b.Cabs[j];
                         MyTreeViewItem cabNode = new MyTreeViewItem(c);
                         cabNode.Header = createTreeViewItem(c.Name, new BitmapImage(new Uri("/Images/rack.png", UriKind.Relative)), true, 2, cabNode);
-                
                         roomNode.Items.Add(cabNode);
                         //显示通道
                         Dictionary<String, List<Device>> subSystemNames = sortSubsystem(c);
@@ -231,7 +233,9 @@
 
             MyTreeViewItem treeNode = (MyTreeViewItem)sender;
             MyTreeViewItem cabNode =  (MyTreeViewItem)treeNode.Parent;
-            Cab cab = (Cab)cabNode.NodeObject;
+            if (cabNode.NodeObject is Building)
+                return;
+            Cab cab = (Cab)cabNode.NodeObject ;
             List<Device> subsys = (List<Device>)treeNode.NodeObject;
             if (page.Content is CabsPage) //当前在cab页面 ，跳转到设备页面
             {
@@ -275,7 +279,6 @@
                     subSystemNames[d.SubSystemName].Add(d);
                 }
             }
-           
             return subSystemNames ;
         }
         // 0  1
@@ -290,7 +293,7 @@
             {
                 Image img = new Image();
                 img.Source = btmapImg;
-                panel.Children.Add(img);
+                panel.Children.Add(img); //加入图片
             }
 
             Label lb = new Label();
@@ -300,7 +303,7 @@
             lb.VerticalAlignment = VerticalAlignment.Center;
             lb.HorizontalAlignment = HorizontalAlignment.Center;
             lb.Foreground = new SolidColorBrush(Colors.White);
-            panel.Children.Add(lb);
+            panel.Children.Add(lb); //加入文字标签
         
             if (hasMyCheckBox)
             {
@@ -323,7 +326,7 @@
                 }
                 MyCheckBox cb = new MyCheckBox(t, item);
                 cb.Click += cb_Checked;
-                panel.Children.Add(cb);
+                panel.Children.Add(cb); //加入最后一个checkbox
             }   
             return panel;
         }
@@ -339,11 +342,16 @@
                 //遍历node的每一个子node  == stackpanel 
                 foreach (TreeViewItem item in node.Items)
                 {
-                    StackPanel nodePanel = (StackPanel)item.Header;
-                    CheckBox c = (CheckBox)nodePanel.Children[2];
-                    c.IsChecked = isChecked;
-                    //  c.Checked += new RoutedEventHandler(cb_Checked);
-                    checkAllChild(item, isChecked);
+                     StackPanel nodePanel = (StackPanel)item.Header;
+                    //checkbox 放在第三个位置上，判断是否有最后的checkbox
+                     if (nodePanel.Children.Count==3)
+                    {
+                          CheckBox c = (CheckBox)nodePanel.Children[2];
+                        c.IsChecked = isChecked;
+                        //  c.Checked += new RoutedEventHandler(cb_Checked);
+                        checkAllChild(item, isChecked);
+                    }
+                    
                 }
             }
         }

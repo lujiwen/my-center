@@ -53,9 +53,9 @@ namespace WpfApplication2.View.Windows
             Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Confirm_Button_Click(object sender, RoutedEventArgs e)
         {
-            bool [] arr = new bool[5];
+            bool [] arr = new bool[GlobalMapForShow.globalMapForBuiding.Count];
             int i = 0;
             foreach( CheckBox b in roomsPanel.Children)
             {

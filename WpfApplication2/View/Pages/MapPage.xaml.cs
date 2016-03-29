@@ -192,9 +192,9 @@ namespace WpfApplication2.View.Pages
             PositionMarker marker = e.Data.GetData(typeof(PositionMarker)) as PositionMarker;
             Building b = marker.building;
             b.PropertyChanged += LeftBuidingInfoChange; 
-            room.Text = b.Name;
-            position.Text = b.Location;
-            status.Text = b.State.Equals("Nomal")? "正常" : "异常";
+            room.Text = "监测点："+ b.Name;
+            position.Text = "监测点位置："+ b.Location;
+            status.Text = "监测点状态：" + (b.State.Equals("Nomal") ? "正常" : "异常");
             cab_num.Text = "柜子总数：" + b.Cabs.Count;
             manager.Text = "负责人："+ b.Manager;
             group_panel.Children.Clear();

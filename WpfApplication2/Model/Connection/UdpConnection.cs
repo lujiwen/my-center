@@ -11,7 +11,7 @@ namespace WpfApplication2.Controller
     {
         public State(Socket socket)
         {
-            this.Buffer = new byte[1024];
+            this.Buffer = new byte[1024*10];
             this.Socket = socket;
             this.RemoteEP = new IPEndPoint(IPAddress.Any, 0);
         }
