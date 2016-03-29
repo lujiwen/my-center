@@ -9,7 +9,8 @@ WpfApplication2/bin/Debug/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+*.dll
+*.exe
 # Build results
 #[Dd]ebug/
 [Dd]ebugPublic/
