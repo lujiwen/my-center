@@ -109,10 +109,10 @@ namespace WpfApplication2.Controls
                device_name.Text = _device.SubSystemName;
                cab_name.Text = cabs[_device.BuildingId + "_" + _device.CabId].Name; 
            }
-            if(curveEnable)
-            {
+           // if(curveEnable)
+          //  {
                 initDeviceChart();
-            }
+           // }
            
         }
 
