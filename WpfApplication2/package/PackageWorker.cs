@@ -88,6 +88,7 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
+                Console.WriteLine("设备类型："+boxes[boxes.Count-1].ToString() );
             }
             return boxes;
         }

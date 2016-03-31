@@ -40,7 +40,12 @@ namespace WpfApplication2.Controls
        public bool CurveEnable { get { return curveEnable; } set { curveEnable = value; } }
        public List<string> LabelsToShow { set { label = value; } get { return label; } }
     // private Box box;
+       private List<String> nowValues;
+       protected DataSeries[] dataSeries;
+       protected List<String> values;
        private int maxPointSize;
+       protected int lineCount;
+       protected Dictionary<int, string> valueDic;
        public Device DeviceInUI { 
            get { return _device; } 
            set { _device = value;
@@ -143,7 +148,7 @@ namespace WpfApplication2.Controls
         }
      
         Visifire.Charts.Title title;
-        private DataSeries dataSeries;
+       // private DataSeries dataSeries;
         private void initDeviceChart()
         {
             device_chart.Visibility = System.Windows.Visibility.Visible;
@@ -156,9 +161,9 @@ namespace WpfApplication2.Controls
             device_chart.Titles.Add(title);//添加标题
             device_chart.AxesX.Add(axisX);//添加x轴
             device_chart.AxesY.Add(axisY);//添加y轴
-            dataSeries = new DataSeries();  //数据系列 
-            dataSeries.RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
-            device_chart.Series.Add(dataSeries);
+            //dataSeries = new DataSeries() ;  //数据系列 
+            //dataSeries.RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
+            //device_chart.Series.Add(dataSeries);
             
         }
 
@@ -194,41 +199,46 @@ namespace WpfApplication2.Controls
 
         private void updateChart()
         {
-          //  if (NowValue != null)
-          //  {
+            if (valueDic != null && valueDic.Count != 0)
+             {
                 //HH:mm:ss 
              //   if (!curveEnable) return;
 
                 DateTime dt = DateTime.Now;
                 string timeStamp = dt.ToString("HH:mm:ss ");//dt.Hour + ":" + dt.Minute + ":" + dt.Second;
-                if (dataSeries.DataPoints.Count < maxPointSize) //直接添加
+                for (int i = 0; i < valueDic.Count; i++)
                 {
-                    //   Console.WriteLine(i + "  :  " + d.NowValue);
-                    DataPoint dataPoint = new DataPoint();//数据点
-                    dataPoint.MarkerSize = 8;
-                    //dataPoint.AxisXLabel = "0000-00-00 00:00:00";
-                    dataPoint.AxisXLabel = timeStamp; // dataSeries.DataPoints.Count + "";
-                    dataPoint.YValue = Double.Parse(DeviceInUI.NowValue);
-                   // Console.WriteLine("X：" + dataPoint.AxisXLabel + "   Y:" + dataPoint.YValue);
-                    dataSeries.DataPoints.Add(dataPoint);//数据点添加到数据系列
-                }
-                else //想左移动
-                {
-                    for (int j = 1; j < maxPointSize; j++)
+                    if (dataSeries[i].DataPoints.Count < maxPointSize) //直接添加
                     {
-                        dataSeries.DataPoints[j - 1].AxisXLabel = dataSeries.DataPoints[j].AxisXLabel;
-                        dataSeries.DataPoints[j - 1].YValue = dataSeries.DataPoints[j].YValue;
-                    }
 
-                    //    Console.WriteLine(i + "  :  " + d.NowValue);
-                    dataSeries.DataPoints[maxPointSize - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString(); //; ;//数据点添加到数据系列
-                    dataSeries.DataPoints[maxPointSize - 1].YValue = Double.Parse(DeviceInUI.NowValue); //; ;//数据点添加到数据系列
+                        //   Console.WriteLine(i + "  :  " + d.NowValue);
+                        DataPoint dataPoint = new DataPoint();//数据点
+                        dataPoint.MarkerSize = 8;
+                        //dataPoint.AxisXLabel = "0000-00-00 00:00:00";
+                        dataPoint.AxisXLabel = timeStamp; // dataSeries.DataPoints.Count + "";
+                        dataPoint.YValue = Double.Parse(nowValues[i]);
+                        // Console.WriteLine("X：" + dataPoint.AxisXLabel + "   Y:" + dataPoint.YValue);
+                        dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                    }
+                    else //想左移动
+                    {
+                        for (int j = 1; j < maxPointSize; j++)
+                        {
+                            dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
+                            dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
+                        }
+
+                        //    Console.WriteLine(i + "  :  " + d.NowValue);
+                        dataSeries[i].DataPoints[maxPointSize - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString(); //; ;//数据点添加到数据系列
+                        dataSeries[i].DataPoints[maxPointSize - 1].YValue = Double.Parse(nowValues[i]); //; ;//数据点添加到数据系列
+                    }
                 }
-          //  }  
+            }  
         }
 
-        public void updateChart(string NowValue)
+        public void updateChart(List<String> NowValue)
         {
+            nowValues = NowValue;
             Dispatcher.BeginInvoke(new Action(updateChart));
         }
         //private void Device_MouseDoubleClick(object sender, MouseEventArgs e)

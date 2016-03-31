@@ -288,10 +288,29 @@ namespace WpfApplication2.Controller
                     deviceToChange.CabId = tempItem.cabId;
                     deviceToChange.DeviceId = tempItem.devId;
                     deviceToChange.State = tempItem.state.ToString();
-                    deviceToChange.Highthreshold = (float)Convert.ToDouble(tempItem.highThreshold);
-                    deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
 
-                    if (tempItem.state != DeviceDataBox_Base.State.Normal) //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
+                    //高低阈值被修改，将修改后的参数入库
+                    if ((!tempItem.lowThreshold.Equals("")&&deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold))||
+                        (!tempItem.highThreshold.Equals("")&&deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
+                    {
+                        MessageBox.Show(deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改");
+                        deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
+                        deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
+                        deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
+
+                        dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceToChange);
+                    }
+                    if(!tempItem.highThreshold.Equals(""))
+                    {
+                        deviceToChange.Highthreshold = (float)Convert.ToDouble(tempItem.highThreshold);
+                    }
+                    if(!tempItem.lowThreshold.Equals(""))
+                    {
+                        deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
+                    }
+                    
+            //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
+                    if (tempItem.state != DeviceDataBox_Base.State.Normal) 
                     {
                         Alarm(deviceToChange);
                     }
@@ -307,15 +326,8 @@ namespace WpfApplication2.Controller
                     //    DeviceDataBox_6517AB a = (DeviceDataBox_6517AB)deviceToChange.Value;
                     //}
 
-                    if (deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold) || deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold))//高低阈值被修改，将修改后的参数入库
-                    {
-                        MessageBox.Show(deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改");
-                        deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
-                        deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
-                        deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
-
-                        dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceToChange);
-                    }
+                    
+                   
                     //if (!(float.Parse(tempItem.lowThreshold) <= float.Parse(tempItem.value)))  //低报，入异常数据表
                     //{
                     //    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.Alert.ToString();

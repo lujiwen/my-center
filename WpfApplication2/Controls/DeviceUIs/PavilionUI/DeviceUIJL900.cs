@@ -9,6 +9,7 @@ using System.ComponentModel;
 using WpfApplication2.package;
 using WpfApplication2.View.Windows;
 using System.Windows.Media;
+using Visifire.Charts;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
@@ -28,6 +29,23 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
          // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
+
+            valueDic = new Dictionary<int, string>();
+            valueDic.Add( 0, "keep_time");
+            valueDic.Add(1, "sample");
+            valueDic.Add(2, "trafiic" );
+            valueDic.Add(3, "presure");
+
+           dataSeries = new DataSeries[valueDic.Count];
+           values = new List<string>();
+           for (int i = 0; i < valueDic.Count; i++)
+           {
+               dataSeries[i] = new DataSeries();  //数据系列 
+               dataSeries[i].Legend = valueDic[i];
+               dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
+               device_chart.Series.Add(dataSeries[i]);
+           }
+          
            //DeviceBuzzer.startAlarm();
        }
 
@@ -39,7 +57,12 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 
        private void updateLabels()
        {
-          // updateChart(box.presure);
+           values.Clear();
+           values.Add(box.presure);
+           values.Add(box.real_traffic);
+           values.Add(box.keep_time);
+           values.Add(box.sample_volume);
+           updateChart(values);
            presureLT.getValueTextBlock().Text = box.presure;
            realTrafficLT.getValueTextBlock().Text = box.real_traffic;
            sampleVolumeLT.getValueTextBlock().Text = box.sample_volume;

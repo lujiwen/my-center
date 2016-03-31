@@ -38,14 +38,14 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="气溶胶"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="11" FontWeight="Bold" Foreground="#FFBDC7D7" />
             <TextBlock Text="" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" FontWeight="Bold" Name="ASM02_Status" />
-            <TextBlock Text="Ab"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Ec"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Fl"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Ga"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Gi"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Me"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Oi"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"  FontWeight="Bold"  />
-            <TextBlock Text="Rn"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"  FontWeight="Bold"  />
+            <TextBlock Text="Ab"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
+        <TextBlock Text="Ec"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontWeight="Bold"  Foreground="#FFFDF7EE"/>
+        <TextBlock Text="Fl"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  FontWeight="Bold"  Foreground="#FFFDF7EE"/>
+        <TextBlock Text="Ga"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
+        <TextBlock Text="Gi"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"  FontWeight="Bold"  Foreground="#FFFDF7EE"/>
+        <TextBlock Text="Me"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
+        <TextBlock Text="Oi"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
+        <TextBlock Text="Rn"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
             <Separator Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="3" Margin="8,0.2,-5.2,0" Grid.Row="1" VerticalAlignment="Top" Width="1300"/>
             <Separator Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="3" Margin="8,0.2,-5.2,0" Grid.Row="2" VerticalAlignment="Top" Width="1300"/>
             <Separator Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="3" Margin="8,0.2,-5.2,0" Grid.Row="3" VerticalAlignment="Top" Width="1300"/>

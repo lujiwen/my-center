@@ -28,7 +28,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
           //getChart().SetBinding();
          // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
-           
+           dataSeries = new Visifire.Charts.DataSeries[1];
+           values = new List<string>();
            //DeviceBuzzer.startAlarm();
        }
 
@@ -40,7 +41,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
        private void updateLabels()
        {
-           updateChart(box.value);
+           values.Clear();
+           values.Add(box.value);
+           updateChart(values);
            valueLT.getValueTextBlock().Text = box.value;
            stateLT.getValueTextBlock().Text = DeviceInUI.State;
            if(MainWindow.getInstance().IsMute )

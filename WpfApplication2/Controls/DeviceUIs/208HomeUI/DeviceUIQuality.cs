@@ -33,7 +33,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
         private void updateLabels()
         {
-            updateChart(box.value);
+            updateChart(values);
             valueLT.getValueTextBlock().Text = box.value;
             stateLT.getValueTextBlock().Text = DeviceInUI.State;
             if (MainWindow.getInstance().IsMute)
