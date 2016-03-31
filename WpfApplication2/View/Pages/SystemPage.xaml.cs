@@ -428,7 +428,7 @@
 
         private void initEventListener()
         {
-            map.MouseDoubleClick += new MouseButtonEventHandler(map_double_click);
+            map.MouseDoubleClick     += new MouseButtonEventHandler(map_double_click);
             home.MouseLeftButtonDown += new MouseButtonEventHandler(home_btn_click);
             back.MouseLeftButtonDown += new MouseButtonEventHandler(back_btn_click);
             next.MouseLeftButtonDown += new MouseButtonEventHandler(next_btn_click);

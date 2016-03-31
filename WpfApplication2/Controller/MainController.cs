@@ -270,6 +270,7 @@ namespace WpfApplication2.Controller
        public void receiveData(string data)  //收到二级发送过来的数据后触发
         {
             List<Box> boxes = PackageWorker.unpack(data);
+            Console.WriteLine("收到数据包中包含的设备："+boxes.Count);
             foreach (Box item in boxes)
             {
                 if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
