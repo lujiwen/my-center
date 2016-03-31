@@ -35,7 +35,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
             valueDic.Add(1, "sample");
             valueDic.Add(2, "trafiic" );
             valueDic.Add(3, "presure");
-
+            device_chart.Height = 400;
            dataSeries = new DataSeries[valueDic.Count];
            values = new List<string>();
            for (int i = 0; i < valueDic.Count; i++)

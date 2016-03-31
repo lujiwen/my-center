@@ -12,6 +12,7 @@ using System.Windows;
 using WpfApplication2.View.Windows;
 using System.ComponentModel;
 using WpfApplication2.package;
+using Visifire.Charts;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
@@ -24,13 +25,18 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        public DeviceUI6517AB(Device d, Frame fm)
          :base(d, fm)
        {
-         // MouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(DeviceUI6517AB_MouseLeftButtonDown);
-          //getChart().SetBinding();
-         // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
-           dataSeries = new Visifire.Charts.DataSeries[1];
+           valueDic = new Dictionary<int, string>();
+           valueDic.Add(0, "keep_time");
+           dataSeries = new  DataSeries[valueDic.Count];
            values = new List<string>();
-           //DeviceBuzzer.startAlarm();
+           for (int i = 0; i < valueDic.Count; i++)
+           {
+               dataSeries[i] = new DataSeries();  //数据系列 
+               dataSeries[i].Legend = valueDic[i];
+               dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
+               device_chart.Series.Add(dataSeries[i]);
+           }
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -44,6 +50,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            values.Clear();
            values.Add(box.value);
            updateChart(values);
+
            valueLT.getValueTextBlock().Text = box.value;
            stateLT.getValueTextBlock().Text = DeviceInUI.State;
            if(MainWindow.getInstance().IsMute )

@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows;
 using WpfApplication2.View.Windows;
 using WpfApplication2.package;
+using Visifire.Charts;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
@@ -23,6 +24,17 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
             : base(d, fm)
         {
             DeviceInUI.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(DeviceInUI_PropertyChanged);
+            valueDic = new Dictionary<int, string>();
+            valueDic.Add(0, "keep_time");
+            dataSeries = new DataSeries[valueDic.Count];
+            values = new List<string>();
+            for (int i = 0; i < valueDic.Count; i++)
+            {
+                dataSeries[i] = new DataSeries();  //数据系列 
+                dataSeries[i].Legend = valueDic[i];
+                dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
+                device_chart.Series.Add(dataSeries[i]);
+            }
         }
 
         void DeviceInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -33,6 +45,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
         private void updateLabels()
         {
+            values.Clear();
+            values.Add(box.value);
+            updateChart(values);
             updateChart(values);
             valueLT.getValueTextBlock().Text = box.value;
             stateLT.getValueTextBlock().Text = DeviceInUI.State;

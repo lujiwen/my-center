@@ -157,7 +157,7 @@ namespace WpfApplication2.Controls
             Axis axisY = new Axis(); //图表Y轴
             axisX.Title = "时间";//横坐标单位
             axisY.Title = "单位:xxx";//纵坐标单位
-
+             
             device_chart.Titles.Add(title);//添加标题
             device_chart.AxesX.Add(axisX);//添加x轴
             device_chart.AxesY.Add(axisY);//添加y轴
@@ -214,10 +214,8 @@ namespace WpfApplication2.Controls
                         //   Console.WriteLine(i + "  :  " + d.NowValue);
                         DataPoint dataPoint = new DataPoint();//数据点
                         dataPoint.MarkerSize = 8;
-                        //dataPoint.AxisXLabel = "0000-00-00 00:00:00";
-                        dataPoint.AxisXLabel = timeStamp; // dataSeries.DataPoints.Count + "";
+                        dataPoint.AxisXLabel = timeStamp;  
                         dataPoint.YValue = Double.Parse(nowValues[i]);
-                        // Console.WriteLine("X：" + dataPoint.AxisXLabel + "   Y:" + dataPoint.YValue);
                         dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
                     }
                     else //想左移动
