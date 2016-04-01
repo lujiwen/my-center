@@ -125,23 +125,32 @@ namespace WpfApplication2.Controls
 
         private void initArtWork()
         {
-            //利用反射机制，进行初始化工艺流程图
-            Type tp = Type.GetType("Project208Home.Views.ArtWorks208.Cab" + CabInUI.TypeInSystem);
-            if(tp==null)
+            try
             {
-                return;
+                 //利用反射机制，进行初始化工艺流程图
+                Type tp = Type.GetType("Project208Home.Views.ArtWorks208.Cab" + CabInUI.TypeInSystem);
+                Console.WriteLine(tp.ToString());
+                if(tp==null)
+                {
+                    return;
+                }
+                Type[] types = new Type[1];
+                types[0] = typeof(Cab);
+                //有参构造
+                ConstructorInfo ct = tp.GetConstructor(types);
+
+                Object[] paras = new Object[1];
+                paras[0] = CabInUI;
+
+                UserControl concreteCabArtWork = (UserControl)ct.Invoke(paras);
+               // Cab407HPT500I cab = new Cab407HPT500I(CabInUI);
+                cabArtWork.Children.Add(concreteCabArtWork);
             }
-            Type[] types = new Type[1];
-            types[0] = typeof(Cab);
-            //有参构造
-            ConstructorInfo ct = tp.GetConstructor(types);
+            catch(Exception e)
+            {
 
-            Object[] paras = new Object[1];
-            paras[0] = CabInUI;
-
-            UserControl concreteCabArtWork = (UserControl)ct.Invoke(paras);
-           // Cab407HPT500I cab = new Cab407HPT500I(CabInUI);
-            cabArtWork.Children.Add(concreteCabArtWork);
+            }
+          
         }
 
         void c_Unchecked(object sender, RoutedEventArgs e)

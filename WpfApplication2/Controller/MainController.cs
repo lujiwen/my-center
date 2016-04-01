@@ -165,14 +165,16 @@ namespace WpfApplication2.Controller
                         odr2 = readCabFromDb(dbOfDevice, odr);
                         if (odr2.HasRows)
                         {
-                            while (odr2.Read()) //找每个building对应的cab
+                            while (odr2.Read()) //找每个building对应的cab5
                             {
                                 Cab cab = new Cab("" + odr2.GetInt32(0), "" + odr2.GetInt32(1), "" + odr2.GetString(2), odr2.GetString(3), odr2.GetString(4), odr2.GetString(5), odr2.GetString(6), new List<Device>(), state);
                                 odr3 = readDeviceFromDb(dbOfDevice, odr2, cab);
+                                Console.WriteLine(building.Name +" :"+cab.Name );
                                 while (odr3.Read())
                                 {
                                     Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8), odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
                                     cab.Devices.Add(device);
+                                    Console.WriteLine(building.Name + " :" + cab.Name+":"+device.Type);
                                     GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
                                 }
                                 GlobalMapForShow.globalMapForCab.Add(building.SystemId + "_" + cab.CabId, cab);

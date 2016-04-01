@@ -19,7 +19,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab422ThermalDesorptionSys.xaml 的交互逻辑
-    /// </summary>
+    /// </summary>        
     public partial class Cab422UnifyThermalDesorptionSys : UserControl
     {
         //Dictionary<UInt32, DeviceGroup> subSystemNum_DeviceGroups;
@@ -38,15 +38,15 @@ namespace Project208Home.Views.ArtWorks208
         void initBindings()
         {
             //解体氚测量仪
-            Binding nowding1 = new Binding();
-            nowding1.Source = cabInArtwork.Devices[0];
-            nowding1.Path = new PropertyPath("NowValue");
-            subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding1);
-            //房间氚测量仪
-            Binding nowding2 = new Binding();
-            nowding2.Source = cabInArtwork.Devices[0];
-            nowding2.Path = new PropertyPath("NowValue");
-            subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding2);
+            //Binding nowding1 = new Binding();
+            //nowding1.Source = cabInArtwork.Devices[0];
+            //nowding1.Path = new PropertyPath("NowValue");
+            //subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding1);
+            ////房间氚测量仪
+            //Binding nowding2 = new Binding();
+            //nowding2.Source = cabInArtwork.Devices[0];
+            //nowding2.Path = new PropertyPath("NowValue");
+            //subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding2);
 
         }
        /// <summary>

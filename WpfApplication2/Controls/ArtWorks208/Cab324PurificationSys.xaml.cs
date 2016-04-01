@@ -20,7 +20,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab324PurificationSys.xaml 的交互逻辑
-    /// </summary>
+    /// </summary>       
     public partial class Cab324PurificationSys : UserControl
     {
         //Dictionary<UInt32, DeviceGroup> subSystemNum_DeviceGroups;

@@ -65,7 +65,7 @@
             <Label Canvas.Left="316" Canvas.Top="176" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="242" Canvas.Top="37" Content="特排氚测量仪" Style="{StaticResource devInfoLableStyle}" Width="135" Height="36" />
             <Label Canvas.Left="247" Canvas.Top="79" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="37" Width="125" />
-            <Label Canvas.Left="247" Canvas.Top="147"  Content="氚测量仪"  Style="{StaticResource devInfoLableStyle}" Height="34" Width="127" />
+            <Label Canvas.Left="247" Canvas.Top="149"  Content="氚测量仪"  Style="{StaticResource devInfoLableStyle}" Height="34" Width="127" />
             <Label Canvas.Left="247" Canvas.Top="196"  Content="氚测量仪"  Style="{StaticResource devInfoLableStyle}" Height="42" Width="127" />
             <Ellipse Name="subSys1Pumpep"  Canvas.Left="392" Canvas.Top="32" Style="{StaticResource pumpEllipseStyle}"/>
             <Ellipse Name="subSys2Pumpep"  Canvas.Left="392" Canvas.Top="73" Style="{StaticResource pumpEllipseStyle}" />
