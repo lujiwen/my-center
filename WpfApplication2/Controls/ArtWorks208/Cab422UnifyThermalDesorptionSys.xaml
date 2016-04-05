@@ -54,8 +54,8 @@
             <Rectangle Canvas.Left="453" Canvas.Top="9" Height="241" Name="rectangle2" Width="10" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="214" Canvas.Top="120" Height="15" Name="rectangleSubSys1" Width="184" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="214" Canvas.Top="190" Height="15" Name="rectangleSubSys2" Width="184" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="229" Canvas.Top="159" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="235" Canvas.Top="92" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="229" Canvas.Top="159" Name="Text2" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="235" Canvas.Top="92" Name="Text1" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <Label Canvas.Left="312" Canvas.Top="152" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="318" Canvas.Top="84" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="237" Canvas.Top="111" Content="解体氚测量仪" Style="{StaticResource devInfoLableStyle}" Width="143" Height="37" />

@@ -53,7 +53,7 @@
         </Grid.Resources>
         <Canvas Name="artWorkCn">
             <Rectangle Canvas.Left="2" Canvas.Top="-1" Height="10" Name="rectangle1" Width="500" Style="{StaticResource channelRectangleStyle}"/>
-            <Rectangle Canvas.Left="460" Canvas.Top="9" Height="500" Name="rectangle2" Width="15" Style="{StaticResource channelRectangleStyle}"/>
+            <Rectangle Canvas.Left="460" Canvas.Top="10" Height="240" Name="rectangle2" Width="15" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="233" Canvas.Top="124" Height="15" Name="rectangleSubSys1" Width="155" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="234" Canvas.Top="191" Height="15" Name="rectangleSubSys2" Width="154" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="234" Canvas.Top="57" Height="15" Name="rectangleSubSys3" Width="155" Style="{StaticResource channelRectangleStyle}"/>

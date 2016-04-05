@@ -7,19 +7,22 @@ using System.Windows.Controls;
 using WpfApplication2.Model.Vo;
 using Visifire.Charts;
 using WpfApplication2.package;
+using System.Windows.Media;
+using WpfApplication2.View.Windows;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
     public class DeviceUIXH31253127 : DeviceUI 
     {
-        
+        DeviceDataBox_XH3125 box;
+        LabelAndText stateLT;
+        LabelAndText valueLT;
         public DeviceUIXH31253127(Device d, Frame fm)
-               :base(d,fm)
-           
+               :base(d,fm)          
         {
             DeviceInUI.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(DeviceInUI_PropertyChanged);
             valueDic = new Dictionary<int, string>();
-            valueDic.Add(0, "keep_time");
+            valueDic.Add(0, "concentration");
             dataSeries = new DataSeries[valueDic.Count];
             values = new List<string>();
             for (int i = 0; i < valueDic.Count; i++)
@@ -32,8 +35,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
         }
         public override void initlabels()
         {
-            //LabelAndText stateLT = new LabelAndText("状态", "", Colors.White);
-            //LabelAndText valueLT = new LabelAndText("电压", "", Colors.White);
+             stateLT = new LabelAndText("状态 ", "", Colors.White);
+             valueLT = new LabelAndText("浓度 ", "", Colors.White);
 
             ////实时值绑定
             //Binding valueBingding = new Binding();
@@ -47,14 +50,31 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
             //stateBinding.Path = new PropertyPath("State");
             //valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, stateBinding);
 
-            //getInoPanel().Children.Add(stateLT);
-            //getInoPanel().Children.Add(valueLT);
+             getInoPanel().Children.Add(stateLT);
+             getInoPanel().Children.Add(valueLT);
 
         }
         void DeviceInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //box = (DeviceDataBox_Quality)DeviceInUI.Value;
-            //Dispatcher.BeginInvoke(new Action(updateLabels));
+            box = (DeviceDataBox_XH3125)DeviceInUI.Value;
+             Dispatcher.BeginInvoke(new Action(updateLabels));
+        }
+        private void updateLabels()
+        {
+            values.Clear();
+            values.Add(box.value);
+            updateChart(values);
+
+            stateLT.getValueTextBlock().Text = box.value;
+            valueLT.getValueTextBlock().Text = DeviceInUI.State;
+            if (MainWindow.getInstance().IsMute)
+            {
+                //DeviceBuzzer.muteBuzzer();
+            }
+            //if (DeviceInUI.State.Equals("Normal") && !DeviceBuzzer.IsAlarming)
+            //{
+            //    startToAlrm();
+            //}
         }
     }
 }

@@ -311,7 +311,7 @@ namespace WpfApplication2.Controller
                         deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
                     }
                     
-            //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
+                     //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
                     if (tempItem.state != DeviceDataBox_Base.State.Normal) 
                     {
                         Alarm(deviceToChange);
@@ -363,6 +363,7 @@ namespace WpfApplication2.Controller
                     //    deviceToChange.DataUnit += ";" + ((DeviceDataBox_Quality)item).sumUnit;
                     //}
                     bq.Enqueue(deviceToChange);  //将获取到的数据插入队列   
+                    Console.WriteLine(deviceToChange.NowValue);  
                 }
             }
            // notifyUpdateUI();

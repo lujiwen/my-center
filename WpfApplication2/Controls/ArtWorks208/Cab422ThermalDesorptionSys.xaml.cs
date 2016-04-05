@@ -46,7 +46,7 @@ namespace Project208Home.Views.ArtWorks208
             subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding1);
             //房间氚测量仪
             Binding nowding2 = new Binding();
-            nowding2.Source = cabInArtwork.Devices[0];
+            nowding2.Source = cabInArtwork.Devices[2];
             nowding2.Path = new PropertyPath("NowValue");
             subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding2);
             

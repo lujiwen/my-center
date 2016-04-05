@@ -88,6 +88,12 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
+                else if (elem.Name == DeviceDataBox_XH3125.classNameString)
+                {
+                    DeviceDataBox_XH3125 box = new DeviceDataBox_XH3125();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
                 Console.WriteLine("设备类型："+boxes[boxes.Count-1].ToString() );
             }
             return boxes;

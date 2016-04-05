@@ -96,7 +96,7 @@ namespace WpfApplication2.Controls
                         Device d = _cab.Devices[i];
                         c.Name = "cb_" + _cab.Devices[i].DeviceId;
                         c.Content = "" + _cab.Devices[i].DeviceId;
-                        c.Content = devices[d.BuildingId + "_" + d.DeviceId].Type;
+                        c.Content =d.Type;
                     }
                     c.IsChecked = true;
                     c.Margin = new Thickness(2); ;

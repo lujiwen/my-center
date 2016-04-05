@@ -46,18 +46,18 @@ namespace Project208Home.Views.ArtWorks208
             subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding1);
             //房间氚测量仪
             Binding nowding2 = new Binding();
-            nowding2.Source = cabInArtwork.Devices[0];
+            nowding2.Source = cabInArtwork.Devices[1];
             nowding2.Path = new PropertyPath("NowValue");
             subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding2);
 
             //房间氚测量仪
             Binding nowding3 = new Binding();
-            nowding3.Source = cabInArtwork.Devices[0];
+            nowding3.Source = cabInArtwork.Devices[2];
             nowding3.Path = new PropertyPath("NowValue");
             subSys3Qualitytb.SetBinding(TextBlock.TextProperty, nowding3);
             //房间氚测量仪
             Binding nowding4 = new Binding();
-            nowding4.Source = cabInArtwork.Devices[0];
+            nowding4.Source = cabInArtwork.Devices[3];
             nowding4.Path = new PropertyPath("NowValue");
             subSys4Qualitytb.SetBinding(TextBlock.TextProperty, nowding4);
         }
