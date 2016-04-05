@@ -42,7 +42,7 @@ namespace WpfApplication2.CustomMarkers.Controls
             BlueBuzzer = new BitmapImage(new Uri("/Images/blue_buzzer.png", UriKind.Relative));
             redBuzzerMute = new BitmapImage(new Uri("/Images/red_buzzer_mute.png", UriKind.Relative));
             blueBuzzerMute = new BitmapImage(new Uri("/Images/blue_buzzer_mute.png", UriKind.Relative));
-            isMute = false;
+            isMute = true;
             isAlarming = false;
            //Visibility = System.Windows.Visibility.Hidden; 
         }

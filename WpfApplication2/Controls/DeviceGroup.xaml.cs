@@ -49,8 +49,8 @@ namespace WpfApplication2.CustomMarkers.Controls
         private void init()
         {
             device_group.Header = "柜子：" + cab.Name;
-            info_panel.Children.Add(new LabelAndText("状态 : ", cab.State.Equals("Normal") ? "正常" : "异常", Colors.White));
-            cab.PropertyChanged += DeviceGroupStatusChage;
+            info_panel.Children.Add(new LabelAndText("监测点状态 : ", cab.State.Equals("Normal") ? "正常" : "异常", Colors.White));
+            cab.PropertyChanged +=  DeviceGroupStatusChage;
             //info_panel.Children.Add(new LabelAndText("状态：", "正常", Colors.White));
         }
         private void DeviceGroupStatusChage(object sender, PropertyChangedEventArgs e)
@@ -59,7 +59,7 @@ namespace WpfApplication2.CustomMarkers.Controls
             {
                 Cab c = (Cab)sender;
                 info_panel.Children.RemoveAt(0);
-                info_panel.Children.Add(new LabelAndText("状态 : ", cab.State.Equals("Normal") ? "正常" : "异常", Colors.White));
+                info_panel.Children.Add(new LabelAndText("监测点状态 : ", cab.State.Equals("Normal") ? "正常" : "异常", Colors.White));
             });
         }
     }

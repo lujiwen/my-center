@@ -296,8 +296,16 @@ namespace WpfApplication2.View.Windows
 
         private void alarmMute(object sender, RoutedEventArgs e)
         {
-            alarmer.muteBuzzer();
-            isMute = true ;
+            if(alarmer.isMute)
+            {
+                MessageBox.Show("当前并不处于报警状态！");
+            }
+            else 
+            {
+                   alarmer.muteBuzzer();
+                   isMute = true ;
+            }
+         
         }
 
         private void help_Click(object sender, RoutedEventArgs e)

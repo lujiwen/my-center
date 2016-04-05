@@ -89,8 +89,7 @@
                 <MenuItem Header="关于" />
             </MenuItem>
             <MenuItem Header="设置" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
-                <MenuItem Header="软件设置" Click="soft_settings_Click_1" />
-                <MenuItem Header="参数设置" />
+                <MenuItem Header="参数设置" Click="soft_settings_Click_1" />
             </MenuItem>
             <MenuItem Header="操作" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
                 <MenuItem Header="合并显示" Name="MultiRoomshow" Click="MenuItem_Click" />

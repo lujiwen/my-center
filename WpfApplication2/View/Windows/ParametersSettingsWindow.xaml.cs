@@ -153,23 +153,33 @@ namespace WpfApplication2.View.Windows
             string param1 = Parameters1.Text;
             string factor = Correct_Factor.Text;
             int selctDevice = Device_Combox.SelectedIndex;
-            Device d ;
-            if (type.Equals(paraSettingsWindowType.onDevice))
+            if (high_threshold.Equals("") || low_threshold.Equals("") || param1.Equals("") || factor.Equals(""))
             {
-                d = device;
+                MessageBox.Show("请补全所有设置项！");
+                return;
             }
             else
             {
-                d = devices[selctDevice];
+                Device d;
+                if (type.Equals(paraSettingsWindowType.onDevice))
+                {
+                    d = device;
+                }
+                else
+                {
+                    d = devices[selctDevice];
+                }
+
+                resetParams(d, high_threshold, low_threshold, param1, factor);
+                MessageBox.Show("设置成功！");
+                Close();
             }
            
-            resetParams(d,high_threshold, low_threshold, param1, factor);
 
         }
 
         private void resetParams(Device d, string high_threshold, string low_threshold, string param1, string factor)
         {
-
             /**
               * 发送控制命令到二级的调用方法
             * */
