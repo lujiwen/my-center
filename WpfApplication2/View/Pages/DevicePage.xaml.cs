@@ -82,7 +82,7 @@ namespace WpfApplication2.View.Pages
                          case "Quality":
                              deviceUI = new DeviceUIQuality(d, systemFrame);
                              break;
-                         case "ASM02":
+                         case "Asm02":
                              deviceUI = new DeviceUIASM02(d, systemFrame);
                              break;
                          case "jl900":
