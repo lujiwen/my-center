@@ -90,17 +90,17 @@ namespace WpfApplication2.Controls
         }
         private void initBindings()
         {
-            //实时值绑定
-            Binding valueBingding = new Binding();
-            valueBingding.Source = _device;
-            valueBingding.Path = new PropertyPath("Value");
-            valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
+            ////实时值绑定
+            //Binding valueBingding = new Binding();
+            //valueBingding.Source = _device;
+            //valueBingding.Path = new PropertyPath("Value");
+            //valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
 
-            //状态绑定
-            Binding stateBinding = new Binding();
-            stateBinding.Source = _device;
-            stateBinding.Path = new PropertyPath("State");
-            valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty,stateBinding);
+            ////状态绑定
+            //Binding stateBinding = new Binding();
+            //stateBinding.Source = _device;
+            //stateBinding.Path = new PropertyPath("State");
+            //valueLT.getValueTextBlock().SetBinding(TextBlock.TextProperty,stateBinding);
         }
         private void init()
         {
@@ -111,7 +111,7 @@ namespace WpfApplication2.Controls
            if(_device!=null)
            {
                Dictionary<string, Cab> cabs = GlobalMapForShow.globalMapForCab;
-               device_name.Text = _device.SubSystemName;
+               device_name.Text = _device.HandleTypeInSystem;
                cab_name.Text = cabs[_device.BuildingId + "_" + _device.CabId].Name; 
            }
            // if(curveEnable)
@@ -192,7 +192,7 @@ namespace WpfApplication2.Controls
         public void updateDeviceUI(Device d)
         {
             //更新一个设备
-            stateLT.updateValue(d.State);
+            stateLT.updateValue(d.State.Equals("Normal")?"正常":"异常");
             valueLT.updateValue("  " + d.NowValue + "  ");
             //更新图表
         }
@@ -239,14 +239,7 @@ namespace WpfApplication2.Controls
             nowValues = NowValue;
             Dispatcher.BeginInvoke(new Action(updateChart));
         }
-        //private void Device_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    Console.WriteLine("双击了设备一下");
-        //    DeviceDetailPage page = new DeviceDetailPage();
-        //    systemFrame.Content = page;
-        // //   deviceCloselistener.onDeviceDoubleClick(this);
-        //}
-
+       
         private void historyCurve(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("查看历史曲线");

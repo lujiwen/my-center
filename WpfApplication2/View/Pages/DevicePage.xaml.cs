@@ -76,7 +76,7 @@ namespace WpfApplication2.View.Pages
                         case "Pump":
                              deviceUI = new DeviceUIPump(d, systemFrame);
                              break ;
-                        case "XH31253127":
+                        case "XH3125":
                              deviceUI = new DeviceUIXH31253127(d, systemFrame);
                              break ;
                          case "Quality":
@@ -85,7 +85,7 @@ namespace WpfApplication2.View.Pages
                          case "Asm02":
                              deviceUI = new DeviceUIASM02(d, systemFrame);
                              break;
-                         case "jl900":
+                         case "Jl900":
                              deviceUI = new DeviceUIJL900(d, systemFrame);
                              break;
                          case "rss131":
@@ -148,7 +148,6 @@ namespace WpfApplication2.View.Pages
         void DevicePage_Unloaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("DevicePage_Unloaded");
-             
         }
         
     }

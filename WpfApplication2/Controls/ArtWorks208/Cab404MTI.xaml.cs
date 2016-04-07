@@ -39,54 +39,54 @@ namespace Project208Home.Views.ArtWorks208
         void initBindings()
         {
             //压力计
-            Binding nowding1 = new Binding();
-            nowding1.Source = cabInArtwork.Devices[0];
-            nowding1.Path = new PropertyPath("NowValue");
-            subSys1Presuretb.SetBinding(TextBlock.TextProperty, nowding1);
+            //Binding nowding1 = new Binding();
+            //nowding1.Source = cabInArtwork.Devices[0];
+            //nowding1.Path = new PropertyPath("NowValue");
+            //subSys1Presuretb.SetBinding(TextBlock.TextProperty, nowding1);
             //压力计
-            Binding nowding2 = new Binding();
-            nowding2.Source = cabInArtwork.Devices[1];
-            nowding2.Path = new PropertyPath("NowValue");
-            subSys2Presuretb.SetBinding(TextBlock.TextProperty, nowding2);
+            //Binding nowding2 = new Binding();
+            //nowding2.Source = cabInArtwork.Devices[1];
+            //nowding2.Path = new PropertyPath("NowValue");
+            //subSys2Presuretb.SetBinding(TextBlock.TextProperty, nowding2);
             //压力计
-            Binding nowding3 = new Binding();
-            nowding3.Source = cabInArtwork.Devices[2];
-            nowding3.Path = new PropertyPath("NowValue");
-            subSys3Presuretb.SetBinding(TextBlock.TextProperty, nowding3);
+            //Binding nowding3 = new Binding();
+            //nowding3.Source = cabInArtwork.Devices[2];
+            //nowding3.Path = new PropertyPath("NowValue");
+            //subSys3Presuretb.SetBinding(TextBlock.TextProperty, nowding3);
 
             //特排氚测量仪
             Binding nowding4 = new Binding();
-            nowding4.Source = cabInArtwork.Devices[3];
+            nowding4.Source = cabInArtwork.Devices[0];
             nowding4.Path = new PropertyPath("NowValue");
             subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding4);
 
             //房间氚测量仪
             Binding nowding5 = new Binding();
-            nowding5.Source = cabInArtwork.Devices[4];
+            nowding5.Source = cabInArtwork.Devices[2];
             nowding5.Path = new PropertyPath("NowValue");
             subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding5);
 
             //房间氚测量仪
             Binding nowding6 = new Binding();
-            nowding6.Source = cabInArtwork.Devices[5];
+            nowding6.Source = cabInArtwork.Devices[4];
             nowding6.Path = new PropertyPath("NowValue");
             subSys3Qualitytb.SetBinding(TextBlock.TextProperty, nowding6);
 
             //特排氚测量仪
             Binding nowding7 = new Binding();
-            nowding7.Source = cabInArtwork.Devices[6];
+            nowding7.Source = cabInArtwork.Devices[1];
             nowding7.Path = new PropertyPath("NowValue");
             subSys16517ABtb.SetBinding(TextBlock.TextProperty, nowding7);
 
             //特排氚测量仪
             Binding nowding8 = new Binding();
-            nowding8.Source = cabInArtwork.Devices[7];
+            nowding8.Source = cabInArtwork.Devices[3];
             nowding8.Path = new PropertyPath("NowValue");
             subSys26517ABtb.SetBinding(TextBlock.TextProperty, nowding8);
 
             //特排氚测量仪
             Binding nowding9 = new Binding();
-            nowding9.Source = cabInArtwork.Devices[8];
+            nowding9.Source = cabInArtwork.Devices[5];
             nowding9.Path = new PropertyPath("NowValue");
             subSys36517ABtb.SetBinding(TextBlock.TextProperty, nowding9);
 
@@ -97,65 +97,6 @@ namespace Project208Home.Views.ArtWorks208
         private void InitCab()
         {
             initBindings();
-            ////绑定对应子系统的泵设备状态
-            //foreach (UInt32 subSysNum in subSystemNum_DevicePump.Keys)
-            //{
-            //    //初始化操作
-            //    String devpumpepname = "subSys" + subSysNum + "Pumpep";
-            //    Ellipse devpumpep = WindowsUtils.GetChildObject<Ellipse>(artWorkCn, devpumpepname);
-            //    if (devpumpep != null)
-            //    {
-            //        devpumpep.Uid = subSysNum.ToString();//根据Uid设备相应的泵状态，以便点击后唯一定位某个泵按钮
-            //    }
-            //    //初始化显示和更新
-            //    DevicePump dp = subSystemNum_DevicePump[subSysNum];
-            //    if (dp.PumpPropertyChanged == null)
-            //    {
-            //        //dp.PumpPropertyChanged += RefreshPumpState;
-            //    }
-            //    //从其他页面跳转来后需刷新界面
-            //    RefreshPumpState(subSysNum,dp.OpenState);
-                
-            //}
-            //绑定对应子系统 对应设备的数据显示
-            //foreach (UInt32 subSysNum in subSystemNum_DeviceGroups.Keys)
-            //{
-            //    Dictionary<String,Device> tempDGTD = subSystemNum_DeviceGroups[subSysNum].Types_Devices;
-            //    foreach (String handleTypeInSystem in tempDGTD.Keys)
-            //    {
-            //        if (handleTypeInSystem != Constants.Dev_Pump)//如果设备不为泵，则应添加数据更新
-            //        {
-            //            //查找设备类型的数据显示，并绑定
-            //            String devdatatbname = "subSys" + subSysNum + handleTypeInSystem + "tb";
-            //            TextBlock devdatatb = WindowsUtils.GetChildObject<TextBlock>(artWorkCn, devdatatbname);
-            //            if (devdatatb != null)
-            //            {
-            //                switch (handleTypeInSystem)
-            //                {
-            //                    case Constants.Dev_Quality://该柜子只有质量流量计
-            //                        DeviceQuality tempDQ = (DeviceQuality)tempDGTD[handleTypeInSystem];
-            //                        //绑定数据源
-            //                        //实时值绑定
-            //                        Binding nowding = new Binding();
-            //                        nowding.Source = tempDQ;
-            //                        nowding.Path = new PropertyPath("DoseNow");
-            //                        devdatatb.SetBinding(TextBlock.TextProperty, nowding);
-            //                        break;
-            //                    default:
-            //                        break;
-            //                }
-
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("请检查324PurificationSys的设备输入是否正常？");
-            //            }
-            //        }
-
-
-            //    }
-
-            //}
         }
         //刷新泵的状态
         public void RefreshPumpState(UInt32 sysnum,Boolean values)

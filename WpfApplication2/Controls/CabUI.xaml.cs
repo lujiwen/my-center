@@ -96,7 +96,7 @@ namespace WpfApplication2.Controls
                         Device d = _cab.Devices[i];
                         c.Name = "cb_" + _cab.Devices[i].DeviceId;
                         c.Content = "" + _cab.Devices[i].DeviceId;
-                        c.Content =d.Type;
+                        c.Content =d.HandleTypeInSystem;
                     }
                     c.IsChecked = true;
                     c.Margin = new Thickness(2); ;
@@ -196,7 +196,7 @@ namespace WpfApplication2.Controls
                 {
                     dataSeries[i] = new DataSeries();  //数据系列 
                     dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
-                    dataSeries[i].LegendText = _cab.Devices[i].SubSystemName;
+                    dataSeries[i].LegendText = _cab.Devices[i].Type;
                     real_time_cab_chart.Series.Add(dataSeries[i]);
                 }
             }
@@ -205,8 +205,6 @@ namespace WpfApplication2.Controls
        
         private void initEnventListner()
         {
-          //  power.MouseLeftButtonDown += new MouseButtonEventHandler(power_btn_click);
-        //    close.MouseLeftButtonDown += new MouseButtonEventHandler(close_btn_click);
             this.MouseDoubleClick += new MouseButtonEventHandler(cabDoubleClick);
             CabInUI.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(CabInUI_PropertyChanged);
         }
@@ -222,7 +220,7 @@ namespace WpfApplication2.Controls
             //改变状态
             if (stateLT!=null)
             {
-                stateLT.updateValue(CabInUI.State.Equals("Nomal") ? "正常" : "异常" );
+                stateLT.updateValue(CabInUI.State.Equals("Normal") ? "正常" : "异常" );
             }
             //改变工艺图上的数值 在工艺图内部实现数据绑定
              
@@ -233,7 +231,7 @@ namespace WpfApplication2.Controls
 
         public void UpdateChart(Cab c)
         {
-            Console.WriteLine("更新柜子图表， 一共有设备数量： "+c.Devices.Count);
+          //  Console.WriteLine("更新柜子图表， 一共有设备数量： "+c.Devices.Count);
             List<Device> devices = c.Devices ;
             DateTime dt =   DateTime.Now;
             string timeStamp = dt.ToString("HH:mm:ss ");
@@ -284,7 +282,7 @@ namespace WpfApplication2.Controls
         {
             Console.WriteLine("start updateCabUI");
             //更新状态
-            stateLT.updateValue(c.State.Equals("Nomal") ? "正常" : "异常");
+            stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
             //更新曲线图
             UpdateChart(c);
         }
@@ -312,8 +310,8 @@ namespace WpfApplication2.Controls
                case "both":
                     tech.IsChecked = false;
                     cabArtWork.Visibility = System.Windows.Visibility.Visible;
-                     real_time_cab_chart.Visibility = System.Windows.Visibility.Visible;
-                     curve_pannel.Visibility = System.Windows.Visibility.Visible;
+                    real_time_cab_chart.Visibility = System.Windows.Visibility.Visible;
+                    curve_pannel.Visibility = System.Windows.Visibility.Visible;
                   //  curveChooserTip.Visibility = System.Windows.Visibility.Visible;    
                     break ;
 

@@ -50,7 +50,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
             updateChart(values);
             updateChart(values);
             valueLT.getValueTextBlock().Text = box.value;
-            stateLT.getValueTextBlock().Text = DeviceInUI.State;
+            stateLT.getValueTextBlock().Text = DeviceInUI.State.Equals("Normal") ? "正常" : "异常";
             if (MainWindow.getInstance().IsMute)
             {
                 DeviceBuzzer.muteBuzzer();

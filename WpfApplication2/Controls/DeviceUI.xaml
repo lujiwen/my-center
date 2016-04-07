@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:my="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"
              mc:Ignorable="d" 
-             d:DesignHeight="170" d:DesignWidth="250" Width="447" Height="385" FontStretch="Normal">
+             d:DesignHeight="170" d:DesignWidth="250" Width="447" Height="400" FontStretch="Normal">
     <Grid >
         <Grid.Resources>
             <Style  x:Key="myLBStyle" TargetType="MenuItem">
