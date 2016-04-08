@@ -38,7 +38,7 @@
             <ListBox  MouseLeftButtonDown="listBox1_MouseLeftButtonDown" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Name="listBox1"  Background="#FF116EAA"  Height="200" HorizontalAlignment="Stretch"   >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding MessageContent}" TextWrapping="Wrap" Foreground="White" Margin="10,0" FontSize="24"   />
+                        <TextBlock Text="{Binding MessageContent}"  TextWrapping="Wrap" Foreground="Red" Margin="10,0" FontSize="18"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

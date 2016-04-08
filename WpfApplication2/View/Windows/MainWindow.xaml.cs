@@ -120,7 +120,7 @@ namespace WpfApplication2.View.Windows
                 if (mapPage != null)
                 {
                     mapPage.updateAlarmMessage(alarmMsg.MessageContent);
-                    Console.WriteLine(alarmMsg);
+                    Console.WriteLine(alarmMsg.MessageContent);
                 }  
             });
           
@@ -240,9 +240,8 @@ namespace WpfApplication2.View.Windows
             {
                 str = "状态切换失败";
                 MessageBox.Show(this, str, "通知", MessageBoxButton.OK, MessageBoxImage.Information);
-
             }
-            MainWindowShowAlarm(new AlarmMessage(str,new DateTime()));
+            MainWindowShowAlarm(new AlarmMessage(str + "(" + DateTime.Now.ToString() + ")"));
         }
 
         private bool resetEmergentStatus(bool isEmergencyStatus)

@@ -46,7 +46,8 @@ namespace WpfApplication2.View.Pages
         object mouseCtrl = null;
         private List<Building> buildings;
         private QueueFixedLength<AlarmMessage> alarmMessages;
-         
+        private  DateTime mStartHoverTime = DateTime.MinValue;
+        private AdornerLayer mAdornerLayer = null;
         public MapPage(MainWindow w)
         {
             InitializeComponent();
@@ -88,18 +89,9 @@ namespace WpfApplication2.View.Pages
         }
         private void init()
         {
-           // info.MouseEnter += new MouseEventHandler(info_MouseEnter);
-           // info.MouseLeave += new MouseEventHandler(info_MouseLeave);
-        //    info_panel.MouseEnter += new MouseEventHandler(info_panel_MouseEnter);
-            //whole_status.Text += "异常点：1/20";
             buildings = mainWindow.Buildings;
             alarmMessages = new QueueFixedLength<AlarmMessage>(10);
             listBox1.ItemsSource = alarmMessages.Queue;
-            //listBox1.SelectedValuePath = "messageContent";
-            //listBox1.DisplayMemberPath = "messageContent";
-            //Binding binding = new Binding();
-            //binding.Path = new PropertyPath("messageContent");
-            //listBox1.SetBinding(ListBox.SelectedValuePathProperty, binding);
         }
 
         private void initMap()
@@ -202,12 +194,6 @@ namespace WpfApplication2.View.Pages
             {
                 group_panel.Children.Add(new DeviceGroup(c));
             }
-            
-
-            //for (int i = 0; i < b.Cabs.Count; i++)
-            //{
-            //    group_panel.Children.Add(new DeviceGroup(i)); //LabelAndText("氚浓度","0.00007668")
-            //}
         }
 
         private void LeftBuidingInfoChange(object sender, PropertyChangedEventArgs e)
@@ -250,14 +236,9 @@ namespace WpfApplication2.View.Pages
             System.Windows.DragDrop.DoDragDrop(marker, marker, DragDropEffects.Copy);
 
             mStartHoverTime = DateTime.MinValue;
-          //  mHoveredItem = null;
             mAdornerLayer.Remove(adorner);
             mAdornerLayer = null;
         }
-        DateTime mStartHoverTime = DateTime.MinValue;
-     // TreeViewItem mHoveredItem = null;
-        AdornerLayer mAdornerLayer = null;
-
 
         void info_panel_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -293,7 +274,6 @@ namespace WpfApplication2.View.Pages
                 mouseCtrl = sender;
                 dragMarker = (PositionMarker)mouseCtrl;
                 currentMarker = dragMarker.getGmapMarker();
-               // currentMarker.Position = MainMap.FromLocalToLatLng((int)mousePoint.X, (int)mousePoint.Y);
             }
         }
 
@@ -358,16 +338,11 @@ namespace WpfApplication2.View.Pages
 
         void MainMap_OnMapTypeChanged(MapType type)
         {
-            //   sliderZoom.Minimum = MainMap.MinZoom;5
-            //     sliderZoom.Maximum = MainMap.MaxZoom;
-            
             Console.WriteLine("MainMap_OnMapTypeChanged:" + MainMap.MinZoom + " ; " + MainMap.MaxZoom);
         }
 
-        // current location changed
         void MainMap_OnCurrentPositionChanged(PointLatLng point)
         {
-          //  mapgroup.Header = "gmap: " + point;
             Console.WriteLine("头部的经纬度：" + point);
         }
 
@@ -375,8 +350,6 @@ namespace WpfApplication2.View.Pages
         {
              System.Windows.Point p = e.GetPosition(MainMap);
              mainWindow.setClickPoint(MainMap.FromLocalToLatLng((int)p.X, (int)p.Y));
-          //  RedMarkerCickPoint = MainMap.FromLocalToLatLng((int)p.X, (int)p.Y);
-         //   Console.WriteLine("MainMap_MouseLeftButtonDown");
         }
         void MainMap_MouseWheelScroll(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
@@ -463,7 +436,7 @@ namespace WpfApplication2.View.Pages
 
         public void updateAlarmMessage(String alarmStr)
         {
-            alarmMessages.add(new AlarmMessage(alarmStr,new DateTime()));
+            alarmMessages.add(new AlarmMessage(alarmStr));
             //存储报警信息
 
 

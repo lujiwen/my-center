@@ -13,6 +13,7 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 using WpfApplication2.package;
+using WpfApplication2.View.Windows;
 
 
 namespace WpfApplication2.Controller
@@ -60,9 +61,6 @@ namespace WpfApplication2.Controller
             get { return dataUpdate; }
         }
 
-        
-
-        
         /// <summary>
         /// 第一次进入程序初始化数据库
         /// </summary>
@@ -133,6 +131,7 @@ namespace WpfApplication2.Controller
                 return null;
             }       
         }
+    
         public void InitialData()  //初始化数据
         {
             if (Utils.isFirstIn()) //第一次进入创建数据表和sequence
@@ -271,8 +270,23 @@ namespace WpfApplication2.Controller
 
        public void receiveData(string data)  //收到二级发送过来的数据后触发
         {
-            List<Box> boxes = PackageWorker.unpack(data);
-            Console.WriteLine("收到数据包中包含的设备："+boxes.Count);
+             List<Box> boxes = new List<Box>();
+            try
+            {
+                boxes = PackageWorker.unpack(data);
+                Console.WriteLine("收到数据包中包含的设备："+boxes.Count);
+            }
+            catch(Exception e)
+            {
+                Alarm("收到数据包格式异常，无法解析！");
+            }
+
+
+            if (boxes == null || boxes.Count == 0)
+            {
+                return;
+            }
+                
             foreach (Box item in boxes)
             {
                 if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
@@ -319,7 +333,6 @@ namespace WpfApplication2.Controller
                      GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
                      GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
                     
-               
                     /**
                      * 鲁继文这边像下面这么调应该就可以获得所有东西了
                      * */
@@ -384,15 +397,18 @@ namespace WpfApplication2.Controller
            {
                alertInfomation = "当前值出错 " ;
            }
-           String msg = d.NowValue + "," + d.DeviceId + "," + d.BuildingId + "," + d.CabId + " ," + alertInfomation + DateTime.Now;
+           String msg = d.NowValue + "," + d.DeviceId + "," + d.BuildingId + "," + d.CabId + " ," + alertInfomation ;
            dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
-           alarm(new AlarmMessage(msg,new DateTime(),d));
-           
+           alarm(new AlarmMessage(msg,d));
+       }
+
+       private void Alarm(String alrm)
+       {
+           alarm(new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")"));
        }
 
        private void SaveDataToDataBase()
        {
-
            while (bq.Count > 0)
            {
                try
@@ -418,13 +434,10 @@ namespace WpfApplication2.Controller
 
        }
 
-      
-
         private void Update(String s)
         {
             // Dispatcher.Invoke(DispatcherPriority.Normal,new DelegateStrUpdateEvent(dataReceive), s);
             Str = s;
-            
         }
 
         public String Str

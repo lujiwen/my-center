@@ -10,27 +10,20 @@ namespace WpfApplication2.Model.Vo
         private String messageContent;
         private DateTime alarmDate;
         private Device alarmDevice;
-
+        private string alarmTime;
         public DateTime AlarmDate { get { return alarmDate ; } set { alarmDate  = value;} }
         public String MessageContent { get { return messageContent; } set { messageContent = value; } }
         public Device AlarmDevice { get { return alarmDevice; } set { alarmDevice = value; } }
 
-        public AlarmMessage()
+        public AlarmMessage(String content)
         {
-            messageContent = "";
-            alarmDate = new DateTime();
+            messageContent = content ;
         }
 
-        public AlarmMessage(String content,DateTime d)
+        public AlarmMessage(String content,Device alarmDvc)
         {
-            messageContent = content;
-            alarmDate = d;
-        }
-        public AlarmMessage(String content, DateTime d,Device alarmDvc)
-        {
-            messageContent = content;
-            alarmDate = d;
-            alarmDevice = alarmDvc;
+            alarmDevice = alarmDvc; 
+            messageContent = content ;
         }
     }
 }
