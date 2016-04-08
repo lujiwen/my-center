@@ -31,8 +31,6 @@ namespace Project208Home.Views.ArtWorks208
         public Cab404MTI(Cab cab)
         {
             InitializeComponent();
-            //subSystemNum_DeviceGroups = cab.SubSystemNum_DeviceGroups;
-            //subSystemNum_DevicePump = cab.SubSystemNum_DevicePump;
             cabInArtwork = cab;
             InitCab();
         }
@@ -98,71 +96,5 @@ namespace Project208Home.Views.ArtWorks208
         {
             initBindings();
         }
-        //刷新泵的状态
-        public void RefreshPumpState(UInt32 sysnum,Boolean values)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, new FreshPumpFunc(setSwithchToWindow), sysnum, values);
-        }
-        public void setSwithchToWindow(UInt32 sysnum,Boolean openstate)
-        {
-            String devpumpepname = "subSys" + sysnum + "Pumpep";
-            Ellipse devpumpep = WindowsUtils.GetChildObject<Ellipse>(artWorkCn, devpumpepname);
-            if (devpumpep != null)
-            {
-                if (openstate)
-                {
-                    devpumpep.Fill = new SolidColorBrush(Colors.Red);
-                }
-                else
-                {
-                    devpumpep.Fill = new SolidColorBrush(Colors.Blue);
-                }
-            }
-        }
-        private void pumpSwitch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Ellipse ep = sender as Ellipse;
-            //if (canClick)//能够再次点击
-            //{
-            //    InputKey inputkey = new InputKey();
-            //    inputkey.Uid = ep.Uid;
-            //    inputkey.Show();
-            //    inputkey.ReturnKey += setSwitch;//注册事件
-            //}
-        }
-        /// <summary>
-        /// 设置开关
-        /// </summary>
-        /// <param name="inputkey"></param>
-    //    private void setSwitch(InputKey inputkey)
-    //    {
-    //        if (inputkey.Permission)
-    //        {
-    //            //找到对应的泵设备
-    //            UInt32 subsysnum = Convert.ToUInt32(inputkey.Uid);
-    //            subSystemNum_DevicePump[subsysnum].pumpOperation = true;
-    //            subSystemNum_DevicePump[subsysnum].PumpNoUpdated = true;
-    //            if (subSystemNum_DevicePump[subsysnum].OpenState)
-    //            {
-    //                PutInfoObjToQueue.SaveInfors(new InforBasic(DateTime.Now, "正在关闭泵....."));
-    //            }
-    //            else
-    //            {
-    //                PutInfoObjToQueue.SaveInfors(new InforBasic(DateTime.Now, "正在打开泵....."));
-    //            }
-    //            //设置该泵是否可点击
-    //            if (WindowsUtils.setClick(DateTime.Now, lastClicktime))//可点击
-    //            {
-    //                canClick = true;
-    //                lastClicktime = DateTime.Now;
-    //            }
-    //            else
-    //            {
-    //                canClick = false;
-    //            }
-    //        }
-    //        inputkey.Close();
-    //        inputkey.ReturnKey -= setSwitch;//注册事件
-    //    }
      }
 }

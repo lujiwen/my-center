@@ -46,7 +46,6 @@
                 <Setter Property="Opacity" Value="1"/>
                 <Setter Property="StrokeThickness" Value="4"/>
                 <Setter Property="Margin" Value="5"/>
-                <EventSetter Event="MouseLeftButtonUp" Handler="pumpSwitch_MouseLeftButtonUp"/>
             </Style>
         </Grid.Resources>
         <Canvas Name="artWorkCn">

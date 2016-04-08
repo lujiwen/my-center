@@ -57,38 +57,5 @@ namespace Project208Home.Views.ArtWorks208
         {
              initBindings();
         }
-        //刷新泵的状态
-        public void RefreshPumpState(UInt32 sysnum,Boolean values)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, new FreshPumpFunc(setSwithchToWindow), sysnum, values);
-        }
-        public void setSwithchToWindow(UInt32 sysnum,Boolean openstate)
-        {
-            String devpumpepname = "subSys" + sysnum + "Pumpep";
-            Ellipse devpumpep = WindowsUtils.GetChildObject<Ellipse>(artWorkCn, devpumpepname);
-            if (devpumpep != null)
-            {
-                if (openstate)
-                {
-                    devpumpep.Fill = new SolidColorBrush(Colors.Red);
-                }
-                else
-                {
-                    devpumpep.Fill = new SolidColorBrush(Colors.Blue);
-                }
-            }
-        }
-        private void pumpSwitch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Ellipse ep = sender as Ellipse;
-            if (canClick)//能够再次点击
-            {
-                //InputKey inputkey = new InputKey();
-                //inputkey.Uid = ep.Uid;
-                //inputkey.Show();
-                //inputkey.ReturnKey += setSwitch;//注册事件
-            }
-        }
-    
      }
 }
