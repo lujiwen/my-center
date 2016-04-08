@@ -20,6 +20,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
         LabelAndText rainyStateLT;
         LabelAndText cabStateLT;
         LabelAndText rainTimeLT;
+
         public DeviceUIDryWet(Device d, Frame fm)
          :base(d, fm)
        {
@@ -41,7 +42,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        {
            CurveEnable = false;
           // updateChart(box.value);
-           cabStateLT.getValueTextBlock().Text = box.cab_state;
+           cabStateLT.getValueTextBlock().Text = box.cab_state.Equals("Normal")?"正常":"异常";
            rainyStateLT.getValueTextBlock().Text = box.rainy_state;
            rainTimeLT.getValueTextBlock().Text = box.rain_time;
            if(MainWindow.getInstance().IsMute )

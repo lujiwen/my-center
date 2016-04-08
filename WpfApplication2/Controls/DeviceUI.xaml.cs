@@ -206,6 +206,7 @@ namespace WpfApplication2.Controls
 
                 DateTime dt = DateTime.Now;
                 string timeStamp = dt.ToString("HH:mm:ss ");//dt.Hour + ":" + dt.Minute + ":" + dt.Second;
+                if (nowValues == null) return; 
                 for (int i = 0; i < valueDic.Count; i++)
                 {
                     if (dataSeries[i].DataPoints.Count < maxPointSize) //直接添加
@@ -237,7 +238,7 @@ namespace WpfApplication2.Controls
         public void updateChart(List<String> NowValue)
         {
             nowValues = NowValue;
-            Dispatcher.BeginInvoke(new Action(updateChart));
+           Dispatcher.BeginInvoke(new Action(updateChart));
         }
        
         private void historyCurve(object sender, RoutedEventArgs e)

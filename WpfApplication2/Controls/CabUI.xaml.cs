@@ -234,7 +234,7 @@ namespace WpfApplication2.Controls
           //  Console.WriteLine("更新柜子图表， 一共有设备数量： "+c.Devices.Count);
             List<Device> devices = c.Devices ;
             DateTime dt =   DateTime.Now;
-            string timeStamp = dt.ToString("HH:mm:ss ");
+            string timeStamp = dt.ToString("HH:mm:ss");
             for (int i = 0; i <c.Devices.Count;i++ )
             {
                 if (devices[i].NowValue != null && (!devices[i].NowValue.Equals("")))
@@ -244,7 +244,6 @@ namespace WpfApplication2.Controls
                         Console.WriteLine(i + "  :  " + devices[i].NowValue);
                         DataPoint dataPoint = new DataPoint();//数据点
                         dataPoint.MarkerSize = 8;
-                        //dataPoint.AxisXLabel = "0000-00-00 00:00:00";
 
                         dataPoint.AxisXLabel = timeStamp; //dataSeries[i].DataPoints.Count + "";
                         dataPoint.YValue = Double.Parse(devices[i].NowValue);
@@ -258,7 +257,6 @@ namespace WpfApplication2.Controls
                             dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
                             dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
                         }
-
                         //Console.WriteLine(i + "  :  " + devices[i].NowValue);
                         dataSeries[i].DataPoints[_pointCount - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString();
                         dataSeries[i].DataPoints[_pointCount - 1].YValue = Double.Parse(devices[i].NowValue); //; ;//数据点添加到数据系列
