@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WpfApplication2.Util;
 
 namespace WpfApplication2.Model.Vo
 {
@@ -18,12 +19,14 @@ namespace WpfApplication2.Model.Vo
         public AlarmMessage(String content)
         {
             messageContent = content ;
+            LogUtil.Log(false, messageContent, 0);
         }
 
         public AlarmMessage(String content,Device alarmDvc)
         {
             alarmDevice = alarmDvc; 
             messageContent = content ;
+            LogUtil.Log(false, messageContent, 0);
         }
     }
 }

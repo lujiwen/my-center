@@ -62,12 +62,13 @@ namespace WpfApplication2.CustomMarkers.Controls
         }
        
         public void startAlarm()
-        {
-            Visibility = System.Windows.Visibility.Visible;
+        {        
             isAlarming = true;
             count = 0;
+            if (countThread != null) return;
             countThread = new Thread(new ThreadStart(DispatcherThread));
             countThread.Start();
+           
         }
         public void stopAlarm()
         {

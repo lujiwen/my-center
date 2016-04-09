@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows;
+using WpfApplication2.Controller;
 
 //[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace WpfApplication2.Util
@@ -63,14 +64,14 @@ namespace WpfApplication2.Util
             int i = 0;
             try
             {
-                if (!Directory.Exists(path))
+                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-                String filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+                 String filename = path+DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 if (!File.Exists(filename))
                 {
-                    File.Create(path + filename);
+                    File.Create(filename);
                 }
                 //当日志超过大小后，新建文件进行写
                 long size = new FileInfo(filename).Length;
@@ -80,15 +81,16 @@ namespace WpfApplication2.Util
                     filename = filenames[0] + (i++) + ".txt";
                     File.Create(filename);
                 }
-                FileStream fs = new FileStream(path + filename, FileMode.Append); ;
+                FileStream fs = new FileStream( filename, FileMode.Append); ;
                 StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-                sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + err.ErrContent + "\r\n");
+                //sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + err.ErrContent + "\r\n");
+                sw.Write(exMessage + "\r\n");
                 sw.Close();
                 fs.Close();
             }
             catch (Exception e)
             {
-
+               
             }
             if (alterMesBox)
             {

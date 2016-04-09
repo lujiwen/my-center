@@ -73,7 +73,7 @@ namespace WpfApplication2.package
         protected virtual void toXmlElementMore(ref XmlElement element)
         { }
 
-        public enum State { Normal, Alert, H_Alert, Fault };
+        public enum State { Normal, Alert, H_Alert, L_Alert,Fault };
 
         public string systemId
         {

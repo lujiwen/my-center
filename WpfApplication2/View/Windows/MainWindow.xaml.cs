@@ -301,8 +301,8 @@ namespace WpfApplication2.View.Windows
             }
             else 
             {
-                   alarmer.muteBuzzer();
-                   isMute = true ;
+                alarmer.muteBuzzer();
+                isMute = true ;
             }
          
         }

@@ -271,6 +271,10 @@ namespace WpfApplication2.Controller
        public void receiveData(string data)  //收到二级发送过来的数据后触发
         {
              List<Box> boxes = new List<Box>();
+            if(data==null||data.Equals(""))
+            {
+                return;
+            }
             try
             {
                 boxes = PackageWorker.unpack(data);
@@ -305,6 +309,16 @@ namespace WpfApplication2.Controller
                     deviceToChange.DeviceId = tempItem.devId;
                     deviceToChange.State = tempItem.state.ToString();
 
+                    if (float.Parse(deviceToChange.NowValue) > deviceToChange.Highthreshold  )
+                    {
+                        tempItem.state = DeviceDataBox_Base.State.H_Alert ;
+                        deviceToChange.State = DeviceDataBox_Base.State.H_Alert.ToString();
+                    }
+                    else if( float.Parse(deviceToChange.NowValue) < deviceToChange.Lowthreshold)
+                    {
+                        tempItem.state = DeviceDataBox_Base.State.L_Alert ;
+                        deviceToChange.State = DeviceDataBox_Base.State.L_Alert.ToString();
+                    }
                     //高低阈值被修改，将修改后的参数入库
                     if ((!tempItem.lowThreshold.Equals("")&&deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold))||
                         (!tempItem.highThreshold.Equals("")&&deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
@@ -330,6 +344,7 @@ namespace WpfApplication2.Controller
                     {
                         Alarm(deviceToChange);
                     }
+         
                      GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
                      GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
                     
@@ -385,26 +400,28 @@ namespace WpfApplication2.Controller
        private void Alarm(Device d)
        {
            String alertInfomation = "";
-           if (d.State.ToString().Equals(DeviceDataBox_Base.State.Alert))
+           if (d.State.ToString().Equals(DeviceDataBox_Base.State.L_Alert.ToString()))
            {
                alertInfomation = "当前值： " + d.NowValue + "低于正常值";
            }
-           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.H_Alert))
+           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
            {
                alertInfomation = "当前值： " + d.NowValue + "高于正常值";
            }
-           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.Fault))
+           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
            {
                alertInfomation = "当前值出错 " ;
            }
-           String msg = d.NowValue + "," + d.DeviceId + "," + d.BuildingId + "," + d.CabId + " ," + alertInfomation ;
-           dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
-           alarm(new AlarmMessage(msg,d));
+           String msg =  GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," +GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation+"  当前值为："+d.NowValue + ".";
+            //dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
+            alarm(new AlarmMessage(msg,d));
+       //     MainWindow.getInstance().alarmer.startAlarm();
        }
 
        private void Alarm(String alrm)
        {
            alarm(new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")"));
+        //   MainWindow.getInstance().alarmer.startAlarm();
        }
 
        private void SaveDataToDataBase()

@@ -85,7 +85,7 @@ namespace WpfApplication2.Model.Db
 
         public int InsertExceptionToDb(String tableName, Device value, String Content) //tableName:EXCEPTIONINFO
         {
-            String sql = "INSERT INTO " + tableName + " VALUES(" + "exceptioninfo_sequence" + ".nextval" + ", " + value.BuildingId + ", " + value.CabId + ", " + value.DeviceId + ", " + Content+ " '" + DateTime.Now + "'" + ")";
+            String sql = "INSERT INTO " + tableName + " VALUES(" + "exceptioninfo_sequence" + ".nextval" + ", " + value.BuildingId + ", " + value.CabId + ", " + value.DeviceId + ", " + Content+ " ' ，" + DateTime.Now  + "'" + ")";
             OracleCommand command = new OracleCommand(sql, Conn);
             int result = command.ExecuteNonQuery();
             return result;
