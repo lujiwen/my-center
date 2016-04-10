@@ -103,15 +103,15 @@ namespace WpfApplication2.View.Windows
             initPoints();
             //弹出窗，选择展示页面
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            c.alarm += new alarmEventHandler(MainWindowShowAlarm );
-            
+            c.alarmMessage += new alarmMessageEventHandler(MainWindowShowAlarm );
+            c.alarmBuzzer += new alarmBuzzerEventHandler(buzzerAlarm);
             isEmergencyStatus = false;
            // alarmer = new AlarmBuzzer();
             isMute = false;
             mapPage = new MapPage(this);
             systemPage = new SystemPage(this);
         }
-
+      
         void MainWindowShowAlarm(AlarmMessage alarmMsg)
         {
             //添加 显示报警信息
@@ -123,7 +123,6 @@ namespace WpfApplication2.View.Windows
                     Console.WriteLine(alarmMsg.MessageContent);
                 }  
             });
-          
         }
 
       
@@ -279,6 +278,7 @@ namespace WpfApplication2.View.Windows
             w.Show();
         }
 
+
         private void exit(object sender, RoutedEventArgs e)
         {
             //if (alarmer.IsAlarming)
@@ -289,8 +289,32 @@ namespace WpfApplication2.View.Windows
             //{
             //    alarmer.startAlarm();
             //}
-            //this.MainWindowShowAlarm(new AlarmMessage("12456455",new DateTime()));
-            Application.Current.Shutdown();
+            // this.MainWindowShowAlarm(new AlarmMessage("12456455"));
+            // startToAlarm();
+           Application.Current.Shutdown();
+        }
+
+        private void buzzerAlarm(bool isStart)
+        {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate()
+            {
+                if (isStart)
+                {
+                    if (!alarmer.IsAlarming)
+                    {
+                        alarmer.Visibility = System.Windows.Visibility.Visible;
+                        alarmer.startAlarm();
+                    }
+                }
+                else  //停止报警
+                {
+                    if (alarmer.IsAlarming)
+                    {
+                        alarmer.Visibility = System.Windows.Visibility.Hidden;
+                        alarmer.stopAlarm();
+                    }
+                }
+            });
         }
 
         private void alarmMute(object sender, RoutedEventArgs e)

@@ -29,5 +29,17 @@ namespace WpfApplication2.Util
         {  "2_7", "422ThermalDesorptionSys" },{"2_8","422UnifyThermalDesorptionSys"},{"5_9","亭子"} };
  
     //,{"5_43","asm02"},{"5_46","jl900"},{"5_47","DryWet"}
+
+        public static bool isAllBuildingNormal()
+        {
+            foreach(Building b  in globalMapForBuiding.Values)
+            {
+                if(!b.State.Equals("Normal"))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

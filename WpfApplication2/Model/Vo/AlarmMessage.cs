@@ -18,7 +18,7 @@ namespace WpfApplication2.Model.Vo
 
         public AlarmMessage(String content)
         {
-            messageContent = content ;
+            messageContent = content;
             LogUtil.Log(false, messageContent, 0);
         }
 

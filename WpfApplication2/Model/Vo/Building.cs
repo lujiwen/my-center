@@ -123,7 +123,17 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
-
+        public bool isStateNormal()
+        {
+            foreach(Cab c in cabs)
+            {
+                if(!c.isStateNormal())
+                {
+                 return false ;
+                }
+            }
+            return true;
+        }
 
     }
 }

@@ -20,7 +20,8 @@ namespace WpfApplication2.Controller
 {
     public delegate void DataUpdatedEventHandler();
     public delegate void UpdateUI();
-    public delegate void alarmEventHandler(AlarmMessage alarmMsg);
+    public delegate void alarmMessageEventHandler(AlarmMessage alarmMsg);
+    public delegate void alarmBuzzerEventHandler(bool isStart);
     public class MainController : INotifyPropertyChanged
     {
         public static WpfApplication2.Model.Db.DBManager dataOfDevice;
@@ -36,8 +37,8 @@ namespace WpfApplication2.Controller
         public static SocketConnection tcpConnection; //控制命令的连接
         public static String tempSendData;
         public event UpdateUI notifyUpdateUI;
-        public event alarmEventHandler alarm;
-       
+        public event alarmMessageEventHandler alarmMessage;
+        public event alarmBuzzerEventHandler alarmBuzzer;
         public MainController()
         {
             InitialData();
@@ -343,10 +344,22 @@ namespace WpfApplication2.Controller
                     if (tempItem.state != DeviceDataBox_Base.State.Normal) 
                     {
                         Alarm(deviceToChange);
+
                     }
-         
-                     GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
-                     GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
+
+                    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = 
+                        GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ?        DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+                     GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+
+                     //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
+                     if (GlobalMapForShow.isAllBuildingNormal())
+                     {
+                         alarmBuzzer(false);
+                     }
+                     else
+                     {
+                         alarmBuzzer(true);
+                     }
                     
                     /**
                      * 鲁继文这边像下面这么调应该就可以获得所有东西了
@@ -394,7 +407,6 @@ namespace WpfApplication2.Controller
                     Console.WriteLine(deviceToChange.NowValue);  
                 }
             }
-           // notifyUpdateUI();
         }
 
        private void Alarm(Device d)
@@ -412,15 +424,15 @@ namespace WpfApplication2.Controller
            {
                alertInfomation = "当前值出错 " ;
            }
-           String msg =  GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," +GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation+"  当前值为："+d.NowValue + ".";
+           String msg = GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," + GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation + "  当前值为：" + d.NowValue + "(" + DateTime.Now.ToString() + ")";
             //dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
-            alarm(new AlarmMessage(msg,d));
-       //     MainWindow.getInstance().alarmer.startAlarm();
+            alarmMessage(new AlarmMessage(msg,d));
        }
 
        private void Alarm(String alrm)
        {
-           alarm(new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")"));
+           alarmMessage(new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")"));
+
         //   MainWindow.getInstance().alarmer.startAlarm();
        }
 

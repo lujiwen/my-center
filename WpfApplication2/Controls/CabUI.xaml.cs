@@ -81,6 +81,7 @@ namespace WpfApplication2.Controls
             both.IsChecked = true;
             Dictionary<string, Device> devices =  GlobalMapForShow.globalMapForDevice;
             cabAlarm = new AlarmBuzzer();
+            cabAlarm.startAlarm();
             for(int i=0;i<_cab.Devices.Count;i++)
             {
                 if (!_cab.Devices[i].Type.Equals("Pump"))
@@ -121,6 +122,7 @@ namespace WpfApplication2.Controls
                 info_panel.Children.Add(stateLT);
             }
             initArtWork();
+            cabAlarm.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void initArtWork()
@@ -212,6 +214,14 @@ namespace WpfApplication2.Controls
         void CabInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Console.WriteLine("CabInUI_PropertyChanged");
+            //if (CabInUI.State.Equals("Normal"))
+            //{
+            //    cabAlarm.Visibility = System.Windows.Visibility.Hidden;
+            //}
+            //else
+            //{
+            //    cabAlarm.Visibility = System.Windows.Visibility.Visible;
+            //}
             Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
       
@@ -221,6 +231,24 @@ namespace WpfApplication2.Controls
             if (stateLT!=null)
             {
                 stateLT.updateValue(CabInUI.State.Equals("Normal") ? "正常" : "异常" );
+            }
+ 
+            if (!CabInUI.State.Equals("Normal"))
+            {
+                if (!cabAlarm.IsAlarming)
+                {
+                    cabAlarm.Visibility = System.Windows.Visibility.Visible;
+                    cabAlarm.startAlarm();
+                    Console.WriteLine("cabAlarm.startAlarm()"+ "  "+ CabInUI.Name );
+                }
+            }
+            else if (CabInUI.State.Equals("Normal"))
+            {
+                if (cabAlarm.IsAlarming)
+                {
+                    cabAlarm.Visibility = System.Windows.Visibility.Hidden;
+                    cabAlarm.stopAlarm();
+                }
             }
             //改变工艺图上的数值 在工艺图内部实现数据绑定
              

@@ -117,5 +117,17 @@ namespace WpfApplication2.Model.Vo
                     }
               }
         }
+
+        public bool isStateNormal()
+        {
+           foreach(Device d in devices)
+           {
+               if(!d.State.Equals("Normal"))
+               {
+                   return false;
+               }
+           }
+            return true;
+        }
     }
 }

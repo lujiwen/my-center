@@ -30,7 +30,7 @@
                 <ImageBrush ImageSource="/WpfApplication2;component/Images/home6.png" />
             </Canvas.Background>
             <TextBlock Name="system_name" Text="208室" VerticalAlignment="Center" Canvas.Left="6" Canvas.Top="6" FontWeight="Normal" FontSize="15" Foreground="GhostWhite"></TextBlock>
-            <usercontrl:AlarmBuzzer  Visibility="Hidden" x:Name="cabAlarm" Height="40" Width="57" Canvas.Left="292" Canvas.Top="0" ></usercontrl:AlarmBuzzer>
+            <usercontrl:AlarmBuzzer   x:Name="cabAlarm" Height="40" Width="57" Canvas.Left="292" Canvas.Top="0" ></usercontrl:AlarmBuzzer>
             <Button Name="settings_btn" Content="参数设置" VerticalAlignment="Center" Canvas.Left="343" Canvas.Top="5" FontWeight="Normal" FontSize="13" Background="#FF0DA7F9" Foreground="#FFE5EBFD"  BorderBrush="#FF0DA7F9"  Click="settings_btn_Click"></Button>
              <Button Name="history_btn" Content="查看历史曲线" VerticalAlignment="Center" Canvas.Left="407" Canvas.Top="5" FontWeight="Normal" FontSize="13" Background="#FF0DA7F9" Foreground="#FFE5EBFD"  BorderBrush="#FF0DA7F9"  Click="history_btn_Click"></Button>
         </Canvas>
