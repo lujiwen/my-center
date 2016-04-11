@@ -29,7 +29,7 @@ namespace WpfApplication2.View.Windows
         // marker1, marker2, marker3, marker4;
         GMapMarker[] markers;
         PointLatLng clickPoint;
-     //   public static MainController mc = new MainController();
+        public  MainController c ;
         public PageChooserWindow chooser;
         private Boolean[] _roomChoosed;
         public Boolean[] RoomChoosed { get { return _roomChoosed; } set { _roomChoosed = value; } }
@@ -44,8 +44,8 @@ namespace WpfApplication2.View.Windows
         public  Boolean IsMute { get { return isMute; } set { isMute = value; } }
         private MapPage mapPage;
         private SystemPage systemPage;
-        public MapPage MainWindowMapPage { get { return mapPage; } set { mapPage = value; } }
-        public SystemPage MainWindowSyspage { get { return systemPage; } set { systemPage = value; } }
+        public  MapPage MainWindowMapPage { get { return mapPage; } set { mapPage = value; } }
+        public  SystemPage MainWindowSyspage { get { return systemPage; } set { systemPage = value; } }
 
         public static  MainWindow getInstance()
         {
@@ -99,17 +99,18 @@ namespace WpfApplication2.View.Windows
         private void  init()
         {
             instance = this ;
-            MainController c = new MainController();
+            c = new MainController();
             initPoints();
             //弹出窗，选择展示页面
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+          //  this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
             c.alarmMessage += new alarmMessageEventHandler(MainWindowShowAlarm );
             c.alarmBuzzer += new alarmBuzzerEventHandler(buzzerAlarm);
             isEmergencyStatus = false;
            // alarmer = new AlarmBuzzer();
             isMute = false;
             mapPage = new MapPage(this);
-            systemPage = new SystemPage(this);
+            MainPage.Content = mapPage;
+           // systemPage = new SystemPage(this);
         }
       
         void MainWindowShowAlarm(AlarmMessage alarmMsg)
@@ -134,7 +135,6 @@ namespace WpfApplication2.View.Windows
         private void chooser_pageClick(int pageNum)
         {
             pageNO = pageNum;
-         //   this.Dispatcher.BeginInvoke(new Action(changePage));
         }
         private void changePage(int num)
         {
@@ -281,16 +281,6 @@ namespace WpfApplication2.View.Windows
 
         private void exit(object sender, RoutedEventArgs e)
         {
-            //if (alarmer.IsAlarming)
-            //{
-            //    alarmer.stopAlarm();
-            //}
-            //else
-            //{
-            //    alarmer.startAlarm();
-            //}
-            // this.MainWindowShowAlarm(new AlarmMessage("12456455"));
-            // startToAlarm();
            Application.Current.Shutdown();
         }
 

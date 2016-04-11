@@ -110,14 +110,12 @@ namespace WpfApplication2.View.Pages
                          subSystem[d.SubSystemName] = new List<UserControl>();
                          subSystem[d.SubSystemName].Add(deviceUI);
                      }
-                  
-                //     DeviceList.Items.Add(deviceUI);
                      devices.Add(d);
                 }
             }
             showDeviceBySubSystem();
         }
-
+ 
         void showDeviceBySubSystem()
         {
             foreach (var dic in subSystem)

@@ -39,7 +39,7 @@ namespace WpfApplication2.Controls
        private bool curveEnable;
        public bool CurveEnable { get { return curveEnable; } set { curveEnable = value; } }
        public List<string> LabelsToShow { set { label = value; } get { return label; } }
-    // private Box box;
+       private Visifire.Charts.Title title;
        private List<String> nowValues;
        protected DataSeries[] dataSeries;
        protected List<String> values;
@@ -146,9 +146,8 @@ namespace WpfApplication2.Controls
         { 
 
         }
-     
-        Visifire.Charts.Title title;
-       // private DataSeries dataSeries;
+
+
         private void initDeviceChart()
         {
             device_chart.Visibility = System.Windows.Visibility.Visible;
@@ -188,7 +187,6 @@ namespace WpfApplication2.Controls
            // this.MouseDoubleClick += new MouseButtonEventHandler(Device_MouseDoubleClick);
         }
       
-
         public void updateDeviceUI(Device d)
         {
             //更新一个设备
@@ -201,9 +199,6 @@ namespace WpfApplication2.Controls
         {
             if (valueDic != null && valueDic.Count != 0)
              {
-                //HH:mm:ss 
-             //   if (!curveEnable) return;
-
                 DateTime dt = DateTime.Now;
                 string timeStamp = dt.ToString("HH:mm:ss ");//dt.Hour + ":" + dt.Minute + ":" + dt.Second;
                 if (nowValues == null) return; 
@@ -238,7 +233,7 @@ namespace WpfApplication2.Controls
         public void updateChart(List<String> NowValue)
         {
             nowValues = NowValue;
-        //   Dispatcher.BeginInvoke(new Action(updateChart));
+            Dispatcher.BeginInvoke(new Action(updateChart));
         }
        
         private void historyCurve(object sender, RoutedEventArgs e)

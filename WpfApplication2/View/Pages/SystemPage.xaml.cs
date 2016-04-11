@@ -558,5 +558,10 @@
         {
             return page;
         }
+        public MainWindow getMainWindowInstance()
+        {
+            return mainWindow;
+        }
+
     }
 }

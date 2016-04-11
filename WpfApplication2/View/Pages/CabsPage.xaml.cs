@@ -71,6 +71,7 @@ namespace WpfApplication2.View.Pages
             cabListSource.Add(new CabUI(sysFram, c));
             ApplyDataBinding();
         }
+
         //添加一个楼的柜子到当前页面
         public void insertCab(Frame sysFram, Building b)
         {
@@ -141,8 +142,23 @@ namespace WpfApplication2.View.Pages
              }
             CabList.ItemsSource = cabListSource;
             this.Unloaded += new RoutedEventHandler(CabsPage_Unloaded);
+            systemPage.getMainWindowInstance().c.dataChartUpdate += new Controller.DataUpdatedEventHandler(updateCabsCharts);
         }
 
+        private void updateCabsCharts()
+        {
+            Dispatcher.BeginInvoke(new Action(updateAllCharts));
+        }
+        private void updateAllCharts()
+        {
+            if (cabListSource!=null)
+            {
+                foreach(CabUI cu in cabListSource)
+                {
+                    cu.updateCabUI();
+                }
+            }
+        }
         void CabsPage_Unloaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("CabsPage_Unloaded");
@@ -152,5 +168,8 @@ namespace WpfApplication2.View.Pages
         {
             selectBuildings.Add(b);
         }
+
+
+
     }
 }

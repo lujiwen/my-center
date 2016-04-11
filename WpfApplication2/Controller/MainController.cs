@@ -22,6 +22,7 @@ namespace WpfApplication2.Controller
     public delegate void UpdateUI();
     public delegate void alarmMessageEventHandler(AlarmMessage alarmMsg);
     public delegate void alarmBuzzerEventHandler(bool isStart);
+ 
     public class MainController : INotifyPropertyChanged
     {
         public static WpfApplication2.Model.Db.DBManager dataOfDevice;
@@ -32,7 +33,7 @@ namespace WpfApplication2.Controller
         private SocketConnection sc;
         private String str;
         public event PropertyChangedEventHandler PropertyChanged;
-        public event DataUpdatedEventHandler dataUpdate;
+        public event DataUpdatedEventHandler dataChartUpdate;
         public Queue<Device> bq;  //用于缓存从二级获得的数据的队列
         public static SocketConnection tcpConnection; //控制命令的连接
         public static String tempSendData;
@@ -58,8 +59,8 @@ namespace WpfApplication2.Controller
 
         public DataUpdatedEventHandler DataUpdate
         {
-            set { dataUpdate = value; }
-            get { return dataUpdate; }
+            set { dataChartUpdate = value; }
+            get { return dataChartUpdate; }
         }
 
         /// <summary>
@@ -291,118 +292,87 @@ namespace WpfApplication2.Controller
             {
                 return;
             }
-                
-            foreach (Box item in boxes)
+
+            try
             {
-                if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
+                foreach (Box item in boxes)
                 {
-                    DeviceDataBox_Base tempItem = (DeviceDataBox_Base)item;
-                    if(tempItem==null)
+                    if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
                     {
-                        break;
-                    }
-                    Device deviceToChange = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
-                    deviceToChange.Value = item;
-                    deviceToChange.Type = item.className();
-                    deviceToChange.NowValue = tempItem.value;
-                    deviceToChange.BuildingId = tempItem.systemId;
-                    deviceToChange.CabId = tempItem.cabId;
-                    deviceToChange.DeviceId = tempItem.devId;
-                    deviceToChange.State = tempItem.state.ToString();
+                        DeviceDataBox_Base tempItem = (DeviceDataBox_Base)item;
+                        if (tempItem == null)
+                        {
+                            break;
+                        }
+                        Device deviceToChange = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
+                        deviceToChange.Value = item;
+                        deviceToChange.Type = item.className();
+                        deviceToChange.NowValue = tempItem.value;
+                        deviceToChange.BuildingId = tempItem.systemId;
+                        deviceToChange.CabId = tempItem.cabId;
+                        deviceToChange.DeviceId = tempItem.devId;
+                        deviceToChange.State = tempItem.state.ToString();
 
-                    if (float.Parse(deviceToChange.NowValue) > deviceToChange.Highthreshold  )
-                    {
-                        tempItem.state = DeviceDataBox_Base.State.H_Alert ;
-                        deviceToChange.State = DeviceDataBox_Base.State.H_Alert.ToString();
-                    }
-                    else if( float.Parse(deviceToChange.NowValue) < deviceToChange.Lowthreshold)
-                    {
-                        tempItem.state = DeviceDataBox_Base.State.L_Alert ;
-                        deviceToChange.State = DeviceDataBox_Base.State.L_Alert.ToString();
-                    }
-                    //高低阈值被修改，将修改后的参数入库
-                    if ((!tempItem.lowThreshold.Equals("")&&deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold))||
-                        (!tempItem.highThreshold.Equals("")&&deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
-                    {
-                        MessageBox.Show(deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改");
-                        deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
-                        deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
-                        deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
+                        if (float.Parse(deviceToChange.NowValue) > deviceToChange.Highthreshold)
+                        {
+                            tempItem.state = DeviceDataBox_Base.State.H_Alert;
+                            deviceToChange.State = DeviceDataBox_Base.State.H_Alert.ToString();
+                        }
+                        else if (float.Parse(deviceToChange.NowValue) < deviceToChange.Lowthreshold)
+                        {
+                            tempItem.state = DeviceDataBox_Base.State.L_Alert;
+                            deviceToChange.State = DeviceDataBox_Base.State.L_Alert.ToString();
+                        }
+                        //高低阈值被修改，将修改后的参数入库
+                        if ((!tempItem.lowThreshold.Equals("") && deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold)) ||
+                            (!tempItem.highThreshold.Equals("") && deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
+                        {
+                            MessageBox.Show(deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改");
+                            deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
+                            deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
+                            deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
 
-                        dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceToChange);
-                    }
-                    if(!tempItem.highThreshold.Equals(""))
-                    {
-                        deviceToChange.Highthreshold = (float)Convert.ToDouble(tempItem.highThreshold);
-                    }
-                    if(!tempItem.lowThreshold.Equals(""))
-                    {
-                        deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
-                    }
-                    
-                     //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
-                    if (tempItem.state != DeviceDataBox_Base.State.Normal) 
-                    {
-                        Alarm(deviceToChange);
+                            dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceToChange);
+                        }
+                        if (!tempItem.highThreshold.Equals(""))
+                        {
+                            deviceToChange.Highthreshold = (float)Convert.ToDouble(tempItem.highThreshold);
+                        }
+                        if (!tempItem.lowThreshold.Equals(""))
+                        {
+                            deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
+                        }
 
+                        //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
+                        if (tempItem.state != DeviceDataBox_Base.State.Normal)
+                        {
+                            Alarm(deviceToChange);
+                        }
+
+                        GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State =
+                            GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+                        GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+
+                        //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
+                        if (GlobalMapForShow.isAllBuildingNormal())
+                        {
+                            alarmBuzzer(false);
+                        }
+                        else
+                        {
+                            alarmBuzzer(true);
+                        }
+                        bq.Enqueue(deviceToChange);  //将获取到的数据插入队列   
                     }
-
-                    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = 
-                        GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ?        DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
-                     GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
-
-                     //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
-                     if (GlobalMapForShow.isAllBuildingNormal())
-                     {
-                         alarmBuzzer(false);
-                     }
-                     else
-                     {
-                         alarmBuzzer(true);
-                     }
-                    
-                    /**
-                     * 鲁继文这边像下面这么调应该就可以获得所有东西了
-                     * */
-                    //if (GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId].Type == "6517AB")
-                    //{
-                    //    DeviceDataBox_6517AB a = (DeviceDataBox_6517AB)deviceToChange.Value;
-                    //}
-                    
-                    //if (!(float.Parse(tempItem.lowThreshold) <= float.Parse(tempItem.value)))  //低报，入异常数据表
-                    //{
-                    //    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.Alert.ToString();
-                    //    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.Alert.ToString();
-                    //}
-                    //if (!(float.Parse(tempItem.value) <= float.Parse(tempItem.highThreshold)))//高报，入异常数据表
-                    //{
-                    //    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.H_Alert.ToString();
-                    //    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.H_Alert.ToString();
-                    //}
-                    //if (tempItem.state != WpfApplication2.Controller.DeviceDataBox_Base.State.Normal)
-                    //{
-                    //    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = tempItem.state.ToString();
-                    //    GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = tempItem.state.ToString();
-                    //}
-                    //deviceToChange.NowValue = tempItem.value;
-                    //deviceToChange.DataUnit = tempItem.unit;
-                    //deviceToChange.State = tempItem.state.ToString();
-                    //deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
-                    //deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
-                    //deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
-                    //if (item.className() == DeviceDataBox_6517AB.classNameString)  //如果是6517AB，则添加电压
-                    //{
-                    //    deviceToChange.NowValue += ";" + ((DeviceDataBox_6517AB)item).voltValue;
-                    //    deviceToChange.DataUnit += ";" + "V";
-
-                    //}
-                    //if (item.className() == DeviceDataBox_Quality.classNameString) //如果是质量流量计，则添加累计值和累计单位
-                    //{
-                    //    deviceToChange.NowValue += ";" + ((DeviceDataBox_Quality)item).sumValue;
-                    //    deviceToChange.DataUnit += ";" + ((DeviceDataBox_Quality)item).sumUnit;
-                    //}
-                    bq.Enqueue(deviceToChange);  //将获取到的数据插入队列   
-                }
+                }//end for 
+            }
+            catch (Exception e)
+            {
+                Alarm("收到数据包格式异常，无法解析！"+"("+DateTime.Now.ToString()+")");
+            }
+            finally
+            {
+                dataChartUpdate();
             }
         }
 

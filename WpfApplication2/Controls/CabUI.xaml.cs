@@ -222,39 +222,9 @@ namespace WpfApplication2.Controls
             //{
             //    cabAlarm.Visibility = System.Windows.Visibility.Visible;
             //}
-          //  Dispatcher.BeginInvoke(new Action(updateCabUI));
+         //   Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
-      
-        private void updateCabUI()
-        {
-            //改变状态
-            if (stateLT!=null)
-            {
-                stateLT.updateValue(CabInUI.State.Equals("Normal") ? "正常" : "异常" );
-            }
- 
-            if (!CabInUI.State.Equals("Normal"))
-            {
-                if (!cabAlarm.IsAlarming)
-                {
-                    cabAlarm.Visibility = System.Windows.Visibility.Visible;
-                    cabAlarm.startAlarm();
-                    Console.WriteLine("cabAlarm.startAlarm()"+ "  "+ CabInUI.Name );
-                }
-            }
-            else if (CabInUI.State.Equals("Normal"))
-            {
-                if (cabAlarm.IsAlarming)
-                {
-                    cabAlarm.Visibility = System.Windows.Visibility.Hidden;
-                    cabAlarm.stopAlarm();
-                }
-            }
-            //改变工艺图上的数值 在工艺图内部实现数据绑定
-             
-            //改变曲线图上面的数值
-            UpdateChart(CabInUI);
-        }
+
 
 
         public void UpdateChart(Cab c)
@@ -304,8 +274,9 @@ namespace WpfApplication2.Controls
             }
         }
 
-        public void updateCabUI(Cab c)
+        public void updateCabUI()
         {
+            Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
             Console.WriteLine("start updateCabUI");
             //更新状态
             stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
@@ -313,6 +284,36 @@ namespace WpfApplication2.Controls
             UpdateChart(c);
         }
 
+        //private void updateCabUI()
+        //{
+        //    //改变状态
+        //    if (stateLT != null)
+        //    {
+        //        stateLT.updateValue(CabInUI.State.Equals("Normal") ? "正常" : "异常");
+        //    }
+
+        //    if (!CabInUI.State.Equals("Normal"))
+        //    {
+        //        if (!cabAlarm.IsAlarming)
+        //        {
+        //            cabAlarm.Visibility = System.Windows.Visibility.Visible;
+        //            cabAlarm.startAlarm();
+        //            Console.WriteLine("cabAlarm.startAlarm()" + "  " + CabInUI.Name);
+        //        }
+        //    }
+        //    else if (CabInUI.State.Equals("Normal"))
+        //    {
+        //        if (cabAlarm.IsAlarming)
+        //        {
+        //            cabAlarm.Visibility = System.Windows.Visibility.Hidden;
+        //            cabAlarm.stopAlarm();
+        //        }
+        //    }
+        //    //改变工艺图上的数值 在工艺图内部实现数据绑定
+
+        //    //改变曲线图上面的数值
+        //    UpdateChart(CabInUI);
+        //}
         private void radio_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton r = (RadioButton)sender;

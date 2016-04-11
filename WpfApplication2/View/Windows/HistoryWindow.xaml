@@ -12,7 +12,7 @@
                 <TextBox>起始日期:</TextBox>
                 <!--<sys:DatePicker Name="start_time" ></sys:DatePicker>-->
                 <toolkit:DateTimePicker Name="start_time"  Width="120"   BorderBrush="Black"    />
-                <TextBox Margin="50,0,0,0">起始日期:</TextBox>
+                <TextBox Margin="50,0,0,0">终止时间:</TextBox>
                 <!--<sys:DatePicker  Name="end_time"></sys:DatePicker>-->
                 <toolkit:DateTimePicker Name="end_time"  Width="120"  TimeFormat="LongTime"></toolkit:DateTimePicker>
                 <Button Margin="20,5,5,5" Click="Start_Query_Button_Click" Width="54"> 查询</Button>
