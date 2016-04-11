@@ -222,7 +222,7 @@ namespace WpfApplication2.Controls
             //{
             //    cabAlarm.Visibility = System.Windows.Visibility.Visible;
             //}
-            Dispatcher.BeginInvoke(new Action(updateCabUI));
+          //  Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
       
         private void updateCabUI()

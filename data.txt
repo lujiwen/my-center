@@ -163,4 +163,14 @@ cabId=5 404HPT500II
 <DeviceDataBox_Quality systemId = "2" cabId="3" devId="22" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
 <DeviceDataBox_6517AB systemId = "2" cabId="3" devId="25" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
 <DeviceDataBox_Quality systemId = "2" cabId="3" devId="26" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_DryWet systemId= "5" cabId= "9" devId= "83" cab_state= "normal" rainy_state= "rainny" rain_time= "21:00" state= "Normal " unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_JL900 systemId= "5" cabId= "9" devId= "84" presure= "%D1,100%.%D0,9%" real_traffic= "65" sample_volume= "87" keep_time= "" state= "Normal " unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataASM02Box systemId= "5" cabId= "9" devId= "82" val_str_set= "Ab:,,,3.13E-003,,,,1.85E-002;Ec:,,,,,,,;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:,,,,,,;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001, " state= "Normal " unit= "c" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_DryWet systemId= "5" cabId= "9" devId= "83" cab_state= "normal" rainy_state= "rainny" rain_time= "21:00" state= "Normal " unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+</package>
+
+<package>
+<DeviceDataBox_DryWet systemId= "5" cabId= "9" devId= "83" cab_state= "normal" rainy_state= "rainny" rain_time= "21:00" state= "Normal " unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_JL900 systemId= "5" cabId= "9" devId= "84" presure= "%D1,100%.%D0,9%" real_traffic= "65" sample_volume= "87" keep_time= "54" state= "Normal " unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataASM02Box systemId= "5" cabId= "9" devId= "82" val_str_set= "Ab:,,,3.13E-003,,,,1.85E-002;Ec:,,,,,,,;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:,,,,,,;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001, " state= "Normal " unit= "c" highThreshold= "" lowThreshold= "" factor= "" />
 </package>

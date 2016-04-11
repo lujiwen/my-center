@@ -368,9 +368,7 @@ namespace WpfApplication2.Controller
                     //{
                     //    DeviceDataBox_6517AB a = (DeviceDataBox_6517AB)deviceToChange.Value;
                     //}
-
                     
-                   
                     //if (!(float.Parse(tempItem.lowThreshold) <= float.Parse(tempItem.value)))  //低报，入异常数据表
                     //{
                     //    GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State = WpfApplication2.Controller.DeviceDataBox_Base.State.Alert.ToString();
@@ -404,7 +402,6 @@ namespace WpfApplication2.Controller
                     //    deviceToChange.DataUnit += ";" + ((DeviceDataBox_Quality)item).sumUnit;
                     //}
                     bq.Enqueue(deviceToChange);  //将获取到的数据插入队列   
-                    Console.WriteLine(deviceToChange.NowValue);  
                 }
             }
         }

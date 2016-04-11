@@ -238,7 +238,7 @@ namespace WpfApplication2.Controls
         public void updateChart(List<String> NowValue)
         {
             nowValues = NowValue;
-           Dispatcher.BeginInvoke(new Action(updateChart));
+        //   Dispatcher.BeginInvoke(new Action(updateChart));
         }
        
         private void historyCurve(object sender, RoutedEventArgs e)

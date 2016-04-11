@@ -63,8 +63,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
         public override void initlabels()
         {
-             stateLT = new LabelAndText("状态", "", Colors.White);
-             valueLT = new LabelAndText("累计值", "", Colors.White);
+             stateLT = new LabelAndText("状态：", "", Colors.White);
+             valueLT = new LabelAndText("累计值：", "", Colors.White);
+             valueLT = new LabelAndText("实时值：", "", Colors.White);
              valueLT.getUnitTextBlock().Text = " " + DeviceInUI.DataUnit;
             
              getInoPanel().Children.Add(stateLT);

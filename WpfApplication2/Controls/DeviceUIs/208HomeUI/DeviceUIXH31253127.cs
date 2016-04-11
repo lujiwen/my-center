@@ -35,8 +35,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
         }
         public override void initlabels()
         {
-             stateLT = new LabelAndText("状态 ", "", Colors.White);
-             valueLT = new LabelAndText("浓度 ", "", Colors.White);
+             stateLT = new LabelAndText("状态：", "", Colors.White);
+             valueLT = new LabelAndText("浓度：", "", Colors.White);
 
             ////实时值绑定
             //Binding valueBingding = new Binding();

@@ -67,7 +67,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        public override void initlabels()
        {
            stateLT = new LabelAndText("状态:", "", Colors.White);
-           valueLT = new LabelAndText("电压:", "", Colors.White);
+           valueLT = new LabelAndText("浓度:", "", Colors.White);
            valueLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
 
            //实时值绑定
