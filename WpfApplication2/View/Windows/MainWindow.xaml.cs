@@ -213,7 +213,7 @@ namespace WpfApplication2.View.Windows
                     break; 
                 case "check_logs":
                     string path = System.Environment.CurrentDirectory + @"\log\";
-                    Util.Utils.openDir(path);
+                    Utils.openDir(path);
                     break;
                 default: 
                     break;

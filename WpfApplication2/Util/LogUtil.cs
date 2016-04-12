@@ -109,8 +109,9 @@ namespace WpfApplication2.Util
         public static void Log(bool alterMesBox, string exMessage ,int errCode)
         {
             ErrorCode err = new ErrorCode(errCode, exMessage);
-            Thread writeFileThread = new Thread(new ParameterizedThreadStart(writeErrInFile));
-            writeFileThread.Start(exMessage);
+            //Thread writeFileThread = new Thread(new ParameterizedThreadStart(writeErrInFile));
+            //writeFileThread.Start();
+            writeErrInFile(exMessage);
             if (alterMesBox)
             {
                 MessageBox.Show(err.ErrContent,err.ErrDescription);

@@ -53,14 +53,14 @@
             </StackPanel>  
            
             <StackPanel  Visibility="Visible"  Name="curve_pannel" Orientation="Vertical" Grid.Row="3">
-                <TextBox  Name="curveChooserTip" Visibility="Collapsed" Background="#FF565656" Foreground="White" Width="490">选择要显示的设备曲线：</TextBox>
+                <!--<TextBox  Name="curveChooserTip" Visibility="Collapsed" Background="#FF565656" Foreground="White" Width="490">选择要显示的设备曲线：</TextBox>
                 <ListBox    Name="curveChooser"  Visibility="Visible"  Background="#FF565656">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Name="uniform" Columns="5"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-                </ListBox>
+                </ListBox>-->
                 <my:Chart  Visibility="Visible" Name="real_time_cab_chart" Height="350" View3D="False" AnimationEnabled="False"  AnimatedUpdate="False" Watermark="False" Background="#FF565656" IndicatorEnabled="True"     />
                 <!-- <TabControl TabStripPlacement="Top" Height="Auto"  Foreground="White" Background="#FF565656">
                     <TabItem Header="实时曲线">

@@ -82,31 +82,31 @@ namespace WpfApplication2.Controls
             Dictionary<string, Device> devices =  GlobalMapForShow.globalMapForDevice;
             cabAlarm = new AlarmBuzzer();
             //cabAlarm.startAlarm();
-            for(int i=0;i<_cab.Devices.Count;i++)
-            {
-                if (!_cab.Devices[i].Type.Equals("Pump"))
-                {
-                    CheckBox c = new CheckBox();
-                    if (i == _cab.Devices.Count)
-                    {
-                        c.Name = "cb_all_select";
-                        c.Content = "全选";
-                    }
-                    else
-                    {
-                        Device d = _cab.Devices[i];
-                        c.Name = "cb_" + _cab.Devices[i].DeviceId;
-                        c.Content = "" + _cab.Devices[i].DeviceId;
-                        c.Content =d.HandleTypeInSystem;
-                    }
-                    c.IsChecked = true;
-                    c.Margin = new Thickness(2); ;
-                    c.Foreground = new SolidColorBrush(Colors.White);
-                    c.Checked += new RoutedEventHandler(c_Checked);
-                    c.Unchecked += new RoutedEventHandler(c_Unchecked); 
-                    curveChooser.Items.Add(c);//_cab.Devices[i].DeviceId+""
-                }
-            }
+            //for(int i=0;i<_cab.Devices.Count;i++)
+            //{
+            //    if (!_cab.Devices[i].Type.Equals("Pump"))
+            //    {
+            //        CheckBox c = new CheckBox();
+            //        if (i == _cab.Devices.Count)
+            //        {
+            //            c.Name = "cb_all_select";
+            //            c.Content = "全选";
+            //        }
+            //        else
+            //        {
+            //            Device d = _cab.Devices[i];
+            //            c.Name = "cb_" + _cab.Devices[i].DeviceId;
+            //            c.Content = "" + _cab.Devices[i].DeviceId;
+            //            c.Content =d.HandleTypeInSystem;
+            //        }
+            //        c.IsChecked = true;
+            //        c.Margin = new Thickness(2); ;
+            //        c.Foreground = new SolidColorBrush(Colors.White);
+            //        c.Checked += new RoutedEventHandler(c_Checked);
+            //        c.Unchecked += new RoutedEventHandler(c_Unchecked); 
+            //       // curveChooser.Items.Add(c);//_cab.Devices[i].DeviceId+""
+            //    }
+            //}
             
             if (_cab!=null)
             {
