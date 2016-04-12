@@ -292,6 +292,7 @@ namespace WpfApplication2.View.Windows
                 {
                     if (!alarmer.IsAlarming)
                     {
+                        Console.WriteLine("  alarmer.startAlarm();");
                         alarmer.Visibility = System.Windows.Visibility.Visible;
                         alarmer.startAlarm();
                     }
@@ -300,6 +301,7 @@ namespace WpfApplication2.View.Windows
                 {
                     if (alarmer.IsAlarming)
                     {
+                        Console.WriteLine("    alarmer.stopAlarm();");
                         alarmer.Visibility = System.Windows.Visibility.Hidden;
                         alarmer.stopAlarm();
                     }

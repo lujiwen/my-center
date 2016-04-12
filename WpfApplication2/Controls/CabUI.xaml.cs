@@ -81,7 +81,7 @@ namespace WpfApplication2.Controls
             both.IsChecked = true;
             Dictionary<string, Device> devices =  GlobalMapForShow.globalMapForDevice;
             cabAlarm = new AlarmBuzzer();
-            cabAlarm.startAlarm();
+            //cabAlarm.startAlarm();
             for(int i=0;i<_cab.Devices.Count;i++)
             {
                 if (!_cab.Devices[i].Type.Equals("Pump"))

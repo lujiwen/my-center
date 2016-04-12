@@ -373,6 +373,7 @@ namespace WpfApplication2.Controller
             finally
             {
                 dataChartUpdate();
+                boxes = null;
             }
         }
 

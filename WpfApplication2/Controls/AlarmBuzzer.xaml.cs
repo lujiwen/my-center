@@ -90,11 +90,6 @@ namespace WpfApplication2.CustomMarkers.Controls
     
         private  void UpdateBuzzer()
         {
-
-            //RedBuzzer = new BitmapImage(new Uri("/Images/red_buzzer.png", UriKind.Relative));
-            //BlueBuzzer = new BitmapImage(new Uri("/Images/blue_buzzer.png", UriKind.Relative));
-            //redBuzzerMute = new BitmapImage(new Uri("/Images/red_buzzer_mute.png", UriKind.Relative));
-            //blueBuzzerMute = new BitmapImage(new Uri("/Images/blue_buzzer_mute.png", UriKind.Relative));
             if (isAlarming)
             {
                 buzzer.Visibility = System.Windows.Visibility.Visible;
@@ -103,12 +98,12 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = redBuzzerMute;
-                    //    Console.WriteLine("redBuzzerMute");
+                         Console.WriteLine("redBuzzerMute");
                     }
                     else
                     {
                         buzzer.Source = blueBuzzerMute;
-                      //  Console.WriteLine("blueBuzzerMute");
+                        Console.WriteLine("blueBuzzerMute");
                     }
                 }
                 else
@@ -116,12 +111,12 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = RedBuzzer;
-                     //   Console.WriteLine("RedBuzzer");
+                       Console.WriteLine("RedBuzzer");
                     }
                     else
                     {
                         buzzer.Source = BlueBuzzer;
-                     //   Console.WriteLine("BlueBuzzer");
+                        Console.WriteLine("BlueBuzzer");
                     }
                 }
                 count++;
