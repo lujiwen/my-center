@@ -240,7 +240,9 @@ namespace WpfApplication2.View.Windows
                 str = "状态切换失败";
                 MessageBox.Show(this, str, "通知", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            MainWindowShowAlarm(new AlarmMessage(str + "(" + DateTime.Now.ToString() + ")"));
+            AlarmMessage msg = new AlarmMessage(str + "(" + DateTime.Now.ToString() + ")");
+            MainWindowShowAlarm(msg);
+            msg = null; 
         }
 
         private bool resetEmergentStatus(bool isEmergencyStatus)

@@ -436,7 +436,10 @@ namespace WpfApplication2.View.Pages
 
         public void updateAlarmMessage(String alarmStr)
         {
-            alarmMessages.add(new AlarmMessage(alarmStr));
+            AlarmMessage msg = new AlarmMessage(alarmStr);
+            alarmMessages.add(msg);
+            msg = null;
+                 
             //存储报警信息
 
 

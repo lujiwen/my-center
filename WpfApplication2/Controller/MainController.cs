@@ -394,14 +394,16 @@ namespace WpfApplication2.Controller
            }
            String msg = GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," + GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation + "  当前值为：" + d.NowValue + "(" + DateTime.Now.ToString() + ")";
             //dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
-            alarmMessage(new AlarmMessage(msg,d));
+           AlarmMessage amsg = new AlarmMessage(msg, d);
+           alarmMessage(amsg);
+           amsg = null;
        }
 
        private void Alarm(String alrm)
        {
-           alarmMessage(new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")"));
-
-        //   MainWindow.getInstance().alarmer.startAlarm();
+           AlarmMessage msg = new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")");
+           alarmMessage(msg);
+           msg = null ;
        }
 
        private void SaveDataToDataBase()
