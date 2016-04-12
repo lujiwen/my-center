@@ -62,7 +62,7 @@
             }
             else
             {
-                cabspage = new CabsPage();
+                cabspage = new CabsPage(this);
                 page.Content = cabspage;
             }
            
@@ -80,7 +80,7 @@
             }
             else
             {
-                cabspage = new CabsPage();
+                cabspage = new CabsPage(this);
             }
             page.Content = cabspage;
             init();
@@ -97,7 +97,7 @@
             }
             else
             {
-                cabspage = new CabsPage();
+                cabspage = new CabsPage(this);
             }
             page.Content = cabspage;
             if (isMutilChoose)

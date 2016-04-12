@@ -51,9 +51,10 @@ namespace WpfApplication2.View.Pages
             init();
         }
 
-        public CabsPage()
+        public CabsPage(SystemPage sp)
         {
             InitializeComponent();
+            systemPage = sp;
             init();
         }
 
