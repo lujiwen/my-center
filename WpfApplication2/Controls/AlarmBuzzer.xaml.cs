@@ -98,12 +98,14 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = redBuzzerMute;
-                         Console.WriteLine("redBuzzerMute");
+                        Console.WriteLine("redBuzzerMute");
+                        count = 0; 
                     }
                     else
                     {
                         buzzer.Source = blueBuzzerMute;
                         Console.WriteLine("blueBuzzerMute");
+                        count = 1; 
                     }
                 }
                 else
@@ -112,14 +114,16 @@ namespace WpfApplication2.CustomMarkers.Controls
                     {
                         buzzer.Source = RedBuzzer;
                        Console.WriteLine("RedBuzzer");
+                       count = 0; 
                     }
                     else
                     {
                         buzzer.Source = BlueBuzzer;
                         Console.WriteLine("BlueBuzzer");
+                        count = 1; 
                     }
                 }
-                count++;
+              //  count++;
                 Console.WriteLine(count);
             }
         }

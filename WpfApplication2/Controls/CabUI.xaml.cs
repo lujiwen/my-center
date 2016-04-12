@@ -214,14 +214,7 @@ namespace WpfApplication2.Controls
         void CabInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Console.WriteLine("CabInUI_PropertyChanged");
-            //if (CabInUI.State.Equals("Normal"))
-            //{
-            //    cabAlarm.Visibility = System.Windows.Visibility.Hidden;
-            //}
-            //else
-            //{
-            //    cabAlarm.Visibility = System.Windows.Visibility.Visible;
-            //}
+           
          //   Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
 
@@ -277,7 +270,14 @@ namespace WpfApplication2.Controls
         public void updateCabUI()
         {
             Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
-            Console.WriteLine("start updateCabUI");
+            if (c.State.Equals("Normal"))
+            {
+                cabAlarm.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                cabAlarm.Visibility = System.Windows.Visibility.Visible;
+            }
             //更新状态
             stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
             //更新曲线图

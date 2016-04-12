@@ -466,43 +466,8 @@
                     markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, mainWindow.Buildings[i]);
                     markers[i].Shape.AllowDrop = false;
                     map.Markers.Add(markers[i]);
-                     
                 }
             }
-
-
-            //PointLatLng point = mainWindow.getClickPoint();
-            //map.CurrentPosition = point;
-            //map.MaxZoom =  25;
-            //map.MinZoom = 1;
-            //map.Zoom = 10;
-            //map.MapType = MapType.GoogleHybridChina;
-            //map.Manager.Mode = AccessMode.ServerAndCache;
-            //map.BoundsOfMap = new RectLatLng(point.Lat-1, point.Lng-1, 1.025, 1.018); //北纬30.67度，东经104.06度。
-            //map.CanDragMap = true;
-
-            //currentMarker = mainWindow.getCurrentMarker();
-            //{
-            //    TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-            //    //  map.Markers.Add(currentMarker);
-
-            //    for (int i = 0; i < markers.Length; i++)
-            //    {
-            //        trolleyToolTip = new TrolleyTooltip();
-            //        if (i == 2)
-            //        {
-            //            markers[i].Shape = new PositionMarker(this, markers[i], trolleyToolTip, false);
-            //        }
-            //        else
-            //        {
-            //            markers[i].Shape = new PositionMarker(this, markers[i], trolleyToolTip, false);
-            //        }
-
-            //        markers[i].Offset = new System.Windows.Point(0, 0);
-            //        markers[i].ZIndex = int.MaxValue;
-            //        map.Markers.Add(markers[i]);
-            //    }
-            //}
         }
 
         void map_MouseWheel(object sender, MouseWheelEventArgs e)

@@ -262,6 +262,7 @@ namespace WpfApplication2.View.Windows
         void window_roomChose(bool[] chooseArr)
         {
             _roomChoosed = chooseArr;    
+
             MainPage.Content = new SystemPage(this,true);
         }
 

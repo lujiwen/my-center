@@ -48,7 +48,7 @@ namespace WpfApplication2.View.Windows
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

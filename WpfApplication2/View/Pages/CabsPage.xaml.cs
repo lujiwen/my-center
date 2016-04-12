@@ -168,8 +168,5 @@ namespace WpfApplication2.View.Pages
         {
             selectBuildings.Add(b);
         }
-
-
-
     }
 }
