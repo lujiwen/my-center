@@ -196,7 +196,7 @@ namespace WpfApplication2.View.Windows
                     w.Show();
                     break; 
                 case"emergency_status":
-                   string alerString  ;
+                    string alerString  ;
                     if(!isEmergencyStatus)
                     {
                         alerString = "确定切换到应急状态";
@@ -210,8 +210,11 @@ namespace WpfApplication2.View.Windows
                     {
                         switchEmergentStatus(!isEmergencyStatus);
                     }
-                   
                     break; 
+                case "check_logs":
+                    string path = System.Environment.CurrentDirectory + @"\log\";
+                    Util.Utils.openDir(path);
+                    break;
                 default: 
                     break;
              }

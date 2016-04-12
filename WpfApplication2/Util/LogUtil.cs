@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using System.Windows;
 using WpfApplication2.Controller;
+using System.Windows.Threading;
+using System.Threading;
 
 //[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace WpfApplication2.Util
@@ -56,14 +58,14 @@ namespace WpfApplication2.Util
         //    }
         //}
 
-        public static void Log(bool alterMesBox, string exMessage ,int errCode)
+        public static void writeErrInFile(object exmsg)
         {
-            ErrorCode err = new ErrorCode(errCode,exMessage);
+            string exMessage = exmsg as string;
             //新建路径
             string path = System.Environment.CurrentDirectory + @"\log\";
             int i = 0;
             FileStream fs = null; ;
-            StreamWriter sw = null ;
+            StreamWriter sw = null;
             try
             {
                 if (!Directory.Exists(path))
@@ -90,19 +92,25 @@ namespace WpfApplication2.Util
             }
             catch (Exception e)
             {
-                Log(false, e.Message.ToString() + "(" + DateTime.Now.ToString() + ")" + "\r\n", (int)           ErrorCode.ERR_CODE.WRITE_FILE_ERR);
+                Log(false, e.Message.ToString() + "(" + DateTime.Now.ToString() + ")" + "\r\n", (int)ErrorCode.ERR_CODE.WRITE_FILE_ERR);
             }
             finally
             {
-                if(sw!=null)
+                if (sw != null)
                 {
                     sw.Close();
                 }
-                 if(fs!=null)
-                 {
-                     fs.Close();
-                 }
+                if (fs != null)
+                {
+                    fs.Close();
+                }
             }
+        }
+        public static void Log(bool alterMesBox, string exMessage ,int errCode)
+        {
+            ErrorCode err = new ErrorCode(errCode, exMessage);
+            Thread writeFileThread = new Thread(new ParameterizedThreadStart(writeErrInFile));
+            writeFileThread.Start(exMessage);
             if (alterMesBox)
             {
                 MessageBox.Show(err.ErrContent,err.ErrDescription);

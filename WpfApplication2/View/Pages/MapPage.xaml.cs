@@ -439,10 +439,7 @@ namespace WpfApplication2.View.Pages
             AlarmMessage msg = new AlarmMessage(alarmStr);
             alarmMessages.add(msg);
             msg = null;
-                 
             //存储报警信息
-
-
             //alarmMessages.Capacity = 10;
             //count_item = count_item + 1;
             //double x = SystemParameters.WorkArea.Width;        

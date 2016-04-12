@@ -62,6 +62,10 @@ namespace WpfApplication2.Util
             else return false;
         }
 
+        public static void openDir(string path)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", path);
+        }
     }
 }
  
