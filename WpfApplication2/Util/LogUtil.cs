@@ -62,13 +62,15 @@ namespace WpfApplication2.Util
             //新建路径
             string path = System.Environment.CurrentDirectory + @"\log\";
             int i = 0;
+            FileStream fs = null; ;
+            StreamWriter sw = null ;
             try
             {
-                 if (!Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-                 String filename = path+DateTime.Now.ToString("yyyyMMdd") + ".txt";
+                String filename = path + DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 if (!File.Exists(filename))
                 {
                     File.Create(filename);
@@ -78,19 +80,28 @@ namespace WpfApplication2.Util
                 if (File.Exists(filename) && size >= 10000)
                 {
                     String[] filenames = filename.Split('.');
-                    filename = filenames[0] + (i++) + ".txt";
+                    filename = filenames[0] + ".txt";
                     File.Create(filename);
                 }
-                FileStream fs = new FileStream( filename, FileMode.Append); ;
-                StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+                fs = new FileStream(filename, FileMode.Append); ;
+                sw = new StreamWriter(fs, Encoding.Default);
                 //sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + err.ErrContent + "\r\n");
                 sw.Write(exMessage + "\r\n");
-                sw.Close();
-                fs.Close();
             }
             catch (Exception e)
             {
-               
+                Log(false, e.Message.ToString() + "(" + DateTime.Now.ToString() + ")" + "\r\n", (int)           ErrorCode.ERR_CODE.WRITE_FILE_ERR);
+            }
+            finally
+            {
+                if(sw!=null)
+                {
+                    sw.Close();
+                }
+                 if(fs!=null)
+                 {
+                     fs.Close();
+                 }
             }
             if (alterMesBox)
             {

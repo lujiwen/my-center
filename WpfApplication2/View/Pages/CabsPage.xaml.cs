@@ -160,6 +160,7 @@ namespace WpfApplication2.View.Pages
                 }
             }
         }
+
         void CabsPage_Unloaded(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("CabsPage_Unloaded");
