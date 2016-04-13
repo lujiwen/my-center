@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using WpfApplication2.Model.Vo;
 
 namespace PavilionMonitor
 {
@@ -18,6 +19,13 @@ namespace PavilionMonitor
 
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //public DryWet(DeviceDataBox_Base b, Device mapDevice)
+        //    :base(b,mapDevice)
+        //{
+
+        //}
+        
         public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

@@ -48,6 +48,7 @@ namespace WpfApplication2.package
             highThreshold = element.GetAttribute("highThreshold");
             lowThreshold = element.GetAttribute("lowThreshold");
             factor = element.GetAttribute("factor");
+            correctFactor = element.GetAttribute("factor");
             fromXmlElementMore(element); //让子类读取更多变量
         }
 

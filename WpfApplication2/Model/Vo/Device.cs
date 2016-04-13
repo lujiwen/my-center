@@ -5,6 +5,7 @@ using System.Text;
 using WpfApplication2.Controller;
 using System.ComponentModel;
 using WpfApplication2.package;
+using WpfApplication2.Util;
 
 namespace WpfApplication2.Model.Vo
 {
@@ -29,6 +30,7 @@ namespace WpfApplication2.Model.Vo
         private string state;
         private string nowValue;
         private List<string> labels = new List<string>();
+        
         /**
          * 一下两项用于数据交互
          * */
@@ -47,11 +49,15 @@ namespace WpfApplication2.Model.Vo
   /// <summary>
   ///
   /// </summary>
+        public Device(DeviceDataBox_Base b,Device deviceInMap)
+        {
+            fromBoxToDevice(b,deviceInMap);
+            judgeState();
+        }
         public Device()
         {
-
+    
         }
-
         public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
             float correctFactor, string dataUnit, float inputArg1, float inputArg2, float inputArg3, string handleTypeInSystem, string state)
         {
@@ -72,6 +78,58 @@ namespace WpfApplication2.Model.Vo
             this.inputArg3 = inputArg3;
             this.handleTypeInSystem = handleTypeInSystem;
             this.state = state;
+        }
+
+        public virtual void fromBoxToDevice(DeviceDataBox_Base box,Device mapDevice)
+        {
+            nowValue = box.value;
+            state = box.state.ToString();
+            Value = box;
+            Type = box.className();
+            BuildingId = box.systemId;
+            CabId = box.cabId;
+            DeviceId = box.devId;
+            State = box.state.ToString();
+            handleTypeInSystem = mapDevice.handleTypeInSystem;
+            if (!box.highThreshold.Equals(""))
+            {
+                Highthreshold = float.Parse(box.highThreshold);
+            }
+            else
+            {
+                Highthreshold = mapDevice.Highthreshold;
+            }
+
+            if (!box.lowThreshold.Equals(""))
+            {
+                Lowthreshold = float.Parse(box.lowThreshold);
+            }
+            else
+            {
+                Lowthreshold = mapDevice.Lowthreshold;
+            }
+            if (!box.CorrectFactor.Equals(""))
+            {
+                CorrectFactor = float.Parse(box.CorrectFactor);
+            }
+            else
+            {
+                CorrectFactor = mapDevice.correctFactor;
+            }
+        }
+
+        public virtual void judgeState()
+        {
+            if (float.Parse(NowValue) > Highthreshold)
+            {
+                //state = DeviceDataBox_Base.State.H_Alert;
+                State = DeviceDataBox_Base.State.H_Alert.ToString();
+            }
+            else if (float.Parse(NowValue) < Lowthreshold)
+            {
+                //tempItem.state = DeviceDataBox_Base.State.L_Alert;
+                State = DeviceDataBox_Base.State.L_Alert.ToString();
+            }
         }
 
         public void addLabel(string label)
@@ -194,7 +252,7 @@ namespace WpfApplication2.Model.Vo
             }
         }
       
-
+      
         public string CabId
         {
             get { return cabId; }
@@ -309,9 +367,32 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
-        public virtual string GenerateSql(string tablename,Device d) 
+        public virtual string GenerateSql(string tablename) 
          {
-             return "INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + State + "'" + ", " + "'" + DataUnit + "'" + ", " + "1" + ")"; 
+             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " +  DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" +  DataUnit + "'" + ", " + "'" +  State + "' )";
          }
+
+        public virtual string GenerateAlarmMessage()
+        {
+            String alertInfomation = "";
+            if (State.ToString().Equals(DeviceDataBox_Base.State.L_Alert.ToString()))
+            {
+                alertInfomation = "当前值： \"" + NowValue + "\" 低于正常值";
+            }
+            else if (State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
+            {
+                alertInfomation = "当前值： \"" + NowValue + "\"高于正常值";
+            }
+            else if (State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
+            {
+                alertInfomation = "当前值出错 ";
+            }
+
+            String msg = GlobalMapForShow.globalMapForBuiding[BuildingId].Name + " 监测点" + "," +
+                GlobalMapForShow.globalMapForCab[BuildingId + "_" + CabId].Name + " ," +
+                GlobalMapForShow.globalMapForDevice[BuildingId + "_" + DeviceId].SubSystemName + alertInfomation +
+                "  当前值为：\"" + NowValue + "\" (" + DateTime.Now.ToString() + ")";
+            return msg;
+        }
     }
 }

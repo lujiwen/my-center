@@ -126,6 +126,7 @@ namespace WpfApplication2.Model.Vo
                {
                    return false;
                }
+               Console.WriteLine(d.DeviceId+":"+d.State);
            }
             return true;
         }

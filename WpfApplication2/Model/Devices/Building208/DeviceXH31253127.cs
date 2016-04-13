@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using Project208Home.Model;
 using WpfApplication2.Model.Vo;
+using WpfApplication2.package;
 
 namespace Project208Home.Model
 {
@@ -23,6 +24,14 @@ namespace Project208Home.Model
         {
            
         }
+
+        public DeviceXH31253127(DeviceDataBox_Base b, Device mapDevice)
+            :base(b,mapDevice)
+        {
+
+        }
+
+
         public DeviceXH31253127(UInt32 id, UInt32 interfaceId, String type)
             //: base(id, interfaceId, type)
         {
@@ -192,10 +201,11 @@ namespace Project208Home.Model
                 }
             }
         }
-        public static string GenerateSql(Device d, string tablename)
+        public override string GenerateSql(string tablename)
         {
-            string[] values = d.NowValue.Trim().Split(',');
-            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, VALUE2, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + d.DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + values[0] + ", " + values[1] + ", " + "'" + d.DataUnit + "'" + ", " + "'" + d.State + "' )";
+            string[] values =  NowValue.Trim().Split(',');
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, VALUE2, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + values[0] + ", " + values[1] + ", " + "'" + DataUnit + "'" + ", " + "'" +  State + "' )";
         }
+     
     }
 }

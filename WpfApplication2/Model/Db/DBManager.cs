@@ -63,21 +63,8 @@ namespace WpfApplication2.Model.Db
 
         public int InsertDataToDb(String tablename,Device value)
         {
-            String sql = "";  //由每个具体的设备类提供插入sql的语句
-            switch(value.HandleTypeInSystem)
-            {
-                case "6517AB":
-                    sql = Device6517AB.GenerateSql(value, tablename);
-                    break;
-                case "XH3125":
-                    sql = DeviceXH31253127.GenerateSql(value, tablename);
-                    break;
-                case "Quality":
-                    sql = Device6517AB.GenerateSql(value, tablename);
-                    break;
-            }
-               
-  
+            String sql = value.GenerateSql(tablename);  //由每个具体的设备类提供插入sql的语句
+
             OracleCommand command = new OracleCommand(sql, Conn);
             int result  = command.ExecuteNonQuery();
             return result;

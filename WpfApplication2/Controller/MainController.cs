@@ -292,7 +292,7 @@ namespace WpfApplication2.Controller
             {
                 return;
             }
-
+            Device deviceToChange = null;
             try
             {
                 foreach (Box item in boxes)
@@ -300,59 +300,47 @@ namespace WpfApplication2.Controller
                     if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
                     {
                         DeviceDataBox_Base tempItem = (DeviceDataBox_Base)item;
+                        Console.WriteLine(item.className());
+
+                        switch(item.className())
+                        {
+                            case "DeviceDataBox_Quality":
+                              deviceToChange = new DeviceQuality(tempItem, GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId]);
+                                break;
+                            case "DeviceDataBox_XH3125":
+                                deviceToChange = new DeviceXH31253127(tempItem, GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId]);
+                            break;
+                            case "DeviceDataBox_6517AB":
+                            deviceToChange = new Device6517AB(tempItem, GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId]);
+                            break;
+                        }
                         if (tempItem == null)
                         {
                             break;
                         }
-                        Device deviceToChange = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
-                        deviceToChange.Value = item;
-                        deviceToChange.Type = item.className();
-                        deviceToChange.NowValue = tempItem.value;
-                        deviceToChange.BuildingId = tempItem.systemId;
-                        deviceToChange.CabId = tempItem.cabId;
-                        deviceToChange.DeviceId = tempItem.devId;
-                        deviceToChange.State = tempItem.state.ToString();
 
-                        if (float.Parse(deviceToChange.NowValue) > deviceToChange.Highthreshold)
-                        {
-                            tempItem.state = DeviceDataBox_Base.State.H_Alert;
-                            deviceToChange.State = DeviceDataBox_Base.State.H_Alert.ToString();
-                        }
-                        else if (float.Parse(deviceToChange.NowValue) < deviceToChange.Lowthreshold)
-                        {
-                            tempItem.state = DeviceDataBox_Base.State.L_Alert;
-                            deviceToChange.State = DeviceDataBox_Base.State.L_Alert.ToString();
-                        }
+                        GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId].State = deviceToChange.State;
+                      
                         //高低阈值被修改，将修改后的参数入库
                         if ((!tempItem.lowThreshold.Equals("") && deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold)) ||
                             (!tempItem.highThreshold.Equals("") && deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
                         {
                             LogUtil.Log(true, deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改", (int)ErrorCode.ERR_CODE.OK);
-                            deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
-                            deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
-                            deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
-
                             dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceToChange);
-                        }
-                        if (!tempItem.highThreshold.Equals(""))
-                        {
-                            deviceToChange.Highthreshold = (float)Convert.ToDouble(tempItem.highThreshold);
-                        }
-                        if (!tempItem.lowThreshold.Equals(""))
-                        {
-                            deviceToChange.Lowthreshold = (float)Convert.ToDouble(tempItem.lowThreshold);
                         }
 
                         //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
-                        if (tempItem.state != DeviceDataBox_Base.State.Normal)
-                        {
-                            Alarm(deviceToChange);
-                        }
-
+                        //if (deviceToChange.State!= DeviceDataBox_Base.State.Normal.ToString())
+                        //{
+                        //    Alarm(deviceToChange);
+                        //}
+                        GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId]=  deviceToChange;
+                        Console.WriteLine(GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId].State.ToString());
                         GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State =
-                            GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+                        GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString(GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State.ToString());
+                        Console.WriteLine(GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State.ToString());
                         GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
-
+                        Console.WriteLine(GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State.ToString());
                         //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
                         if (GlobalMapForShow.isAllBuildingNormal())
                         {
@@ -375,29 +363,14 @@ namespace WpfApplication2.Controller
             {
                 dataChartUpdate();
                 boxes = null;
+                deviceToChange = null;
             }
         }
 
        private void Alarm(Device d)
        {
-           String alertInfomation = "";
-           if (d.State.ToString().Equals(DeviceDataBox_Base.State.L_Alert.ToString()))
-           {
-               alertInfomation = "当前值： \"" + d.NowValue + "\" 低于正常值";
-           }
-           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
-           {
-               alertInfomation = "当前值： \"" + d.NowValue + "\"高于正常值";
-           }
-           else if (d.State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
-           {
-               alertInfomation = "当前值出错 " ;
-           }
-           String msg = GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + 
-               GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," +
-               GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation +
-               "  当前值为：\"" + d.NowValue + "\" (" + DateTime.Now.ToString() + ")";
-           dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO",d, msg);
+           string msg =  d.GenerateAlarmMessage();
+           dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO", d, msg);
            AlarmMessage amsg = new AlarmMessage(msg, d);
            alarmMessage(amsg);
            amsg = null;
