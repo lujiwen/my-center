@@ -17,7 +17,8 @@ namespace WpfApplication2.Util
             CONNECTION_CLOSE_ERR = 0x05,
             MAP_POINTS_INIT_ERR = 0x06,
             WIRTE_CONFIG_ERR = 0x07,
-            WRITE_FILE_ERR   = 0x08
+            WRITE_FILE_ERR   = 0x08,
+            DATABASE_INSERT_ERR = 0x09
         } ;
 
         private string errDescription;

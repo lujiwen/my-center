@@ -308,10 +308,10 @@ namespace WpfApplication2.Model.Vo
                 }
             }
         }
-        public virtual string GenerateSql(string tablename)
-        {
-         //   return "";//"INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + value.DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + value.NowValue + ", " + "'" + value.State + "'" + ", " + "'" + value.DataUnit + "'" + ", " + "1" + ")"; ;
-            return "INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + State + "'" + ", " + "'" + DataUnit + "'" + ", " + "1" + ")"; 
-        }
+
+        public virtual string GenerateSql(string tablename,Device d) 
+         {
+             return "INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + State + "'" + ", " + "'" + DataUnit + "'" + ", " + "1" + ")"; 
+         }
     }
 }

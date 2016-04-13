@@ -78,13 +78,13 @@ namespace WpfApplication2.Util
                     File.Create(filename);
                 }
                 //当日志超过大小后，新建文件进行写
-                long size = new FileInfo(filename).Length;
-                if (File.Exists(filename) && size >= 10000)
-                {
-                    String[] filenames = filename.Split('.');
-                    filename = filenames[0] + ".txt";
-                    File.Create(filename);
-                }
+                //long size = new FileInfo(filename).Length;
+                //if (File.Exists(filename) && size >= 10000)
+                //{
+                //    String[] filenames = filename.Split('.');
+                //    filename = filenames[0] + ".txt";
+                //    File.Create(filename);
+                //}
                 fs = new FileStream(filename, FileMode.Append); ;
                 sw = new StreamWriter(fs, Encoding.Default);
                 //sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + err.ErrContent + "\r\n");

@@ -969,48 +969,6 @@ namespace PavilionMonitor
                 }
             }           
         }
-
- 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //public override String getHistoryDataSql()
-        //{
-        //    if (rtPaint)
-        //    { //该设备正在绘制实时曲线
-        //        float[] dosevalues = new float[4];
-        //        // 如何绑定显示 ？？？？ 显示变量统一用字符串？？？？？
-
-        //        //dosevalues[0] = DoseNow;//实时值
-        //        //dosevalues[1] = DoseAvg;//平均值
-        //        //dosevalues[2] = DoseStd;//标准差值
-        //        //dosevalues[3] = RainValue;//雨量
-
-        //        Rtce(dosevalues);
-        //    }
-        //    DateTime dt = DateTime.Now;
-        //    String[] colums = { "DevId", "val1", "val2", "val3", "val4", "str_val5", "DataTime", "State" }; // 4个float+ 1个字符串 +单位 状态 
-        //    Object[] values = { devId, 0, 0, 0, 0, "'" + val_str_set + "'", "'" + dt.ToString() + "'", "'" + DevState + "'" };
-        //    String sql = DBHelper.getInsertCommands("monthhistorydata", colums, values);
-        //    sql += ";";
-        //    sql += DBHelper.getInsertCommands("historydata", colums, values); // 复制两条sql ？？？  历史数据库
-
-           
-        //    return sql;
-        //}
-
-        //public override String getExcepDataSql()
-        //{
-        //    DateTime dt = DateTime.Now;
-        //    String[] colums = { "DevId", "val1", "val2", "val3", "val4", "str_val5", "DataTime", "State" }; // 4个float+ 1个字符串 +单位 状态 
-        //    Object[] values = { devId, 0, 0, 0, 0, "'" + val_str_set + "'", "'" + dt.ToString() + "'", "'" + DevState + "'" };
-        //    String sql = DBHelper.getInsertCommands("exceptionhistorydata", colums, values);
-
-        //    return sql;
-        //}
-
         /// <summary>
         /// 2115房间数据或参数读取命令生成。
         /// </summary>

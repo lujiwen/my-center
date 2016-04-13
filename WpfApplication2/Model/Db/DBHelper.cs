@@ -66,9 +66,15 @@ namespace WpfApplication2.Model.Db
              * 参数分别表示：创建的楼的id，楼中设备最多的有几个参数
              * */
 
-            CreateDataTableAndSequence(1, 8);//这行的意思就是创建sid为2（208）的数据表，而208的设备中最多有8个参数
+            //CreateDataTableAndSequence(1, 8);//这行的意思就是创建sid为2（208）的数据表，而208的设备中最多有8个参数
+          
 
-            createConstantTableAndInsertConstantData(); //创建除数据表以外的其他数据表，并插入测试数据
+            for (int i = 0; i < 10; i++)
+            {
+                CreateDataTableAndSequence(i, 8);
+            }
+
+                createConstantTableAndInsertConstantData(); //创建除数据表以外的其他数据表，并插入测试数据
         }
 
         /**
@@ -108,14 +114,15 @@ namespace WpfApplication2.Model.Db
             String args = " ";
             for (int i = 1; i <= number; i++)
             {
-                args += "ARG" + i + " float(126) " + " , ";
+                args += "VALUE" + i + " float(126) " + " , ";
             }
             String result = "CREATE TABLE " + tableName + systemId
                 + "("
                 + "  DD_ID NUMBER(38, 0) NOT NULL "
                 + ", DEVID NUMBER(38, 0) "
                 + ", DATATIME VARCHAR2(25 BYTE) "
-                + ", NOWVALUE FLOAT(126) "
+                + ", INPUT_ARG VARCHAR2(255 BYTE) "
+                + ", VALUE_OPTION VARCHAR2(255 BYTE) "
                 + "," + args
                 + " UNITS VARCHAR2(200 BYTE) "
                 + ", SAFESTATE VARCHAR2(10 BYTE)"
@@ -146,8 +153,8 @@ namespace WpfApplication2.Model.Db
         {
             String createBuildingTableSql = "CREATE TABLE BUILDINGINFO (B_ID NUMBER(38,0) NOT NULL , NAME VARCHAR2(30 BYTE), OFFICE VARCHAR2(30 BYTE), LOCATION VARCHAR2(30 BYTE), LOCATION_LAT float(126), LOCATION_LNG float(126), MANAGER VARCHAR2(30 BYTE), CONSTRAINT BUILDINGINFO_PK PRIMARY KEY (B_ID))";
             String createCabTableSql = "CREATE TABLE CABINFO (C_ID NUMBER(38,0) NOT NULL ENABLE, BUILDINGID NUMBER(38,0), NAME VARCHAR2(30 BYTE), OFFICE VARCHAR2(30 BYTE), HOME VARCHAR2(50 BYTE), IP VARCHAR2(20 BYTE), PORT VARCHAR2(8 BYTE), CONSTRAINT CABINFO_PK PRIMARY KEY (C_ID))";
-            String createDeviceTableSql = "CREATE TABLE DEVICEINFO (D_ID NUMBER(38,0) NOT NULL ENABLE, TYPE VARCHAR2(30 BYTE), CABID NUMBER(38,0), SUBSYSTEMSERIAL NUMBER(38,0), SUBSYSTEMNAME VARCHAR2(30 BYTE), HIGHTHRESHOLD float(126), LOWTHRESHOLD float(126), DEVLOCALADDRESS NUMBER(38,0), "
-            + "INTERFACEID NUMBER(38,0), CORRECTFACTOR float(126), DATAUNIT VARCHAR2(20 BYTE), INPUTARG1 float(126), INPUTARG2 float(126), INPUTARG3 float(126), BUILDINGID NUMBER(38,0), HANDLETYPEINSYSTEM VARCHAR2(45 BYTE), CONSTRAINT DEVICEINFO_PK PRIMARY KEY (D_ID))";
+            String createDeviceTableSql = "CREATE TABLE DEVICEINFO (D_ID NUMBER(38,0) NOT NULL ENABLE, TYPE VARCHAR2(30 BYTE), CABID NUMBER(38,0), SUBSYSTEMSERIAL NUMBER(38,0), SUBSYSTEMNAME VARCHAR2(255 BYTE), HIGHTHRESHOLD float(126), LOWTHRESHOLD float(126), DEVLOCALADDRESS NUMBER(38,0), "
+            + "INTERFACEID NUMBER(38,0), CORRECTFACTOR float(126), DATAUNIT VARCHAR2(255 BYTE), INPUTARG1 float(126), INPUTARG2 float(126), INPUTARG3 float(126), BUILDINGID NUMBER(38,0), HANDLETYPEINSYSTEM VARCHAR2(45 BYTE), CONSTRAINT DEVICEINFO_PK PRIMARY KEY (D_ID))";
             String createExceptionTableSql = "CREATE TABLE EXCEPTIONINFO (E_ID NUMBER(38,0) NOT NULL ENABLE, B_ID NUMBER(38,0), C_ID NUMBER(38,0), D_ID NUMBER(38,0), CONTENT VARCHAR2(100 BYTE), DATATIME VARCHAR2(25 BYTE), CONSTRAINT EXCEPTIONINFO_PK PRIMARY KEY (E_ID))";
             String createExceptionSequence = "CREATE SEQUENCE " + "exceptioninfo_sequence" + " INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE CACHE 10";
             OracleCommand command1 = new OracleCommand(createBuildingTableSql, initialDB.GetConnection());

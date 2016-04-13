@@ -14,6 +14,7 @@ using System.IO;
 using System.Threading;
 using WpfApplication2.package;
 using WpfApplication2.View.Windows;
+using Project208Home.Model;
 
 
 namespace WpfApplication2.Controller
@@ -244,7 +245,7 @@ namespace WpfApplication2.Controller
         {
             bq = new Queue<Device>(Constants.BlockQueueSize);
           
-         //    new Thread(new ThreadStart(TakeDataFromQueueThread)).Start();  //启动从队列取数据的线程
+             new Thread(new ThreadStart(TakeDataFromQueueThread)).Start();  //启动从队列取数据的线程
         }
       
         public void TakeDataFromQueueThread()  //循环从队列里面取数据并存到数据库
@@ -260,7 +261,7 @@ namespace WpfApplication2.Controller
                     }
                     catch (Exception ex)
                     {
-                        throw;
+                        LogUtil.Log(false,"设备采集数据入库异常！",(int)ErrorCode.ERR_CODE.DATABASE_INSERT_ERR);
                     }
                 }
                 else
@@ -287,8 +288,6 @@ namespace WpfApplication2.Controller
             {
                 Alarm("收到数据包格式异常，无法解析！");
             }
-
-
             if (boxes == null || boxes.Count == 0)
             {
                 return;
@@ -328,7 +327,7 @@ namespace WpfApplication2.Controller
                         if ((!tempItem.lowThreshold.Equals("") && deviceToChange.Lowthreshold != float.Parse(tempItem.lowThreshold)) ||
                             (!tempItem.highThreshold.Equals("") && deviceToChange.Highthreshold != float.Parse(tempItem.highThreshold)))
                         {
-                            MessageBox.Show(deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改");
+                            LogUtil.Log(true, deviceToChange.SubSystemName + " 设备" + deviceToChange.DeviceId + "高低阈值被修改", (int)ErrorCode.ERR_CODE.OK);
                             deviceToChange.Lowthreshold = float.Parse(tempItem.lowThreshold);
                             deviceToChange.Highthreshold = float.Parse(tempItem.highThreshold);
                             deviceToChange.CorrectFactor = float.Parse(tempItem.factor);
@@ -363,6 +362,7 @@ namespace WpfApplication2.Controller
                         {
                             alarmBuzzer(true);
                         }
+
                         bq.Enqueue(deviceToChange);  //将获取到的数据插入队列   
                     }
                 }//end for 
@@ -383,17 +383,20 @@ namespace WpfApplication2.Controller
            String alertInfomation = "";
            if (d.State.ToString().Equals(DeviceDataBox_Base.State.L_Alert.ToString()))
            {
-               alertInfomation = "当前值： " + d.NowValue + "低于正常值";
+               alertInfomation = "当前值： \"" + d.NowValue + "\" 低于正常值";
            }
            else if (d.State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
            {
-               alertInfomation = "当前值： " + d.NowValue + "高于正常值";
+               alertInfomation = "当前值： \"" + d.NowValue + "\"高于正常值";
            }
            else if (d.State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
            {
                alertInfomation = "当前值出错 " ;
            }
-           String msg = GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," + GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation + "  当前值为：" + d.NowValue + "(" + DateTime.Now.ToString() + ")";
+           String msg = GlobalMapForShow.globalMapForBuiding[d.BuildingId].Name + " 监测点" + "," + 
+               GlobalMapForShow.globalMapForCab[d.BuildingId + "_" + d.CabId].Name + " ," +
+               GlobalMapForShow.globalMapForDevice[d.BuildingId + "_" + d.DeviceId].SubSystemName + alertInfomation +
+               "  当前值为：\"" + d.NowValue + "\" (" + DateTime.Now.ToString() + ")";
            dataOfDevice.InsertExceptionToDb("EXCEPTIONINFO",d, msg);
            AlarmMessage amsg = new AlarmMessage(msg, d);
            alarmMessage(amsg);
@@ -418,15 +421,14 @@ namespace WpfApplication2.Controller
                    int result = dataOfDevice.InsertDataToDb(DBHelper.NORMALDATATABLE + dataInDevice.BuildingId, dataInDevice);
                    int result2 = dataOfDevice.InsertDataToDb(DBHelper.TOTLEDATATABLE + dataInDevice.BuildingId, dataInDevice);  //插入到总表
                    int result3 = dataOfDevice.InsertDataToDb(DBHelper.TEMPDATATABLE + dataInDevice.BuildingId, dataInDevice);  //插入到temp表
+                   dataInDevice = null;
                    Thread.Sleep(Constants.inputAndOutputFromQueueInterval);
                }
                catch (Exception ex)
                {
-                   throw;
+                   LogUtil.Log(false,ex.Message,(int)ErrorCode.ERR_CODE.DATABASE_INSERT_ERR);
                }
            }  
-          
-          
        }
 
        private void saveCommandToDataBase()

@@ -192,9 +192,10 @@ namespace Project208Home.Model
                 }
             }
         }
-        public override string GenerateSql(string tablename)
+        public static string GenerateSql(Device d, string tablename)
         {
-            return "INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + State + "'" + ", " + "'" + DataUnit + "'" + ", " + "1" + ")"; ;
+            string[] values = d.NowValue.Trim().Split(',');
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, VALUE2, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + d.DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + values[0] + ", " + values[1] + ", " + "'" + d.DataUnit + "'" + ", " + "'" + d.State + "' )";
         }
     }
 }
