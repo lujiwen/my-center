@@ -99,9 +99,8 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = redBuzzerMute;
-                         count = 0; 
+                        count = 0; 
                         LogUtil.writeErrInFile("buzzer is red ,count is " + count +" "+DateTime.Now.ToString());
-                       
                     }
                     else
                     {
@@ -115,17 +114,16 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = RedBuzzer;
-                       Console.WriteLine("RedBuzzer");
-                       count = 0; 
+                       count = 0;
+                       LogUtil.Log(false, "buzzer is red ,count is " + count + " " + DateTime.Now.ToString(),(int)ErrorCode.ERR_CODE.OK);
                     }
                     else
                     {
                         buzzer.Source = BlueBuzzer;
-                        Console.WriteLine("BlueBuzzer");
-                        count = 1; 
+                        count = 1;
+                        LogUtil.Log(false, "buzzer is blue ,count is " + count + " " + DateTime.Now.ToString(), (int)ErrorCode.ERR_CODE.OK);
                     }
                 }
-              //  count++;
                 Console.WriteLine(count);
             }
         }
