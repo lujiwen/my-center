@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using WpfApplication2.Model.Vo;
 using System.Threading;
 using System.Windows.Threading;
+using WpfApplication2.Util;
 
 namespace WpfApplication2.CustomMarkers.Controls
 {
@@ -98,14 +99,15 @@ namespace WpfApplication2.CustomMarkers.Controls
                     if (count % 2 == 1)
                     {
                         buzzer.Source = redBuzzerMute;
-                        Console.WriteLine("redBuzzerMute");
-                        count = 0; 
+                         count = 0; 
+                        LogUtil.writeErrInFile("buzzer is red ,count is " + count +" "+DateTime.Now.ToString());
+                       
                     }
                     else
                     {
                         buzzer.Source = blueBuzzerMute;
-                        Console.WriteLine("blueBuzzerMute");
-                        count = 1; 
+                        count = 1;
+                        LogUtil.writeErrInFile("buzzer is blue ,count is " + count + " " + DateTime.Now.ToString());
                     }
                 }
                 else

@@ -68,9 +68,7 @@ namespace WpfApplication2.Model.Db
 
             CreateDataTableAndSequence(1, 8);//这行的意思就是创建sid为2（208）的数据表，而208的设备中最多有8个参数
 
-
             createConstantTableAndInsertConstantData(); //创建除数据表以外的其他数据表，并插入测试数据
-
         }
 
         /**
