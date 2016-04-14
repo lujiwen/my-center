@@ -134,14 +134,6 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
-        public void addLabel(string label)
-        {
-            labels.Add(label);
-        }
-        public List<string> getLabels()
-        {
-            return labels;
-        }
         public string DeviceId
         {
             get { return deviceId; }
@@ -154,7 +146,6 @@ namespace WpfApplication2.Model.Vo
             set { buildingId = value; }
         }
       
-
         public string Type
         {
             get { return type; }
@@ -235,7 +226,43 @@ namespace WpfApplication2.Model.Vo
             get { return inputArg3; }
             set { inputArg3 = value; }
         }
-        
+
+        public float InputArg4
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+        public float InputArg5
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+        public float InputArg6
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+        public float InputArg7
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+        public float InputArg8
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+        //public string Option_value 
+        //{
+        //    get { return inputArg3; }
+        //    set { inputArg3 = value; }
+        //}
+        //public float InputArg3
+        //{
+        //    get { return inputArg3; }
+        //    set { inputArg3 = value; }
+        //}
+
         public string HandleTypeInSystem
         {
             get { return handleTypeInSystem; }
@@ -254,7 +281,6 @@ namespace WpfApplication2.Model.Vo
             }
         }
       
-      
         public string CabId
         {
             get { return cabId; }
@@ -272,9 +298,7 @@ namespace WpfApplication2.Model.Vo
                 }
             }
         }
-        public virtual void setDevState(string state)
-        {
-        }
+ 
         //2115房间经过RF1000后的数据格式是否正确
         public virtual bool isDataRight(byte[] flowBytes, int len)
         {
@@ -347,14 +371,7 @@ namespace WpfApplication2.Model.Vo
         {
             return;
         }
-        /// <summary>
-        /// 生成阿里云中转更新数据的sql
-        /// </summary>
-        /// <returns></returns>
-        public virtual void getAliyunUpdateStr()
-        {
-            return;
-        }
+ 
         public Box Value
         {
             get {

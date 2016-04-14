@@ -119,10 +119,7 @@ namespace PavilionMonitor
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", '" + asm02_box.val_str_set + "', " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
         }
-        public override void setDevState(string state)
-        {
-            DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更
-        }
+        
         public String DevState
         {
             get { return State; }

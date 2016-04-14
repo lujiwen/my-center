@@ -260,6 +260,7 @@ namespace WpfApplication2.Controller
                     catch (Exception ex)
                     {
                         LogUtil.Log(false,"设备采集数据入库异常！",(int)ErrorCode.ERR_CODE.DATABASE_INSERT_ERR);
+                        Alarm(ex.Message+DateTime.Now.ToString());
                     }
                 }
                 else
