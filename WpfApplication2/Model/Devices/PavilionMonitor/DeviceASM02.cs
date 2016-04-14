@@ -112,15 +112,11 @@ namespace PavilionMonitor
 
         public override string GenerateAlarmMessage()
         {
-            //return base.GenerateAlarmMessage();
-
             return "Asm02的报警信息！" + DateTime.Now.ToString();
         }
 
         public override string GenerateSql(string tablename)
         {
-            //return base.GenerateSql(tablename);
-
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", '" + asm02_box.val_str_set + "', " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
         }
         public override void setDevState(string state)

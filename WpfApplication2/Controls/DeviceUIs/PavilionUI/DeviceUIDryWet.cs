@@ -38,18 +38,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        private void updateLabels()
        {
            CurveEnable = false;
-          // updateChart(box.value);
            cabStateLT.getValueTextBlock().Text = box.cab_state.Equals("Normal")?"正常":"异常";
            rainyStateLT.getValueTextBlock().Text = box.rainy_state;
            rainTimeLT.getValueTextBlock().Text = box.rain_time;
-           if(MainWindow.getInstance().IsMute )
-           {
-               //DeviceBuzzer.muteBuzzer();
-           }
-           //if (DeviceInUI.State.Equals("Normal") && !DeviceBuzzer.IsAlarming)
-           //{
-           //    startToAlrm();
-           //}
        }
 
        public override void initlabels()

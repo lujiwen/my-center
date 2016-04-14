@@ -304,8 +304,6 @@ namespace WpfApplication2.Controller
                             break;
                         }
 
-                       
-
                         deviceInMap = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
                         deviceInMap.Value = item;
                         deviceInMap.Type = item.className();
