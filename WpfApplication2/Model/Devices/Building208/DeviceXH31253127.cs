@@ -25,8 +25,8 @@ namespace Project208Home.Model
            
         }
 
-        public DeviceXH31253127(DeviceDataBox_Base b, Device mapDevice)
-            :base(b,mapDevice)
+        public DeviceXH31253127(DeviceDataBox_Base b)
+            :base(b)
         {
 
         }

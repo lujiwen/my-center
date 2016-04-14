@@ -27,6 +27,15 @@ namespace PavilionMonitor
        public String cabName=" "; //所属柜子名称 （接入点名称描述）
        public string devState=" "; // 设备状态 枚举 变量表示，全局统一
 
+       public DevicePavilion()
+       {
+ 
+       }
+       public DevicePavilion(DeviceDataBox_Base box)
+           :base(box)
+       {
+
+       }
        public string DState
        {
            get { return devState; }

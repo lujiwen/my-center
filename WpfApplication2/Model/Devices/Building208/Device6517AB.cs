@@ -30,8 +30,8 @@ namespace Project208Home.Model
            // InitComsLength = initCommands.Length;
         }
 
-        public Device6517AB(DeviceDataBox_Base b, Device mapDevice)
-            :base(b,mapDevice)
+        public Device6517AB(DeviceDataBox_Base b)
+            :base(b )
         {
 
         }
@@ -176,12 +176,6 @@ namespace Project208Home.Model
                 }
             }
         }
-
-        //public override string GenerateSql(string tablename)
-        //{
-        //   // return "INSERT INTO " + tablename + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + State + "'" + ", " + "'" + DataUnit + "'" + ", " + "1" + ")"; 
-        //    return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + "deviceData_" + BuildingId + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )"; 
-        //}
         public override string GenerateSql(string tablename)
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";

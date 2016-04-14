@@ -24,12 +24,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
         public DeviceUIDryWet(Device d, Frame fm)
          :base(d, fm)
        {
-         // MouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(DeviceUI6517AB_MouseLeftButtonDown);
-          //getChart().SetBinding();
-         // box.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
-           //DeviceBuzzer.startAlarm();
+        
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -77,7 +74,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            getInoPanel().Children.Add(rainyStateLT);
            getInoPanel().Children.Add(rainTimeLT);
            //getInoPanel().Children.Add(keepTimeLT);
-
        }
     }
 

@@ -45,13 +45,13 @@ namespace WpfApplication2.Model.Vo
         public String devPort = " ";
         public String devIp = " ";
         public String devType = " ";  // 子类赋值
-       
+        public  Device DeviceInMap;
   /// <summary>
   ///
   /// </summary>
-        public Device(DeviceDataBox_Base b,Device deviceInMap)
+        public Device(DeviceDataBox_Base b)
         {
-            fromBoxToDevice(b,deviceInMap);
+            fromBoxToDevice(b);
             judgeState();
         }
         public Device()
@@ -80,8 +80,9 @@ namespace WpfApplication2.Model.Vo
             this.state = state;
         }
 
-        public virtual void fromBoxToDevice(DeviceDataBox_Base box,Device mapDevice)
+        public virtual void fromBoxToDevice(DeviceDataBox_Base box)
         {
+            DeviceInMap = GlobalMapForShow.globalMapForDevice[box.systemId+"_"+box.devId];
             nowValue = box.value;
             state = box.state.ToString();
             Value = box;
@@ -90,14 +91,14 @@ namespace WpfApplication2.Model.Vo
             CabId = box.cabId;
             DeviceId = box.devId;
             State = box.state.ToString();
-            handleTypeInSystem = mapDevice.handleTypeInSystem;
+            handleTypeInSystem = DeviceInMap.handleTypeInSystem;
             if (!box.highThreshold.Equals(""))
             {
                 Highthreshold = float.Parse(box.highThreshold);
             }
             else
             {
-                Highthreshold = mapDevice.Highthreshold;
+                Highthreshold = DeviceInMap.Highthreshold;
             }
 
             if (!box.lowThreshold.Equals(""))
@@ -106,7 +107,7 @@ namespace WpfApplication2.Model.Vo
             }
             else
             {
-                Lowthreshold = mapDevice.Lowthreshold;
+                Lowthreshold = DeviceInMap.Lowthreshold;
             }
             if (!box.CorrectFactor.Equals(""))
             {
@@ -114,12 +115,13 @@ namespace WpfApplication2.Model.Vo
             }
             else
             {
-                CorrectFactor = mapDevice.correctFactor;
+                CorrectFactor = DeviceInMap.correctFactor;
             }
         }
 
         public virtual void judgeState()
         {
+            if (NowValue!=null&&!NowValue.Equals(""))
             if (float.Parse(NowValue) > Highthreshold)
             {
                 //state = DeviceDataBox_Base.State.H_Alert;

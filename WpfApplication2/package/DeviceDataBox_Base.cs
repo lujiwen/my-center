@@ -5,6 +5,10 @@ using System.Text;
 using System.Xml;
 using System.Windows;
 using System.ComponentModel;
+using WpfApplication2.Model.Vo;
+using WpfApplication2.Util;
+using Project208Home.Model;
+using PavilionMonitor;
 
 namespace WpfApplication2.package
 {
@@ -73,6 +77,36 @@ namespace WpfApplication2.package
 
         protected virtual void toXmlElementMore(ref XmlElement element)
         { }
+
+        public Device fromBoxToDevice()
+        {
+                Device deviceToChange = null ;
+                        switch (this.className())
+                        {
+                            case "DeviceDataBox_Quality":
+                                deviceToChange = new DeviceQuality((DeviceDataBox_Quality)this );
+                                break;
+                            case "DeviceDataBox_XH3125":
+                                deviceToChange = new DeviceXH31253127((DeviceDataBox_XH3125)this);
+                                break;
+                            case "DeviceDataBox_6517AB":
+                                deviceToChange = new Device6517AB((DeviceDataBox_6517AB)this);
+                                break;
+                            case "DeviceDataBox_JL900":
+                                deviceToChange = new DeviceJL900((DeviceDataJL900Box)this);
+                                break;
+                            case "DeviceDataASM02Box":
+                                deviceToChange = new DeviceASM02((DeviceDataASM02Box)this);
+                                break;
+                            case "DeviceDataBox_DryWet":
+                                deviceToChange = new DeviceDryWet((DeviceDataDryWetBox)this);
+                                break;
+                            default :
+                                deviceToChange = new Device(this );
+                                break ;
+                        }
+                        return deviceToChange;
+        }
 
         public enum State { Normal, Alert, H_Alert, L_Alert,Fault };
 

@@ -9,11 +9,10 @@ using WpfApplication2.Model.Vo;
 namespace PavilionMonitor
 {
     // 超大流量
-    class JL900 : Device, INotifyPropertyChanged
+    class DeviceJL900 : Device, INotifyPropertyChanged
     {
 
-        private int presure;
-
+        private float presure;
 
         private float real_traffic, sample_volume; // 实时流量 采样体积
 
@@ -24,7 +23,7 @@ namespace PavilionMonitor
 
 
 
-        public JL900(UInt32 id, String ip, String port)
+        public DeviceJL900(UInt32 id, String ip, String port)
         {
             presure = 0;
             real_traffic = 0.0f;
@@ -33,6 +32,22 @@ namespace PavilionMonitor
 
         }
 
+        public DeviceJL900(DeviceDataJL900Box box)
+            : base(box )
+        {
+            jl900_box = box;
+            fromBoxToDevice((DeviceDataBox_Base)jl900_box );
+        }
+
+        public override string GenerateSql(string tablename)
+        {
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1,VALUE2,VALUE3,VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + Presure + ", " + Real_traffic + ", " + Sample_volume + ", " + Keep_time + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+
+        public override string GenerateAlarmMessage()
+        {
+            return base.GenerateAlarmMessage();
+        }
 
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,7 +59,30 @@ namespace PavilionMonitor
             }
         }
 
-
+        public override void fromBoxToDevice(DeviceDataBox_Base box)
+        {
+            base.fromBoxToDevice(box);
+            if(jl900_box.presure!=null&&!jl900_box.presure.Equals(""))
+            {
+                Presure = float.Parse(jl900_box.presure);
+            }
+            if (jl900_box.real_traffic != null && !jl900_box.real_traffic.Equals(""))
+            {
+                Real_traffic = float.Parse(jl900_box.real_traffic);
+            }
+            if (jl900_box.sample_volume != null && !jl900_box.sample_volume.Equals(""))
+            {
+                Sample_volume = float.Parse(jl900_box.sample_volume);
+            }
+            if (jl900_box.keep_time != null && !jl900_box.keep_time.Equals(""))
+            {
+                Keep_time = jl900_box.keep_time;
+            }
+        }
+        public override void judgeState()
+        {
+            base.judgeState();
+        }
 
       //public override void setDevState(string state)
       //  {
@@ -72,7 +110,7 @@ namespace PavilionMonitor
                 }
             }
         }
-        public int Presure
+        public float Presure
         {
             get { return presure; }
             set { presure = value;
@@ -116,7 +154,6 @@ namespace PavilionMonitor
             else
                 return false;
         }
-
 
         public override void AnalysisPavilionData(byte[] flowBytes,int len)
         {
@@ -178,35 +215,6 @@ namespace PavilionMonitor
         //    return sql;
         //}
 
-        //public override String getExcepDataSql()
-        //{
-        //    DateTime dt = DateTime.Now;
-        //    String[] colums = { "DevId", "val1", "val2", "val3", "val4", "str_val5", "DataTime", "State" }; // 4个float+ 1个字符串 +单位 状态 
-        //    Object[] values = { devId, presure, real_traffic, sample_volume, 0, "'" + keep_time + "'", "'" + dt.ToString() + "'",  "'" + DevState + "'" };
-        //    String sql = DBHelper.getInsertCommands("exceptionhistorydata", colums, values);
-
-        //    return sql;
-        //}
-
-
-
-        /// <summary>
-        /// 2115房间数据或参数读取命令生成。
-        /// </summary>
-        /// <returns></returns>
-        public override byte[] ToReadDataCommand()
-        {
-            byte[] command = {0x80,0x4D,0x45,0x41,0x20,0x53,0x43,0x41,0x4E,0x20,0x31,0x20,0x34,0x03,0x70}; // 超大流量15字节命令
-            // 固定内容
-            return command;
-        }
-
-        public override void doWork()
-        {
-
-
-        }
-
-
+        
     }
 }

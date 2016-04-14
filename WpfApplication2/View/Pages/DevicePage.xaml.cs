@@ -94,7 +94,7 @@ namespace WpfApplication2.View.Pages
                          case "h3r7000":
                              deviceUI = new DeviceUIH3R7000(d, systemFrame);
                              break;
-                         case "DryWet":
+                         case "DeviceDryWet":
                              deviceUI = new DeviceUIDryWet(d, systemFrame);
                              break;
                          default:

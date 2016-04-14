@@ -36,9 +36,7 @@ namespace WpfApplication2.package
          string _val_str_set, string _unit, string _paraLow, string _paraHigh, string _correctFactor)
         {
             val_str_set=_val_str_set;
-
             systemId = "运输部监测亭"; // 部署在不同位置的程序，systemid不一样
-
             systemId = _systemId;
             cabId = _cabId; //cab id
             devId = _devId; //device id

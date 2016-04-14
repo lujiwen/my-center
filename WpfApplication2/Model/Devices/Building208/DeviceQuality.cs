@@ -23,8 +23,8 @@ namespace Project208Home.Model
         public event PropertyChangedEventHandler PropertyChanged;
         private DeviceDataBox_Quality box;
 
-        public DeviceQuality(DeviceDataBox_Base b ,Device mapDevice)
-            :base(b,mapDevice)
+        public DeviceQuality(DeviceDataBox_Base b)
+            :base(b)
         {
            // box = (DeviceDataBox_Quality);
 

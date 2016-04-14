@@ -9,23 +9,43 @@ using WpfApplication2.Model.Vo;
 namespace PavilionMonitor
 {
     // 干湿沉降设备类
-    class DryWet : DevicePavilion, INotifyPropertyChanged
+    class DeviceDryWet : DevicePavilion, INotifyPropertyChanged
     {
         private String cab_state="开盖", rainy_state="未下雨"; // 开盖状态，是否下雨？？？
         private int rain_time = 0; // 降雨时间
 
         // 用于生成阿里云中转数据的对象
-        public DeviceDataDryWetBox drywet_box = new DeviceDataDryWetBox();
+        public DeviceDataDryWetBox drywet_box ;
 
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //public DryWet(DeviceDataBox_Base b, Device mapDevice)
-        //    :base(b,mapDevice)
-        //{
+        public DeviceDryWet(DeviceDataDryWetBox b)
+        {
+            drywet_box = b;
+            fromBoxToDevice((DeviceDataBox_Base)b);
+            judgeState();
+        }
 
-        //}
-        
+        public override string GenerateAlarmMessage()
+        {
+            return base.GenerateAlarmMessage();
+        }
+
+        public override string GenerateSql(string tablename)
+        {
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1,VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + Rain_time + ", '" + Cab_state+";"+Rainy_state + "' , " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+        public override void fromBoxToDevice(DeviceDataBox_Base box)
+        {
+            base.fromBoxToDevice(box);
+            Cab_state = drywet_box.Cab_state;
+            Rainy_state = drywet_box.Rainy_state;
+            if (drywet_box.Rain_time!=null&&!drywet_box.Rain_time.Equals(""))
+            {
+                Rain_time = int.Parse(drywet_box.Rain_time);
+            }
+        }
         public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -86,7 +106,7 @@ namespace PavilionMonitor
 
 
 
-        public DryWet(UInt32 id, String ip, String port): base(id,ip,port)
+        public DeviceDryWet(UInt32 id, String ip, String port): base(id,ip,port)
         {
             rain_time = 0;
             cab_state = " ";
