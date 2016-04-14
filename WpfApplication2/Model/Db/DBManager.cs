@@ -72,9 +72,9 @@ namespace WpfApplication2.Model.Db
 
         public int UpdateDeviceInfo(String tablename, Device value)
         {
-            String sql = "UPDATE " + tablename + "set highthreshold = " + value.Highthreshold + " ,set lowthreshold = " + value.Lowthreshold + " ,set correctFactor = " + value.CorrectFactor + " where buildingId = "+value.BuildingId+" and deviceId = "+value.DeviceId;
+            String sql = "UPDATE " + tablename + " set highthreshold=" + value.Highthreshold + " ,lowthreshold =" + value.Lowthreshold + " , correctFactor =" + value.CorrectFactor + " where BUILDINGID = " + value.BuildingId + " and D_ID = " + value.DeviceId;
             OracleCommand command = new OracleCommand(sql, Conn);
-            int result = command.ExecuteNonQuery();
+           int result = command.ExecuteNonQuery();
             return result;
         }
 

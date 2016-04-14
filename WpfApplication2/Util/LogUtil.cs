@@ -114,7 +114,7 @@ namespace WpfApplication2.Util
             writeErrInFile(exMessage);
             if (alterMesBox)
             {
-                MessageBox.Show(err.ErrContent,err.ErrDescription);
+                MessageBox.Show(exMessage, err.ErrDescription);
             }
         }
         /*

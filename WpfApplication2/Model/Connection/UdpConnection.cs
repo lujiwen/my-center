@@ -73,7 +73,6 @@ namespace WpfApplication2.Controller
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-
             }
             finally
             {

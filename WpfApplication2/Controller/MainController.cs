@@ -319,7 +319,6 @@ namespace WpfApplication2.Controller
                                 break;
                         }
 
-                        //////////
                         deviceInMap = GlobalMapForShow.globalMapForDevice[tempItem.systemId + "_" + tempItem.devId];
                         deviceInMap.Value = item;
                         deviceInMap.Type = item.className();
@@ -341,13 +340,28 @@ namespace WpfApplication2.Controller
                         }
                         //高低阈值被修改，将修改后的参数入库
                         if ((!tempItem.lowThreshold.Equals("") && deviceInMap.Lowthreshold != float.Parse(tempItem.lowThreshold)) ||
-                            (!tempItem.highThreshold.Equals("") && deviceInMap.Highthreshold != float.Parse(tempItem.highThreshold)))
+                            (!tempItem.highThreshold.Equals("") && deviceInMap.Highthreshold != float.Parse(tempItem.highThreshold))||
+                            !tempItem.factor.Equals("") && deviceInMap.CorrectFactor != float.Parse(tempItem.factor))
                         {
-                            LogUtil.Log(true, deviceInMap.SubSystemName + " 设备" + deviceInMap.DeviceId + "高低阈值被修改", (int)ErrorCode.ERR_CODE.OK);
-                            deviceInMap.Lowthreshold = float.Parse(tempItem.lowThreshold);
-                            deviceInMap.Highthreshold = float.Parse(tempItem.highThreshold);
-                            deviceInMap.CorrectFactor = float.Parse(tempItem.factor);
-                            dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceInMap);
+                            
+                            if(!tempItem.lowThreshold.Equals(""))
+                            {
+                                 deviceInMap.Lowthreshold = float.Parse(tempItem.lowThreshold);
+                            }
+                            if(!tempItem.highThreshold.Equals(""))
+                            {
+                                deviceInMap.Highthreshold = float.Parse(tempItem.highThreshold);
+                            }
+                            if(!tempItem.factor.Equals(""))
+                            {
+                                deviceInMap.CorrectFactor = float.Parse(tempItem.factor);
+                            }
+                         
+                            if(dataOfDevice.UpdateDeviceInfo("deviceInfo", deviceInMap)==1) //修改成功
+                            {
+                                LogUtil.Log(true, deviceInMap.SubSystemName + " 设备 " + deviceInMap.Type+" 设备编号："+deviceInMap.DeviceId + 
+                                    "高低阈值修改成功！当前高阈值："+deviceInMap.Highthreshold+",低阈值："+deviceInMap.Lowthreshold+",修正因子："+deviceInMap.CorrectFactor, (int)ErrorCode.ERR_CODE.OK);
+                            }
                         }
                         
                         //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
@@ -380,9 +394,9 @@ namespace WpfApplication2.Controller
             }
             finally
             {
-                dataChartUpdate();
                 boxes = null;
                 deviceInMap = null;
+                dataChartUpdate();
             }
         }
 
