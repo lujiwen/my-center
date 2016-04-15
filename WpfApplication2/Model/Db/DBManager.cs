@@ -63,7 +63,7 @@ namespace WpfApplication2.Model.Db
 
         public int InsertDataToDb(String tablename,Device value)
         {
-            String sql = value.GenerateSql(tablename);  //由每个具体的设备类提供插入sql的语句
+            String sql = value.GenerateInsertSql(tablename);  //由每个具体的设备类提供插入sql的语句
 
             OracleCommand command = new OracleCommand(sql, Conn);
             int result  = command.ExecuteNonQuery();
@@ -92,46 +92,15 @@ namespace WpfApplication2.Model.Db
             return result;
         }
 
-        public List<DeviceForShow> getDataBetweenStartAndEndTime(int systemId, int deviceId, String startTime, String endTime)
+        public Dictionary<string, List<DeviceData>> getDataBetweenStartAndEndTime(Device device, String startTime, String endTime)
         {
-            List<DeviceForShow> deviceDatas = new List<DeviceForShow>();
+            List<DeviceData> deviceDatas = new List<DeviceData>();
             OracleCommand command = Conn.CreateCommand();
-            command.CommandText = "select * from devicedata_" + systemId + " where devid = " + deviceId + " and datatime between " + startTime + " and " + endTime;
+            command.CommandText = device.GenerateSelectSql("DEVICEDATA_" + device.BuildingId, startTime,endTime);
             OracleDataReader odr = command.ExecuteReader();
-            while (odr.Read())
-            {
-                DeviceForShow d = new DeviceForShow();
-                d.DeviceId = odr.GetInt32(1);
-                d.Value = odr.GetString(3);
-                d.State = odr.GetString(4);
-                d.Time = odr.GetString(2);
-                d.Unit = odr.GetString(5);
-                deviceDatas.Add(d);
-            }
+            Dictionary<string, List<DeviceData>> datas = device.getHistoryDataSet(odr);
             odr.Close();
-            return deviceDatas;
+            return datas;
         }
-
-
-        //public OracleDataReader getDataBetweenStartAndEndTime(int systemId, int deviceId, String startTime, String endTime)
-        //{
-        //    List<DeviceForShow> deviceDatas = new List<DeviceForShow>();
-        //    OracleCommand command = Conn.CreateCommand();
-        //    command.CommandText = "select * from devicedata_" + systemId + " where devid = " + deviceId + " and datatime between " + startTime + " and " + endTime;
-        //    OracleDataReader odr = command.ExecuteReader();
-        //    return odr;
-        //    //while (odr.Read())
-        //    //{
-        //    //    DeviceForShow d = new DeviceForShow();
-        //    //    d.DeviceId = odr.GetInt32(1);
-        //    //    d.Value = odr.GetString(3);
-        //    //    d.State = odr.GetString(4);
-        //    //    d.Time = odr.GetString(2);
-        //    //    d.Unit = odr.GetString(5);
-        //    //    deviceDatas.Add(d);
-        //    //}
-        //    //odr.Close();
-        //    //return deviceDatas;
-        //}
     }
 }

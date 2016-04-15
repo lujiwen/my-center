@@ -8,6 +8,7 @@ using Project208Home.Model;
 using System.Windows.Threading;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -29,7 +30,16 @@ namespace Project208Home.Model
         {
            // InitComsLength = initCommands.Length;
         }
+        public Device6517AB(OracleDataReader odr)
+            :base(odr)
+        {
 
+        }
+        public Device6517AB(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
+    float correctFactor, string dataUnit, float inputArg1, float inputArg2, float inputArg3, string handleTypeInSystem, string state)
+        {
+
+        }
         public Device6517AB(DeviceDataBox_Base b)
             :base(b )
         {
@@ -50,7 +60,23 @@ namespace Project208Home.Model
             //InitComsLength = initCommands.Length;
             DoseNowforPresentation = "30";
         }
-        
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("浓度", dataset);
+            return dataDictionary;
+        }
+
         private Double getDoubleFromBytes(String str)
         {
             string strP = resolveP(str);//实数部分
@@ -62,7 +88,6 @@ namespace Project208Home.Model
             return realData;
         }
 
-         
         /// <summary>
         /// 获取实数
         /// </summary>
@@ -176,7 +201,7 @@ namespace Project208Home.Model
                 }
             }
         }
-        public override string GenerateSql(string tablename)
+        public override string GenerateInsertSql(string tablename)
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
         }

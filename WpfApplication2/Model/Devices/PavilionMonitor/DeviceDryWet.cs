@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 namespace PavilionMonitor
 {
@@ -26,16 +27,38 @@ namespace PavilionMonitor
             fromBoxToDevice((DeviceDataBox_Base)b);
             judgeState();
         }
+        public DeviceDryWet(OracleDataReader odr)
+            :base(odr)
+        {
 
+        }
         public override string GenerateAlarmMessage()
         {
             return base.GenerateAlarmMessage();
         }
 
-        public override string GenerateSql(string tablename)
+        public override string GenerateInsertSql(string tablename)
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1,VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + Rain_time + ", '" + Cab_state+";"+Rainy_state + "' , " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
         }
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.Value_Option = odr.GetString(4);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("干湿检测仪", dataset);
+            return dataDictionary;
+        }
+
         public override void fromBoxToDevice(DeviceDataBox_Base box)
         {
             base.fromBoxToDevice(box);
@@ -102,7 +125,7 @@ namespace PavilionMonitor
             }
         }
 
-
+       
 
 
 

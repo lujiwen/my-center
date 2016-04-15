@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using Project208Home.Model;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -19,6 +20,11 @@ namespace Project208Home.Model
 
         public DevicePresure()
         {
+        }
+        public DevicePresure(OracleDataReader odr)
+            :base(odr)
+        {
+
         }
         public DevicePresure(UInt32 id, UInt32 interfaceId, String type)
             //: base(id, interfaceId, type)

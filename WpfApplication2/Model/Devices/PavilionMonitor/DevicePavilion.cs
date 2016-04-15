@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Threading;
 using WpfApplication2.package;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 
 namespace PavilionMonitor
@@ -36,6 +37,13 @@ namespace PavilionMonitor
        {
 
        }
+
+       public DevicePavilion(OracleDataReader odr)
+            :base(odr)
+        {
+
+        }
+
        public string DState
        {
            get { return devState; }

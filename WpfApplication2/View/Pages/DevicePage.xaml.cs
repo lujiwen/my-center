@@ -68,7 +68,7 @@ namespace WpfApplication2.View.Pages
                      switch(d.HandleTypeInSystem)
                      {
                          case "6517AB":
-                             deviceUI = new DeviceUI6517AB(d, systemFrame);
+                             deviceUI = new DeviceUI6517AB((Device6517AB)d, systemFrame);
                              break; 
                          case "Presure":
                              deviceUI = new DeviceUIPresure(d, systemFrame);

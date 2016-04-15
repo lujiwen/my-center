@@ -6,6 +6,7 @@ using System.ComponentModel;
 using Project208Home.Model;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -30,7 +31,12 @@ namespace Project208Home.Model
         {
 
         }
+        public DeviceXH31253127(OracleDataReader odr)
+         :base(odr)
+        {
 
+        }
+ 
 
         public DeviceXH31253127(UInt32 id, UInt32 interfaceId, String type)
             //: base(id, interfaceId, type)
@@ -201,7 +207,24 @@ namespace Project208Home.Model
                 }
             }
         }
-        public override string GenerateSql(string tablename)
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("XH31252127浓度", dataset);
+            return dataDictionary;
+        }
+
+        public override string GenerateInsertSql(string tablename)
         {
             string[] values =  NowValue.Trim().Split(',');
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, VALUE2, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + values[0] + ", " + values[1] + ", " + "'" + DataUnit + "'" + ", " + "'" +  State + "' )";

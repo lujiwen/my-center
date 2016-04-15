@@ -6,6 +6,7 @@ using System.ComponentModel;
 using Project208Home.Model;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -29,7 +30,11 @@ namespace Project208Home.Model
            // box = (DeviceDataBox_Quality);
 
         }
+        public DeviceQuality(OracleDataReader odr)
+            :base(odr)
+        {
 
+        }
  
         public double DoseNow
         {
@@ -110,9 +115,25 @@ namespace Project208Home.Model
                 }
             }
         }
-        public override string GenerateSql(string tablename)
+        public override string GenerateInsertSql(string tablename)
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("质量流量计浓度", dataset);
+            return dataDictionary;
         }
     }
 }

@@ -6,6 +6,7 @@ using WpfApplication2.Controller;
 using System.ComponentModel;
 using WpfApplication2.package;
 using WpfApplication2.Util;
+using System.Data.OracleClient;
 
 namespace WpfApplication2.Model.Vo
 {
@@ -34,7 +35,7 @@ namespace WpfApplication2.Model.Vo
         /**
          * 一下两项用于数据交互
          * */
-        private Box value;
+        private DeviceDataBox_Base value;
         private string type;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -56,8 +57,30 @@ namespace WpfApplication2.Model.Vo
         }
         public Device()
         {
-    
+ 
         }
+        //string D_ID, string TYPE, string CABID, string SUBSYSTEMSERIAL, string SUBSYSTEMNAME, int HIGHTHRESHOLD, string LOWTHRESHOLD, float DEVLOCALADDRESS, float INTERFACEID, int CORRECTFACTOR, int DATAUNIT, float INPUTARG1, string INPUTARG2, float INPUTARG3, float BUILDINGID, float HANDLETYPEINSYSTEM
+        
+        public Device(OracleDataReader odr)
+        {
+            deviceId = odr.GetInt32(0).ToString();
+            type = odr.GetString(1);
+            cabId = odr.GetInt32(2).ToString();
+            subSystemSerial = odr.GetInt32(3);
+            subSystemName = odr.GetString(4);
+            highthreshold = odr.GetFloat(5);
+            lowthreshold = odr.GetFloat(6);
+            devLocalAddress = odr.GetInt32(7);
+            interfaceId = odr.GetInt32(8);
+            correctFactor = odr.GetFloat(9);
+            dataUnit = odr.GetString(10);
+            inputArg1 = odr.GetFloat(11);
+            inputArg2 = odr.GetFloat(12);
+            inputArg3 = odr.GetFloat(13);
+            buildingId = odr.GetInt32(14).ToString();
+            handleTypeInSystem = odr.GetString(15);
+        }
+
         public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
             float correctFactor, string dataUnit, float inputArg1, float inputArg2, float inputArg3, string handleTypeInSystem, string state)
         {
@@ -124,12 +147,10 @@ namespace WpfApplication2.Model.Vo
             if (NowValue!=null&&!NowValue.Equals(""))
             if (float.Parse(NowValue) > Highthreshold)
             {
-                //state = DeviceDataBox_Base.State.H_Alert;
                 State = DeviceDataBox_Base.State.H_Alert.ToString();
             }
             else if (float.Parse(NowValue) < Lowthreshold)
             {
-                //tempItem.state = DeviceDataBox_Base.State.L_Alert;
                 State = DeviceDataBox_Base.State.L_Alert.ToString();
             }
         }
@@ -215,54 +236,7 @@ namespace WpfApplication2.Model.Vo
             set { inputArg1 = value; }
         }
        
-        public float InputArg2
-        {
-            get { return inputArg2; }
-            set { inputArg2 = value; }
-        }
-
-        public float InputArg3
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-
-        public float InputArg4
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-        public float InputArg5
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-        public float InputArg6
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-        public float InputArg7
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-        public float InputArg8
-        {
-            get { return inputArg3; }
-            set { inputArg3 = value; }
-        }
-        //public string Option_value 
-        //{
-        //    get { return inputArg3; }
-        //    set { inputArg3 = value; }
-        //}
-        //public float InputArg3
-        //{
-        //    get { return inputArg3; }
-        //    set { inputArg3 = value; }
-        //}
-
+      
         public string HandleTypeInSystem
         {
             get { return handleTypeInSystem; }
@@ -372,7 +346,7 @@ namespace WpfApplication2.Model.Vo
             return;
         }
  
-        public Box Value
+        public DeviceDataBox_Base Value
         {
             get {
                 return this.value; 
@@ -386,10 +360,31 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
-        public virtual string GenerateSql(string tablename) 
+        public virtual string GenerateInsertSql(string tablename) 
          {
              return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " +  DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" +  DataUnit + "'" + ", " + "'" +  State + "' )";
          }
+
+        public virtual string GenerateSelectSql(string tablename, string start, string end)
+        {
+            return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; ;
+        }
+
+        public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("nowValue", dataset);
+            return dataDictionary;
+        }
 
         public virtual string GenerateAlarmMessage()
         {

@@ -184,7 +184,6 @@ namespace WpfApplication2.Controls
 
         private void initEnventListner()
         {
-           // this.MouseDoubleClick += new MouseButtonEventHandler(Device_MouseDoubleClick);
         }
       
         public void updateDeviceUI(Device d)
@@ -258,6 +257,11 @@ namespace WpfApplication2.Controls
         }
         private void history_btn_Click(object sender, RoutedEventArgs e)
         {
+            startHistoryWindow();
+        }
+
+        public virtual void startHistoryWindow()
+        {
             HistoryWindow w = new HistoryWindow(this._device);
             w.Show();
         }
@@ -281,5 +285,6 @@ namespace WpfApplication2.Controls
         {
             DeviceBuzzer.startAlarm();
         }
+
     }
 }

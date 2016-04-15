@@ -13,6 +13,7 @@ using WpfApplication2.View.Windows;
 using System.ComponentModel;
 using WpfApplication2.package;
 using Visifire.Charts;
+using Project208Home.Model;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 {
@@ -22,10 +23,13 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        DeviceDataBox_6517AB box;
        LabelAndText stateLT;
        LabelAndText valueLT;
-       public DeviceUI6517AB(Device d, Frame fm)
+       private Device6517AB device;
+       public DeviceUI6517AB(Device6517AB d, Frame fm)
          :base(d, fm)
        {
+           device = d;
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
+           box = (DeviceDataBox_6517AB)DeviceInUI.Value;
            valueDic = new Dictionary<int, string>();
            valueDic.Add(0, "keep_time");
            dataSeries = new  DataSeries[valueDic.Count];
@@ -84,9 +88,12 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
            getInoPanel().Children.Add(stateLT);
            getInoPanel().Children.Add(valueLT);
-
        }
-
+       public override void startHistoryWindow()
+       {
+           HistoryWindow w = new HistoryWindow(device);
+           w.Show();
+       }
     }
 }
  

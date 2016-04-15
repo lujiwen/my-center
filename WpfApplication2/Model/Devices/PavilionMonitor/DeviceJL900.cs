@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 namespace PavilionMonitor
 {
@@ -21,7 +22,11 @@ namespace PavilionMonitor
 
         public DeviceDataJL900Box jl900_box = new DeviceDataJL900Box();
 
+        public DeviceJL900(OracleDataReader odr)
+            :base(odr)
+         {
 
+         }
 
         public DeviceJL900(UInt32 id, String ip, String port)
         {
@@ -39,9 +44,28 @@ namespace PavilionMonitor
             fromBoxToDevice((DeviceDataBox_Base)jl900_box );
         }
 
-        public override string GenerateSql(string tablename)
+        public override string GenerateInsertSql(string tablename)
         {
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1,VALUE2,VALUE3,VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + Presure + ", " + Real_traffic + ", " + Sample_volume + ", " + Keep_time + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetFloat(5);
+                d.VALUE2 = odr.GetFloat(6);
+                d.VALUE3 = odr.GetFloat(7);
+                d.Value_Option = odr.GetString(4);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("Jl900", dataset);
+            return dataDictionary;
         }
 
         public override string GenerateAlarmMessage()

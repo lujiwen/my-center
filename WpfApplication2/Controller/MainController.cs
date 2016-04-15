@@ -15,6 +15,7 @@ using System.Threading;
 using WpfApplication2.package;
 using WpfApplication2.View.Windows;
 using Project208Home.Model;
+using PavilionMonitor;
 
 
 namespace WpfApplication2.Controller
@@ -173,7 +174,34 @@ namespace WpfApplication2.Controller
                                 Console.WriteLine(building.Name +" :"+cab.Name );
                                 while (odr3.Read())
                                 {
-                                    Device device = new Device("" + odr3.GetInt32(0), "" + odr3.GetInt32(2), building.SystemId, odr3.GetString(1), odr3.GetInt32(3), odr3.GetString(4), odr3.GetFloat(5), odr3.GetFloat(6), odr3.GetInt32(7), odr3.GetInt32(8), odr3.GetFloat(9), odr3.GetString(10), odr3.GetFloat(11), odr3.GetFloat(12), odr3.GetFloat(13), odr3.GetString(15), state);
+                                    Device device = null;
+                                    switch (odr3.GetString(15))
+                                    {
+                                        case "XH3125":
+                                            device = new DeviceXH31253127(odr3);
+                                            break;
+                                        case "Pump":
+                                            device = new DevicePump(odr3);
+                                            break;
+                                        case "6517AB":
+                                            device = new Device6517AB(odr3);
+                                            break;
+                                        case "Quality":
+                                            device = new DeviceQuality(odr3);
+                                            break;
+                                        case "DryWet":
+                                             device = new DeviceDryWet(odr3);
+                                            break;
+                                        case "Asm02":
+                                            device = new DeviceASM02(odr3);
+                                            break;
+                                        case "Jl900":
+                                            device = new DeviceJL900(odr3);
+                                            break;
+                                        default :
+                                            device = new Device(odr3);
+                                            break;
+                                    }
                                     cab.Devices.Add(device);
                                     Console.WriteLine(building.Name + " :" + cab.Name+":"+device.Type);
                                     GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
@@ -295,7 +323,7 @@ namespace WpfApplication2.Controller
             Device deviceToChange = null;
             try
             {
-                foreach (Box item in boxes)
+                foreach (DeviceDataBox_Base item in boxes)
                 {
                     if (item.className() != DeviceCommandEchoBox.classNameString) //控制命令单独处理
                     {
