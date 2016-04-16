@@ -112,16 +112,28 @@ namespace WpfApplication2.View.Windows
                 DBManager dataOfDevice = new DBManager();
                 string errorCode = "";
                 dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-                Dictionary<string,List<DeviceData>>  dataDic = dataOfDevice.getDataBetweenStartAndEndTime(device, start, end);
-                dataOfDevice.CloseConnection();
-                if (device.showCurve)
+                if (type.Equals(HistoryWindowType.TYPE_DEVICE) && device != null)
                 {
+                    Dictionary<string, List<DeviceData>> dataDic = dataOfDevice.getDataBetweenStartAndEndTime(device, start, end);
+                    dataOfDevice.CloseConnection();
+                    if (device.showCurve)
+                    {
+                        drawLines(dataDic);
+                    }
+                    else
+                    {
+                        MessageBox.Show("不给显示！");
+                    }
+                }
+                else if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
+                {
+                    Dictionary<string, List<DeviceData>> dataDic = dataOfDevice.getDataBetweenStartAndEndTime(cab, start, end);
+                    dataOfDevice.CloseConnection();
                     drawLines(dataDic);
+                   
                 }
-                else
-                {
-                    MessageBox.Show("不给显示！");
-                }
+              
+             
                 
             //if(start_time.Value==null||end_time.Value==null)
             //{

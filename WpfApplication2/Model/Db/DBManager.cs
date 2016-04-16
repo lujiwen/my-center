@@ -102,5 +102,16 @@ namespace WpfApplication2.Model.Db
             odr.Close();
             return datas;
         }
+
+        public Dictionary<string, List<DeviceData>> getDataBetweenStartAndEndTime(Cab cab, String startTime, String endTime)
+        {
+            List<DeviceData> deviceDatas = new List<DeviceData>();
+            OracleCommand command = Conn.CreateCommand();
+            command.CommandText = cab.GenerateSelectSql(startTime, endTime);
+            OracleDataReader odr = command.ExecuteReader();
+            Dictionary<string, List<DeviceData>> datas = cab.getHistoryDataSet(odr);
+            odr.Close();
+            return datas;
+        }
     }
 }

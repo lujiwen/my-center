@@ -5,6 +5,7 @@ using System.Text;
 using WpfApplication2.package;
 using System.ComponentModel;
 using WpfApplication2.Util;
+using System.Data.OracleClient;
 
 namespace WpfApplication2.Model.Vo
 {
@@ -47,7 +48,32 @@ namespace WpfApplication2.Model.Vo
             typeInSystem = GlobalMapForShow.cabId_typeInSystem[buildingId +"_"+cabId];
 
         }
+         public Cab(OracleDataReader odr)
+         {
+             
+         }
 
+         public virtual string GenerateSelectSql(string start,string end)
+         {
+            // return "select * from devicedata_" + this.buildingId + " where devid = " + cabId + " and DATATIME between " + start + " and " + end;
+
+             return "SELECT *  from DEVICEDATA_"+buildingId +" where DEVID in (SELECT D_ID from DEVICEINFO where CABID="+cabId+") ";
+         }
+         public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+         {
+             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+              foreach (Device d in devices)
+              {
+                  Dictionary<string, List<DeviceData>> tmp = new Dictionary<string, List<DeviceData>>();
+                  tmp = d.getHistoryDataSet(odr);
+                  foreach(var item in tmp)
+                  {
+                      dataDictionary.Add(item.Key+d.DeviceId,item.Value);
+                  }
+                  tmp = null;
+              }
+             return dataDictionary;
+         }
          public String TypeInSystem
          {
              get { return typeInSystem; }

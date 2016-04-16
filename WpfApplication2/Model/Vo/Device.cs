@@ -369,7 +369,7 @@ namespace WpfApplication2.Model.Vo
 
         public virtual string GenerateSelectSql(string tablename, string start, string end)
         {
-            return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; ;
+            return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; 
         }
 
         public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)

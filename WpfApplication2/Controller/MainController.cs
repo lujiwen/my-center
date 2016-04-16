@@ -89,7 +89,6 @@ namespace WpfApplication2.Controller
                 string errorCode = "";
                 errCode = dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
                 
-                /////read buildings////
                 String sql = "select * from buildinginfo Orders ORDER BY B_ID";
                 OracleDataReader odr = null;
                 odr = dbOfDevice.ReadDeviceInfomationFromDb(sql);
@@ -121,12 +120,11 @@ namespace WpfApplication2.Controller
 
         private OracleDataReader readDeviceFromDb(DBManager dm,OracleDataReader odr2,Cab cab)
         {
-              try{                
+            try{                
                    string sql3 = "select * from deviceinfo where cabid = " + cab.CabId + " ORDER BY D_ID";
                    OracleDataReader odr3 = null; 
                    odr3 = dm.ReadDeviceInfomationFromDb(sql3);
                    return odr3 ;
-                
             }
             catch(Exception e)
             {
