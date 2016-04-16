@@ -52,19 +52,37 @@ namespace PavilionMonitor
         public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
         {
             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
-            List<DeviceData> dataset = new List<DeviceData>();
+            List<DeviceData> pressureDataset = new List<DeviceData>();
+            List<DeviceData> realTrafficDataset = new List<DeviceData>();
+            List<DeviceData> sampleDataset = new List<DeviceData>();
+            List<DeviceData> keepTimeDataset = new List<DeviceData>();
             while (odr.Read())
             {
-                DeviceData d = new DeviceData();
-                d.VALUE1 = odr.GetFloat(5);
-                d.VALUE2 = odr.GetFloat(6);
-                d.VALUE3 = odr.GetFloat(7);
-                d.Value_Option = odr.GetString(4);
-                d.Time = odr.GetString(2);
-                dataset.Add(d);
-                d = null;
+                DeviceData d1 = new DeviceData();
+                DeviceData d2 = new DeviceData();
+                DeviceData d3 = new DeviceData();
+                DeviceData d4 = new DeviceData();
+                d1.VALUE1 = odr.GetFloat(5);
+                d2.VALUE1 = odr.GetFloat(6);
+                d3.VALUE3 = odr.GetFloat(7);
+                d4.Value_Option = odr.GetString(4);
+                d1.Time = odr.GetString(2);
+                d2.Time = odr.GetString(2);
+                d3.Time = odr.GetString(2);
+                d4.Time = odr.GetString(2);
+                pressureDataset.Add(d1);
+                realTrafficDataset.Add(d2);
+                sampleDataset.Add(d3);
+                keepTimeDataset.Add(d4);
+                d1 = null;
+                d2 = null;
+                d3 = null;
+                d4 = null;
             }
-            dataDictionary.Add("Jl900", dataset);
+            dataDictionary.Add("压力", pressureDataset);
+            dataDictionary.Add("实时流量", realTrafficDataset);
+            dataDictionary.Add("抽样体积", sampleDataset);
+            dataDictionary.Add("持续时间", keepTimeDataset);
             return dataDictionary;
         }
 

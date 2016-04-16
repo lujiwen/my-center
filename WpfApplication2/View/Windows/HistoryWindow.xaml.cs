@@ -114,7 +114,15 @@ namespace WpfApplication2.View.Windows
                 dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
                 Dictionary<string,List<DeviceData>>  dataDic = dataOfDevice.getDataBetweenStartAndEndTime(device, start, end);
                 dataOfDevice.CloseConnection();
-                drawLines(dataDic);
+                if (device.showCurve)
+                {
+                    drawLines(dataDic);
+                }
+                else
+                {
+                    MessageBox.Show("不给显示！");
+                }
+                
             //if(start_time.Value==null||end_time.Value==null)
             //{
             //    MessageBox.Show("起止时间不可缺省！");

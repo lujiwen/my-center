@@ -56,6 +56,7 @@ namespace PavilionMonitor
                 d = null;
             }
             dataDictionary.Add("干湿检测仪", dataset);
+            showCurve = false;
             return dataDictionary;
         }
 

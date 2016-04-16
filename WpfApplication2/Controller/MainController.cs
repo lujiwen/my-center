@@ -386,7 +386,7 @@ namespace WpfApplication2.Controller
                         {
                             Alarm(deviceToChange);
                         }
-
+                        GlobalMapForShow.globalMapForDevice[deviceToChange.BuildingId + "_" + deviceToChange.DeviceId] = deviceToChange;
                         GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State =
                             GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
                         Console.WriteLine(GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State.ToString());
