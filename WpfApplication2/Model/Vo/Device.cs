@@ -372,8 +372,11 @@ namespace WpfApplication2.Model.Vo
             return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; 
         }
 
+
+        public delegate string ReadDatabaseDelegate();
         public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
         {
+          //  ReadDatabaseDelegate readDatabase = new ReadDatabaseDelegate(OracleDataReader odr);
             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
             List<DeviceData> dataset = new List<DeviceData>();
             while (odr.Read())
