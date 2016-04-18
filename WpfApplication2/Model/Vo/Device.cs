@@ -27,11 +27,17 @@ namespace WpfApplication2.Model.Vo
         private float inputArg1;
         private float inputArg2;
         private float inputArg3;
+        private float inputArg4;
+        private float inputArg5;
+        private float inputArg6;
+        private float inputArg7;
+        private float inputArg8;
         private string handleTypeInSystem;
         private string state;
         private string nowValue;
         private List<string> labels = new List<string>();
-        public bool showCurve;
+        public  bool showCurve;
+
         /**
          * 一下两项用于数据交互
          * */
@@ -237,7 +243,42 @@ namespace WpfApplication2.Model.Vo
             get { return inputArg1; }
             set { inputArg1 = value; }
         }
-       
+        public float InputArg2
+        {
+            get { return inputArg2; }
+            set { inputArg2 = value; }
+        }
+          public float InputArg3
+        {
+            get { return inputArg3; }
+            set { inputArg3 = value; }
+        }
+          public float InputArg4
+          {
+              get { return inputArg4; }
+              set { inputArg4 = value; }
+          }
+          public float InputArg5
+          {
+              get { return inputArg5; }
+              set { inputArg5 = value; }
+          }
+          public float InputArg6
+          {
+              get { return inputArg6; }
+              set { inputArg6 = value; }
+          }
+          public float InputArg7
+          {
+              get { return inputArg7; }
+              set { inputArg7 = value; }
+          }
+          public float InputArg8
+          {
+              get { return inputArg8; }
+              set { inputArg8 = value; }
+          }
+          
       
         public string HandleTypeInSystem
         {

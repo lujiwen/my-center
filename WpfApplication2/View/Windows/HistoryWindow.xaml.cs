@@ -25,7 +25,8 @@ namespace WpfApplication2.View.Windows
         private Cab cab;
         private Device device;
         private HistoryWindowType type;
-
+        public delegate Dictionary<string, List<DeviceData>> ReadDeviceDataDelegate(Device device, string start, string end);
+        public delegate Dictionary<string, List<DeviceData>> ReadCabDataDelegate(Cab cab, string start, string end);
         public HistoryWindow()
         {
             InitializeComponent();
@@ -102,8 +103,7 @@ namespace WpfApplication2.View.Windows
                 history_chart.Series.Add(dataSeries[i]);
             }
         }
-        public delegate  Dictionary<string, List<DeviceData>> ReadDeviceDataDelegate(Device device, string start, string end);
-        public delegate  Dictionary<string, List<DeviceData>> ReadCabDataDelegate(Cab cab, string start, string end);
+
 
         public static void TestCallback(IAsyncResult data)
         {
@@ -113,7 +113,6 @@ namespace WpfApplication2.View.Windows
         //开始查询
         private void Start_Query_Button_Click(object sender, RoutedEventArgs e)
         {
-
             //String start = "'" + start_time.Value.ToString() + "'";
             //String end = "'" + end_time.Value.ToString() + "'";
 
@@ -153,52 +152,5 @@ namespace WpfApplication2.View.Windows
                 drawLines(dataDic);
             }
         }
-        //private void Start_Query_Button_Click(object sender, RoutedEventArgs e)
-      //  {
-            //if(start_time.Value==null||end_time.Value==null)
-            //{
-            //    MessageBox.Show("起止时间不可缺省！");
-            //    return;
-            //}
-        //    //else 
-        //    {
-        //        //String start = "'" + start_time.Value.ToString() + "'";
-        //        //String end = "'" + end_time.Value.ToString() + "'";
-
-        //        String start = "'2016/4/15 0:00:00'";
-        //        String end   = "'2016/4/16 0:00:00'";
-
-        //        DBManager dataOfDevice = new DBManager();
-        //        // if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
-        //        //{
-        //        //    List<List<DeviceForShow>> datalist = new List<List<DeviceForShow>>();
-                   
-        //        //    string errorCode = "";
-        //        //    dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-        //        //   //dataOfDevice.getDataBetweenStartAndEndTime(cab.BuildingId,cab.Devices[0].DeviceId,start,end);
-
-        //        //    for (int i = 0; i < cab.Devices.Count;i++ )
-        //        //    {
-        //        //        //List<DeviceForShow> datas = dataOfDevice.getDataBetweenStartAndEndTime(int.Parse(cab.BuildingId), int.Parse(cab.Devices[i].DeviceId), start, end);
-        //        //        datalist.Add(datas);
-        //        //    }
-        //        //    drawLines(datalist);
-        //        ////    Console.WriteLine("查询到数据点一共" + datas.Count);
-        //         }
-        //         if (type.Equals(HistoryWindowType.TYPE_DEVICE) && device != null)
-        //        {
-                   
-        //            string errorCode = "";
-                    
-        //            //dataOfDevice.getDataBetweenStartAndEndTime(device, start, end);
-
-        //           // List<DeviceForShow> datas = dbMng.getDataBetweenStartAndEndTime(int.Parse(device.BuildingId), int.Parse(device.DeviceId), start, end);
-        //            //Console.WriteLine("查询到数据点一共" + datas.Count);
-        //            //drawLine(datas);
-        //        }
-        //    }
-
     }
-
-     
 }
