@@ -27,7 +27,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
            box = (DeviceDataDryWetBox)DeviceInUI.Value;
-          
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -51,10 +50,10 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            rainTimeLT = new LabelAndText("降雨时间（分钟）:", "",Colors.White);
            
            //盖子状态绑定
-           Binding valueBingding = new Binding();
-           valueBingding.Source = DeviceInUI;
-           valueBingding.Path = new PropertyPath("NowValue");
-           cabStateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
+           //Binding valueBingding = new Binding();
+           //valueBingding.Source = DeviceInUI;
+           //valueBingding.Path = new PropertyPath("NowValue");
+           //cabStateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
 
            ////状态绑定
            //Binding stateBinding = new Binding();
