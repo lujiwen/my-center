@@ -287,7 +287,8 @@ namespace WpfApplication2.View.Windows
 
         private void exit(object sender, RoutedEventArgs e)
         {
-           Application.Current.Shutdown();
+         //  Application.Current.Shutdown();
+            System.Environment.Exit(0);
         }
 
         private void buzzerAlarm(bool isStart)
