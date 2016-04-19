@@ -110,7 +110,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        }
         private void init()
         {
-           initBingdings();
+          // initBingdings();
         }
         
         /// <summary>

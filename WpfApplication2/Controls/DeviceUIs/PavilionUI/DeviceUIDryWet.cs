@@ -26,7 +26,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        {
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
-        
+           box = (DeviceDataDryWetBox)DeviceInUI.Value;
+          
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
