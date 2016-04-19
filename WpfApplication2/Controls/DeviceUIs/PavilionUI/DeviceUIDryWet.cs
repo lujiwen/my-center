@@ -48,23 +48,10 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            cabStateLT = new LabelAndText("盖子状态:", "", Colors.White);
            rainyStateLT = new LabelAndText("下雨状态:", "", Colors.White);
            rainTimeLT = new LabelAndText("降雨时间（分钟）:", "",Colors.White);
-           
-           //盖子状态绑定
-           //Binding valueBingding = new Binding();
-           //valueBingding.Source = DeviceInUI;
-           //valueBingding.Path = new PropertyPath("NowValue");
-           //cabStateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, valueBingding);
-
-           ////状态绑定
-           //Binding stateBinding = new Binding();
-           //stateBinding.Source = DeviceInUI;
-           //stateBinding.Path = new PropertyPath("State");
-           //stateLT.getValueTextBlock().SetBinding(TextBlock.TextProperty, stateBinding);
 
            getInoPanel().Children.Add(cabStateLT);
            getInoPanel().Children.Add(rainyStateLT);
            getInoPanel().Children.Add(rainTimeLT);
-           //getInoPanel().Children.Add(keepTimeLT);
        }
     }
 

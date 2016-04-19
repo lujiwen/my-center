@@ -384,13 +384,12 @@ namespace WpfApplication2.Controller
                         {
                             Alarm(deviceToChange);
                         }
-                      //  GlobalMapForShow.globalMapForDevice[deviceToChange.BuildingId + "_" + deviceToChange.DeviceId] = deviceToChange;
-                        
+                        //更改柜子的状态
                         GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State =
                             GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
-                      //  Console.WriteLine(GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State.ToString());
+
+                        //更改监测点的状态
                         GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
-                      //  Console.WriteLine(GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State.ToString());
 
                         //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
                         if (GlobalMapForShow.isAllBuildingNormal())

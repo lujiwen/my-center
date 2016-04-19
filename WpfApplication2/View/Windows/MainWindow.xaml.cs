@@ -271,9 +271,6 @@ namespace WpfApplication2.View.Windows
 
         private void soft_settings_Click_1(object sender, RoutedEventArgs e)
         {
-            //PasswordWindow w = new PasswordWindow("");
-            //w.PasswordCorrect += new isPasswordCorrect(w_PasswordCorrect);
-            //w.Show();
             ParametersSettingsWindow w = new ParametersSettingsWindow();
             w.Show();
         }

@@ -14,14 +14,9 @@ namespace WpfApplication2
       {
          // Create the application.
          Application app = new Application();
-      //   MainController c = new MainController();
-
-         // Create the main window.
-             MainWindow win = new  MainWindow(); 
-          //  MapWindow win = new MapWindow();
-         //  Window1 win = new Window1();
-          // Launch the application and show the main window.
-           app.Run(win);
+ 
+         MainWindow win = new  MainWindow(); 
+         app.Run(win);
       }
    }
 

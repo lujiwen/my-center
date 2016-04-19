@@ -46,7 +46,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
                device_chart.Series.Add(dataSeries[i]);
            }
           
-           //DeviceBuzzer.startAlarm();
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -62,7 +61,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            values.Add(box.real_traffic);
            values.Add(box.keep_time);
            values.Add(box.sample_volume);
-          // updateChart(values);
            presureLT.getValueTextBlock().Text = box.presure;
            realTrafficLT.getValueTextBlock().Text = box.real_traffic;
            sampleVolumeLT.getValueTextBlock().Text = box.sample_volume;
@@ -71,10 +69,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            {
                 DeviceBuzzer.muteBuzzer();
            }
-           //if (DeviceInUI.State.Equals("Normal") && !DeviceBuzzer.IsAlarming)
-           //{
-           //    startToAlrm();
-           //}
        }
 
        public override void initlabels()
@@ -83,7 +77,6 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            realTrafficLT = new LabelAndText("瞬时流量:", "", "m^3/h",Colors.White);
            sampleVolumeLT = new LabelAndText("采样体积:", "", "m^3", Colors.White);
            keepTimeLT = new LabelAndText("采样时间:", "", "h", Colors.White);
-           //valueLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
 
            getInoPanel().Children.Add(presureLT);
            getInoPanel().Children.Add(realTrafficLT);

@@ -55,8 +55,6 @@ namespace WpfApplication2.Model.Vo
 
          public virtual string GenerateSelectSql(string start,string end)
          {
-            // return "select * from devicedata_" + this.buildingId + " where devid = " + cabId + " and DATATIME between " + start + " and " + end;
-
              return "SELECT *  from DEVICEDATA_"+buildingId +" where DEVID in (SELECT D_ID from DEVICEINFO where CABID="+cabId+") ";
          }
          public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)

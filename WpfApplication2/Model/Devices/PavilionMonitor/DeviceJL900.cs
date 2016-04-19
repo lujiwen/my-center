@@ -126,22 +126,7 @@ namespace PavilionMonitor
             base.judgeState();
         }
 
-      //public override void setDevState(string state)
-      //  {
-      //      DevState = state;  // 糟糕的设计。父类引用更新子类成员，触发界面更新
-      //  }
-      //public String DevState
-      //{
-      //    get { return devState; }
-      //    set
-      //    {
-      //        devState = value;
-      //        if (this.PropertyChanged != null)
-      //        {
-      //            this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("DevState"));
-      //        }
-      //    }
-      //}
+ 
         public float Real_traffic
         {
             get { return real_traffic; }
