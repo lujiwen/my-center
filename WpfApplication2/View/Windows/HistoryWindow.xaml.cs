@@ -136,16 +136,8 @@ namespace WpfApplication2.View.Windows
                 IAsyncResult result = deviceDelegate.BeginInvoke(device, start, end, TestCallback, "call back");
                 Dictionary<string, List<DeviceData>> dataDic = deviceDelegate.EndInvoke(result);
                 dataOfDevice.CloseConnection();
-                bindDatatToDataGrid(device,dataDic);
+                device.startToShowHistoryTable(dataDic);
                 ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
-                //if (device.showCurve)
-                //{
-                //     drawLines(dataDic);
-                //}
-                //else
-                //{
-                //    MessageBox.Show("不给显示！");
-                //}
             }
             else if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
             {
@@ -153,23 +145,23 @@ namespace WpfApplication2.View.Windows
                 IAsyncResult result = cabDelegate.BeginInvoke(cab, start, end, TestCallback, "call back");
                 Dictionary<string, List<DeviceData>> dataDic = cabDelegate.EndInvoke(result);
                 dataOfDevice.CloseConnection();
-            //    bindDatatToDataGrid(dataDic);
+               // device.startToShowHistoryTable(dataDic);
      ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
              //   drawLines(dataDic);
             }
         }
+ 
+ 
 
-        private void bindDatatToDataGrid(Device device, Dictionary<string, List<DeviceData>> datas )
-        {
-            data_grid.ItemsSource = device.getHistoryDataList(datas);
-        }
-
-        private void data_grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid dg = sender as DataGrid;
-            DeviceData data = dg.SelectedCells[0].Item as DeviceData;
-
-            MessageBox.Show("双击！");
-        }
+        //private void data_grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    DataGrid dg = sender as DataGrid;
+        //    DeviceData data = dg.SelectedCells[0].Item as DeviceData;
+        //    if(deviceDataList!=null)
+        //    {
+        //      //  device.startToShowHistoryTable(deviceDataList);
+        //    }
+        //    MessageBox.Show("双击！");
+        //}
     }
 }

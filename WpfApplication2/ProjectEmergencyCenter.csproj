@@ -175,6 +175,9 @@
       <DependentUpon>DeviceUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="View\Windows\Asm02HistoryTable.xaml.cs">
+      <DependentUpon>Asm02HistoryTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\PasswordWindow.xaml.cs">
       <DependentUpon>PasswordWindow.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LabelAndText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Asm02HistoryTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

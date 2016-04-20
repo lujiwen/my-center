@@ -403,6 +403,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
         private void history_btn_Click(object sender, RoutedEventArgs e)
         {
             HistoryWindow w = new HistoryWindow(asm02);
+            //Asm02HistoryTable w = new Asm02HistoryTable(asm02.getHistoryDataSet());
             w.Show();
         }
     }

@@ -7,6 +7,7 @@ using System.Threading;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
 using System.Data.OracleClient;
+using WpfApplication2.View.Windows;
 
 namespace PavilionMonitor
 {
@@ -126,6 +127,13 @@ namespace PavilionMonitor
             return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE_OPTION, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", '" + asm02_box.val_str_set + "', " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
         }
 
+        public override void startToShowHistoryTable(Dictionary<string, List<DeviceData>> data)
+        {
+            //base.startToShowHistoryTable(data);
+            Asm02HistoryTable w = new Asm02HistoryTable(data["Asm"]);
+            w.Show();
+        }
+
         public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
         {
             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
@@ -146,7 +154,7 @@ namespace PavilionMonitor
         {
             return dataDictionary["Asm"];
         }
-
+ 
         public String DevState
         {
             get { return State; }

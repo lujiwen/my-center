@@ -437,7 +437,10 @@ namespace WpfApplication2.Model.Vo
             List<DeviceData> data = new List<DeviceData>();
             return data;
         }
-
+        public virtual void startToShowHistoryTable( Dictionary<string, List<DeviceData>> data)
+        {
+ 
+        }
         public virtual string GenerateAlarmMessage()
         {
             String alertInfomation = "";
