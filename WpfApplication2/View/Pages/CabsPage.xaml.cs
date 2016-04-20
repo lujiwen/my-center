@@ -142,7 +142,8 @@ namespace WpfApplication2.View.Pages
                  }
              }
             CabList.ItemsSource = cabListSource;
-            this.Unloaded += new RoutedEventHandler(CabsPage_Unloaded);
+         //   this.Unloaded += new RoutedEventHandler(CabsPage_Unloaded);
+            this.Loaded += new RoutedEventHandler(CabsPage_loaded);
             systemPage.getMainWindowInstance().c.dataChartUpdate += new Controller.DataUpdatedEventHandler(updateCabsCharts);
         }
 
@@ -156,17 +157,21 @@ namespace WpfApplication2.View.Pages
             {
                 foreach(CabUI cu in cabListSource)
                 {
-                    if(!cu.CabInUI.isAllUpdate())
-                    {
-                        cu.updateCabUI();
-                    }
+                    cu.updateCabUI();
                 }
             }
         }
 
-        void CabsPage_Unloaded(object sender, RoutedEventArgs e)
+        void CabsPage_loaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("CabsPage_Unloaded");
+            Console.WriteLine("CabsPage_loaded");
+            if (cabListSource != null)
+            {
+                foreach (CabUI cu in cabListSource)
+                {
+                    cu.CabInUI.IsUpdate = false;
+                }
+            }
         }
 
         public void addBuildingToShow(Building b)

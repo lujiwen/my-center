@@ -267,13 +267,10 @@ namespace WpfApplication2.Controls
             }
         }
 
+
         public void updateCabUI()
         {
             Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
-            if(c.isAllUpdate())
-            {
-                return;
-            }
             if (c.State.Equals("Normal"))
             {
                 cabAlarm.Visibility = System.Windows.Visibility.Hidden;

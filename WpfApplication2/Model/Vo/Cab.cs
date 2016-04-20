@@ -23,7 +23,7 @@ namespace WpfApplication2.Model.Vo
         public event PropertyChangedEventHandler PropertyChanged;
         private String typeInSystem;//利用它进行对应工艺流程图创建
         private bool isUpdate;
-        public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; } }
+        public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; unUpdateAllDevice(); } }
         
          public Cab()
         {
@@ -138,6 +138,14 @@ namespace WpfApplication2.Model.Vo
             {
                 Device tmpDevice = GlobalMapForShow.globalMapForDevice[buildingId + "_" + d.DeviceId];
                 tmpDevice.IsUpdate = true;
+            }
+        }
+        public void unUpdateAllDevice()
+        {
+            foreach (Device d in devices)
+            {
+                Device tmpDevice = GlobalMapForShow.globalMapForDevice[buildingId + "_" + d.DeviceId];
+                tmpDevice.IsUpdate = false ;
             }
         }
 

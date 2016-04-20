@@ -117,7 +117,7 @@ namespace WpfApplication2.View.Windows
             // String start = "'" + start_time.Value.ToString() + "'";
            //  String end = "'" + end_time.Value.ToString() + "'";
 
-            String start = "'2016/4/20 0:00:00'";
+            String start = "'2016/4/20 19:30:00'";
              String end = "'2016/4/21 0:00:00'";
             //if (start_time.Value == null || end_time.Value == null)
             //{
@@ -138,6 +138,7 @@ namespace WpfApplication2.View.Windows
                 dataOfDevice.CloseConnection();
                 device.startToShowHistoryTable(dataDic);
                 ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
+                drawLines(dataDic);
             }
             else if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
             {

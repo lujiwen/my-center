@@ -30,6 +30,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            device = d;
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            box = (DeviceDataBox_6517AB)DeviceInUI.Value;
+
            valueDic = new Dictionary<int, string>();
            valueDic.Add(0, "keep_time");
            dataSeries = new  DataSeries[valueDic.Count];
