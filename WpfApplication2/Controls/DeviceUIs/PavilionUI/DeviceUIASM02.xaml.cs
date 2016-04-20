@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
+using WpfApplication2.View.Windows;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
@@ -397,7 +398,12 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
             bind_rn_6.Source = asm02;
             bind_rn_6.Path = new PropertyPath("Rn_6");
             rn_6.SetBinding(TextBlock.TextProperty, bind_rn_6);
+        }
 
+        private void history_btn_Click(object sender, RoutedEventArgs e)
+        {
+            HistoryWindow w = new HistoryWindow(asm02);
+            w.Show();
         }
     }
 }

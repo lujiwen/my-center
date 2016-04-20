@@ -99,6 +99,7 @@ namespace WpfApplication2.Model.Db
             command.CommandText = device.GenerateSelectSql("DEVICEDATA_" + device.BuildingId, startTime,endTime);
             OracleDataReader odr = command.ExecuteReader();
             Dictionary<string, List<DeviceData>> datas = device.getHistoryDataSet(odr);
+            MessageBox.Show("正在查询数据，请稍等......");
             odr.Close();
             return datas;
         }

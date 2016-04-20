@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.Model.Db;
 using Visifire.Charts;
+using Microsoft.Windows.Controls;
 
 namespace WpfApplication2.View.Windows
 {
@@ -113,35 +114,38 @@ namespace WpfApplication2.View.Windows
         //开始查询
         private void Start_Query_Button_Click(object sender, RoutedEventArgs e)
         {
-             String start = "'" + start_time.Value.ToString() + "'";
-             String end = "'" + end_time.Value.ToString() + "'";
+            // String start = "'" + start_time.Value.ToString() + "'";
+           //  String end = "'" + end_time.Value.ToString() + "'";
 
-           // String start = "'2016/4/16 0:00:00'";
-           // String end = "'2016/4/17 0:00:00'";
-            if (start_time.Value == null || end_time.Value == null)
-            {
-                MessageBox.Show("起止时间不可缺省！");
-                return;
-            }
+            String start = "'2016/4/20 0:00:00'";
+             String end = "'2016/4/21 0:00:00'";
+            //if (start_time.Value == null || end_time.Value == null)
+            //{
+            //    MessageBox.Show("起止时间不可缺省！");
+            //    return;
+            //}
+           
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";
             dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
             if (type.Equals(HistoryWindowType.TYPE_DEVICE) && device != null)
             {
                 ReadDeviceDataDelegate deviceDelegate = new ReadDeviceDataDelegate(dataOfDevice.getDataBetweenStartAndEndTime);
-                MessageBox.Show("正在查询数据，请稍等......");
+            
 
                 IAsyncResult result = deviceDelegate.BeginInvoke(device, start, end, TestCallback, "call back");
                 Dictionary<string, List<DeviceData>> dataDic = deviceDelegate.EndInvoke(result);
                 dataOfDevice.CloseConnection();
-                if (device.showCurve)
-                {
-                    drawLines(dataDic);
-                }
-                else
-                {
-                    MessageBox.Show("不给显示！");
-                }
+                bindDatatToDataGrid(device,dataDic);
+                ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
+                //if (device.showCurve)
+                //{
+                //     drawLines(dataDic);
+                //}
+                //else
+                //{
+                //    MessageBox.Show("不给显示！");
+                //}
             }
             else if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
             {
@@ -149,8 +153,23 @@ namespace WpfApplication2.View.Windows
                 IAsyncResult result = cabDelegate.BeginInvoke(cab, start, end, TestCallback, "call back");
                 Dictionary<string, List<DeviceData>> dataDic = cabDelegate.EndInvoke(result);
                 dataOfDevice.CloseConnection();
-                drawLines(dataDic);
+            //    bindDatatToDataGrid(dataDic);
+     ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
+             //   drawLines(dataDic);
             }
+        }
+
+        private void bindDatatToDataGrid(Device device, Dictionary<string, List<DeviceData>> datas )
+        {
+            data_grid.ItemsSource = device.getHistoryDataList(datas);
+        }
+
+        private void data_grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = sender as DataGrid;
+            DeviceData data = dg.SelectedCells[0].Item as DeviceData;
+
+            MessageBox.Show("双击！");
         }
     }
 }

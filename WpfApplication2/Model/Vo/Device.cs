@@ -432,6 +432,12 @@ namespace WpfApplication2.Model.Vo
             return dataDictionary;
         }
 
+        public virtual List<DeviceData>  getHistoryDataList(Dictionary<string,List<DeviceData>> datadic)
+        {
+            List<DeviceData> data = new List<DeviceData>();
+            return data;
+        }
+
         public virtual string GenerateAlarmMessage()
         {
             String alertInfomation = "";
@@ -454,5 +460,6 @@ namespace WpfApplication2.Model.Vo
                 "  当前值为：\"" + NowValue + "\" (" + DateTime.Now.ToString() + ")";
             return msg;
         }
+
     }
 }

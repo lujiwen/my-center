@@ -37,7 +37,8 @@
                 <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="气溶胶"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="11" FontWeight="Bold" Foreground="#FFBDC7D7" />
-            <TextBlock Text="" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" FontWeight="Bold" Name="ASM02_Status" />
+        <Button Name="history_btn" Content="查看历史数据" VerticalAlignment="Center" Grid.Row="0" Grid.Column="10" Canvas.Left="357" Canvas.Top="5" FontWeight="Normal" FontSize="13" Background="#FF0DA7F9" Foreground="#FFE5EBFD"  BorderBrush="#FF0DA7F9"  Click="history_btn_Click"></Button>
+        <TextBlock Text="" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" FontWeight="Bold" Name="ASM02_Status" />
             <TextBlock Text="Ab"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontWeight="Bold" Foreground="#FFFDF7EE" />
         <TextBlock Text="Ec"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontWeight="Bold"  Foreground="#FFFDF7EE"/>
         <TextBlock Text="Fl"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  FontWeight="Bold"  Foreground="#FFFDF7EE"/>

@@ -141,7 +141,12 @@ namespace PavilionMonitor
             dataDictionary.Add("Asm", dataset);
             return dataDictionary;
         }
-        
+
+        public override List<DeviceData> getHistoryDataList( Dictionary<string, List<DeviceData>> dataDictionary)
+        {
+            return dataDictionary["Asm"];
+        }
+
         public String DevState
         {
             get { return State; }
