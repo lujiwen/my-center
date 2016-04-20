@@ -17,7 +17,7 @@
                 <Button Margin="20,5,5,5" Click="Start_Query_Button_Click" Width="54"> 查询</Button>
             </StackPanel>
             <my:Chart  Visibility="Collapsed" Name="history_chart" Width="770" Height="400"  Margin="10,5,10,5" View3D="False" AnimationEnabled="False"  HorizontalAlignment="Center"  AnimatedUpdate="False" Watermark="False" Background="#FF565656" IndicatorEnabled="True"   />
-            <dg:DataGrid  Visibility="Visible" Name="data_grid"   Width="770" Height="400"  Margin="10,5,10,5" AutoGenerateColumns="True"  IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="data_grid_MouseDoubleClick"></dg:DataGrid>
+            <!--<dg:DataGrid  Visibility="Visible" Name="data_grid"   Width="770" Height="400"  Margin="10,5,10,5" AutoGenerateColumns="True"  IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="data_grid_MouseDoubleClick"></dg:DataGrid>-->
         </StackPanel>
     </Grid>
 </Window>

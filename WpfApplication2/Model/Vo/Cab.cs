@@ -22,7 +22,8 @@ namespace WpfApplication2.Model.Vo
         private string state;
         public event PropertyChangedEventHandler PropertyChanged;
         private String typeInSystem;//利用它进行对应工艺流程图创建
-       
+        private bool isUpdate;
+        public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; } }
         
          public Cab()
         {
@@ -131,6 +132,15 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
+        public void updateAllDevice()
+        {
+            foreach (Device d in devices)
+            {
+                Device tmpDevice = GlobalMapForShow.globalMapForDevice[buildingId + "_" + d.DeviceId];
+                tmpDevice.IsUpdate = true;
+            }
+        }
+
         public string State
         {
             get { return state; }
@@ -142,6 +152,22 @@ namespace WpfApplication2.Model.Vo
               }
         }
 
+        /// <summary>
+        /// 该柜子里面的设备是不是都完全更新了
+        /// </summary>
+        /// <returns></returns>
+        public bool isAllUpdate()
+        {
+            foreach (Device d in devices)
+            {
+                Device tmpDevice = GlobalMapForShow.globalMapForDevice[buildingId + "_" + d.DeviceId];
+                if (!tmpDevice.IsUpdate)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public bool isStateNormal()
         {
            foreach(Device d in devices)
@@ -150,7 +176,6 @@ namespace WpfApplication2.Model.Vo
                {
                    return false;
                }
-               Console.WriteLine(d.DeviceId+":"+d.State);
            }
             return true;
         }

@@ -262,7 +262,7 @@ namespace WpfApplication2.Controls
             if(systemframe!=null)
             {
                DevicePage page = new DevicePage(systemframe,_cab);
-               //  ProcedurePage page = new ProcedurePage(systemframe);
+             //ProcedurePage page = new ProcedurePage(systemframe);
                systemframe.Content = page;
             }
         }
@@ -270,6 +270,10 @@ namespace WpfApplication2.Controls
         public void updateCabUI()
         {
             Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
+            if(c.isAllUpdate())
+            {
+                return;
+            }
             if (c.State.Equals("Normal"))
             {
                 cabAlarm.Visibility = System.Windows.Visibility.Hidden;
@@ -282,38 +286,11 @@ namespace WpfApplication2.Controls
             stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
             //更新曲线图
             UpdateChart(c);
+            c.updateAllDevice();
+
         }
 
-        //private void updateCabUI()
-        //{
-        //    //改变状态
-        //    if (stateLT != null)
-        //    {
-        //        stateLT.updateValue(CabInUI.State.Equals("Normal") ? "正常" : "异常");
-        //    }
-
-        //    if (!CabInUI.State.Equals("Normal"))
-        //    {
-        //        if (!cabAlarm.IsAlarming)
-        //        {
-        //            cabAlarm.Visibility = System.Windows.Visibility.Visible;
-        //            cabAlarm.startAlarm();
-        //            Console.WriteLine("cabAlarm.startAlarm()" + "  " + CabInUI.Name);
-        //        }
-        //    }
-        //    else if (CabInUI.State.Equals("Normal"))
-        //    {
-        //        if (cabAlarm.IsAlarming)
-        //        {
-        //            cabAlarm.Visibility = System.Windows.Visibility.Hidden;
-        //            cabAlarm.stopAlarm();
-        //        }
-        //    }
-        //    //改变工艺图上的数值 在工艺图内部实现数据绑定
-
-        //    //改变曲线图上面的数值
-        //    UpdateChart(CabInUI);
-        //}
+ 
         private void radio_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton r = (RadioButton)sender;
@@ -325,21 +302,18 @@ namespace WpfApplication2.Controls
                     cabArtWork.Visibility = System.Windows.Visibility.Visible;
                     real_time_cab_chart.Visibility = System.Windows.Visibility.Collapsed;
                     curve_pannel.Visibility = System.Windows.Visibility.Collapsed;
-                //    curveChooserTip.Visibility = System.Windows.Visibility.Collapsed;    
                     break ;
                 case "curve":
                     tech.IsChecked = false;
                     cabArtWork.Visibility = System.Windows.Visibility.Collapsed;
                     real_time_cab_chart.Visibility = System.Windows.Visibility.Visible;
                     curve_pannel.Visibility = System.Windows.Visibility.Visible;
-                   // curveChooserTip.Visibility = System.Windows.Visibility.Visible;    
                     break ;
                case "both":
                     tech.IsChecked = false;
                     cabArtWork.Visibility = System.Windows.Visibility.Visible;
                     real_time_cab_chart.Visibility = System.Windows.Visibility.Visible;
                     curve_pannel.Visibility = System.Windows.Visibility.Visible;
-                  //  curveChooserTip.Visibility = System.Windows.Visibility.Visible;    
                     break ;
 
             }
@@ -352,11 +326,11 @@ namespace WpfApplication2.Controls
         }
 
          private void settings_btn_Click(object sender, RoutedEventArgs e)
-        {
+         {
             PasswordWindow pw = new PasswordWindow("");
             pw.PasswordCorrect += new isPasswordCorrect(pw_PasswordCorrect);
             pw.Show();
-        }
+         }
 
          void pw_PasswordCorrect(bool isCorrect)
          {
@@ -376,10 +350,5 @@ namespace WpfApplication2.Controls
                  cab_name.Text = " " + value + " ";
              }
          }
-   
-         //private void cabAlarm_Loaded(object sender, RoutedEventArgs e)
-         //{
-         //    cabAlarm.muteBuzzer();
-         //}
     }
 }

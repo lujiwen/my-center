@@ -339,6 +339,7 @@ namespace WpfApplication2.Controller
                         deviceInMap.CabId = tempItem.cabId;
                         deviceInMap.DeviceId = tempItem.devId;
                         deviceInMap.State = tempItem.state.ToString();
+                        deviceInMap.IsUpdate = false;
 
                         if(!deviceInMap.NowValue.Equals(""))
                         {

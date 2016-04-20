@@ -156,7 +156,10 @@ namespace WpfApplication2.View.Pages
             {
                 foreach(CabUI cu in cabListSource)
                 {
-                    cu.updateCabUI();
+                    if(!cu.CabInUI.isAllUpdate())
+                    {
+                        cu.updateCabUI();
+                    }
                 }
             }
         }

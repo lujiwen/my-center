@@ -37,6 +37,8 @@ namespace WpfApplication2.Model.Vo
         private string nowValue;
         private List<string> labels = new List<string>();
         public  bool showCurve;
+        private bool isUpdate;
+        public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; } }
 
         /**
          * 一下两项用于数据交互
@@ -87,6 +89,7 @@ namespace WpfApplication2.Model.Vo
             handleTypeInSystem = odr.GetString(15);
             state = "Normal";
             showCurve = true;
+            IsUpdate = false;
         }
 
         public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
