@@ -84,6 +84,8 @@ namespace WpfApplication2.View.Windows
         //绘制一组曲线
         private void drawLines(Dictionary<string,List<DeviceData>> dataList)
         {
+            MessageBox.Show("数据查询完毕，正在绘制历史曲线 ，请稍等...");
+            history_chart.Series.Clear();
             dataSeries = new DataSeries[dataList.Count];
             int i = 0;
             foreach(var item in dataList)
@@ -102,13 +104,24 @@ namespace WpfApplication2.View.Windows
                     dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
                 }
                 history_chart.Series.Add(dataSeries[i]);
+                 dataSeries[i] = null;
             }
+            MessageBox.Show("查询结果：\r\n"
+                       + getHistoryResult( dataList));
         }
 
-
+        private string getHistoryResult(Dictionary<string, List<DeviceData>>  dataList)
+        {
+            string str = "";
+            foreach(var v in dataList)
+            {
+                str += v.Key + ": " + v.Value.Count+"条记录！\r\n";
+            }
+            return str;
+        }
         public static void TestCallback(IAsyncResult data)
         {
-            MessageBox.Show("查到了！");
+
         }
         MessageBox box;
         //开始查询
@@ -117,38 +130,52 @@ namespace WpfApplication2.View.Windows
             // String start = "'" + start_time.Value.ToString() + "'";
            //  String end = "'" + end_time.Value.ToString() + "'";
 
-            String start = "'2016/4/20 19:30:00'";
+             String start = "'2016/4/20 19:30:00'";
              String end = "'2016/4/21 0:00:00'";
-            //if (start_time.Value == null || end_time.Value == null)
-            //{
-            //    MessageBox.Show("起止时间不可缺省！");
-            //    return;
-            //}
+             if (start_time.Value == null || end_time.Value == null)
+             {
+                 MessageBox.Show("起止时间不可缺省！");
+                 return;
+             }
+             else if (start_time.Value>=end_time.Value)
+             {
+                 MessageBox.Show("开始时间应早于结束时间！");
+                 return;
+             }
            
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";
             dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+            //Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            //{
+            //    MessageBox.Show("正在查询数据，请稍等......");
+            //}));
             if (type.Equals(HistoryWindowType.TYPE_DEVICE) && device != null)
             {
                 ReadDeviceDataDelegate deviceDelegate = new ReadDeviceDataDelegate(dataOfDevice.getDataBetweenStartAndEndTime);
-            
-
                 IAsyncResult result = deviceDelegate.BeginInvoke(device, start, end, TestCallback, "call back");
+              //  MessageBox.Show("正在查询数据，请稍等......");
                 Dictionary<string, List<DeviceData>> dataDic = deviceDelegate.EndInvoke(result);
+                if(dataDic==null)
+                {
+                    MessageBox.Show("访问数据库错误！");
+                    return;
+                }
                 dataOfDevice.CloseConnection();
                 device.startToShowHistoryTable(dataDic);
-                ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
+                //绘制图表 
                 drawLines(dataDic);
             }
             else if (type.Equals(HistoryWindowType.TYPE_CAB) && cab != null)
             {
                 ReadCabDataDelegate cabDelegate = new ReadCabDataDelegate(dataOfDevice.getDataBetweenStartAndEndTime);
                 IAsyncResult result = cabDelegate.BeginInvoke(cab, start, end, TestCallback, "call back");
+              //  MessageBox.Show("正在查询数据，请稍等......");
                 Dictionary<string, List<DeviceData>> dataDic = cabDelegate.EndInvoke(result);
                 dataOfDevice.CloseConnection();
                // device.startToShowHistoryTable(dataDic);
-     ////////////////////////////////////////////绘制图表//////////////////////////////////////////////////////////
-             //   drawLines(dataDic);
+                //绘制图表 
+                drawLines(dataDic);
             }
         }
  
