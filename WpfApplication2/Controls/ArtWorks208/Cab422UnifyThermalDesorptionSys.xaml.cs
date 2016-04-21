@@ -32,7 +32,8 @@ namespace Project208Home.Views.ArtWorks208
         {
             InitializeComponent();
             cabInArtwork = cab;
-             InitCab();
+            cabInArtwork.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(update);
+            InitCab();
         }
         void initBindings()
         {
@@ -50,6 +51,16 @@ namespace Project208Home.Views.ArtWorks208
             nowding2.Path = new PropertyPath("NowValue");
             Text2.SetBinding(TextBlock.TextProperty, nowding2);
         }
+
+        private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+                Text1.Text = cabInArtwork.Devices[0].NowValue;
+                Text2.Text = cabInArtwork.Devices[2].NowValue;
+            }));
+        }
+
        /// <summary>
        /// 初始化柜子工艺图
        /// </summary>

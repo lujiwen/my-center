@@ -62,9 +62,9 @@ namespace WpfApplication2.View.Pages
         public void insertCab(Frame sysFram, Cab c)
         {
             selectCabs.Add(c);
-            foreach(CabUI cu in CabList.Items)
+            foreach (CabUI cu in CabList.Items)
             {
-                if(cu.CabInUI.CabId == c.CabId)
+                if (cu.CabInUI.CabId == c.CabId)
                 {
                     return;
                 }
@@ -77,17 +77,17 @@ namespace WpfApplication2.View.Pages
         public void insertCab(Frame sysFram, Building b)
         {
             selectBuildings.Add(b);
-            for (int i = 0; i < b.Cabs.Count;i++ )
+            for (int i = 0; i < b.Cabs.Count; i++)
             {
                 selectCabs.Add(b.Cabs[i]);
-                _cabUIs.Add(new CabUI(sysFram,b.Cabs[i]));
+                _cabUIs.Add(new CabUI(sysFram, b.Cabs[i]));
             }
-          //  
-            for (int i = 0; i < b.Cabs.Count;i++ )
+            //  
+            for (int i = 0; i < b.Cabs.Count; i++)
             {
                 cabListSource.Add(new CabUI(sysFram, b.Cabs[i]));
             }
-             
+
             ApplyDataBinding();
         }
 
@@ -97,9 +97,9 @@ namespace WpfApplication2.View.Pages
             // Bind ArrayList with the ListBox
             CabList.ItemsSource = cabListSource;
         }
-        public void deleteCab(Frame sysFram,Building b)
+        public void deleteCab(Frame sysFram, Building b)
         {
-            for (int i = cabListSource.Count-1; i >= 0;i-- )
+            for (int i = cabListSource.Count - 1; i >= 0; i--)
             {
                 if (((CabUI)cabListSource[i]).CabInUI.BuildingId == b.SystemId)
                 {
@@ -110,9 +110,9 @@ namespace WpfApplication2.View.Pages
         }
 
         //删除一个柜子
-        public void deleteCab(Frame sysFram,Cab c)
+        public void deleteCab(Frame sysFram, Cab c)
         {
-            for (int i = 0; i < CabList.Items.Count;i++ )
+            for (int i = 0; i < CabList.Items.Count; i++)
             {
                 if (((CabUI)cabListSource[i]).CabInUI.CabId == c.CabId)
                 {
@@ -127,23 +127,23 @@ namespace WpfApplication2.View.Pages
             cabListSource = new ArrayList();
             selectBuildings = new List<Building>();
             selectCabs = new List<Cab>();
-            if(_building!=null)
+            if (_building != null)
             {
                 selectBuildings.Add(_building);
             }
-              
-             if (cabs != null)
-             {
-                 for (int i = 0; i < cabs.Count; i++)
-                 {
-                     WpfApplication2.Model.Vo.Cab cab = cabs[i];
-                     CabUI cabUI = new CabUI(systemPage.getPageFrame(), cab);
-                     cabListSource.Add(cabUI);
-                 }
-             }
+
+            if (cabs != null)
+            {
+                for (int i = 0; i < cabs.Count; i++)
+                {
+                    WpfApplication2.Model.Vo.Cab cab = cabs[i];
+                   //   WpfApplication2.Model.Vo.Cab cab = GlobalMapForShow.globalMapForCab[cabs[i].BuildingId+"_"+cabs[i].CabId];
+                    CabUI cabUI = new CabUI(systemPage.getPageFrame(), cab);
+                    cabListSource.Add(cabUI);
+                }
+            }
             CabList.ItemsSource = cabListSource;
-         //   this.Unloaded += new RoutedEventHandler(CabsPage_Unloaded);
-            this.Loaded += new RoutedEventHandler(CabsPage_loaded);
+            this.Unloaded += new RoutedEventHandler(CabsPage_Unloaded);
             systemPage.getMainWindowInstance().c.dataChartUpdate += new Controller.DataUpdatedEventHandler(updateCabsCharts);
         }
 
@@ -153,25 +153,18 @@ namespace WpfApplication2.View.Pages
         }
         private void updateAllCharts()
         {
-            if (cabListSource!=null)
+            if (cabListSource != null)
             {
-                foreach(CabUI cu in cabListSource)
+                foreach (CabUI cu in cabListSource)
                 {
                     cu.updateCabUI();
                 }
             }
         }
 
-        void CabsPage_loaded(object sender, RoutedEventArgs e)
+        void CabsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("CabsPage_loaded");
-            if (cabListSource != null)
-            {
-                foreach (CabUI cu in cabListSource)
-                {
-                    cu.CabInUI.IsUpdate = false;
-                }
-            }
+            Console.WriteLine("CabsPage_Unloaded");
         }
 
         public void addBuildingToShow(Building b)

@@ -32,6 +32,8 @@ namespace Project208Home.Views.ArtWorks208
         {
             InitializeComponent();
             cabInArtwork = cab;
+            cabInArtwork.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(update);
+       
             InitCab();
         }
         void initBindings()
@@ -89,12 +91,31 @@ namespace Project208Home.Views.ArtWorks208
             subSys36517ABtb.SetBinding(TextBlock.TextProperty, nowding9);
 
         }
+
+        private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+                subSys1Qualitytb.Text = cabInArtwork.Devices[0].NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.Devices[2].NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.Devices[4].NowValue;
+             
+                subSys16517ABtb.Text = cabInArtwork.Devices[1].NowValue;
+                subSys26517ABtb.Text = cabInArtwork.Devices[3].NowValue;
+                subSys36517ABtb.Text = cabInArtwork.Devices[5].NowValue;
+
+            }));
+        }
        /// <summary>
        /// 初始化柜子工艺图
        /// </summary>
         private void InitCab()
         {
             initBindings();
+        }
+        private void update(Cab cab)
+        {
+            this.cabInArtwork = cab;
         }
      }
 }

@@ -80,34 +80,6 @@ namespace WpfApplication2.Controls
             initChart();
             both.IsChecked = true;
             Dictionary<string, Device> devices =  GlobalMapForShow.globalMapForDevice;
-            cabAlarm = new AlarmBuzzer();
-            //cabAlarm.startAlarm();
-            //for(int i=0;i<_cab.Devices.Count;i++)
-            //{
-            //    if (!_cab.Devices[i].Type.Equals("Pump"))
-            //    {
-            //        CheckBox c = new CheckBox();
-            //        if (i == _cab.Devices.Count)
-            //        {
-            //            c.Name = "cb_all_select";
-            //            c.Content = "全选";
-            //        }
-            //        else
-            //        {
-            //            Device d = _cab.Devices[i];
-            //            c.Name = "cb_" + _cab.Devices[i].DeviceId;
-            //            c.Content = "" + _cab.Devices[i].DeviceId;
-            //            c.Content =d.HandleTypeInSystem;
-            //        }
-            //        c.IsChecked = true;
-            //        c.Margin = new Thickness(2); ;
-            //        c.Foreground = new SolidColorBrush(Colors.White);
-            //        c.Checked += new RoutedEventHandler(c_Checked);
-            //        c.Unchecked += new RoutedEventHandler(c_Unchecked); 
-            //       // curveChooser.Items.Add(c);//_cab.Devices[i].DeviceId+""
-            //    }
-            //}
-            
             if (_cab!=null)
             {
                 cab_name.Text = _cab.Name;
@@ -145,7 +117,6 @@ namespace WpfApplication2.Controls
                 paras[0] = CabInUI;
 
                 UserControl concreteCabArtWork = (UserControl)ct.Invoke(paras);
-               // Cab407HPT500I cab = new Cab407HPT500I(CabInUI);
                 cabArtWork.Children.Add(concreteCabArtWork);
             }
             catch(Exception e)
@@ -214,7 +185,6 @@ namespace WpfApplication2.Controls
         void CabInUI_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Console.WriteLine("CabInUI_PropertyChanged");
-           
          //   Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
 
@@ -222,7 +192,6 @@ namespace WpfApplication2.Controls
 
         public void UpdateChart(Cab c)
         {
-          //  Console.WriteLine("更新柜子图表， 一共有设备数量： "+c.Devices.Count);
             List<Device> devices = c.Devices ;
             DateTime dt =   DateTime.Now;
             string timeStamp = dt.ToString("HH:mm:ss");
@@ -248,7 +217,6 @@ namespace WpfApplication2.Controls
                             dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
                             dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
                         }
-                        //Console.WriteLine(i + "  :  " + devices[i].NowValue);
                         dataSeries[i].DataPoints[_pointCount - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString();
                         dataSeries[i].DataPoints[_pointCount - 1].YValue = Double.Parse(devices[i].NowValue); //; ;//数据点添加到数据系列
                     }
@@ -262,7 +230,6 @@ namespace WpfApplication2.Controls
             if(systemframe!=null)
             {
                DevicePage page = new DevicePage(systemframe,_cab);
-             //ProcedurePage page = new ProcedurePage(systemframe);
                systemframe.Content = page;
             }
         }
@@ -270,8 +237,9 @@ namespace WpfApplication2.Controls
 
         public void updateCabUI()
         {
-            Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
-            if (c.State.Equals("Normal"))
+             //CabInUI = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
+             Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
+             if (c.State.Equals("Normal"))
             {
                 cabAlarm.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -280,10 +248,9 @@ namespace WpfApplication2.Controls
                 cabAlarm.Visibility = System.Windows.Visibility.Visible;
             }
             //更新状态
-            stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
+             stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
             //更新曲线图
-            UpdateChart(c);
-            c.updateAllDevice();
+             UpdateChart(c);
 
         }
 

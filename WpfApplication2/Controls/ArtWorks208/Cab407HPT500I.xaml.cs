@@ -32,7 +32,25 @@ namespace Project208Home.Views.ArtWorks208
         {
             InitializeComponent();
             cabInArtwork = cab;
+            cabInArtwork.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(update);
             InitCab();
+        }
+
+        private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+                subSys16517ABtb.Text  = cabInArtwork.Devices[0].NowValue;
+                subSys26517ABtb.Text  = cabInArtwork.Devices[4].NowValue;
+                subSys36517ABtb.Text  = cabInArtwork.Devices[8].NowValue;
+                subSys46517ABtb.Text  = cabInArtwork.Devices[12].NowValue;
+
+                subSys1Qualitytb.Text = cabInArtwork.Devices[1].NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.Devices[5].NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.Devices[9].NowValue;
+                subSys4Qualitytb.Text = cabInArtwork.Devices[13].NowValue;
+
+            }));
         }
 
         private void initBindings()

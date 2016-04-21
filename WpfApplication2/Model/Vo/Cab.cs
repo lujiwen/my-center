@@ -22,9 +22,7 @@ namespace WpfApplication2.Model.Vo
         private string state;
         public event PropertyChangedEventHandler PropertyChanged;
         private String typeInSystem;//利用它进行对应工艺流程图创建
-        private bool isUpdate;
-        public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; unUpdateAllDevice(); } }
-        
+     
          public Cab()
         {
             name = "";

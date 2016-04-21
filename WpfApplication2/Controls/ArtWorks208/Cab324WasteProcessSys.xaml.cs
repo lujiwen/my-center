@@ -34,6 +34,7 @@ namespace Project208Home.Views.ArtWorks208
         {
             InitializeComponent();
             cabInArtwork = cab;
+            cabInArtwork.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(update);
             InitCab();
         }
 
@@ -44,6 +45,16 @@ namespace Project208Home.Views.ArtWorks208
             InitCab();
         }
 
+        private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+                // Console.WriteLine(" private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)");
+                subSys1Qualitytb.Text = cabInArtwork.Devices[0].NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.Devices[2].NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.Devices[4].NowValue;
+            }));
+        }
         void initBindings()
         {
             //解体氚测量仪
@@ -69,6 +80,10 @@ namespace Project208Home.Views.ArtWorks208
         private void InitCab()
         {
             initBindings();
+        }
+        private void update(Cab cab)
+        {
+            this.cabInArtwork = cab;
         }
     }
 }
