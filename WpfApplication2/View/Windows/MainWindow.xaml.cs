@@ -15,6 +15,7 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Windows.Documents;
 using System.Diagnostics;
+using WpfApplication2.Daemon;
 namespace WpfApplication2.View.Windows
 {
     /// <summary>
@@ -61,7 +62,6 @@ namespace WpfApplication2.View.Windows
 
         public MainWindow()
         {
-        
             InitializeComponent();
             init();
         }
@@ -96,8 +96,14 @@ namespace WpfApplication2.View.Windows
             }
             
         }
+        CenterDaemon daemon;
         private void  init()
         {
+            //开启守护进程
+            string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
+            daemon = new CenterDaemon();
+            //daemon.startDaemon(@"F:\center-daemon\center-daemon\Debug\center-daemon.exe");
+            daemon.startDaemon(DaemonExePath);
             instance = this ;
             c = new MainController();
             initPoints();
@@ -281,10 +287,13 @@ namespace WpfApplication2.View.Windows
             w.Show();
         }
 
-
         private void exit(object sender, RoutedEventArgs e)
         {
          //  Application.Current.Shutdown();
+            if(daemon!=null)
+            {
+                daemon.shutdownDaeom();
+            }
             System.Environment.Exit(0);
         }
 

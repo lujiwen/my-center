@@ -14,7 +14,8 @@ namespace WpfApplication2
       {
          // Create the application.
          Application app = new Application();
-         MainWindow win = new  MainWindow(); 
+         MainWindow win = new  MainWindow();
+         
          app.Run(win);
       }
    }

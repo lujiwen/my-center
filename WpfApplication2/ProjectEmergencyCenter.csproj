@@ -106,6 +106,7 @@
     <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="package\208Boxes\DeviceDataBox_XH3125.cs" />
     <Compile Include="package\Box.cs" />
     <Compile Include="package\DeviceDataBox.cs" />
