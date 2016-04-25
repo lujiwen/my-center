@@ -125,6 +125,7 @@
         {
             Console.WriteLine("SystemPage_Unloaded");
         }
+
         /// <summary>
         /// 由选择多个检测点进来 看到的左侧的树状结构
         /// </summary>
@@ -212,6 +213,7 @@
             }
         }
 
+
         void mainNode_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
@@ -281,6 +283,7 @@
             }
             return subSystemNames ;
         }
+      
         // 0  1
         private StackPanel createTreeViewItem(string value, BitmapImage btmapImg,bool hasMyCheckBox,int level,MyTreeViewItem item)
         {

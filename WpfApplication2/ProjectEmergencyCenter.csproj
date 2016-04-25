@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WpfApplication2</RootNamespace>
     <AssemblyName>WpfApplication2</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -54,6 +54,7 @@
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -67,9 +68,9 @@
     <Reference Include="WPFToolkit">
       <HintPath>E:\share\WPFToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="WPFVisifire.Charts, Version=3.0.3.0, Culture=neutral, PublicKeyToken=99d724542e4db593, processorArchitecture=MSIL">
+    <Reference Include="WPFVisifire.Charts, Version=5.1.7.0, Culture=neutral, PublicKeyToken=99d724542e4db593, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\WPFVisifire.Charts.dll</HintPath>
+      <HintPath>..\Dlls\WPFVisifire.Charts.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>..\Xceed.Wpf.Toolkit.dll</HintPath>

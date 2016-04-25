@@ -6,6 +6,7 @@
         xmlns:my="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"
         xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:dg="clr-namespace:Microsoft.Windows.Controls;assembly=WpfToolkit"
+         
         Title="历史数据查询" Height="Auto" Width="850" Background="#FF565656" Foreground="White"  >
     <Grid>
         <StackPanel Orientation="Vertical">
@@ -16,6 +17,7 @@
                 <toolkit:DateTimePicker Name="end_time"  Width="120"  TimeFormat="LongTime"></toolkit:DateTimePicker>
                 <Button Margin="20,5,5,5" Click="Start_Query_Button_Click" Width="54"> 查询</Button>
             </StackPanel>
+            
             <my:Chart  Visibility="Visible" Name="history_chart" Width="770" Height="400"  Margin="10,5,10,5" View3D="False" AnimationEnabled="False"  HorizontalAlignment="Center"  AnimatedUpdate="False" Watermark="False" Background="#FF565656" IndicatorEnabled="True"   />
             <!--<dg:DataGrid  Visibility="Visible" Name="data_grid"   Width="770" Height="400"  Margin="10,5,10,5" AutoGenerateColumns="True"  IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="data_grid_MouseDoubleClick"></dg:DataGrid>-->
         </StackPanel>

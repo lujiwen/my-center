@@ -12,14 +12,11 @@ namespace WpfApplication2
       [STAThread()]
       static void Main()
       {
-         // Create the application.
          Application app = new Application();
          MainWindow win = new  MainWindow();
-         
          app.Run(win);
       }
    }
-
 
    public struct PointAndInfo
    {

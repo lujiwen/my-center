@@ -40,8 +40,7 @@ namespace WpfApplication2.Daemon
                 // 如果 守护进程 已经存在，则不需再启动。无需重复执行。
                 if (daemon_exits_judge())
                 {
-                  //  textBox1.AppendText("daemon already exits !!\r\n");
-                  //  LogUtil.Log(false,
+                    MessageBox.Show("daemon already exits !");
                 }
                 else
                 {
@@ -49,13 +48,12 @@ namespace WpfApplication2.Daemon
                 }
                 th = new Thread(new ThreadStart(DaemonCommunicate)); //与守护进程进行 心跳通信                
                 th.Start(); //启动线程  
-               // textBox1.AppendText("daemon starts successfully ..\r\n");
+               
             }
             catch (Exception)
             {
-               // textBox1.AppendText("daemon fails to start !!\r\n");
+                MessageBox.Show("daemon fails to start !");
             }
-            //  pro.WaitForExit();
         }
 
         static void DaemonCommunicate()
@@ -77,10 +75,6 @@ namespace WpfApplication2.Daemon
                 {
                     int len_sent = sock.Send(bs, bs.Length, 0);
                     Thread.Sleep(500);
-                    // 真实运行，注释这 3句代码，只是为了测试，程序异常终止，没有发消息了。
-                    //cnt++;
-                    //if (cnt > 5)
-                    //    return;
                 }
             }
             catch (Exception e)

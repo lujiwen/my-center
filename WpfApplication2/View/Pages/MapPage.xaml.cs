@@ -48,6 +48,7 @@ namespace WpfApplication2.View.Pages
         private QueueFixedLength<AlarmMessage> alarmMessages;
         private  DateTime mStartHoverTime = DateTime.MinValue;
         private AdornerLayer mAdornerLayer = null;
+
         public MapPage(MainWindow w)
         {
             InitializeComponent();
@@ -55,38 +56,8 @@ namespace WpfApplication2.View.Pages
             init();
             initPoints();
             initMap();
-            //listBox1.Items.Add("this is listbox");
-            Thread th1 = new Thread(new ThreadStart(DispatcherThread));
-            //th1.Start();
-          
         }
-        public void DispatcherThread()
-        {
-            //可以通过循环条件来控制UI的更新
-            while (true)
-            {
-                //this.listBox1.ScrollIntoView(this.listBox1.Items[listBox1.Items.Count - 1]);
-                ///线程优先级，最长超时时间，方法委托（无参方法）
-                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(UpdateOutput));
-                //this.listBox1.ScrollIntoView(this.listBox1.Items[listBox1.Items.Count - 1]);
-                Thread.Sleep(500);
-            }
-        }
-        private void UpdateOutput()
-        {
-            //listBox1.Items.Add("itemThread");
-            count_item++;
-            listBox1.Items.Insert(0, "最前面" + count_item);
-            if (listBox1.Items.Count > 10)
-                listBox1.Items.Clear();
-            //清除所有内容
-            //listBox1.Items.Clear();
-            //listBox1.ScrollIntoView(listBox1.Items[listBox1.Items.Count - 1]);
-            //System.Console.WriteLine("*********************"+listBox1.Items.Count);
-            //listBox1.Items.MoveCurrentToPosition(listBox1.Items.Count-1);
-            //listBox1.SelectedIndex = listBox1.Items.Count - 1;
-            //this.listBox1.ScrollIntoView(this.listBox1.SelectedItem);
-        }
+      
         private void init()
         {
             buildings = mainWindow.Buildings;
@@ -102,7 +73,7 @@ namespace WpfApplication2.View.Pages
             //MainMap.Manager.ImageCacheSecond = ch;
 
             // set your proxy here if need
-       //    MainMap.Manager.Proxy = new WebProxy("10.2.0.100", 8080);
+          //    MainMap.Manager.Proxy = new WebProxy("10.2.0.100", 8080);
         //   MainMap.Manager.Proxy.Credentials = new NetworkCredential("ogrenci@bilgeadam.com", "bilgeadam");
 
             // set cache mode only if no internet avaible
@@ -129,9 +100,9 @@ namespace WpfApplication2.View.Pages
             MainMap.MaxZoom = 40;
             MainMap.MinZoom = 2;
             MainMap.Zoom = 6;
-           // MainMap.MapType = MapType.GoogleHybridChina;
              MainMap.MapType = MapType.ArcGIS_Map;
-            MainMap.Manager.Mode = AccessMode.CacheOnly;
+            MainMap.Manager.Mode = AccessMode.ServerAndCache;
+         //   MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
           //MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
             MainMap.CanDragMap = true;
             MainMap.DragButton = MouseButton.Right;
@@ -149,8 +120,6 @@ namespace WpfApplication2.View.Pages
                     markers[i].ZIndex = int.MaxValue;
                     trolleyToolTip = new TrolleyTooltip(buildings[i]);
                     markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
-                 //   markers[i].Shape.MouseRightButtonDown += new MouseButtonEventHandler(Marker_MouseRightButtonDown);
-                    // markers[i].Shape.MouseDown += new MouseButtonEventHandler(marker_Click);
                     markers[i].Shape.MouseLeftButtonUp += marker_Click;
                     markers[i].Shape.AllowDrop = true;
                     markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
@@ -173,7 +142,11 @@ namespace WpfApplication2.View.Pages
             e.Effects = DragDropEffects.Copy;
         }
 
-        
+       /// <summary>
+       /// 拖动监测点，在左侧信息窗口释放监测点之后，将该检测点的信息展示在左侧
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void OnDrop(object sender, DragEventArgs e)
         {
             System.Windows.Point pos = e.GetPosition(info_panel);
@@ -289,6 +262,7 @@ namespace WpfApplication2.View.Pages
                 }
             }
         }
+
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (IsMouseDown)
@@ -320,6 +294,12 @@ namespace WpfApplication2.View.Pages
             MainMap.Focus();
         }
 
+
+       /// <summary>
+        /// 地图上的检测点被点击之后，进入到改监测点的系统页面SystemPage
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         public void marker_Click(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("点击了一下marker");
@@ -373,7 +353,7 @@ namespace WpfApplication2.View.Pages
         }
 
         /// <summary>
-        /// 初始化所有点
+        /// 初始化所有点检测点
         /// </summary>
         private void initPoints()
         {
@@ -393,6 +373,11 @@ namespace WpfApplication2.View.Pages
             MainMap.ZoomAndCenterMarkers(null);
         }
 
+        /// <summary>
+        /// 右键菜单项点击事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem i = (MenuItem)sender ;
@@ -404,6 +389,9 @@ namespace WpfApplication2.View.Pages
             }
         }
 
+       /// <summary>
+       /// 清除左侧每个监测点的概要信息
+       /// </summary>
         private void clearLeftPanelInfo()
         {
             for(int i = 0;i<6;i++)
@@ -414,43 +402,37 @@ namespace WpfApplication2.View.Pages
             group_panel.Children.Clear();
         }
 
-        //更新地图界面数据
-        public void updateMapUI()
-        {
-            Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
-            if(markers!=null&&markers.Length>0)
-            {
-                for (int i = 0; i < markers.Length;i++ )
-                {
-                    Building b = ((PositionMarker)(markers[i].Shape)).building;
-                    Building b2 = buildings[b.SystemId + ""];
-                    if (b2.State != b.State) //异常和正常状态的切换
-                    {
-                        TrolleyTooltip trolleyToolTip = new TrolleyTooltip(b);
-                        markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[b.SystemId + ""]);
-                    }
-                }
-            }
-        }
+        /// <summary>
+        ///   更新地图界面数据 (未调用)
+        /// </summary>
+        //public void updateMapUI()
+        //{
+        //    Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
+        //    if(markers!=null&&markers.Length>0)
+        //    {
+        //        for (int i = 0; i < markers.Length;i++ )
+        //        {
+        //            Building b = ((PositionMarker)(markers[i].Shape)).building;
+        //            Building b2 = buildings[b.SystemId + ""];
+        //            if (b2.State != b.State) //异常和正常状态的切换
+        //            {
+        //                TrolleyTooltip trolleyToolTip = new TrolleyTooltip(b);
+        //                markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[b.SystemId + ""]);
+        //            }
+        //        }
+        //    }
+        //}
 
 
+        /// <summary>
+        /// alarmMessages 队列中的信息已经和大地图界面下方的滚动列表绑定binding，添加到列表中的信息会自动显示在列表最上方
+        /// </summary>
+        /// <param name="alarmStr"></param>
         public void updateAlarmMessage(String alarmStr)
         {
             AlarmMessage msg = new AlarmMessage(alarmStr);
             alarmMessages.add(msg);
             msg = null;
-            //存储报警信息
-            //alarmMessages.Capacity = 10;
-            //count_item = count_item + 1;
-            //double x = SystemParameters.WorkArea.Width;        
-            //listBox1.Width = x;
         }
-
-        private void listBox1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            updateAlarmMessage("1234");
-        }
-       
-        
     }
 }

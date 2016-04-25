@@ -46,7 +46,6 @@ namespace WpfApplication2.Controller
             InitialConnection();
             InitialThread();
 
-
             //while (true)
             //{
             //    List<DeviceForShow> result = dataOfDevice.getDataBetweenStartAndEndTime(2, 5, "'2015/10/8 20:14:25'", "'2016/10/8 20:14:25'");

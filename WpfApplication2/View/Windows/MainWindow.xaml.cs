@@ -102,23 +102,27 @@ namespace WpfApplication2.View.Windows
             //开启守护进程
             string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
             daemon = new CenterDaemon();
-            //daemon.startDaemon(@"F:\center-daemon\center-daemon\Debug\center-daemon.exe");
             daemon.startDaemon(DaemonExePath);
+
             instance = this ;
             c = new MainController();
             initPoints();
-            //弹出窗，选择展示页面
-          //  this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+ 
             c.alarmMessage += new alarmMessageEventHandler(MainWindowShowAlarm );
             c.alarmBuzzer += new alarmBuzzerEventHandler(buzzerAlarm);
+
             isEmergencyStatus = false;
-           // alarmer = new AlarmBuzzer();
             isMute = false;
+
             mapPage = new MapPage(this);
             MainPage.Content = mapPage;
-           // systemPage = new SystemPage(this);
+ 
         }
       
+        /// <summary>
+        ///  想大地图界面添加报警消息和报警时间
+        /// </summary>
+        /// <param name="alarmMsg"></param>
         void MainWindowShowAlarm(AlarmMessage alarmMsg)
         {
             //添加 显示报警信息

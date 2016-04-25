@@ -453,17 +453,16 @@ namespace WpfApplication2.Model.Vo
             }
             else if (State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
             {
-                alertInfomation = "当前值： \"" + NowValue + "\"高于正常值";
+                alertInfomation = "当前值： \"" + NowValue + "\" 高于正常值";
             }
             else if (State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
             {
-                alertInfomation = "当前值出错 ";
+                alertInfomation = " 当前值出错 ";
             }
 
             String msg = GlobalMapForShow.globalMapForBuiding[BuildingId].Name + " 监测点" + "," +
                 GlobalMapForShow.globalMapForCab[BuildingId + "_" + CabId].Name + " ," +
-                GlobalMapForShow.globalMapForDevice[BuildingId + "_" + DeviceId].SubSystemName + alertInfomation +
-                "  当前值为：\"" + NowValue + "\" (" + DateTime.Now.ToString() + ")";
+                GlobalMapForShow.globalMapForDevice[BuildingId + "_" + DeviceId].SubSystemName + alertInfomation +" (" + DateTime.Now.ToString() + ")";
             return msg;
         }
 
