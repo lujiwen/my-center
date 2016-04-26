@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApplication2.Model.Vo;
 
 // code by liuhuashan 2016/04/26
 
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Yancong
 {
-    class DeviceX2401b:DevicePavilion
+    class DeviceX2401b:Device
     {
 
         private string deviceId;
@@ -30,8 +31,6 @@ namespace Yancong
         private float correctFactor;
 
         private string dataUnit;
-
-
         private double nowValue;
 
         /// <summary>
@@ -46,7 +45,8 @@ namespace Yancong
         ///
         /// </summary>
         /// <returns></returns>
-        public virtual byte[] ToReadDataCommand() {
+        public override byte[] ToReadDataCommand()
+        {
             // 05 02 00 F0 F7
           byte[] command = {0x05,0x02,0x00,0xF0,0xF7}; // 超大流量15字节命令
             command[1]=(byte)devLocalAddress; // 暂时的定义，该设备标准定义的地址是第二三字节，都是地址标号；可能高位在前，地位在后吧，现场验证看看？
@@ -62,7 +62,8 @@ namespace Yancong
         /// 读参数命令
         /// </summary>
         /// <returns></returns>
-        public virtual Byte[] ToReadParaCommands() {
+        public override Byte[] ToReadParaCommands()
+        {
             return null;
         }
 
@@ -70,7 +71,7 @@ namespace Yancong
         /// 生成设置参数命令
         /// </summary>
         /// <returns></returns>
-        public virtual Byte[] ToSetParaCommands() {
+        public override Byte[] ToSetParaCommands() {
             return null;
         }
 
@@ -80,17 +81,17 @@ namespace Yancong
         /// 默认只有一个通道数据吧
         /// <param name="flowBytes"> 原始字节流 </param>
         /// 字节数（标准数据块）
-/*
-名  称	字节数（压缩数据块）	字节数（标准数据块）
-字节数	1字节	1字节
-设备号	2字节	2字节
-特征字	1字节（0x70）	1字节（0x71）
-1通道实时数据块	4字节	6字节
-……	……×4字节	6字节
-N通道实时数据块	4字节	6字节
-校验码		1字节
-*/
-        public virtual void AnalysisPavilionData(byte[] flowBytes,int len) { 
+            /*
+            名  称	字节数（压缩数据块）	字节数（标准数据块）
+            字节数	1字节	1字节
+            设备号	2字节	2字节
+            特征字	1字节（0x70）	1字节（0x71）
+            1通道实时数据块	4字节	6字节
+            ……	……×4字节	6字节
+            N通道实时数据块	4字节	6字节
+            校验码		1字节
+            */
+        public override void AnalysisPavilionData(byte[] flowBytes,int len) { 
             // 0B 02 00 71 00 70 2D 46 01 80 E2   目前回来的数据只有一个通道的数据，首字节就是命令长度 
             // 0B 02 00 71 99 99 81 41 14 80 06
             // 首字节为命令长度，最后一字节未校验码
@@ -152,7 +153,7 @@ N通道实时数据块	4字节	6字节
         /// 生成插入数据的sql
         /// </summary>
         /// <returns></returns>
-        public virtual String getHistoryDataSql() {
+        public override String getHistoryDataSql() {
             return "";
         }
 

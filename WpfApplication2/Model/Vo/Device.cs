@@ -39,12 +39,15 @@ namespace WpfApplication2.Model.Vo
         public  bool showCurve;
         private bool isUpdate;
         public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; } }
-
+        public Boolean paraChanged;//参数是否被修改
+        public Boolean paraChangedSuccess;//参数修改成功
+        public delegate string ReadDatabaseDelegate();
         /**
          * 一下两项用于数据交互
          * */
         private DeviceDataBox_Base value;
         private string type;
+        public string devUnit; // 单位 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,9 +58,7 @@ namespace WpfApplication2.Model.Vo
         public String devIp = " ";
         public String devType = " ";  // 子类赋值
         public  Device DeviceInMap;
-  /// <summary>
-  ///
-  /// </summary>
+ 
         public Device(DeviceDataBox_Base b)
         {
             fromBoxToDevice(b);
@@ -67,8 +68,15 @@ namespace WpfApplication2.Model.Vo
         {
  
         }
-        //string D_ID, string TYPE, string CABID, string SUBSYSTEMSERIAL, string SUBSYSTEMNAME, int HIGHTHRESHOLD, string LOWTHRESHOLD, float DEVLOCALADDRESS, float INTERFACEID, int CORRECTFACTOR, int DATAUNIT, float INPUTARG1, string INPUTARG2, float INPUTARG3, float BUILDINGID, float HANDLETYPEINSYSTEM
-        
+
+        public Device(UInt32 id, String ip, String port)         
+        {
+            deviceId = id.ToString();
+            devPort = port;
+            devIp = ip;
+            paraChanged = false;
+        }
+
         public Device(OracleDataReader odr)
         {
             deviceId = odr.GetInt32(0).ToString();
@@ -165,7 +173,7 @@ namespace WpfApplication2.Model.Vo
                 State = DeviceDataBox_Base.State.L_Alert.ToString();
             }
         }
-
+    
         public string DeviceId
         {
             get { return deviceId; }
@@ -183,8 +191,19 @@ namespace WpfApplication2.Model.Vo
             get { return type; }
             set { type = value; }
         }
-        
-
+        public string devState = " "; // 设备状态 枚举 变量表示，全局统一
+        public string DState
+        {
+            get { return devState; }
+            set
+            {
+                devState = value;
+                setDevState(devState);
+            }
+        }
+        public virtual void setDevState(string state)
+        {
+        }
         public int SubSystemSerial
         {
             get { return subSystemSerial; }
@@ -233,13 +252,11 @@ namespace WpfApplication2.Model.Vo
             set { correctFactor = value; }
         }
         
-
         public string DataUnit
         {
             get { return dataUnit; }
             set { dataUnit = value; }
         }
-       
 
         public float InputArg1
         {
@@ -282,7 +299,6 @@ namespace WpfApplication2.Model.Vo
               set { inputArg8 = value; }
           }
           
-      
         public string HandleTypeInSystem
         {
             get { return handleTypeInSystem; }
@@ -330,7 +346,6 @@ namespace WpfApplication2.Model.Vo
         {
             bool parasetright = true;
             //判断数据包长度是否为0x05，否则设置为错误
-
             return parasetright;
         }
 
@@ -415,12 +430,9 @@ namespace WpfApplication2.Model.Vo
         {
             return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; 
         }
-
-
-        public delegate string ReadDatabaseDelegate();
+       
         public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
         {
-          //  ReadDatabaseDelegate readDatabase = new ReadDatabaseDelegate(OracleDataReader odr);
             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
             List<DeviceData> dataset = new List<DeviceData>();
             while (odr.Read())
@@ -465,6 +477,5 @@ namespace WpfApplication2.Model.Vo
                 GlobalMapForShow.globalMapForDevice[BuildingId + "_" + DeviceId].SubSystemName + alertInfomation +" (" + DateTime.Now.ToString() + ")";
             return msg;
         }
-
     }
 }
