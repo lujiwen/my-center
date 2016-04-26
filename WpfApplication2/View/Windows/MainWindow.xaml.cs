@@ -351,6 +351,15 @@ namespace WpfApplication2.View.Windows
             System.Diagnostics.Process.Start("IExplore.exe", path);
            
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (daemon != null)
+            {
+                daemon.shutdownDaeom();
+            }
+            System.Environment.Exit(0);
+        }
     }
 }
 

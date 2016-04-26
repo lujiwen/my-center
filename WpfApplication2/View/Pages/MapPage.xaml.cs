@@ -73,8 +73,8 @@ namespace WpfApplication2.View.Pages
             //MainMap.Manager.ImageCacheSecond = ch;
 
             // set your proxy here if need
-          //    MainMap.Manager.Proxy = new WebProxy("10.2.0.100", 8080);
-        //   MainMap.Manager.Proxy.Credentials = new NetworkCredential("ogrenci@bilgeadam.com", "bilgeadam");
+            // MainMap.Manager.Proxy = new WebProxy("10.2.0.100", 8080);
+            //MainMap.Manager.Proxy.Credentials = new NetworkCredential("ogrenci@bilgeadam.com", "bilgeadam");
 
             // set cache mode only if no internet avaible
             //try
@@ -101,7 +101,7 @@ namespace WpfApplication2.View.Pages
             MainMap.MinZoom = 2;
             MainMap.Zoom = 6;
              MainMap.MapType = MapType.ArcGIS_Map;
-            MainMap.Manager.Mode = AccessMode.ServerAndCache;
+            MainMap.Manager.Mode = AccessMode.ServerOnly;
          //   MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
           //MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
             MainMap.CanDragMap = true;
