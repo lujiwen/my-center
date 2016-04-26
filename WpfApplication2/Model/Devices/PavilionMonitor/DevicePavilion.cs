@@ -17,7 +17,7 @@ namespace PavilionMonitor
     public delegate void RealTimeCurveEvent(float[] value); 
     public delegate void UpdateSuccessEvent(Boolean success);
 
-    // 子类再派生类，数据更新做到子类上？？？？？？？？？？？？？？？？？？？？？？？？？？ 
+    // 子类再派生类，数据更新做到子类上  
     public class DevicePavilion : Device
     {
        public UInt32 devId=0;
