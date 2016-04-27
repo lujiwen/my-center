@@ -62,11 +62,14 @@ namespace WpfApplication2.Controller
                 int byteRead = socket.EndReceiveFrom(iar, ref state.RemoteEP);
                 string message = Encoding.Default.GetString(state.Buffer, 0, byteRead);
 
-                if (dataReceivedEvent != null)
+                //if (dataReceivedEvent != null)
+                //{
+                //    dataReceivedEvent(message);
+                //}
+                if(ReceiveListener!=null)
                 {
-                    dataReceivedEvent(message);
+                    ReceiveListener.onDataReceive(message);
                 }
- 
             }
             catch (Exception e)
             {

@@ -245,16 +245,22 @@ namespace WpfApplication2.Controller
             }
         }
 
-        Dictionary<string, List<Connection>> connectionDic;
+        private Dictionary<string, List<Connection>> connectionDic;
+        private List<ConnectionManager> conManagerList;
         public void InitialConnection()  //初始化连接
         {
             connectionDic = new Dictionary<string, List<Connection>>();
             //208connection
              UdpConnection uc208 = new UdpConnection("127.0.0.1", "58888");
-             uc208.dataReceivedEvent += receiveData;
-             List<Connection> connections208 = new List<Connection>();
-             connections208.Add(uc208);
-             connectionDic.Add("208",connections208);
+             //uc208.dataReceivedEvent += receiveData;
+             //List<Connection> connections208 = new List<Connection>();
+             //connections208.Add(uc208);
+             //connectionDic.Add("208",connections208);
+
+             conManagerList = new List<ConnectionManager>();
+             ConnectionManager manager208 = new ConnectionManager(uc208);
+             manager208.ManagerReceivedDataEvent += receiveData;
+
             /**
              * 发送控制命令到二级的调用方法
              * */

@@ -8,7 +8,13 @@ using System.Collections;
 
 namespace WpfApplication2.Controller
 {
- 
+    /// <summary>
+    /// connection 绑定不到界面上，无法使用代理,先使用回调函数的方式
+    /// </summary>
+    public interface DataReciveListner
+    {
+        void onDataReceive(String message);
+    }
     /**
      * 尽可能做到 PLC 串口服务器 二级子系统 3种接入方式 接口一样。
      * 
@@ -19,7 +25,8 @@ namespace WpfApplication2.Controller
         private String port;
         private bool succeed; //是否连接成功
         private bool test;//是否为测试状态
-
+        private DataReciveListner receiveListener;
+        public DataReciveListner ReceiveListener { get { return receiveListener; } set { receiveListener = value; } }
         public  UInt32 receiveNullMaxCount = 5;//每个读取数据周期，最长等待时间 5*500 ms=2.5 S 
 
         public delegate void dataReceivedHandler(string data);

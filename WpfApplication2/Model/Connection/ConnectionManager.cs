@@ -9,7 +9,7 @@ namespace WpfApplication2.Controller
     /// <summary>
     /// 管理一个检测点的所有连接
     /// </summary>
-   public class ConnectionManager
+   public class ConnectionManager :DataReciveListner
     {
         public delegate void MangerReceivedDataHandler(string data);
         public event MangerReceivedDataHandler ManagerReceivedDataEvent;
@@ -35,7 +35,8 @@ namespace WpfApplication2.Controller
        {
            foreach(Connection c in connections)
            {
-               c.dataReceivedEvent += managerDataReceivedEvent ;
+               c.ReceiveListener = this;
+              // c.dataReceivedEvent += managerDataReceivedEvent ;
            }
        }
 
@@ -64,5 +65,10 @@ namespace WpfApplication2.Controller
            return false;
        }
 
+
+       void DataReciveListner.onDataReceive(string message)
+       {
+           ManagerReceivedDataEvent(message);
+       }
     }
 }
