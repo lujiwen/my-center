@@ -14,14 +14,13 @@ namespace WpfApplication2.Controller
   *使用时生成一个SocketConnection对象，然后调用Connect进行连接，如果断开可以使用reconnect进行重连，
   *发送数据需要调用sendData函数，数据接收需要接收dataReceivedEvent事件
  */
-   public class SocketConnection:BaseConnection
+   public class SocketConnection:Connection
     {
         string _ip;
         string _port;
         bool connectState = false;
 
         public delegate void dataReceivedHandler(string data);
-        //emit when data received
         public event dataReceivedHandler dataReceivedEvent;
 
         StateObject curState;
@@ -57,12 +56,9 @@ namespace WpfApplication2.Controller
           
         }
 
-       
-   
         public override void Connect(){
             try
             {
-                
                 IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse(Ip), Convert.ToInt32(Port));
                 // Create a TCP/IP socket.     
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

@@ -22,6 +22,8 @@ namespace WpfApplication2.Controller
 
         public  UInt32 receiveNullMaxCount = 5;//每个读取数据周期，最长等待时间 5*500 ms=2.5 S 
 
+        public delegate void dataReceivedHandler(string data);
+        public event dataReceivedHandler dataReceivedEvent;
 
         public Connection()
         {
@@ -32,6 +34,11 @@ namespace WpfApplication2.Controller
             this.port = port;
             this.succeed = false;
         }
+    
+         public virtual void Connect() { }
+         public virtual void GetDataFromServer() { }
+         public virtual void SendCommandToServer(string data) { }
+
         /// <summary>
         /// 启动连接
         /// </summary>

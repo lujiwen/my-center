@@ -29,19 +29,15 @@ namespace WpfApplication2.Controller
         public EndPoint RemoteEP;
     }
 
-    class UdpConnection
+   public  class UdpConnection:Connection
     {
-        const int localPort = 58888;
-        public delegate void dataReceivedHandler(string data);
-        public event dataReceivedHandler dataReceivedEvent;
-
-        public UdpConnection()
+       public event dataReceivedHandler dataReceivedEvent;
+        public UdpConnection(String ip, String port):base(ip,port)
         {
             try
             {
-                IPEndPoint ipep = new IPEndPoint(IPAddress.Any, localPort);
+                IPEndPoint ipep = new IPEndPoint(IPAddress.Any, Convert.ToInt32(Port));
                 Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
                 socket.Bind(ipep);
 
                 State state = new State(socket);
@@ -65,10 +61,12 @@ namespace WpfApplication2.Controller
             {
                 int byteRead = socket.EndReceiveFrom(iar, ref state.RemoteEP);
                 string message = Encoding.Default.GetString(state.Buffer, 0, byteRead);
+
                 if (dataReceivedEvent != null)
                 {
                     dataReceivedEvent(message);
                 }
+ 
             }
             catch (Exception e)
             {

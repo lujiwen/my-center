@@ -108,6 +108,7 @@
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daemon\Daemon.cs" />
+    <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\DeviceX2401b.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />

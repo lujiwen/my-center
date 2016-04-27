@@ -44,6 +44,7 @@ namespace WpfApplication2.Controller
         {
             InitialData();
             InitialConnection();
+            InitialDBConnection();
             InitialThread();
 
             //while (true)
@@ -244,18 +245,16 @@ namespace WpfApplication2.Controller
             }
         }
 
+        Dictionary<string, List<Connection>> connectionDic;
         public void InitialConnection()  //初始化连接
         {
+            connectionDic = new Dictionary<string, List<Connection>>();
             //208connection
-            UdpConnection uc208 = new UdpConnection();
-            uc208.dataReceivedEvent += receiveData;
-
-            //数据库连接
-            dataOfDevice = new DBManager();
-            string errorCode = "";
-            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-
-
+             UdpConnection uc208 = new UdpConnection("127.0.0.1", "58888");
+             uc208.dataReceivedEvent += receiveData;
+             List<Connection> connections208 = new List<Connection>();
+             connections208.Add(uc208);
+             connectionDic.Add("208",connections208);
             /**
              * 发送控制命令到二级的调用方法
              * */
@@ -265,6 +264,14 @@ namespace WpfApplication2.Controller
             //lb.Add(dcb);
             //String data = PackageWorker.pack(lb);
             //sendCommand("192.168.0.105","6003",data);
+        }
+
+        public void InitialDBConnection()
+        {
+            //数据库连接
+            dataOfDevice = new DBManager();
+            string errorCode = "";
+            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
         }
 
         public void InitialThread()  //初始化队列和线程
@@ -481,7 +488,6 @@ namespace WpfApplication2.Controller
             }
         }
 
-
         public static void sendCommand(String ip, String port, String data)
         {
             tcpConnection = new SocketConnection(ip, port);
@@ -491,7 +497,6 @@ namespace WpfApplication2.Controller
             tcpConnection.SendCommandToServer(data);
             tempSendData = data;
         }
-
 
         public static void receiveCommandData(string data)
         {
