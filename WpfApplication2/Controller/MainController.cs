@@ -246,8 +246,11 @@ namespace WpfApplication2.Controller
 
         public void InitialConnection()  //初始化连接
         {
-            UdpConnection uc = new UdpConnection();
-            uc.dataReceivedEvent += receiveData;
+            //208connection
+            UdpConnection uc208 = new UdpConnection();
+            uc208.dataReceivedEvent += receiveData;
+
+            //数据库连接
             dataOfDevice = new DBManager();
             string errorCode = "";
             dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);

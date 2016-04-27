@@ -109,6 +109,8 @@
     </Compile>
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Devices\DeviceX2401b.cs" />
+    <Compile Include="Model\Connection\COMConnection.cs" />
+    <Compile Include="Model\Connection\Connection.cs" />
     <Compile Include="package\208Boxes\DeviceDataBox_XH3125.cs" />
     <Compile Include="package\Box.cs" />
     <Compile Include="package\DeviceDataBox.cs" />

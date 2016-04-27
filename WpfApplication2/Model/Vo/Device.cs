@@ -12,6 +12,9 @@ namespace WpfApplication2.Model.Vo
 {
     public class Device : INotifyPropertyChanged
     {
+        public delegate string ReadDatabaseDelegate();
+        public delegate void UpdateSuccessEvent(Boolean success);
+
         private string deviceId;
         private string cabId;
         private string buildingId;
@@ -39,18 +42,16 @@ namespace WpfApplication2.Model.Vo
         public  bool showCurve;
         private bool isUpdate;
         public bool IsUpdate { get { return isUpdate; } set { isUpdate = value; } }
+        public int periodInterval; //该设备请求数据周期间隔时间 毫秒单位，不同设备请求数据周期可能不一样
         public Boolean paraChanged;//参数是否被修改
         public Boolean paraChangedSuccess;//参数修改成功
-        public delegate string ReadDatabaseDelegate();
+        public event PropertyChangedEventHandler PropertyChanged;
         /**
          * 一下两项用于数据交互
          * */
         private DeviceDataBox_Base value;
         private string type;
         public string devUnit; // 单位 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// lhs亭子的设备类 所需的属性
         /// </summary>
@@ -58,7 +59,7 @@ namespace WpfApplication2.Model.Vo
         public String devIp = " ";
         public String devType = " ";  // 子类赋值
         public  Device DeviceInMap;
- 
+        public string devState = " "; // 设备状态 枚举 变量表示，全局统一
         public Device(DeviceDataBox_Base b)
         {
             fromBoxToDevice(b);
@@ -191,7 +192,7 @@ namespace WpfApplication2.Model.Vo
             get { return type; }
             set { type = value; }
         }
-        public string devState = " "; // 设备状态 枚举 变量表示，全局统一
+    
         public string DState
         {
             get { return devState; }
@@ -201,9 +202,7 @@ namespace WpfApplication2.Model.Vo
                 setDevState(devState);
             }
         }
-        public virtual void setDevState(string state)
-        {
-        }
+
         public int SubSystemSerial
         {
             get { return subSystemSerial; }
@@ -334,13 +333,23 @@ namespace WpfApplication2.Model.Vo
                 }
             }
         }
- 
-        //2115房间经过RF1000后的数据格式是否正确
+
+        public virtual void setDevState(string state)
+        {
+        }
+
+        /// <summary>
+        /// 2115房间经过RF1000后的数据格式是否正确
+        /// </summary>
+        /// <param name="flowBytes"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
         public virtual bool isDataRight(byte[] flowBytes, int len)
         {
             bool dataright = true;
             return dataright;
         }
+
         //2115房间经过RF1000后的修改参数的确认信息是否是否正确
         public virtual bool isParaSetRight(byte[] paraBytes)
         {
@@ -371,9 +380,8 @@ namespace WpfApplication2.Model.Vo
         /// <returns></returns>
         public virtual void doWork()
         {
-
-
         }
+    
         /// <summary>
         /// 亭子设备 数据或参数读取命令生成。
         /// </summary>
@@ -391,6 +399,7 @@ namespace WpfApplication2.Model.Vo
         {
             return null;
         }
+  
         /// <summary>
         /// 生成设置参数命令
         /// </summary>
@@ -399,6 +408,7 @@ namespace WpfApplication2.Model.Vo
         {
             return null;
         }
+  
         /// <summary>
         /// 更改当前设备参数的值
         /// </summary>
@@ -421,6 +431,28 @@ namespace WpfApplication2.Model.Vo
             }
         }
 
+        public Boolean ParaChanged
+        {
+            get { return paraChanged; }
+            set { paraChanged = value; }
+        }
+        public Boolean ParaChangedSuccess
+        {
+            get { return paraChangedSuccess; }
+            set
+            {
+                paraChangedSuccess = value;
+                use(paraChangedSuccess);
+            }
+        }
+
+        public UpdateSuccessEvent use;
+
+        public UpdateSuccessEvent Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
         public virtual string GenerateInsertSql(string tablename) 
          {
              return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " +  DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + NowValue + ", " + "'" +  DataUnit + "'" + ", " + "'" +  State + "' )";
@@ -430,7 +462,7 @@ namespace WpfApplication2.Model.Vo
         {
             return "select * from devicedata_" + this.buildingId + " where devid = " + deviceId + " and DATATIME between " + start + " and " + end; 
         }
-       
+        
         public virtual Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
         {
             Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
@@ -452,9 +484,23 @@ namespace WpfApplication2.Model.Vo
             List<DeviceData> data = new List<DeviceData>();
             return data;
         }
+
+        /// <summary>
+        /// 个别设备需要单独生成历史数据表 eg:Asm02
+        /// </summary>
+        /// <param name="data"></param>
         public virtual void startToShowHistoryTable( Dictionary<string, List<DeviceData>> data)
         {
  
+        }
+
+        /// <summary>
+        /// 生成阿里云中转更新数据的sql
+        /// </summary>
+        /// <returns></returns>
+        public virtual void getAliyunUpdateStr()
+        {
+            return;
         }
         public virtual string GenerateAlarmMessage()
         {

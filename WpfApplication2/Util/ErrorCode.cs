@@ -18,7 +18,8 @@ namespace WpfApplication2.Util
             MAP_POINTS_INIT_ERR = 0x06,
             WIRTE_CONFIG_ERR = 0x07,
             WRITE_FILE_ERR   = 0x08,
-            DATABASE_INSERT_ERR = 0x09
+            DATABASE_INSERT_ERR = 0x09,
+            SOCKET_CONNECT_ERR = 0x10
         } ;
 
         private string errDescription;
@@ -43,10 +44,11 @@ namespace WpfApplication2.Util
                     errDescription = "柜子信息读取异常";
                     break;
                 case (int)ERR_CODE.CONNECTION_CLOSE_ERR:
-                    errDescription = "数据库连接关闭异常！";
+                    errDescription = "数据库连接关闭异常";
                     break;
-                //case ERR_CODE.CONNECTION_OPEN_ERR:
-                //    break ;
+                 case (int)ERR_CODE.SOCKET_CONNECT_ERR:
+                    errDescription = "套接字连接异常";
+                    break ;
                 case (int)ERR_CODE.MAP_POINTS_INIT_ERR:
                     errDescription = "地图监测点初始化异常";
                     break;
