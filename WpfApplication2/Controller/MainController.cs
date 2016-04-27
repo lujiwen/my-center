@@ -298,6 +298,7 @@ namespace WpfApplication2.Controller
 
        public void receiveData(string data)  //收到二级发送过来的数据后触发
         {
+            Console.WriteLine("收到数据:"+data);
              List<Box> boxes = new List<Box>();
             if(data==null||data.Equals(""))
             {

@@ -35,6 +35,7 @@ namespace Yancong
 
         /// <summary>
         /// 初始化设备地址，设备数据读取命令需要
+        /// addr :设备本地地址，数据请求命令中使用
         /// </summary>
         /// <param name="addr"></param>
         public DeviceX2401b(int addr,UInt32 id, String ip, String port): base(id,ip,port){
@@ -154,6 +155,7 @@ namespace Yancong
         /// </summary>
         /// <returns></returns>
         public override String getHistoryDataSql() {
+
             return "";
         }
 
