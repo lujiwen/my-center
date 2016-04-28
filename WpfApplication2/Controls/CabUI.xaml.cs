@@ -34,7 +34,7 @@ namespace WpfApplication2.Controls
   
         private Frame systemframe;
         private Cab _cab;
-        private int _pointCount = 15 ;
+        private int _pointCount = 50 ;
         public int PointCount { get { return _pointCount; } set { _pointCount = value;} }
         private Visifire.Charts.Title title;
         private DataSeries[] dataSeries;
@@ -188,7 +188,8 @@ namespace WpfApplication2.Controls
          //   Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
 
-
+        public double MAX = 100;
+        public double MIN = 1;  
 
         public void UpdateChart(Cab c)
         {
@@ -197,13 +198,18 @@ namespace WpfApplication2.Controls
             string timeStamp = dt.ToString("HH:mm:ss");
             for (int i = 0; i <c.Devices.Count;i++ )
             {
+               
                 if (devices[i].NowValue != null && (!devices[i].NowValue.Equals("")))
                 {
+                    if (Double.Parse(devices[i].NowValue) > MAX || Double.Parse(devices[i].NowValue) < MIN)
+                    {
+                        devices[i].NowValue = "50";
+                    }
                     if (dataSeries[i].DataPoints.Count < _pointCount) //直接添加
                     {
                         Console.WriteLine(i + "  :  " + devices[i].NowValue);
-                        DataPoint dataPoint = new DataPoint();//数据点
-                        dataPoint.MarkerSize = 8;
+                        LightDataPoint dataPoint = new LightDataPoint();//数据点
+                      //  dataPoint = 8;
 
                         dataPoint.AxisXLabel = timeStamp; //dataSeries[i].DataPoints.Count + "";
                         dataPoint.YValue = Double.Parse(devices[i].NowValue);
@@ -212,6 +218,10 @@ namespace WpfApplication2.Controls
                     }
                     else //想左移动
                     {
+                        if (Double.Parse(devices[i].NowValue) > MAX || Double.Parse(devices[i].NowValue) < MIN)
+                        {
+                            devices[i].NowValue = "50";
+                        }
                         for (int j = 1; j < _pointCount;j++ )
                         {
                             dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;

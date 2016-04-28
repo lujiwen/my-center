@@ -24,11 +24,11 @@
             </Style>
             <Style x:Key="unitLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="35"/>
-                <Setter Property="Width" Value="80"/>
+                <Setter Property="Width" Value="42"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="VerticalContentAlignment" Value="Top"/>
-                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style x:Key="devInfoLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="55"/>
@@ -53,10 +53,10 @@
             <Rectangle Canvas.Left="453" Canvas.Top="9" Height="241" Name="rectangle2" Width="10" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="214" Canvas.Top="120" Height="15" Name="rectangleSubSys1" Width="184" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="214" Canvas.Top="190" Height="15" Name="rectangleSubSys2" Width="184" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="229" Canvas.Top="159" Name="Text2" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="235" Canvas.Top="92" Name="Text1" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <Label Canvas.Left="312" Canvas.Top="152" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="318" Canvas.Top="84" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <TextBlock Canvas.Left="222" Canvas.Top="162" Name="Text2" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="228" Canvas.Top="95" Name="Text1" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <Label Canvas.Left="335" Canvas.Top="155" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="338" Canvas.Top="87" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="237" Canvas.Top="111" Content="解体氚测量仪" Style="{StaticResource devInfoLableStyle}" Width="143" Height="37" />
             <Label Canvas.Left="237" Canvas.Top="179" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Width="143" Height="37" />
             <Ellipse Name="subSys1Pumpep"  Canvas.Left="388" Canvas.Top="105" Style="{StaticResource pumpEllipseStyle}"/>

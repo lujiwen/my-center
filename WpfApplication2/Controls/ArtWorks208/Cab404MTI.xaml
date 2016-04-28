@@ -24,11 +24,11 @@
             </Style>
             <Style x:Key="unitLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="35"/>
-                <Setter Property="Width" Value="80"/>
+                <Setter Property="Width" Value="60"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="VerticalContentAlignment" Value="Top"/>
-                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontSize" Value="11"/>
             </Style>
             <Style x:Key="devInfoLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="45"/>
@@ -54,24 +54,24 @@
             <Rectangle Canvas.Left="200" Canvas.Top="68" Height="15" Name="rectangleSubSys1" Width="221" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="199" Canvas.Top="132" Height="15" Name="rectangleSubSys2" Width="221" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="199" Canvas.Top="176" Height="15" Name="rectangleSubSys3" Width="221" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="204" Canvas.Top="204" Name="subSys3Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30"/>
-            <TextBlock Canvas.Left="203" Canvas.Top="103" Name="subSys2Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30"/>
-            <TextBlock Canvas.Left="200" Canvas.Top="39" Name="subSys1Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30"/>
-            <Label Canvas.Left="231" Canvas.Top="197" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="40"/>
-            <Label Canvas.Left="233" Canvas.Top="95" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="40"/>
-            <Label Canvas.Left="231" Canvas.Top="31" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="40"/>
+            <TextBlock Canvas.Left="193" Canvas.Top="204" Name="subSys3Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30" MaxWidth="Infinity" />
+            <TextBlock Canvas.Left="192" Canvas.Top="103" Name="subSys2Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30"/>
+            <TextBlock Canvas.Left="189" Canvas.Top="39" Name="subSys1Presuretb" Text="000" Style="{StaticResource dataTextStyle}" Width="30"/>
+            <Label Canvas.Left="236" Canvas.Top="197" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="35"/>
+            <Label Canvas.Left="238" Canvas.Top="95" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="35"/>
+            <Label Canvas.Left="236" Canvas.Top="33" Content="Kpa" Style="{StaticResource unitLableStyle}" Width="35"/>
             <TextBlock Canvas.Left="327" Canvas.Top="205" Name="subSys36517ABtb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <TextBlock Canvas.Left="323" Canvas.Top="101" Name="subSys26517ABtb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <TextBlock Canvas.Left="324" Canvas.Top="39" Name="subSys16517ABtb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <Label Canvas.Left="391" Canvas.Top="196" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="387" Canvas.Top="93" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="385" Canvas.Top="31" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="405" Canvas.Top="198" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="401" Canvas.Top="95" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="399" Canvas.Top="33" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <TextBlock Canvas.Left="269" Canvas.Top="204" Name="subSys3Qualitytb" Text="00" Style="{StaticResource dataTextStyle}" Width="30"/>
             <TextBlock Canvas.Left="267" Canvas.Top="102" Name="subSys2Qualitytb" Text="00" Style="{StaticResource dataTextStyle}" Width="30"/>
             <TextBlock Canvas.Left="264" Canvas.Top="40" Name="subSys1Qualitytb" Text="00" Style="{StaticResource dataTextStyle}" Width="30"/>
-            <Label Canvas.Left="299" Canvas.Top="197" Content="L/min" Style="{StaticResource unitLableStyle}" Width="55"/>
-            <Label Canvas.Left="293" Canvas.Top="95" Content="L/min" Style="{StaticResource unitLableStyle}" Width="55"/>
-            <Label Canvas.Left="292" Canvas.Top="33" Content="L/min" Style="{StaticResource unitLableStyle}" Width="55"/>
+            <Label Canvas.Left="305" Canvas.Top="197" Content="L/min" Style="{StaticResource unitLableStyle}" Width="40"/>
+            <Label Canvas.Left="299" Canvas.Top="95" Content="L/min" Style="{StaticResource unitLableStyle}" Width="40"/>
+            <Label Canvas.Left="298" Canvas.Top="33" Content="L/min" Style="{StaticResource unitLableStyle}" Width="40"/>
             <Label Canvas.Left="347" Canvas.Top="56" Content="质量流量计" Style="{StaticResource devInfoLableStyle}" FontSize="11" Height="36" Width="70" />
             <Label Canvas.Left="349" Canvas.Top="116" Content="质量流量计" Style="{StaticResource devInfoLableStyle}" FontSize="11" Height="39" Width="68" />
             <Label Canvas.Left="349" Canvas.Top="160"  Content="质量流量计"  Style="{StaticResource devInfoLableStyle}" FontSize="11" Height="41" Width="68" />

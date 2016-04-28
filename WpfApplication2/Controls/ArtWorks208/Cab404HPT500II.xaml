@@ -54,14 +54,14 @@
             <Rectangle Canvas.Left="219" Canvas.Top="88" Height="15" Name="rectangleSubSys2" Width="178" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="220" Canvas.Top="160" Height="15" Name="rectangleSubSys3" Width="178" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="219" Canvas.Top="205" Height="15" Name="rectangleSubSys4" Width="178" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="235" Canvas.Top="115" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}" Height="18" />
-            <TextBlock Canvas.Left="235" Canvas.Top="134" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="235" Canvas.Top="22" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="237" Canvas.Top="183" Name="subSys4Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <Label Canvas.Left="318" Canvas.Top="127" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="318" Canvas.Top="16" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="318" Canvas.Top="108" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Height="26" />
-            <Label Canvas.Left="316" Canvas.Top="176" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <TextBlock Canvas.Left="215" Canvas.Top="115" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}" Height="18" />
+            <TextBlock Canvas.Left="215" Canvas.Top="134" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="215" Canvas.Top="22" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="217" Canvas.Top="183" Name="subSys4Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <Label Canvas.Left="336" Canvas.Top="127" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="336" Canvas.Top="16" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="336" Canvas.Top="108" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Height="26" />
+            <Label Canvas.Left="334" Canvas.Top="176" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="242" Canvas.Top="37" Content="特排氚测量仪" Style="{StaticResource devInfoLableStyle}" Width="135" Height="36" />
             <Label Canvas.Left="247" Canvas.Top="79" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="37" Width="125" />
             <Label Canvas.Left="247" Canvas.Top="149"  Content="氚测量仪"  Style="{StaticResource devInfoLableStyle}" Height="34" Width="127" />

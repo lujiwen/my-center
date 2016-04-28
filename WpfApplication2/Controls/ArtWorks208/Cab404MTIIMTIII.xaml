@@ -28,7 +28,7 @@
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="VerticalContentAlignment" Value="Top"/>
-                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style x:Key="devInfoLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="55"/>
@@ -59,10 +59,10 @@
             <TextBlock Canvas.Left="234" Canvas.Top="143" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}" Height="13" />
             <TextBlock Canvas.Left="233" Canvas.Top="69" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <TextBlock Canvas.Left="234" Canvas.Top="156" Name="subSys4Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <Label Canvas.Left="308" Canvas.Top="135" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Height="27" />
-            <Label Canvas.Left="315" Canvas.Top="61" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="315" Canvas.Top="18" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="308" Canvas.Top="147" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="325" Canvas.Top="135" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Height="27" />
+            <Label Canvas.Left="327" Canvas.Top="61" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="327" Canvas.Top="18" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="325" Canvas.Top="147" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="252" Canvas.Top="39" Content="特排氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="27" />
             <Label Canvas.Left="252" Canvas.Top="82" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="29" />
             <Label Canvas.Left="252" Canvas.Top="114"  Content="氚测量仪"  Style="{StaticResource devInfoLableStyle}" Height="28" />

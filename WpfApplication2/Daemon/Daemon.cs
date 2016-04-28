@@ -40,7 +40,7 @@ namespace WpfApplication2.Daemon
                 // 如果 守护进程 已经存在，则不需再启动。无需重复执行。
                 if (daemon_exits_judge())
                 {
-                    MessageBox.Show("daemon already exits !");
+                  //  MessageBox.Show("daemon already exits !");
                 }
                 else
                 {

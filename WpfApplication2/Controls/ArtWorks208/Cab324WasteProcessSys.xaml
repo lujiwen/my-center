@@ -28,7 +28,7 @@
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="VerticalContentAlignment" Value="Top"/>
-                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style x:Key="devInfoLableStyle" TargetType="Label">
                 <Setter Property="Height" Value="55"/>
@@ -54,12 +54,12 @@
             <Rectangle Canvas.Left="243" Canvas.Top="73" Height="15" Name="rectangleSubSys1" Width="159" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="243" Canvas.Top="126" Height="15" Name="rectangleSubSys2" Width="159" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="243" Canvas.Top="188" Height="15" Name="rectangleSubSys3" Width="159" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="254" Canvas.Top="160" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="253" Canvas.Top="101" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="255" Canvas.Top="42"   Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <Label Canvas.Left="327" Canvas.Top="152" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="328" Canvas.Top="94" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
-            <Label Canvas.Left="330" Canvas.Top="35" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <TextBlock Canvas.Left="241" Canvas.Top="160" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="240" Canvas.Top="101" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="242" Canvas.Top="42"   Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <Label Canvas.Left="359" Canvas.Top="152" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="360" Canvas.Top="94" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
+            <Label Canvas.Left="362" Canvas.Top="35" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>
             <Label Canvas.Left="259" Canvas.Top="58" Content="解体氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="39" Width="135" />
             <Label Canvas.Left="262" Canvas.Top="118" Content="房间氚测量仪" Style="{StaticResource devInfoLableStyle}" Height="34" Width="131" />
             <Label Canvas.Left="259" Canvas.Top="176"  Content="解吸氚测量仪"  Style="{StaticResource devInfoLableStyle}" Width="135" Height="39" />
