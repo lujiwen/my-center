@@ -80,7 +80,8 @@ namespace WpfApplication2.View.Windows
             history_chart.Series.Add(series);
         }
 
-
+        public double MAX = 100;
+        public double MIN = 1;  
         //绘制一组曲线
         private void drawLines(Dictionary<string,List<DeviceData>> dataList)
         {
@@ -95,16 +96,34 @@ namespace WpfApplication2.View.Windows
                 dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线    
                 for (int j = 0; j < item.Value.Count; j++)
                 {
-                    DataPoint dataPoint = new DataPoint();//数据点
-                    dataPoint.MarkerSize = 8;
-                    DateTime t = DateTime.Parse(item.Value[j].Time);
-                    string his_time = t.ToString("HH:mm:ss");
-                    dataPoint.AxisXLabel = his_time + "";
-                    dataPoint.YValue = item.Value[j].VALUE1;
-                    dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                    try
+                    {
+                        Decimal value = Convert.ToDecimal(item.Value[j].VALUE1);
+                        double v = Decimal.ToDouble(value);
+                        if (v > MAX)
+                        {
+                            v = MAX;
+                        }
+                        else
+                        {
+                            v = MIN;
+                        }
+                        DataPoint dataPoint = new DataPoint();//数据点
+                        dataPoint.MarkerSize = 8;
+                        DateTime t = DateTime.Parse(item.Value[j].Time);
+                        string his_time = t.ToString("HH:mm:ss");
+                        dataPoint.AxisXLabel = his_time + "";
+                        //将数据库中的高精度数值的strin转换为double
+                        dataPoint.YValue = v ;
+                        dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("HistoryWindow 数据绘制有误" + item.Value[j].VALUE1+DateTime.Now.ToString());
+                    }
                 }
                 history_chart.Series.Add(dataSeries[i]);
-                 dataSeries[i] = null;
+                dataSeries[i] = null;
             }
             MessageBox.Show("查询结果：\r\n"
                        + getHistoryResult( dataList));
@@ -130,8 +149,8 @@ namespace WpfApplication2.View.Windows
             // String start = "'" + start_time.Value.ToString() + "'";
            //  String end = "'" + end_time.Value.ToString() + "'";
 
-             String start = "'2016/4/20 19:30:00'";
-             String end = "'2016/4/21 0:00:00'";
+             String start = "'2016/4/30 19:30:00'";
+             String end = "'2016/5/1 0:00:00'";
              if (start_time.Value == null || end_time.Value == null)
              {
                  MessageBox.Show("起止时间不可缺省！");

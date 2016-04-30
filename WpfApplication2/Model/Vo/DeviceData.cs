@@ -47,21 +47,21 @@ namespace WpfApplication2.Model.Vo
             set { unit = value; }
         }
 
-        private float v1, v2, v3, v4, v5, v6, v7, v8;
+        private string v1, v2, v3, v4, v5, v6, v7, v8;
 
-        public float VALUE1
+        public string VALUE1
         {
             get { return v1; }
             set { v1 = value; }
         }
 
-        public float VALUE2
+        public string VALUE2
         {
             get { return v2; }
             set { v2 = value; }
         }
 
-        public float VALUE3
+        public string VALUE3
         {
             get { return v3; }
             set { v3 = value; }

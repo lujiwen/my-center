@@ -6,7 +6,7 @@ using System.Configuration;
 
 namespace WpfApplication2.Util
 {
-    public class Utils
+    public class Utils 
     {
         private static string FIRST_IN_FLAG = "0";
         public static string readConfig(string key)
@@ -65,6 +65,17 @@ namespace WpfApplication2.Util
         public static void openDir(string path)
         {
             System.Diagnostics.Process.Start("explorer.exe", path);
+        }
+
+        public static double Max(double a, double b)
+        {
+            if (a >= b) return a;
+            else return b;
+        }
+        public static double Min(double a, double b)
+        {
+            if (a <= b) return a;
+            else return b;
         }
     }
 }

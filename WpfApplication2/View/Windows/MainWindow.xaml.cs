@@ -100,9 +100,9 @@ namespace WpfApplication2.View.Windows
         private void  init()
         {
             //开启守护进程
-            string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
-            daemon = new CenterDaemon();
-            daemon.startDaemon(DaemonExePath);
+            //string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
+            //daemon = new CenterDaemon();
+            //daemon.startDaemon(DaemonExePath);
 
             instance = this ;
             c = new MainController();

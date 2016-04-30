@@ -193,37 +193,53 @@ namespace WpfApplication2.Controls
             valueLT.updateValue("  " + d.NowValue + "  ");
             //更新图表
         }
-
+      
+        public double MAX = 100;
+        public double MIN = 1;  
         private void updateChart()
         {
             if (valueDic != null && valueDic.Count != 0)
-             {
+            {
                 DateTime dt = DateTime.Now;
-                string timeStamp = dt.ToString("HH:mm:ss ");//dt.Hour + ":" + dt.Minute + ":" + dt.Second;
-                if (nowValues == null) return; 
+                string timeStamp = dt.ToString("HH:mm:ss ");
+                if (nowValues == null) return;
                 for (int i = 0; i < valueDic.Count; i++)
                 {
-                    if (dataSeries[i].DataPoints.Count < maxPointSize) //直接添加
+                    try
                     {
-
-                        //   Console.WriteLine(i + "  :  " + d.NowValue);
-                        DataPoint dataPoint = new DataPoint();//数据点
-                        dataPoint.MarkerSize = 8;
-                        dataPoint.AxisXLabel = timeStamp;  
-                        dataPoint.YValue = Double.Parse(nowValues[i]);
-                        dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
-                    }
-                    else //想左移动
-                    {
-                        for (int j = 1; j < maxPointSize; j++)
+                        Decimal nowvalue = Convert.ToDecimal(nowValues[i]);
+                        double value = Decimal.ToDouble(nowvalue);
+                        if (value >= MAX)
                         {
-                            dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
-                            dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
+                            value = MAX;
                         }
-
-                        //    Console.WriteLine(i + "  :  " + d.NowValue);
-                        dataSeries[i].DataPoints[maxPointSize - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString(); //; ;//数据点添加到数据系列
-                        dataSeries[i].DataPoints[maxPointSize - 1].YValue = Double.Parse(nowValues[i]); //; ;//数据点添加到数据系列
+                        else if (value <= MIN)
+                        {
+                            value = MIN;
+                        }
+                        if (dataSeries[i].DataPoints.Count < maxPointSize) //直接添加
+                        {
+                            DataPoint dataPoint = new DataPoint();//数据点
+                            dataPoint.MarkerSize = 8;
+                            dataPoint.AxisXLabel = timeStamp;
+                            dataPoint.YValue = value;
+                            dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                        }
+                        else //想左移动
+                        {
+                            for (int j = 1; j < maxPointSize; j++)
+                            {
+                                dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
+                                dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
+                            }
+                            dataSeries[i].DataPoints[maxPointSize - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString(); //; ;//数据点添加到数据系列
+                            dataSeries[i].DataPoints[maxPointSize - 1].YValue = value; //; ;//数据点添加到数据系列
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("DeviceUI chart update value wrong!"+e.Message);
+                        break;
                     }
                 }
             }  

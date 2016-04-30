@@ -21,7 +21,7 @@ using Microsoft.Samples.KMoore.WPFSamples.DateControls;
 using Project208Home.Views.ArtWorks208;
 using System.Windows.Threading;
 using System.Reflection;
-
+ 
 namespace WpfApplication2.Controls
 {
     /// <summary>
@@ -198,37 +198,47 @@ namespace WpfApplication2.Controls
             string timeStamp = dt.ToString("HH:mm:ss");
             for (int i = 0; i <c.Devices.Count;i++ )
             {
-               
-                if (devices[i].NowValue != null && (!devices[i].NowValue.Equals("")))
+                if ((devices[i].NowValue != null)&&(!devices[i].NowValue.Equals("")))
                 {
-                    if (Double.Parse(devices[i].NowValue) > MAX || Double.Parse(devices[i].NowValue) < MIN)
+                    try
                     {
-                        devices[i].NowValue = "50";
-                    }
-                    if (dataSeries[i].DataPoints.Count < _pointCount) //直接添加
-                    {
-                        Console.WriteLine(i + "  :  " + devices[i].NowValue);
-                        LightDataPoint dataPoint = new LightDataPoint();//数据点
-                      //  dataPoint = 8;
+                        Decimal nowvalue = Convert.ToDecimal(devices[i].NowValue);
+                        double value = Decimal.ToDouble(nowvalue);
+                        if (value >= MAX  )
+                        {
+                            value = MAX;
+                        }
+                        else if(value<=MIN)
+                        {
+                            value = MIN;
+                        }
 
-                        dataPoint.AxisXLabel = timeStamp; //dataSeries[i].DataPoints.Count + "";
-                        dataPoint.YValue = Double.Parse(devices[i].NowValue);
-                        Console.WriteLine("X：" + dataPoint.AxisXLabel + "   Y:" + dataPoint.YValue);
-                        dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                        if (dataSeries[i].DataPoints.Count < _pointCount) //直接添加
+                        {
+                            LightDataPoint dataPoint = new LightDataPoint();//数据点
+                            //  dataPoint = 8;
+
+                            dataPoint.AxisXLabel = timeStamp; //dataSeries[i].DataPoints.Count + "";
+                            dataPoint.YValue = value;
+                            Console.WriteLine("X：" + dataPoint.AxisXLabel + "   Y:" + dataPoint.YValue);
+                            dataSeries[i].DataPoints.Add(dataPoint);//数据点添加到数据系列
+                            dataPoint = null;
+                        }
+                        else //想左移动
+                        {
+                            for (int j = 1; j < _pointCount; j++)
+                            {
+                                dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
+                                dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
+                            }
+                            dataSeries[i].DataPoints[_pointCount - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString();
+                            dataSeries[i].DataPoints[_pointCount - 1].YValue = value; //; ;//数据点添加到数据系列
+                        }
                     }
-                    else //想左移动
+                    catch(Exception e)
                     {
-                        if (Double.Parse(devices[i].NowValue) > MAX || Double.Parse(devices[i].NowValue) < MIN)
-                        {
-                            devices[i].NowValue = "50";
-                        }
-                        for (int j = 1; j < _pointCount;j++ )
-                        {
-                            dataSeries[i].DataPoints[j - 1].AxisXLabel = dataSeries[i].DataPoints[j].AxisXLabel;
-                            dataSeries[i].DataPoints[j - 1].YValue = dataSeries[i].DataPoints[j].YValue;
-                        }
-                        dataSeries[i].DataPoints[_pointCount - 1].AxisXLabel = timeStamp; //(new DateTime().Second).ToString();
-                        dataSeries[i].DataPoints[_pointCount - 1].YValue = Double.Parse(devices[i].NowValue); //; ;//数据点添加到数据系列
+                        LogUtil.Log(false, "数值过大或过小:" + devices[i].NowValue +" : "+ DateTime.Now.ToString(), 0);
+                        Console.WriteLine("数值过大或过小:" + devices[i].NowValue + " : " + DateTime.Now.ToString());
                     }
                 }
             }

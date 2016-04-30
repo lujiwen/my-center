@@ -62,9 +62,9 @@ namespace PavilionMonitor
                 DeviceData d2 = new DeviceData();
                 DeviceData d3 = new DeviceData();
                 DeviceData d4 = new DeviceData();
-                d1.VALUE1 = odr.GetFloat(5);
-                d2.VALUE2 = odr.GetFloat(6);
-                d3.VALUE3 = odr.GetFloat(7);
+                d1.VALUE1 = odr.GetString(5);
+                d2.VALUE2 = odr.GetString(6);
+                d3.VALUE3 = odr.GetString(7);
                 d4.Value_Option = odr.GetString(4);
                 d1.Time = odr.GetString(2);
                 d2.Time = odr.GetString(2);
