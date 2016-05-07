@@ -188,7 +188,7 @@ namespace WpfApplication2.Controls
          //   Dispatcher.BeginInvoke(new Action(updateCabUI));
         }
 
-        public double MAX = 100;
+        public double MAX = 1000000;
         public double MIN = 1;  
 
         public void UpdateChart(Cab c)
