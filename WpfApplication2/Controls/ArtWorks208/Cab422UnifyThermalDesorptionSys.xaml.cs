@@ -39,7 +39,7 @@ namespace Project208Home.Views.ArtWorks208
         {
             //解体氚测量仪
             Binding nowding1 = new Binding();
-            nowding1.Source = cabInArtwork.Devices[0];
+            nowding1.Source = cabInArtwork.getDeviceByID(61);
             nowding1.Path = new PropertyPath("NowValue");
             Text1.SetBinding(TextBlock.TextProperty, nowding1);
             
@@ -47,7 +47,7 @@ namespace Project208Home.Views.ArtWorks208
 
             ////房间氚测量仪
             Binding nowding2 = new Binding();
-            nowding2.Source = cabInArtwork.Devices[2];
+            nowding2.Source = cabInArtwork.getDeviceByID(63);
             nowding2.Path = new PropertyPath("NowValue");
             Text2.SetBinding(TextBlock.TextProperty, nowding2);
         }

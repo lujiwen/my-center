@@ -56,37 +56,37 @@ namespace Project208Home.Views.ArtWorks208
 
             //特排氚测量仪
             Binding nowding4 = new Binding();
-            nowding4.Source = cabInArtwork.Devices[0];
+            nowding4.Source = cabInArtwork.getDeviceByID(14);
             nowding4.Path = new PropertyPath("NowValue");
             subSys1Qualitytb.SetBinding(TextBlock.TextProperty, nowding4);
 
             //房间氚测量仪
             Binding nowding5 = new Binding();
-            nowding5.Source = cabInArtwork.Devices[2];
+            nowding5.Source = cabInArtwork.getDeviceByID(18);
             nowding5.Path = new PropertyPath("NowValue");
             subSys2Qualitytb.SetBinding(TextBlock.TextProperty, nowding5);
 
             //房间氚测量仪
             Binding nowding6 = new Binding();
-            nowding6.Source = cabInArtwork.Devices[4];
+            nowding6.Source = cabInArtwork.getDeviceByID(22);
             nowding6.Path = new PropertyPath("NowValue");
             subSys3Qualitytb.SetBinding(TextBlock.TextProperty, nowding6);
 
             //特排氚测量仪
             Binding nowding7 = new Binding();
-            nowding7.Source = cabInArtwork.Devices[1];
+            nowding7.Source = cabInArtwork.getDeviceByID(13);
             nowding7.Path = new PropertyPath("NowValue");
             subSys16517ABtb.SetBinding(TextBlock.TextProperty, nowding7);
 
             //特排氚测量仪
             Binding nowding8 = new Binding();
-            nowding8.Source = cabInArtwork.Devices[3];
+            nowding8.Source = cabInArtwork.getDeviceByID(17);
             nowding8.Path = new PropertyPath("NowValue");
             subSys26517ABtb.SetBinding(TextBlock.TextProperty, nowding8);
 
             //特排氚测量仪
             Binding nowding9 = new Binding();
-            nowding9.Source = cabInArtwork.Devices[5];
+            nowding9.Source = cabInArtwork.getDeviceByID(21);
             nowding9.Path = new PropertyPath("NowValue");
             subSys36517ABtb.SetBinding(TextBlock.TextProperty, nowding9);
 

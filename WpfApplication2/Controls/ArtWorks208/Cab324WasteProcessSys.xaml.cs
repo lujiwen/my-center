@@ -50,9 +50,9 @@ namespace Project208Home.Views.ArtWorks208
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
                 // Console.WriteLine(" private void update(object sender, System.ComponentModel.PropertyChangedEventArgs e)");
-                subSys1Qualitytb.Text = cabInArtwork.Devices[0].NowValue;
-                subSys2Qualitytb.Text = cabInArtwork.Devices[2].NowValue;
-                subSys3Qualitytb.Text = cabInArtwork.Devices[4].NowValue;
+                subSys1Qualitytb.Text = cabInArtwork.getDeviceByID(1).NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.getDeviceByID(3).NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.getDeviceByID(5).NowValue;
             }));
         }
         void initBindings()

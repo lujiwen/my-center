@@ -40,15 +40,15 @@ namespace Project208Home.Views.ArtWorks208
         {
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
-                subSys16517ABtb.Text  = cabInArtwork.Devices[0].NowValue;
-                subSys26517ABtb.Text  = cabInArtwork.Devices[4].NowValue;
-                subSys36517ABtb.Text  = cabInArtwork.Devices[8].NowValue;
-                subSys46517ABtb.Text  = cabInArtwork.Devices[12].NowValue;
+                subSys16517ABtb.Text = cabInArtwork.getDeviceByID(41).NowValue;
+                subSys26517ABtb.Text = cabInArtwork.getDeviceByID(45).NowValue;
+                subSys36517ABtb.Text = cabInArtwork.getDeviceByID(49).NowValue;
+                subSys46517ABtb.Text = cabInArtwork.getDeviceByID(53).NowValue;
 
-                subSys1Qualitytb.Text = cabInArtwork.Devices[1].NowValue;
-                subSys2Qualitytb.Text = cabInArtwork.Devices[5].NowValue;
-                subSys3Qualitytb.Text = cabInArtwork.Devices[9].NowValue;
-                subSys4Qualitytb.Text = cabInArtwork.Devices[13].NowValue;
+                subSys1Qualitytb.Text = cabInArtwork.getDeviceByID(42).NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.getDeviceByID(46).NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.getDeviceByID(50).NowValue;
+                subSys4Qualitytb.Text = cabInArtwork.getDeviceByID(54).NowValue;
 
             }));
         }

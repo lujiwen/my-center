@@ -185,5 +185,23 @@ namespace WpfApplication2.Model.Vo
            }
             return true;
         }
+
+        /// <summary>
+        /// 用数据库里的id 在柜子当中查找设备
+        /// </summary>
+        /// <param name="deviceId"></param>
+        /// <returns></returns>
+        public Device getDeviceByID(int deviceId)
+        {
+            Device device = null;
+            foreach (Device d in devices)
+            {
+                if (int.Parse(d.DeviceId) == deviceId)
+                {
+                    return d;
+                }
+            }
+            return device;
+        }
     }
 }
