@@ -56,8 +56,8 @@ namespace Project208Home.Views.ArtWorks208
         {
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
-                Text1.Text = cabInArtwork.Devices[0].NowValue;
-                Text2.Text = cabInArtwork.Devices[2].NowValue;
+                Text1.Text = cabInArtwork.getDeviceByID(61).NowValue;
+                Text2.Text = cabInArtwork.getDeviceByID(63).NowValue;
             }));
         }
 

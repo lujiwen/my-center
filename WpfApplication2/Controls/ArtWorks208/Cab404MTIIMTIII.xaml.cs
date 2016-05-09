@@ -65,10 +65,10 @@ namespace Project208Home.Views.ArtWorks208
         {
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
-                subSys1Qualitytb.Text = cabInArtwork.Devices[0].NowValue;
-                subSys2Qualitytb.Text = cabInArtwork.Devices[1].NowValue;
-                subSys3Qualitytb.Text = cabInArtwork.Devices[2].NowValue;
-                subSys4Qualitytb.Text = cabInArtwork.Devices[3].NowValue;
+                subSys1Qualitytb.Text = cabInArtwork.getDeviceByID(25).NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.getDeviceByID(27).NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.getDeviceByID(29).NowValue;
+                subSys4Qualitytb.Text = cabInArtwork.getDeviceByID(31).NowValue;
 
             }));
         }

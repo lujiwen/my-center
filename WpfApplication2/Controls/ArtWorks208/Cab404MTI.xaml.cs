@@ -99,13 +99,13 @@ namespace Project208Home.Views.ArtWorks208
         {
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
-                subSys1Qualitytb.Text = cabInArtwork.Devices[0].NowValue;
-                subSys2Qualitytb.Text = cabInArtwork.Devices[2].NowValue;
-                subSys3Qualitytb.Text = cabInArtwork.Devices[4].NowValue;
-             
-                subSys16517ABtb.Text = cabInArtwork.Devices[1].NowValue;
-                subSys26517ABtb.Text = cabInArtwork.Devices[3].NowValue;
-                subSys36517ABtb.Text = cabInArtwork.Devices[5].NowValue;
+                subSys1Qualitytb.Text = cabInArtwork.getDeviceByID(13).NowValue;
+                subSys2Qualitytb.Text = cabInArtwork.getDeviceByID(17).NowValue;
+                subSys3Qualitytb.Text = cabInArtwork.getDeviceByID(21).NowValue;
+
+                subSys16517ABtb.Text = cabInArtwork.getDeviceByID(14).NowValue;
+                subSys26517ABtb.Text = cabInArtwork.getDeviceByID(18).NowValue;
+                subSys36517ABtb.Text = cabInArtwork.getDeviceByID(22).NowValue;
 
             }));
         }
