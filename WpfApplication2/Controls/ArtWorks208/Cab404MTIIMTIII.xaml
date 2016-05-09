@@ -56,8 +56,8 @@
             <Rectangle Canvas.Left="220" Canvas.Top="121" Height="12" Name="rectangleSubSys3" Width="177" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="220" Canvas.Top="176" Height="12" Name="rectangleSubSys4" Width="176" Style="{StaticResource channelRectangleStyle}"/>
             <TextBlock Canvas.Left="232" Canvas.Top="25" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
-            <TextBlock Canvas.Left="234" Canvas.Top="143" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}" Height="13" />
             <TextBlock Canvas.Left="233" Canvas.Top="69" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="234" Canvas.Top="143" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}" Height="13" />
             <TextBlock Canvas.Left="234" Canvas.Top="156" Name="subSys4Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <Label Canvas.Left="325" Canvas.Top="135" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Height="27" />
             <Label Canvas.Left="327" Canvas.Top="61" Content="Bq/m^3" Style="{StaticResource unitLableStyle}"/>

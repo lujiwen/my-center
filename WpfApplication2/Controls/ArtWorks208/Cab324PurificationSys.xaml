@@ -56,9 +56,9 @@
             <Rectangle Canvas.Left="233" Canvas.Top="124" Height="15" Name="rectangleSubSys1" Width="155" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="234" Canvas.Top="191" Height="15" Name="rectangleSubSys2" Width="154" Style="{StaticResource channelRectangleStyle}"/>
             <Rectangle Canvas.Left="234" Canvas.Top="57" Height="15" Name="rectangleSubSys3" Width="155" Style="{StaticResource channelRectangleStyle}"/>
-            <TextBlock Canvas.Left="239" Canvas.Top="32" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
+            <TextBlock Canvas.Left="239" Canvas.Top="32" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"/>
             <TextBlock Canvas.Left="236" Canvas.Top="97" Name="subSys2Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"  />
-            <TextBlock Canvas.Left="237" Canvas.Top="163" Name="subSys1Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"  />
+            <TextBlock Canvas.Left="237" Canvas.Top="163" Name="subSys3Qualitytb" Text="2.90E06" Style="{StaticResource dataTextStyle}"  />
            
             <Label Canvas.Left="348" Canvas.Top="28" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Width="65" />
             <Label Canvas.Left="348" Canvas.Top="91" Content="Bq/m^3" Style="{StaticResource unitLableStyle}" Width="65" />
