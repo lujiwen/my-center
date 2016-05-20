@@ -123,6 +123,10 @@ namespace WpfApplication2.Controller
                         if (dataReceivedEvent != null)
                         {
                             dataReceivedEvent(curState.sb.ToString());
+                            if (ReceiveListener != null)
+                            {
+                                ReceiveListener.onDataReceive(content);
+                            }
                         }
                         curState.sb.Remove(0,curState.sb.Length);
                         handler.BeginReceive(curState.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReceiveCallback), curState);
