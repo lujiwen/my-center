@@ -26,7 +26,8 @@ namespace WpfApplication2.Util
         public static Dictionary<String, String> cabId_typeInSystem = new Dictionary<String, string>() { 
         { "2_2", "324PurificationSys" },{  "2_1", "324WasteProcessSys" },{  "2_5", "404HPT500II" },
         {  "2_3", "404MTI" },{ "2_4", "404MTIIMTIII" },{  "2_6", "407HPT500I" },
-        {  "2_7", "422ThermalDesorptionSys" },{"2_8","422UnifyThermalDesorptionSys"},{"5_9","亭子"} ,{"5_82","asm02"},{"5_84","jl900"},{"5_83","DryWet"} };
+        {  "2_7", "422ThermalDesorptionSys" },{"2_8","422UnifyThermalDesorptionSys"},{"5_9","亭子"} ,{"5_82","asm02"},{"5_84","jl900"},{"5_83","DryWet"},
+         {"4_10","209"} };
  
     
 

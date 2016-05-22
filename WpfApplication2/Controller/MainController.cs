@@ -196,6 +196,12 @@ namespace WpfApplication2.Controller
                                         case "Jl900":
                                             device = new DeviceJL900(odr3);
                                             break;
+                                        case "gamma":
+                                            device = new Device(odr3);
+                                            break;
+                                        case "neutron":
+                                            device = new Device(odr3);
+                                            break;
                                         default :
                                             device = new Device(odr3);
                                             break;
