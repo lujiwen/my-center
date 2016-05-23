@@ -61,7 +61,7 @@ namespace WpfApplication2.View.Pages
         private void init()
         {
             buildings = mainWindow.Buildings;
-            alarmMessages = new QueueFixedLength<AlarmMessage>(10);
+            alarmMessages = new QueueFixedLength<AlarmMessage>(20);
             listBox1.ItemsSource = alarmMessages.Queue;
         }
 

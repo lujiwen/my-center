@@ -116,7 +116,8 @@ namespace WpfApplication2.View.Windows
 
             mapPage = new MapPage(this);
             MainPage.Content = mapPage;
- 
+            c.InitialConnection();
+            c.InitialDBConnection();
         }
       
         /// <summary>

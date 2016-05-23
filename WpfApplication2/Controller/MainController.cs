@@ -46,8 +46,8 @@ namespace WpfApplication2.Controller
         public MainController()
         {
             InitialData();
-            InitialConnection();
-            InitialDBConnection();
+          //  InitialConnection();
+          //  InitialDBConnection();
             InitialThread();
 
             //while (true)
@@ -258,18 +258,94 @@ namespace WpfApplication2.Controller
 
         public void InitialConnection()  //初始化连接
         {
-            init207cConnection();
-            init208Connection();
-            init209Conection();
-            init2115Connection();
-            init201Chimney();
-            init207Chimney();
-            init208Chimney();
-            initPavilionEx1();
-            initPavilionEx2();
-            initPavilionInner();
-            initMonitorVehicle();
-            
+            if (init207cConnection() != null)
+            {
+                Alarm("207c连接初始化成功！");
+            }
+            else 
+            {
+                Alarm("207c连接初始化失败！");
+            }
+            if (init208Connection() != null)
+            {
+                Alarm("208连接初始化成功！");
+            }
+            else 
+            {
+                Alarm("208连接初始化失败！");
+            }
+            if (init209Conection() != null)
+            {
+                Alarm("209连接初始化成功！");
+            }
+            else
+            {
+                Alarm("209连接初始化失败！");
+            }
+            if (init2115Connection() != null)
+            {
+                Alarm("2115连接初始化成功！");
+            }
+            else
+            {
+                Alarm("2115连接初始化失败！");
+            }
+            if (init201Chimney() != null)
+            {
+                Alarm("201烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("201烟囱连接初始化失败！");
+            }
+            if (init207Chimney() != null)
+            {
+                Alarm("207烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("207烟囱连接初始化失败！");
+            }
+            if (init208Chimney() != null)
+            {
+                Alarm("208烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("208烟囱连接初始化失败！");
+            }
+            if (initPavilionEx1() != null)
+            {
+                Alarm("亭子（运输部）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（运输部）连接初始化失败！");
+            }
+            if (initPavilionEx2() != null)
+            {
+                Alarm("亭子（新桥）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（新桥）连接初始化失败！");
+            }
+            if (initPavilionInner() != null)
+            {
+                Alarm("亭子（内网）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（内网）连接初始化失败！");
+            }
+            if (initMonitorVehicle()!= null)
+            {
+                Alarm("监测车连接初始化成功！");
+            }
+            else
+            {
+                Alarm("监测车连接初始化失败！");
+            }
         }
 
         /// <summary>
@@ -289,7 +365,6 @@ namespace WpfApplication2.Controller
                     UdpConnection con = new UdpConnection(d.devIp, d.devPort);
                     cons.Add(con);
                 }
-
                 manager207c = new ConnectionManager(cons);
                 manager207c.ManagerReceivedDataEvent += receiveData;
             }
@@ -368,7 +443,6 @@ namespace WpfApplication2.Controller
         {
             return null;
         }
-
         private ConnectionManager initPavilionEx1()
         {
             Building b = GlobalMapForShow.getBuildingByName("亭子（运输部）");
@@ -453,8 +527,7 @@ namespace WpfApplication2.Controller
         public void InitialThread()  //初始化队列和线程
         {
             bq = new Queue<Device>(Constants.BlockQueueSize);
-          
-             new Thread(new ThreadStart(TakeDataFromQueueThread)).Start();  //启动从队列取数据的线程
+            new Thread(new ThreadStart(TakeDataFromQueueThread)).Start();  //启动从队列取数据的线程
         }
       
         public void TakeDataFromQueueThread()  //循环从队列里面取数据并存到数据库
