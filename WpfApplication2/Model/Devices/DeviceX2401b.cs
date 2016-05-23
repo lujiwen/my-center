@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApplication2.Model.Vo;
-
 // code by liuhuashan 2016/04/26
 
 // 2401b 485接入 

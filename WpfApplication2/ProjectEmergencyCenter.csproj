@@ -109,6 +109,10 @@
     </Compile>
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
+    <Compile Include="Model\Devices\Device2115.cs" />
+    <Compile Include="Model\Devices\Device593Tritium.cs" />
+    <Compile Include="Model\Devices\DeviceKSJKSD.cs" />
+    <Compile Include="Model\Devices\DeviceMARC7000.cs" />
     <Compile Include="Model\Devices\DeviceX2401b.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />
@@ -183,6 +187,9 @@
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="View\Windows\Asm02HistoryTable.xaml.cs">
       <DependentUpon>Asm02HistoryTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\ConnectionProcessWindow.xaml.cs">
+      <DependentUpon>ConnectionProcessWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\PasswordWindow.xaml.cs">
       <DependentUpon>PasswordWindow.xaml</DependentUpon>
@@ -291,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\Asm02HistoryTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\ConnectionProcessWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

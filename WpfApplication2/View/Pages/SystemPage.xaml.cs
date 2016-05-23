@@ -45,7 +45,7 @@
             {
                 switch(building.Name)
                 {
-                    case "亭子":
+                    case "亭子（运输部）":
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
                         break;
@@ -68,13 +68,24 @@
                     case "207烟囱":
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
-                        break; 
+                        break;
+                    case "207楼C":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "亭子（新桥）":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "亭子（内网）":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
                     default:
                         cabspage = new CabsPage(this, building);
                         page.Content = cabspage;
                         break;
                 }
-              
             }
             else
             {

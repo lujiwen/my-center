@@ -40,6 +40,9 @@ namespace WpfApplication2.Controller
         public event UpdateUI notifyUpdateUI;
         public event alarmMessageEventHandler alarmMessage;
         public event alarmBuzzerEventHandler alarmBuzzer;
+        private ConnectionManager manager207c, manager208, manager209, manager201Chimney,
+                 manager207Chimney, manager208Chimney, managerMonitorVehicle,
+                 managerPavilionTransport, managerPavilionBridge, managerPavilionInnner, manager2115;
         public MainController()
         {
             InitialData();
@@ -251,39 +254,200 @@ namespace WpfApplication2.Controller
             }
         }
 
-        private Dictionary<string, List<Connection>> connectionDic;
         private List<ConnectionManager> conManagerList;
+
         public void InitialConnection()  //初始化连接
         {
-            connectionDic = new Dictionary<string, List<Connection>>();
-            //208connection
-             UdpConnection uc208 = new UdpConnection("127.0.0.1", "58888");
-             //uc208.dataReceivedEvent += receiveData;
-             //List<Connection> connections208 = new List<Connection>();
-             //connections208.Add(uc208);
-             //connectionDic.Add("208",connections208);
-
-             conManagerList = new List<ConnectionManager>();
-             ConnectionManager manager208 = new ConnectionManager(uc208);
-             manager208.ManagerReceivedDataEvent += receiveData;
-
-            /**
-             * 发送控制命令到二级的调用方法
-             * */
-            //DeviceCommandBox dcb = new DeviceCommandBox();
-            //dcb.load("deviceId","cabId","high","low","param1","factor");
-            //List<Box> lb = new List<Box>();
-            //lb.Add(dcb);
-            //String data = PackageWorker.pack(lb);
-            //sendCommand("192.168.0.105","6003",data);
+            init207cConnection();
+            init208Connection();
+            init209Conection();
+            init2115Connection();
+            init201Chimney();
+            init207Chimney();
+            init208Chimney();
+            initPavilionEx1();
+            initPavilionEx2();
+            initPavilionInner();
+            initMonitorVehicle();
+            
         }
 
-        public void InitialDBConnection()
+        /// <summary>
+        /// 207c 
+        /// 读取方式：串口服务器
+        /// 设备：2个XB2401（两个端口），asm
+        /// </summary>
+        private ConnectionManager init207cConnection()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("207楼C");
+            ConnectionManager manager207c = null;
+            if(b!=null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach(Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                manager207c = new ConnectionManager(cons);
+                manager207c.ManagerReceivedDataEvent += receiveData;
+            }
+            return manager207c;
+        }
+
+        private bool init208Connection()
+        {
+            UdpConnection uc208 = new UdpConnection("127.0.0.1", "58888");
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager manager208 = new ConnectionManager(uc208);
+            manager208.ManagerReceivedDataEvent += receiveData;
+            return true;
+        }
+
+        private ConnectionManager init209Conection()
+        {
+            return null;
+        }
+
+        private ConnectionManager init201Chimney()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("201烟囱");
+            ConnectionManager manager201Chimney = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                manager201Chimney = new ConnectionManager(cons);
+                manager201Chimney.ManagerReceivedDataEvent += receiveData;
+            }
+            return manager201Chimney;
+        }
+        private ConnectionManager init207Chimney()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("207烟囱");
+            ConnectionManager manager207Chimney = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                manager207Chimney = new ConnectionManager(cons);
+                manager207Chimney.ManagerReceivedDataEvent += receiveData;
+            }
+            return manager207Chimney;
+        }
+        private ConnectionManager init208Chimney()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("208烟囱");
+            ConnectionManager manager208Chimney = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                manager208Chimney = new ConnectionManager(cons);
+                manager208Chimney.ManagerReceivedDataEvent += receiveData;
+            }
+            return manager208Chimney;
+        }
+        private ConnectionManager initMonitorVehicle()
+        {
+            return null;
+        }
+
+        private ConnectionManager initPavilionEx1()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("亭子（运输部）");
+            ConnectionManager managerPavilionTransport = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                managerPavilionTransport = new ConnectionManager(cons);
+                managerPavilionTransport.ManagerReceivedDataEvent += receiveData;
+            }
+            return managerPavilionTransport;
+        }
+        private ConnectionManager initPavilionEx2()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("亭子（新桥）");
+            ConnectionManager managerPavilionBridge = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                managerPavilionBridge = new ConnectionManager(cons);
+                managerPavilionBridge.ManagerReceivedDataEvent += receiveData;
+            }
+            return managerPavilionBridge;
+        }
+        private ConnectionManager initPavilionInner()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("亭子（内网）");
+            ConnectionManager managerPavilionInnner = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                managerPavilionInnner = new ConnectionManager(cons);
+                managerPavilionInnner.ManagerReceivedDataEvent += receiveData;
+            }
+            return managerPavilionInnner;
+        }
+        private ConnectionManager init2115Connection()
+        {
+            Building b = GlobalMapForShow.getBuildingByName("2115楼");
+            ConnectionManager manager2115 = null;
+            if (b != null)
+            {
+                List<Connection> cons = new List<Connection>();
+                foreach (Device d in b.Cabs[0].Devices)
+                {
+                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    cons.Add(con);
+                }
+
+                manager2115 = new ConnectionManager(cons);
+                manager2115.ManagerReceivedDataEvent += receiveData;
+            }
+            return manager2115;
+        }
+        public bool InitialDBConnection()
         {
             //数据库连接
             dataOfDevice = new DBManager();
             string errorCode = "";
             dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+            return true;
         }
 
         public void InitialThread()  //初始化队列和线程

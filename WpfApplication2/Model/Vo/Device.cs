@@ -523,5 +523,64 @@ namespace WpfApplication2.Model.Vo
                 GlobalMapForShow.globalMapForDevice[BuildingId + "_" + DeviceId].SubSystemName + alertInfomation +" (" + DateTime.Now.ToString() + ")";
             return msg;
         }
+
+        /// <summary>
+        /// 获取初始化命令
+        /// </summary>
+        /// <returns></returns>
+        public virtual Byte[] getInitCommands(int i)
+        {
+            return null;
+        }
+        /// <summary>
+        /// 解析参数
+        /// </summary>
+        /// <param name="datas"></param>
+        public virtual void AnalysisParaData(byte[] datas)
+        {
+        }
+        /// <summary>
+        /// 获取参数读取命令
+        /// </summary>
+        /// <returns></returns>
+        public virtual Byte[] getParaReadCommands()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 获取数据读取命令
+        /// </summary>
+        /// <returns></returns>
+        public virtual Byte[] getReadCommands()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 解析数据
+        /// </summary>
+        /// <param name="datas"></param>
+        public virtual void AnalysisData(Byte[] datas)
+        {
+        }
+
+
+        /// <summary>
+        /// 获取插入历史数据的sql语句
+        /// </summary>
+        /// <returns></returns>
+        public virtual string getHistorySql(DateTime datareceiveTime)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 获取发送至远端的数据包
+        /// </summary>
+        /// <returns></returns>
+        public virtual Box getCommonDataPack()
+        {
+            return null;
+        }
+
     }
 }
