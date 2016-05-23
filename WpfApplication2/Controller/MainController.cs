@@ -16,6 +16,7 @@ using WpfApplication2.package;
 using WpfApplication2.View.Windows;
 using Project208Home.Model;
 using PavilionMonitor;
+using Yancong;
 
 
 namespace WpfApplication2.Controller
@@ -205,6 +206,18 @@ namespace WpfApplication2.Controller
                                         case "neutron":
                                             device = new Device(odr3);
                                             break;
+                                        case "XB2401":
+                                            device = new DeviceXb2401(odr3);
+                                            break;
+                                        case "MARC7000":
+                                            device = new DeviceMARC7000(odr3);
+                                            break;
+                                        case "KSJ":
+                                            device = new DeviceKSJKSD(odr3);
+                                            break;
+                                        case "593":
+                                            device = new Device593Tritium(odr3);
+                                            break;
                                         default :
                                             device = new Device(odr3);
                                             break;
@@ -362,7 +375,7 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach(Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    UdpConnection con = new UdpConnection(d);
                     cons.Add(con);
                 }
                 manager207c = new ConnectionManager(cons);

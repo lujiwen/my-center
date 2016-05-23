@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections;
+using WpfApplication2.Model.Vo;
 
 namespace WpfApplication2.Controller
 {
@@ -26,9 +27,9 @@ namespace WpfApplication2.Controller
         private bool succeed; //是否连接成功
         private bool test;//是否为测试状态
         private DataReciveListner receiveListener;
-        public DataReciveListner ReceiveListener { get { return receiveListener; } set { receiveListener = value; } }
+        public  DataReciveListner ReceiveListener { get { return receiveListener; } set { receiveListener = value; } }
         public  UInt32 receiveNullMaxCount = 5;//每个读取数据周期，最长等待时间 5*500 ms=2.5 S 
-
+        private Device device;
         public delegate void dataReceivedHandler(string data);
         public event dataReceivedHandler dataReceivedEvent;
 
@@ -41,7 +42,15 @@ namespace WpfApplication2.Controller
             this.port = port;
             this.succeed = false;
         }
-    
+
+        public Connection(Device device)
+        {
+            this.ip = device.devIp;
+            this.port = device.devPort;
+            this.succeed = false;
+            this.device = device;
+        }
+
          public virtual void Connect() { }
          public virtual void GetDataFromServer() { }
          public virtual void SendCommandToServer(string data) { }
@@ -89,6 +98,11 @@ namespace WpfApplication2.Controller
         {
             get { return test; }
             set { test = value; }
+        }
+        public Device DeviceInConnection 
+        { 
+            get { return device; } 
+            set { device = value;}
         }
     }
 }

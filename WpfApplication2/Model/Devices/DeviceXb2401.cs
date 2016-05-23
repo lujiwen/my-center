@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 // code by liuhuashan 2016/04/26
 
 // 2401b 485接入 
@@ -12,7 +13,7 @@ using WpfApplication2.Model.Vo;
 
 namespace Yancong
 {
-    class DeviceX2401b:Device
+    class DeviceXb2401:Device
     {
 
         private string deviceId;
@@ -37,9 +38,15 @@ namespace Yancong
         /// addr :设备本地地址，数据请求命令中使用
         /// </summary>
         /// <param name="addr"></param>
-        public DeviceX2401b(int addr,UInt32 id, String ip, String port): base(id,ip,port){
+        public DeviceXb2401(int addr,UInt32 id, String ip, String port): base(id,ip,port){
             devLocalAddress=addr;
         }
+        public DeviceXb2401(OracleDataReader odr)
+            :base(odr)
+        {
+
+        }
+
 
         /// <summary>
         ///

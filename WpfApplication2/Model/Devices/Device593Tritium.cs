@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -281,7 +282,11 @@ namespace Project208Home.Model
         public Device593Tritium()
         {
         }
+        public Device593Tritium(OracleDataReader odr)
+            :base(odr)
+        {
 
+        }
         public override Byte[] getParaReadCommands()
         {
             byte[] coms = new byte[10];

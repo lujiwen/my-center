@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using WpfApplication2.Model.Vo;
 
 namespace WpfApplication2.Controller
 { 
@@ -31,7 +32,7 @@ namespace WpfApplication2.Controller
 
    public  class UdpConnection:Connection
     {
-       public event dataReceivedHandler dataReceivedEvent;
+        public event dataReceivedHandler dataReceivedEvent;
         public UdpConnection(String ip, String port):base(ip,port)
         {
             try
@@ -50,9 +51,31 @@ namespace WpfApplication2.Controller
             }
             catch (Exception e)
             {
+
             }
         }
+        public UdpConnection(Device device)
+            : base(device)
+        {
+            try
+            {
+                IPEndPoint ipep = new IPEndPoint(IPAddress.Any, Convert.ToInt32(Port));
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                socket.Bind(ipep);
 
+                State state = new State(socket);
+                socket.BeginReceiveFrom(
+                    state.Buffer, 0, state.Buffer.Length,
+                    SocketFlags.None,
+                    ref state.RemoteEP,
+                    EndReceiveFromCallback,
+                    state);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
         private void EndReceiveFromCallback(IAsyncResult iar)
         {
             State state = iar.AsyncState as State;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
@@ -184,8 +185,14 @@ namespace Project208Home.Model
 
         public DeviceMARC7000()
         { 
+
         }
 
+        public DeviceMARC7000(OracleDataReader odr)
+            :base(odr)
+        {
+
+        }
         //marc7000无论下发什么都回来数据。所以暂定下发一个“#”
         public override Byte[] getParaReadCommands()
         {

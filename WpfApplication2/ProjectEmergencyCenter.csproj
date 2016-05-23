@@ -113,7 +113,7 @@
     <Compile Include="Model\Devices\Device593Tritium.cs" />
     <Compile Include="Model\Devices\DeviceKSJKSD.cs" />
     <Compile Include="Model\Devices\DeviceMARC7000.cs" />
-    <Compile Include="Model\Devices\DeviceX2401b.cs" />
+    <Compile Include="Model\Devices\DeviceXb2401.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />
     <Compile Include="package\208Boxes\DeviceDataBox_XH3125.cs" />
