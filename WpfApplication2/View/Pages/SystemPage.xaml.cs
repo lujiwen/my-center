@@ -53,6 +53,22 @@
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
                         break; 
+                    case "209":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "208烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "201烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "207烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break; 
                     default:
                         cabspage = new CabsPage(this, building);
                         page.Content = cabspage;
