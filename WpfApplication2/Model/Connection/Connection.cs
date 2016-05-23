@@ -32,7 +32,7 @@ namespace WpfApplication2.Controller
         private Device device;
         public delegate void dataReceivedHandler(string data);
         public event dataReceivedHandler dataReceivedEvent;
-
+        public string err;
         public Connection()
         {
         }
@@ -54,6 +54,12 @@ namespace WpfApplication2.Controller
          public virtual void Connect() { }
          public virtual void GetDataFromServer() { }
          public virtual void SendCommandToServer(string data) { }
+
+         public virtual string getErrMessage()
+         {
+             err = device.SubSystemName + " " + device.Type + " " + device.DeviceId + "连接异常！";
+             return err;
+         }
 
         /// <summary>
         /// 启动连接

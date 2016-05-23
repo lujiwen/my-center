@@ -108,5 +108,10 @@ namespace WpfApplication2.Controller
                     state);
             }
         }
-    }
+
+        public override bool StartConnection()
+        {
+            return base.StartConnection();
+        }
+   }
 }

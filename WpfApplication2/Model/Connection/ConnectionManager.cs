@@ -13,8 +13,9 @@ namespace WpfApplication2.Controller
     {
         public delegate void MangerReceivedDataHandler(string data);
         public event MangerReceivedDataHandler ManagerReceivedDataEvent;
-
-       List<Connection> connections;
+        public bool isAllConnected;
+        private  List<Connection> connections;
+        private string connectionErrMessage;
        public ConnectionManager(List<Connection> conList)
        {
            this.connections = conList;
@@ -38,6 +39,23 @@ namespace WpfApplication2.Controller
                c.ReceiveListener = this;
               // c.dataReceivedEvent += managerDataReceivedEvent ;
            }
+           isAllConnected = false;
+       }
+       /// <summary>
+       /// 开启管理的每一个连接去请求数据
+       /// </summary>
+       public bool startConnections()
+       {
+           isAllConnected = true;
+           foreach (Connection c in connections)
+           {
+               if(!c.StartConnection())
+               {
+                   isAllConnected = false;
+                   connectionErrMessage += c.getErrMessage()+ "; ";
+               }
+           }
+           return isAllConnected;
        }
 
       public void managerDataReceivedEvent(string data)
@@ -65,6 +83,10 @@ namespace WpfApplication2.Controller
            return false;
        }
 
+       public string getConnectiosErr()
+       {
+           return connectionErrMessage;
+       }
 
        void DataReciveListner.onDataReceive(string message)
        {

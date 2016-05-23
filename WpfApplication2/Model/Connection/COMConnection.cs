@@ -52,7 +52,7 @@ namespace WpfApplication2.Controller
         {
             try
             {
-                //建立socket连接   TCP Server模式 ？
+                //建立socket连接   TCP Server模式 
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 IPEndPoint ie = new IPEndPoint(IPAddress.Parse(Ip), Convert.ToInt32(Port));
                 socket.Connect(ie);
@@ -60,20 +60,28 @@ namespace WpfApplication2.Controller
                 // 开启读取数据线程 
                 rdthread = new Thread(new ThreadStart(this.Work));
                 rdthread.Start();
-
             }
             catch (SocketException se)
             {
-                LogUtil.Log(true, "Socket 连接异常",(int)ErrorCode.ERR_CODE.SOCKET_CONNECT_ERR);
+                LogUtil.Log(false, "Socket 连接异常", (int)ErrorCode.ERR_CODE.SOCKET_CONNECT_ERR);
+                err = "Socket 连接异常： " + device.SubSystemName + ", " + device.Type + device.DeviceId;
+                Console.WriteLine(err);
                 Succeed = false;
             }
             catch (InvalidOperationException ipe)
             {
-                LogUtil.Log(true, "Socket 连接异常", (int)ErrorCode.ERR_CODE.SOCKET_CONNECT_ERR);
+                LogUtil.Log(false, "Socket 连接异常", (int)ErrorCode.ERR_CODE.SOCKET_CONNECT_ERR);
+                err = "Socket 连接异常： " + device.SubSystemName + "; " + device.Type + device.DeviceId;
+                Console.WriteLine(err);
                 Succeed = false;
             }
             return Succeed;
         }
+        public override string getErrMessage()
+        {
+            return err;
+        }
+
         /// <summary>
         /// 关闭连接,不是暂停连接
         /// </summary>
@@ -134,14 +142,15 @@ namespace WpfApplication2.Controller
             try {
                 if (device.ParaChanged)//参数设置命令
                 {
-                      commands = device.ToSetParaCommands();
+                     commands = device.ToSetParaCommands();
                 }
                 else
                 {
-                      commands = device.ToReadDataCommand();
+                    commands = device.ToReadDataCommand();
                 }
-                        //发送数据
-                        socket.Send(commands, commands.Length, 0);
+                //发送数据
+                socket.Send(commands, commands.Length, 0);
+                Console.WriteLine(device.SubSystemName+":"+device.Type+", "+device.DeviceId+"连接放送命令："+commands);
             }
             catch (Exception ex)
             {
@@ -159,52 +168,52 @@ namespace WpfApplication2.Controller
         {
             try
             {             
-                        //发送次数
-                        UInt32 count = 0;
-                        //没有数据更新,跳出等待
-                        while (socket.Available <= 0 && count < receiveNullMaxCount)
+                //发送次数
+                UInt32 count = 0;
+                //没有数据更新,跳出等待
+                while (socket.Available <= 0 && count < receiveNullMaxCount)
+                {
+                    //等待0.1s
+                    Thread.Sleep(500);
+                    count++;
+                } 
+                // 等待有数据或者预置时间，直接一次性读数据
+                if (Succeed && count < receiveNullMaxCount)//正常接收
+                {
+                    int recv_len = socket.Receive(receiveBuffer);
+                    /** 参数解析 **/
+                    if (device.ParaChanged) 
+                    {
+                        device.ParaChanged = false;
+                        if (!device.isParaSetRight(receiveBuffer))//继续设置,设置错误,上层应做判断
                         {
-                            //等待0.1s
-                            Thread.Sleep(500);
-                            count++;
-                        } 
-                        // 等待有数据或者预置时间，直接一次性读数据
-                        if (Succeed && count < receiveNullMaxCount)//正常接收
-                        {
-                            int recv_len = socket.Receive(receiveBuffer);
-                            /** 参数解析 **/
-                            if (device.ParaChanged) 
-                            {
-                                device.ParaChanged = false;
-                                if (!device.isParaSetRight(receiveBuffer))//继续设置,设置错误,上层应做判断
-                                {
-                                    device.ParaChangedSuccess = false;
-                                    return false;
-                                }
-                                else//已经修改成功
-                                {
-                                    device.ParaChangedSuccess = true;
-                                    return true;
-                                }
-                            }
-                            /** 解析接收的设备实时数据 **/
-                            else
-                            {
-                                if (!device.isDataRight(receiveBuffer, recv_len)) //判断是否数据正常？如果不正常，跳出该次数据解析
-                                {
-                                    return false; //数据异常
-                                }
-                                //解析数据
-                                device.AnalysisPavilionData(receiveBuffer,recv_len);
-                                //产生新的数据入库事件
-                                newMonitorData(device.getHistoryDataSql());
-
-                                //产生新的阿里云数据更新事件
-                                device.getAliyunUpdateStr();
-
-                                return true;
-                            }
+                            device.ParaChangedSuccess = false;
+                            return false;
                         }
+                        else//已经修改成功
+                        {
+                            device.ParaChangedSuccess = true;
+                            return true;
+                        }
+                    }
+                    /** 解析接收的设备实时数据 **/
+                    else
+                    {
+                        if (!device.isDataRight(receiveBuffer, recv_len)) //判断是否数据正常？如果不正常，跳出该次数据解析
+                        {
+                            return false; //数据异常
+                        }
+                        //解析数据
+                        device.AnalysisPavilionData(receiveBuffer,recv_len);
+                        //产生新的数据入库事件
+                        newMonitorData(device.getHistoryDataSql());
+
+                        //产生新的阿里云数据更新事件
+                        device.getAliyunUpdateStr();
+
+                        return true;
+                    }
+                }
             }
             catch (Exception ex)
             {

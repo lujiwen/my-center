@@ -222,6 +222,8 @@ namespace WpfApplication2.Controller
                                             device = new Device(odr3);
                                             break;
                                     }
+                                    device.devIp = cab.Ip;
+                                  // device.devPort =
                                     cab.Devices.Add(device);
                                     Console.WriteLine(building.Name + " :" + cab.Name+":"+device.Type);
                                     GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);
@@ -271,94 +273,96 @@ namespace WpfApplication2.Controller
 
         public void InitialConnection()  //初始化连接
         {
-            if (init207cConnection() != null)
+             manager207c = init207cConnection();
+             if (manager207c != null && manager207c.isAllConnected)
             {
                 Alarm("207c连接初始化成功！");
             }
             else 
             {
-                Alarm("207c连接初始化失败！");
+                Alarm("207c连接初始化失败："+manager207c.getConnectiosErr());
+                
             }
-            if (init208Connection() != null)
-            {
-                Alarm("208连接初始化成功！");
-            }
-            else 
-            {
-                Alarm("208连接初始化失败！");
-            }
-            if (init209Conection() != null)
-            {
-                Alarm("209连接初始化成功！");
-            }
-            else
-            {
-                Alarm("209连接初始化失败！");
-            }
-            if (init2115Connection() != null)
-            {
-                Alarm("2115连接初始化成功！");
-            }
-            else
-            {
-                Alarm("2115连接初始化失败！");
-            }
-            if (init201Chimney() != null)
-            {
-                Alarm("201烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("201烟囱连接初始化失败！");
-            }
-            if (init207Chimney() != null)
-            {
-                Alarm("207烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("207烟囱连接初始化失败！");
-            }
-            if (init208Chimney() != null)
-            {
-                Alarm("208烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("208烟囱连接初始化失败！");
-            }
-            if (initPavilionEx1() != null)
-            {
-                Alarm("亭子（运输部）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（运输部）连接初始化失败！");
-            }
-            if (initPavilionEx2() != null)
-            {
-                Alarm("亭子（新桥）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（新桥）连接初始化失败！");
-            }
-            if (initPavilionInner() != null)
-            {
-                Alarm("亭子（内网）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（内网）连接初始化失败！");
-            }
-            if (initMonitorVehicle()!= null)
-            {
-                Alarm("监测车连接初始化成功！");
-            }
-            else
-            {
-                Alarm("监测车连接初始化失败！");
-            }
+            //if (init208Connection() != null)
+            //{
+            //    Alarm("208连接初始化成功！");
+            //}
+            //else 
+            //{
+            //    Alarm("208连接初始化失败！");
+            //}
+            //if (init209Conection() != null)
+            //{
+            //    Alarm("209连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("209连接初始化失败！");
+            //}
+            //if (init2115Connection() != null)
+            //{
+            //    Alarm("2115连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("2115连接初始化失败！");
+            //}
+            //if (init201Chimney() != null)
+            //{
+            //    Alarm("201烟囱连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("201烟囱连接初始化失败！");
+            //}
+            //if (init207Chimney() != null)
+            //{
+            //    Alarm("207烟囱连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("207烟囱连接初始化失败！");
+            //}
+            //if (init208Chimney() != null)
+            //{
+            //    Alarm("208烟囱连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("208烟囱连接初始化失败！");
+            //}
+            //if (initPavilionEx1() != null)
+            //{
+            //    Alarm("亭子（运输部）连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("亭子（运输部）连接初始化失败！");
+            //}
+            //if (initPavilionEx2() != null)
+            //{
+            //    Alarm("亭子（新桥）连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("亭子（新桥）连接初始化失败！");
+            //}
+            //if (initPavilionInner() != null)
+            //{
+            //    Alarm("亭子（内网）连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("亭子（内网）连接初始化失败！");
+            //}
+            //if (initMonitorVehicle()!= null)
+            //{
+            //    Alarm("监测车连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("监测车连接初始化失败！");
+            //}
         }
 
         /// <summary>
@@ -375,11 +379,12 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach(Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d);
+                    COMConnection con = new COMConnection(d);
                     cons.Add(con);
                 }
                 manager207c = new ConnectionManager(cons);
                 manager207c.ManagerReceivedDataEvent += receiveData;
+                manager207c.startConnections();
             }
             return manager207c;
         }

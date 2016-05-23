@@ -98,7 +98,7 @@ namespace WpfApplication2.Model.Vo
             handleTypeInSystem = odr.GetString(15);
             state = "Normal";
             showCurve = true;
-           
+            devPort = inputArg3.ToString() ;
         }
 
         public Device(string deviceId, string cabId, string buildingId, string type, int subSystemSerial, string subSystemName, float highthreshold, float lowthreshold, int devLocalAddress, int interfaceId,
