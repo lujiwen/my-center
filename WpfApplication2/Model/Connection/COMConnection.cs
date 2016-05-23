@@ -150,14 +150,13 @@ namespace WpfApplication2.Controller
                 }
                 //发送数据
                 socket.Send(commands, commands.Length, 0);
-                Console.WriteLine(device.SubSystemName+":"+device.Type+", "+device.DeviceId+"连接放送命令："+commands);
+                Console.WriteLine(device.SubSystemName+":"+device.Type+", "+device.DeviceId+" 连接放送命令："+commands);
             }
             catch (Exception ex)
             {
                 LogUtil.Log(false, ex.ToString(),(int)ErrorCode.ERR_CODE.SOCKET_CONNECT_ERR);
                 return -1; // 返回异常
             }
-
             return 0;
         }
         /// <summary>

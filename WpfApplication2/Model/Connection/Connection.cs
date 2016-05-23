@@ -57,6 +57,7 @@ namespace WpfApplication2.Controller
 
          public virtual string getErrMessage()
          {
+             if (device == null) return "";
              err = device.SubSystemName + " " + device.Type + " " + device.DeviceId + "连接异常！";
              return err;
          }

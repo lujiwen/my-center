@@ -201,10 +201,10 @@ namespace WpfApplication2.Controller
                                             device = new DeviceJL900(odr3);
                                             break;
                                         case "gamma":
-                                            device = new Device(odr3);
+                                            device = new DeviceGamma(odr3);
                                             break;
                                         case "neutron":
-                                            device = new Device(odr3);
+                                            device = new DeviceNeutron(odr3);
                                             break;
                                         case "XB2401":
                                             device = new DeviceXb2401(odr3);
@@ -283,22 +283,24 @@ namespace WpfApplication2.Controller
                 Alarm("207c连接初始化失败："+manager207c.getConnectiosErr());
                 
             }
-            //if (init208Connection() != null)
-            //{
-            //    Alarm("208连接初始化成功！");
-            //}
-            //else 
-            //{
-            //    Alarm("208连接初始化失败！");
-            //}
-            //if (init209Conection() != null)
-            //{
-            //    Alarm("209连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("209连接初始化失败！");
-            //}
+              manager208 = init208Connection();
+             if (manager208 != null)
+             {
+                 Alarm("208连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("208连接初始化失败！");
+             }
+             manager209 = init209Conection();
+             if (manager209 != null)
+             {
+                 Alarm("209连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("209连接初始化失败," + manager209.getConnectiosErr());
+             }
             //if (init2115Connection() != null)
             //{
             //    Alarm("2115连接初始化成功！");
@@ -307,30 +309,33 @@ namespace WpfApplication2.Controller
             //{
             //    Alarm("2115连接初始化失败！");
             //}
-            //if (init201Chimney() != null)
-            //{
-            //    Alarm("201烟囱连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("201烟囱连接初始化失败！");
-            //}
-            //if (init207Chimney() != null)
-            //{
-            //    Alarm("207烟囱连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("207烟囱连接初始化失败！");
-            //}
-            //if (init208Chimney() != null)
-            //{
-            //    Alarm("208烟囱连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("208烟囱连接初始化失败！");
-            //}
+             manager201Chimney = init201Chimney() ;
+             if (manager201Chimney != null && manager201Chimney.isAllConnected)
+             {
+                 Alarm("201烟囱连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+             }
+             manager207Chimney = init207Chimney();
+             if (manager207Chimney != null&& manager207Chimney.isAllConnected)
+             {
+                 Alarm("207烟囱连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
+             }
+             manager208Chimney = init208Chimney();
+             if (manager208Chimney != null && manager208Chimney.isAllConnected)
+             {
+                 Alarm("208烟囱连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
+             }
             //if (initPavilionEx1() != null)
             //{
             //    Alarm("亭子（运输部）连接初始化成功！");
@@ -389,18 +394,26 @@ namespace WpfApplication2.Controller
             return manager207c;
         }
 
-        private bool init208Connection()
+        private ConnectionManager init208Connection()
         {
-            UdpConnection uc208 = new UdpConnection("127.0.0.1", "58888");
+            Building b = GlobalMapForShow.getBuildingByName("208楼");
+            Cab c = b.Cabs[0];
+            UdpConnection uc208 = new UdpConnection(c.Ip, c.Port);
             conManagerList = new List<ConnectionManager>();
             ConnectionManager manager208 = new ConnectionManager(uc208);
             manager208.ManagerReceivedDataEvent += receiveData;
-            return true;
+            return manager208;
         }
 
         private ConnectionManager init209Conection()
         {
-            return null;
+            Building b = GlobalMapForShow.getBuildingByName("209楼");
+            Cab c = b.Cabs[0];
+            UdpConnection uc209 = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager manager209 = new ConnectionManager(uc209);
+            manager209.ManagerReceivedDataEvent += receiveData;
+            return manager209;
         }
 
         private ConnectionManager init201Chimney()
@@ -412,12 +425,12 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach (Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    COMConnection con = new COMConnection(d);
                     cons.Add(con);
                 }
-
                 manager201Chimney = new ConnectionManager(cons);
                 manager201Chimney.ManagerReceivedDataEvent += receiveData;
+                manager201Chimney.startConnections();
             }
             return manager201Chimney;
         }
@@ -430,12 +443,12 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach (Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    COMConnection con = new COMConnection(d);
                     cons.Add(con);
                 }
-
                 manager207Chimney = new ConnectionManager(cons);
                 manager207Chimney.ManagerReceivedDataEvent += receiveData;
+                manager207Chimney.startConnections();
             }
             return manager207Chimney;
         }
@@ -448,12 +461,12 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach (Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    COMConnection con = new COMConnection(d);
                     cons.Add(con);
                 }
-
                 manager208Chimney = new ConnectionManager(cons);
                 manager208Chimney.ManagerReceivedDataEvent += receiveData;
+                manager208Chimney.startConnections();
             }
             return manager208Chimney;
         }
