@@ -487,38 +487,22 @@ namespace WpfApplication2.Controller
         private ConnectionManager initPavilionEx1()
         {
             Building b = GlobalMapForShow.getBuildingByName("亭子（运输部）");
-            ConnectionManager managerPavilionTransport = null;
-            if (b != null)
-            {
-                List<Connection> cons = new List<Connection>();
-                foreach (Device d in b.Cabs[0].Devices)
-                {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
-                    cons.Add(con);
-                }
-
-                managerPavilionTransport = new ConnectionManager(cons);
-                managerPavilionTransport.ManagerReceivedDataEvent += receiveData;
-            }
-            return managerPavilionTransport;
+            Cab c = b.Cabs[0];
+            UdpConnection ucPavilionEx1 = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager managerPavilionEx1 = new ConnectionManager(ucPavilionEx1);
+            managerPavilionEx1.ManagerReceivedDataEvent += receiveData;
+            return managerPavilionEx1;
         }
         private ConnectionManager initPavilionEx2()
         {
             Building b = GlobalMapForShow.getBuildingByName("亭子（新桥）");
-            ConnectionManager managerPavilionBridge = null;
-            if (b != null)
-            {
-                List<Connection> cons = new List<Connection>();
-                foreach (Device d in b.Cabs[0].Devices)
-                {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
-                    cons.Add(con);
-                }
-
-                managerPavilionBridge = new ConnectionManager(cons);
-                managerPavilionBridge.ManagerReceivedDataEvent += receiveData;
-            }
-            return managerPavilionBridge;
+            Cab c = b.Cabs[0];
+            UdpConnection ucPavilionEx2 = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager managerPavilionEx2 = new ConnectionManager(ucPavilionEx2);
+            managerPavilionEx2.ManagerReceivedDataEvent += receiveData;
+            return managerPavilionEx2;
         }
         private ConnectionManager initPavilionInner()
         {
