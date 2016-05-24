@@ -118,11 +118,13 @@
     <Compile Include="Model\Devices\DeviceXb2401.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />
-    <Compile Include="package\208Boxes\DeviceDataBox_XH3125.cs" />
+    <Compile Include="package\DeviceDataBox_XH3125.cs" />
     <Compile Include="package\Box.cs" />
     <Compile Include="package\DeviceDataBox.cs" />
     <Compile Include="package\DeviceCommandBox.cs" />
     <Compile Include="package\DeviceCommandEchoBox.cs" />
+    <Compile Include="package\DeviceDataBox_Gamma.cs" />
+    <Compile Include="package\DeviceDataBox_Neutron.cs" />
     <Compile Include="Util\ErrorCode.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
@@ -158,9 +160,9 @@
     <Compile Include="Model\Vo\Device.cs" />
     <Compile Include="Model\Vo\DeviceData.cs" />
     <Compile Include="Model\Vo\QueueFixedLength.cs" />
-    <Compile Include="package\PavilionBoxes\DeviceDataASM02Box.cs" />
-    <Compile Include="package\PavilionBoxes\DeviceDataDryWetBox.cs" />
-    <Compile Include="package\PavilionBoxes\DeviceDataJL900Box.cs" />
+    <Compile Include="package\DeviceDataASM02Box.cs" />
+    <Compile Include="package\DeviceDataDryWetBox.cs" />
+    <Compile Include="package\DeviceDataJL900Box.cs" />
     <Compile Include="Util\BlockQueue.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ConvertByteAndHex.cs" />
@@ -385,8 +387,8 @@
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
     <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />
     <Compile Include="package\DeviceDataBox_Base.cs" />
-    <Compile Include="package\208Boxes\DeviceDataBox_6517AB.cs" />
-    <Compile Include="package\208Boxes\DeviceDataBox_Quality.cs" />
+    <Compile Include="package\DeviceDataBox_6517AB.cs" />
+    <Compile Include="package\DeviceDataBox_Quality.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

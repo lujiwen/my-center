@@ -94,6 +94,18 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
+                else if (elem.Name == DeviceDataBox_Neutron.classNameString)
+                {
+                    DeviceDataBox_Neutron box = new DeviceDataBox_Neutron();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
+                else if (elem.Name == DeviceDataBox_Gamma.classNameString)
+                {
+                    DeviceDataBox_Gamma box = new DeviceDataBox_Gamma();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
             }
             return boxes;
         }
