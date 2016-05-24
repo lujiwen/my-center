@@ -8,7 +8,7 @@ using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
-    class DeviceNeutron: Device,INotifyPropertyChanged
+   public class DeviceNeutron: Device,INotifyPropertyChanged
     {
         private double m_NeutronRate; //中子计数率
         public event PropertyChangedEventHandler PropertyChanged;

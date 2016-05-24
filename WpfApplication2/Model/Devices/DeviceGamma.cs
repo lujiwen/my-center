@@ -8,7 +8,7 @@ using System.Data.OracleClient;
 
 namespace Project208Home.Model
 {
-    class DeviceGamma: Device,INotifyPropertyChanged
+    public class DeviceGamma: Device,INotifyPropertyChanged
     {
         private double m_gammaTotalDose; //伽马总剂量
         private double m_gammaDoseRate; //伽马剂量率

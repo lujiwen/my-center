@@ -239,6 +239,7 @@ namespace WpfApplication2.Controller
                 }
                 odr.Close();
                 dbOfDevice.CloseConnection();
+                Console.WriteLine("MainController,InitialData, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
             }
             catch(Exception e)
             {
@@ -352,14 +353,15 @@ namespace WpfApplication2.Controller
             //{
             //    Alarm("亭子（新桥）连接初始化失败！");
             //}
-            //if (initPavilionInner() != null)
-            //{
-            //    Alarm("亭子（内网）连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("亭子（内网）连接初始化失败！");
-            //}
+             managerPavilionInnner = initPavilionInner() ;
+             if (managerPavilionInnner != null)
+             {
+                 Alarm("亭子（内网）连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("亭子（内网）连接初始化失败！");
+             }
             //if (initMonitorVehicle()!= null)
             //{
             //    Alarm("监测车连接初始化成功！");
@@ -513,20 +515,12 @@ namespace WpfApplication2.Controller
         private ConnectionManager initPavilionInner()
         {
             Building b = GlobalMapForShow.getBuildingByName("亭子（内网）");
-            ConnectionManager managerPavilionInnner = null;
-            if (b != null)
-            {
-                List<Connection> cons = new List<Connection>();
-                foreach (Device d in b.Cabs[0].Devices)
-                {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
-                    cons.Add(con);
-                }
-
-                managerPavilionInnner = new ConnectionManager(cons);
-                managerPavilionInnner.ManagerReceivedDataEvent += receiveData;
-            }
-            return managerPavilionInnner;
+            Cab c = b.Cabs[0];
+            UdpConnection ucPavilionInner = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager managerPavilionInner = new ConnectionManager(ucPavilionInner);
+            managerPavilionInner.ManagerReceivedDataEvent += receiveData;
+            return managerPavilionInner;
         }
         private ConnectionManager init2115Connection()
         {

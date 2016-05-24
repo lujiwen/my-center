@@ -13,7 +13,7 @@ namespace WpfApplication2.package
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_gammaTotalDose; //伽马总剂量
-        private string m_gammaDoseRate; //伽马剂量率
+        private string m_gammaDoseRate; //伽马剂量率  
 
         public override string className()
         {

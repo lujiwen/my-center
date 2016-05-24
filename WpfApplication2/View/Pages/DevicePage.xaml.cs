@@ -97,6 +97,13 @@ namespace WpfApplication2.View.Pages
                          case "DryWet":
                              deviceUI = new DeviceUIDryWet(d, systemFrame);
                              break;
+                         case "gamma":
+                             deviceUI = new DeviceUIGamma(d, systemFrame);
+                             break;
+                         case "neutron":
+                             deviceUI = new DeviceUINeutron(d, systemFrame);
+                             break;
+                  
                          default:
                              deviceUI = new DeviceUI(d, systemFrame);
                              break;

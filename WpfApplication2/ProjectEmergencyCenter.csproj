@@ -107,6 +107,8 @@
     <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeviceUIs\DeviceUIGamma.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUINeutron.cs" />
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\Device2115.cs" />
@@ -128,15 +130,15 @@
     <Compile Include="Util\ErrorCode.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
-    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUI6517AB.cs" />
-    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIXH31253127.cs" />
-    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml.cs">
+    <Compile Include="Controls\DeviceUIs\DeviceUI6517AB.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIXH31253127.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIASM02.xaml.cs">
       <DependentUpon>DeviceUIASM02.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIJL900.cs" />
-    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIRSS131.cs" />
-    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIDryWet.cs" />
-    <Compile Include="Controls\DeviceUIs\PavilionUI\DeviceUIH3R7000.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIJL900.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIRSS131.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIDryWet.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIH3R7000.cs" />
     <Compile Include="Model\Connection\BaseConnection.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Connection\SocketConnection.cs" />
@@ -293,7 +295,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DeviceUIs\PavilionUI\DeviceUIASM02.xaml">
+    <Page Include="Controls\DeviceUIs\DeviceUIASM02.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,9 +385,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPump.cs" />
-    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIPresure.cs" />
-    <Compile Include="Controls\DeviceUIs\208HomeUI\DeviceUIQuality.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIPump.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIPresure.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIQuality.cs" />
     <Compile Include="package\DeviceDataBox_Base.cs" />
     <Compile Include="package\DeviceDataBox_6517AB.cs" />
     <Compile Include="package\DeviceDataBox_Quality.cs" />

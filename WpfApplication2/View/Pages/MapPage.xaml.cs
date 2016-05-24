@@ -127,6 +127,7 @@ namespace WpfApplication2.View.Pages
                     MainMap.Markers.Add(markers[i]);
                 }
             }
+            Console.WriteLine("initMap, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
         }
 
         void OnDragOver(object sender, DragEventArgs e)
@@ -302,6 +303,7 @@ namespace WpfApplication2.View.Pages
        /// <param name="e"></param>
         public void marker_Click(object sender, MouseButtonEventArgs e)
         {
+            Console.WriteLine("marker_Click, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
             Console.WriteLine("点击了一下marker");
             if (e.LeftButton == MouseButtonState.Released)
             {

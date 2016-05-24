@@ -53,7 +53,7 @@
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
                         break; 
-                    case "209":
+                    case "209楼":
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
                         break;
