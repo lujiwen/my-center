@@ -53,7 +53,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        private void updateLabels()
        {
            values.Clear();
-           values.Add(box.value);
+           values.Add(box.neutronRate);
            updateChart(values);
 
            valueLT.getValueTextBlock().Text = box.value;

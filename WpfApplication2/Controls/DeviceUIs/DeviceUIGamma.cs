@@ -53,7 +53,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        private void updateLabels()
        {
            values.Clear();
-           values.Add(box.value);
+           values.Add(box.GammaTotalDose);
+           values.Add(box.GammaDoseRate);
            updateChart(values);
 
            valueLT.getValueTextBlock().Text = box.value;

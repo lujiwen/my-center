@@ -362,14 +362,15 @@ namespace WpfApplication2.Controller
              {
                  Alarm("亭子（内网）连接初始化失败！");
              }
-            //if (initMonitorVehicle()!= null)
-            //{
-            //    Alarm("监测车连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("监测车连接初始化失败！");
-            //}
+             managerMonitorVehicle = initMonitorVehicle() ;
+            if (managerMonitorVehicle != null)
+             {
+                 Alarm("监测车连接初始化成功！");
+             }
+             else
+             {
+                 Alarm("监测车连接初始化失败！");
+             }
         }
 
         /// <summary>
@@ -474,7 +475,14 @@ namespace WpfApplication2.Controller
         }
         private ConnectionManager initMonitorVehicle()
         {
-            return null;
+            Building b = GlobalMapForShow.getBuildingByName("检测车");
+            Cab c = b.Cabs[0];
+            UdpConnection ucMonitorVehicle = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager managerMonitorVehicle = new ConnectionManager(ucMonitorVehicle);
+            managerMonitorVehicle.ManagerReceivedDataEvent += receiveData;
+            return managerMonitorVehicle;
+        
         }
         private ConnectionManager initPavilionEx1()
         {
