@@ -71,6 +71,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            values.Add(box.real_traffic);
            values.Add(box.keep_time);
            values.Add(box.sample_volume);
+           updateChart(values);
+
            presureLT.getValueTextBlock().Text = box.presure;
            realTrafficLT.getValueTextBlock().Text = box.real_traffic;
            sampleVolumeLT.getValueTextBlock().Text = box.sample_volume;
