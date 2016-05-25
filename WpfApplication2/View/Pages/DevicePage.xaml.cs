@@ -17,6 +17,7 @@ using WpfApplication2.Util;
 using WpfApplication2.CustomMarkers.Controls.DeviceUIs;
 using Project208Home.Model;
 using WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI;
+using PavilionMonitor;
 
 namespace WpfApplication2.View.Pages
 {
@@ -77,16 +78,16 @@ namespace WpfApplication2.View.Pages
                              deviceUI = new DeviceUIPump(d, systemFrame);
                              break ;
                         case "XH3125":
-                             deviceUI = new DeviceUIXH31253127(d, systemFrame);
+                             deviceUI = new DeviceUIXH31253127((DeviceXH31253127)d, systemFrame);
                              break ;
                          case "Quality":
-                             deviceUI = new DeviceUIQuality(d, systemFrame);
+                             deviceUI = new DeviceUIQuality((DeviceQuality)d, systemFrame);
                              break;
                          case "Asm02":
                              deviceUI = new DeviceUIASM02(d, systemFrame);
                              break;
                          case "Jl900":
-                             deviceUI = new DeviceUIJL900(d, systemFrame);
+                             deviceUI = new DeviceUIJL900((DeviceJL900)d, systemFrame);
                              break;
                          case "rss131":
                              deviceUI = new DeviceUIRSS131(d, systemFrame);
@@ -95,13 +96,13 @@ namespace WpfApplication2.View.Pages
                              deviceUI = new DeviceUIH3R7000(d, systemFrame);
                              break;
                          case "DryWet":
-                             deviceUI = new DeviceUIDryWet(d, systemFrame);
+                             deviceUI = new DeviceUIDryWet((DeviceDryWet)d, systemFrame);
                              break;
                          case "gamma":
-                             deviceUI = new DeviceUIGamma(d, systemFrame);
+                             deviceUI = new DeviceUIGamma((DeviceGamma)d, systemFrame);
                              break;
                          case "neutron":
-                             deviceUI = new DeviceUINeutron(d, systemFrame);
+                             deviceUI = new DeviceUINeutron((DeviceNeutron)d, systemFrame);
                              break;
                   
                          default:

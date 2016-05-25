@@ -223,7 +223,6 @@ namespace WpfApplication2.Controller
                                             break;
                                     }
                                     device.devIp = cab.Ip;
-                                  // device.devPort =
                                     cab.Devices.Add(device);
                                     Console.WriteLine(building.Name + " :" + cab.Name+":"+device.Type);
                                     GlobalMapForShow.globalMapForDevice.Add(building.SystemId + "_" + device.DeviceId, device);

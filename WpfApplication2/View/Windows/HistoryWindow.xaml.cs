@@ -104,7 +104,7 @@ namespace WpfApplication2.View.Windows
                         {
                             v = MAX;
                         }
-                        else
+                        else if(v<MIN)
                         {
                             v = MIN;
                         }
@@ -124,6 +124,7 @@ namespace WpfApplication2.View.Windows
                 }
                 history_chart.Series.Add(dataSeries[i]);
                 dataSeries[i] = null;
+                i++;
             }
             MessageBox.Show("查询结果：\r\n"
                        + getHistoryResult( dataList));
@@ -146,21 +147,21 @@ namespace WpfApplication2.View.Windows
         //开始查询
         private void Start_Query_Button_Click(object sender, RoutedEventArgs e)
         {
-            // String start = "'" + start_time.Value.ToString() + "'";
-           //  String end = "'" + end_time.Value.ToString() + "'";
+            //String start = "'" + start_time.Value.ToString() + "'";
+            //String end = "'" + end_time.Value.ToString() + "'";
 
-             String start = "'2016/4/30 19:30:00'";
-             String end = "'2016/5/1 0:00:00'";
-             if (start_time.Value == null || end_time.Value == null)
-             {
-                 MessageBox.Show("起止时间不可缺省！");
-                 return;
-             }
-             else if (start_time.Value>=end_time.Value)
-             {
-                 MessageBox.Show("开始时间应早于结束时间！");
-                 return;
-             }
+            String start = "'2016/5/25 19:30:00'";
+            String end = "'2016/5/26 0:00:00'";
+             //if (start_time.Value == null || end_time.Value == null)
+             //{
+             //    MessageBox.Show("起止时间不可缺省！");
+             //    return;
+             //}
+             //else if (start_time.Value>=end_time.Value)
+             //{
+             //    MessageBox.Show("开始时间应早于结束时间！");
+             //    return;
+             //}
            
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";
@@ -197,18 +198,5 @@ namespace WpfApplication2.View.Windows
                 drawLines(dataDic);
             }
         }
- 
- 
-
-        //private void data_grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    DataGrid dg = sender as DataGrid;
-        //    DeviceData data = dg.SelectedCells[0].Item as DeviceData;
-        //    if(deviceDataList!=null)
-        //    {
-        //      //  device.startToShowHistoryTable(deviceDataList);
-        //    }
-        //    MessageBox.Show("双击！");
-        //}
     }
 }

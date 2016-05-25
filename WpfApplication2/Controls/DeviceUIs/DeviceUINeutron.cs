@@ -24,10 +24,10 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        LabelAndText stateLT;
        LabelAndText valueLT;
        private DeviceNeutron device;
-       public DeviceUINeutron(Device d, Frame fm)
+       public DeviceUINeutron(DeviceNeutron d, Frame fm)
          :base(d, fm)
        {
-          // device = d;
+           device = d;
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            box = (DeviceDataBox_Neutron)DeviceInUI.Value;
 
@@ -56,7 +56,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            values.Add(box.neutronRate);
            updateChart(values);
 
-           valueLT.getValueTextBlock().Text = box.value;
+           valueLT.getValueTextBlock().Text = box.neutronRate;
            stateLT.getValueTextBlock().Text = DeviceInUI.State.Equals("Normal") ? "正常" : "异常";
        }
 

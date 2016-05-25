@@ -126,10 +126,6 @@ namespace PavilionMonitor
             }
         }
 
-       
-
-
-
         public DeviceDryWet(UInt32 id, String ip, String port): base(id,ip,port)
         {
             rain_time = 0;

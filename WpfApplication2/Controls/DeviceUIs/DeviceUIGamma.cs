@@ -22,12 +22,13 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
        static int x = 1;
        DeviceDataBox_Gamma box;
        LabelAndText stateLT;
-       LabelAndText valueLT;
+       LabelAndText gammaTotalLT;
+       LabelAndText gammaDoseRateLT;
        private DeviceGamma device;
-       public DeviceUIGamma(Device d, Frame fm)
+       public DeviceUIGamma(DeviceGamma d, Frame fm)
          :base(d, fm)
        {
-         //  device = d;
+           device = d;
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            box = (DeviceDataBox_Gamma)DeviceInUI.Value;
            valueDic = new Dictionary<int, string>();
@@ -57,18 +58,21 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            values.Add(box.GammaDoseRate);
            updateChart(values);
 
-           valueLT.getValueTextBlock().Text = box.value;
+           gammaTotalLT.getValueTextBlock().Text = box.GammaTotalDose;
+           gammaDoseRateLT.getValueTextBlock().Text = box.GammaDoseRate;
            stateLT.getValueTextBlock().Text = DeviceInUI.State.Equals("Normal") ? "正常" : "异常";
        }
 
        public override void initlabels()
        { 
-           stateLT = new LabelAndText("伽马剂量率:", "", Colors.White);
-           valueLT = new LabelAndText("伽马总剂量:", "", Colors.White);
-           valueLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
+           stateLT = new LabelAndText("状态:", "", Colors.White);
+           gammaTotalLT = new LabelAndText("伽马总剂量:", "", Colors.White);
+           gammaDoseRateLT = new LabelAndText("伽马剂量率:", "", Colors.White);
+           gammaTotalLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
 
            getInoPanel().Children.Add(stateLT);
-           getInoPanel().Children.Add(valueLT);
+           getInoPanel().Children.Add(gammaTotalLT);
+           getInoPanel().Children.Add(gammaDoseRateLT);
        }
        public override void startHistoryWindow()
        {

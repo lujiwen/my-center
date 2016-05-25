@@ -10,6 +10,7 @@ using WpfApplication2.package;
 using WpfApplication2.View.Windows;
 using System.Windows.Media;
 using Visifire.Charts;
+using PavilionMonitor;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
@@ -20,13 +21,13 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
         LabelAndText realTrafficLT;
         LabelAndText sampleVolumeLT;
         LabelAndText keepTimeLT;
-
-        public DeviceUIJL900(Device d, Frame fm)
+        DeviceJL900 device; 
+        public DeviceUIJL900(DeviceJL900 d, Frame fm)
          :base(d, fm)
        {
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
-
+           device = d;
            valueDic = new Dictionary<int, string>();
            valueDic.Add(0, "压差");
            valueDic.Add(1, "瞬时流量");

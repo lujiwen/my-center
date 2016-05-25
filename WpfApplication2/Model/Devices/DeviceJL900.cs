@@ -10,7 +10,7 @@ using System.Data.OracleClient;
 namespace PavilionMonitor
 {
     // 超大流量
-    class DeviceJL900 : Device, INotifyPropertyChanged
+    public class DeviceJL900 : Device, INotifyPropertyChanged
     {
 
         private float presure;
@@ -62,10 +62,10 @@ namespace PavilionMonitor
                 DeviceData d2 = new DeviceData();
                 DeviceData d3 = new DeviceData();
                 DeviceData d4 = new DeviceData();
-                d1.VALUE1 = odr.GetString(5);
-                d2.VALUE2 = odr.GetString(6);
-                d3.VALUE3 = odr.GetString(7);
-                d4.Value_Option = odr.GetString(4);
+                d1.VALUE1 = odr.GetFloat(5).ToString();
+                d2.VALUE1 = odr.GetFloat(6).ToString();
+                d3.VALUE1 = odr.GetFloat(7).ToString();
+                d4.Value_Option = odr.GetString(4) ;
                 d1.Time = odr.GetString(2);
                 d2.Time = odr.GetString(2);
                 d3.Time = odr.GetString(2);

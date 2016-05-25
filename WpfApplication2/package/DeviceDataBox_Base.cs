@@ -101,6 +101,12 @@ namespace WpfApplication2.package
                             case "DeviceDataBox_DryWet":
                                 deviceToChange = new DeviceDryWet((DeviceDataDryWetBox)this);
                                 break;
+                            case "DeviceDataBox_Neutron":
+                                deviceToChange = new DeviceNeutron((DeviceDataBox_Neutron)this);
+                                break;
+                            case "DeviceDataBox_Gamma":
+                                deviceToChange = new DeviceGamma((DeviceDataBox_Gamma)this);
+                                break;
                             default :
                                 deviceToChange = new Device(this );
                                 break ;
