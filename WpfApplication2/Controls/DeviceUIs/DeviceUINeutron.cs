@@ -32,13 +32,13 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            box = (DeviceDataBox_Neutron)DeviceInUI.Value;
 
            valueDic = new Dictionary<int, string>();
-           valueDic.Add(0, "NeutronRate");
+           valueDic.Add(0, "中子计数率");
            dataSeries = new  DataSeries[valueDic.Count];
            values = new List<string>();
            for (int i = 0; i < valueDic.Count; i++)
            {
                dataSeries[i] = new DataSeries();  //数据系列 
-               dataSeries[i].Legend = valueDic[i];
+               dataSeries[i].LegendText = valueDic[i];
                dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
                device_chart.Series.Add(dataSeries[i]);
            }

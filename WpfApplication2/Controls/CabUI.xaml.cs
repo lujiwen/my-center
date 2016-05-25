@@ -175,7 +175,6 @@ namespace WpfApplication2.Controls
             }
         }
 
-       
         private void initEnventListner()
         {
             this.MouseDoubleClick += new MouseButtonEventHandler(cabDoubleClick);

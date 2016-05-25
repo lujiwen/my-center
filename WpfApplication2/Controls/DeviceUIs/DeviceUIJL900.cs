@@ -27,33 +27,19 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
 
-            //valueDic = new Dictionary<int, string>();
-            //valueDic.Add( 0, "keep_time");
-            //valueDic.Add(1, "sample");
-            //valueDic.Add(2, "trafiic" );
-            //valueDic.Add(3, "presure");
-           //dataSeries = new DataSeries[valueDic.Count];
-           //values = new List<string>();
-           //for (int i = 0; i < valueDic.Count; i++)
-           //{
-           //    dataSeries[i] = new DataSeries();  //数据系列 
-           //    dataSeries[i].Legend = valueDic[i];
-           //    dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
-           //    device_chart.Series.Add(dataSeries[i]);
-           //}
-
            valueDic = new Dictionary<int, string>();
-           valueDic.Add(0, "keep_time");
-           valueDic.Add(1, "sample");
-           valueDic.Add(2, "trafiic");
-           valueDic.Add(3, "presure");
+           valueDic.Add(0, "压差");
+           valueDic.Add(1, "瞬时流量");
+           valueDic.Add(2, "采样体积");
+           valueDic.Add(3, "采样时间");
            dataSeries = new DataSeries[valueDic.Count];
            values = new List<string>();
            for (int i = 0; i < valueDic.Count; i++)
            {
                dataSeries[i] = new DataSeries();  //数据系列 
-               dataSeries[i].Legend = valueDic[i];
+              // dataSeries[i].Legend = valueDic[i];
                dataSeries[i].RenderAs = RenderAs.Line;      //Spline : 平滑曲线 Line : 折线     
+               dataSeries[i].LegendText = valueDic[i];
                device_chart.Series.Add(dataSeries[i]);
            }
        }

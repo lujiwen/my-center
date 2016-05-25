@@ -105,7 +105,7 @@ namespace WpfApplication2.Controls
         private void init()
         {
            initlabels();
-           maxPointSize = 20;
+           maxPointSize = 40;
            DeviceBuzzer.MouseLeftButtonDown += new MouseButtonEventHandler(DeviceBuzzer_MouseLeftButtonDown);
            device.MouseLeftButtonDown += new MouseButtonEventHandler(device_MouseLeftButtonDown);
            if(_device!=null)
@@ -155,9 +155,11 @@ namespace WpfApplication2.Controls
             Axis axisX = new Axis();//图表X轴
             Axis axisY = new Axis(); //图表Y轴
             axisX.Title = "时间";//横坐标单位
+            axisX.Interval = 20;
             axisY.Title = "单位:xxx";//纵坐标单位
              
             device_chart.Titles.Add(title);//添加标题
+        
             device_chart.AxesX.Add(axisX);//添加x轴
             device_chart.AxesY.Add(axisY);//添加y轴
             //dataSeries = new DataSeries() ;  //数据系列 
