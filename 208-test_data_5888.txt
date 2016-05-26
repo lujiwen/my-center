@@ -1,0 +1,35 @@
+<package>
+<DeviceDataBox_XH3125 systemId = "2" cabId="1" devId="1" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="1" devId="3" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="1" devId="5" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="2" devId="7" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="2" devId="9" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="2" devId="11" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="3" devId="13" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="3" devId="14" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="3" devId="17" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="3" devId="18" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="3" devId="21" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="3" devId="22" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="4" devId="25" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="4" devId="27" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="4" devId="29" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="4" devId="31" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="5" devId="33" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="5" devId="35" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="5" devId="37" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="5" devId="39" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="6" devId="41" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="6" devId="42" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="6" devId="45" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="6" devId="46" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="6" devId="49" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="6" devId="50" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_6517AB systemId = "2" cabId="6" devId="53" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_Quality systemId = "2" cabId="6" devId="54" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="7" devId="57" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="7" devId="59" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+ <DeviceDataBox_XH3125 systemId = "2" cabId="8" devId="61" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+<DeviceDataBox_XH3125 systemId = "2" cabId="8" devId="63" state="Normal" value="%D1,100%.%D0,9%" unit="Bg/m^3"   highThreshold="" lowThreshold="" factor="" voltValue=""/>
+</package>
+ 
