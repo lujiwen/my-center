@@ -1,5 +1,8 @@
-<package>
-<DeviceDataASM02Box systemId= "7" cabId= "18" devId= "89" val_str_set= "Ab:,,,3.13E-003,,,,1.85E-002;Ec:,,,,,,,;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:,,,,,,;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001, " state= "Normal " unit= "c" highThreshold= "100" lowThreshold= "100" factor= "100" />
-<DeviceDataBox_JL900 systemId= "7" cabId= "18" devId= "91" presure= "%D1,100%.%D0,9%" real_traffic= "%D1,100%.%D0,9%" sample_volume= "%D1,100%.%D0,9%" keep_time= "%D1,100%.%D0,9%" state= "Normal " unit= "L" highThreshold= "100" lowThreshold= "100" factor= "100" />
-<DeviceDataBox_DryWet systemId= "7" cabId= "18" devId= "90" cab_state= "H_Alert" rainy_state= "rainny" rain_time= "%D1,100%.%D0,9%" state= "H_Alert " unit= "L" highThreshold= "100" lowThreshold= "100" factor= "100" />
-</package>
+<package>  
+<DeviceDataBox_Gamma systemId= "4" cabId= "10" devId= "68"  gammaTotalDose="%D1,100%.%D0,9%" gammaDoseRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_Gamma systemId= "4" cabId= "10" devId= "69"  gammaTotalDose="%D1,100%.%D0,9%" gammaDoseRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_Gamma systemId= "4" cabId= "10" devId= "70"  gammaTotalDose="%D1,100%.%D0,9%" gammaDoseRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_Neutron systemId= "4" cabId= "10" devId= "71"  neutronRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_Neutron systemId= "4" cabId= "10" devId= "72"  neutronRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+<DeviceDataBox_Neutron systemId= "4" cabId= "10" devId= "73"  neutronRate="%D1,100%.%D0,9%" state= "H_Alert" unit= "L" highThreshold= "" lowThreshold= "" factor= "" />
+</package>  
