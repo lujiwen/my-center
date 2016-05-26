@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfApplication2.Model.Vo;
 using System.Data.OracleClient;
+using WpfApplication2.package;
 // code by liuhuashan 2016/04/26
 
 // 2401b 485接入 
@@ -110,7 +111,7 @@ namespace Yancong
             N通道实时数据块	4字节	6字节
             校验码		1字节
             */
-        public override void AnalysisPavilionData(byte[] flowBytes,int len) { 
+        public override void AnalysisData(byte[] flowBytes,int len) { 
             // 0B 02 00 71 00 70 2D 46 01 80 E2   目前回来的数据只有一个通道的数据，首字节就是命令长度 
             // 0B 02 00 71 99 99 81 41 14 80 06
             // 首字节为命令长度，最后一字节未校验码
@@ -127,11 +128,11 @@ namespace Yancong
 
             if(flowBytes[3]==0x71) //只处理标准格式的数据 
             {  // 解析数据部分的6字节
-                //byte [] f_bytes=new byte[4];
-                //f_bytes[0]=flowBytes[4];
-                //f_bytes[1]=flowBytes[5];
-                //f_bytes[2]=flowBytes[6];
-                //f_bytes[3]=flowBytes[7];
+                byte[] f_bytes = new byte[4];
+                f_bytes[0] = flowBytes[4];
+                f_bytes[1] = flowBytes[5];
+                f_bytes[2] = flowBytes[6];
+                f_bytes[3] = flowBytes[7];
                 nowValue=BitConverter.ToSingle(flowBytes,4); // 浮点数转换 
             }
             // 状态和单位分析 
@@ -175,6 +176,13 @@ namespace Yancong
         public override String getHistoryDataSql() {
 
             return "";
+        }
+
+        public override WpfApplication2.package.Box getCommonDataPack()
+        {
+            DeviceDataBox_Xb2401 box = new DeviceDataBox_Xb2401();
+            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true), nowValue.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            return box;
         }
     }
 

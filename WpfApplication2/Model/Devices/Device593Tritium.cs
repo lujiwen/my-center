@@ -295,8 +295,6 @@ namespace Project208Home.Model
             return coms;
         }
 
-     
-
         // 解析数据
         public override void AnalysisData(Byte[] datas)
         {

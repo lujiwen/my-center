@@ -16,12 +16,12 @@ namespace PavilionMonitor
         private int rain_time = 0; // 降雨时间
 
         // 用于生成阿里云中转数据的对象
-        public DeviceDataDryWetBox drywet_box ;
+        public DeviceDataBox_DryWet drywet_box ;
 
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DeviceDryWet(DeviceDataDryWetBox b)
+        public DeviceDryWet(DeviceDataBox_DryWet b)
         {
             drywet_box = b;
             fromBoxToDevice((DeviceDataBox_Base)b);
@@ -143,7 +143,7 @@ namespace PavilionMonitor
                 return false;
         }
 
-        public override void AnalysisPavilionData(byte[] flowBytes,int len)
+        public override void AnalysisData(byte[] flowBytes,int len)
         {
             switch (flowBytes[5]) { 
                 case 0x30:
@@ -203,22 +203,23 @@ namespace PavilionMonitor
         /// 
         //public override String getHistoryDataSql()
         //{
-        //    if (rtPaint){ //该设备正在绘制实时曲线
+        //    if (rtPaint)
+        //    { //该设备正在绘制实时曲线
         //        float[] dosevalues = new float[4];
         //        // 如何绑定显示 ？？？？ 显示变量统一用字符串？？？？？
-                
+
         //        //dosevalues[0] = DoseNow;//实时值
         //        //dosevalues[1] = DoseAvg;//平均值
         //        //dosevalues[2] = DoseStd;//标准差值
         //        //dosevalues[3] = RainValue;//雨量
 
-        //        Rtce(dosevalues); 
+        //        Rtce(dosevalues);
         //    }
         //    DateTime dt = DateTime.Now;
-        //    String[] colums = {"DevId","val1","val2","val3","val4","str_val5","DataTime","State"}; // 4个float+ 1个字符串 +单位 状态 
+        //    String[] colums = { "DevId", "val1", "val2", "val3", "val4", "str_val5", "DataTime", "State" }; // 4个float+ 1个字符串 +单位 状态 
         //    // 字符串值的拼接
-        //    string str_value=cab_state+"_"+rainy_state;
-        //    Object[] values = { devId, rain_time, 0, 0, 0, "'" + str_value + "'", "'" + dt.ToString() + "'",  "'" + DevState + "'" };
+        //    string str_value = cab_state + "_" + rainy_state;
+        //    Object[] values = { devId, rain_time, 0, 0, 0, "'" + str_value + "'", "'" + dt.ToString() + "'", "'" + DevState + "'" };
         //    String sql = DBHelper.getInsertCommands("monthhistorydata", colums, values);
         //    sql += ";";
         //    sql += DBHelper.getInsertCommands("historydata", colums, values); // 复制两条sql ？？？  历史数据库
@@ -258,12 +259,6 @@ namespace PavilionMonitor
             // 固定内容
             return command;
         }
-
-        public override void doWork()
-        {
-
-
-        }
-
+ 
     }
 }

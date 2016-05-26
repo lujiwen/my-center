@@ -48,10 +48,10 @@ namespace Project2115Home.Model
             : base(id, ip, port)
         {
         }
-    
+ 
 
         //2115房间经过RF1000后的数据格式是否正确
-        public bool isDataRight(byte[] flowBytes)
+        public override bool isDataRight(byte[] flowBytes, int len)
         {
             bool dataright = true;
             //判断数据包长度是否为0x14，否则设置为错误
@@ -62,8 +62,10 @@ namespace Project2115Home.Model
                 dataright = false;
             return dataright;
         }
+
+        
         //2115房间经过RF1000后的修改参数的确认信息是否是否正确
-        public bool isParaSetRight(byte[] paraBytes)
+        public override bool isParaSetRight(byte[] paraBytes)
         {
             bool parasetright = true;
             //判断数据包长度是否为0x05，否则设置为错误
@@ -75,8 +77,9 @@ namespace Project2115Home.Model
             return parasetright;
         }
 
+ 
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
-        public void Analysis2115Data(byte[] flowBytes)
+        public override void AnalysisData(byte[] flowBytes)
         {
             //获取包长度
             int size = (int)flowBytes[1];

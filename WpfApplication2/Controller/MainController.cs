@@ -309,33 +309,33 @@ namespace WpfApplication2.Controller
             //{
             //    Alarm("2115连接初始化失败！");
             //}
-             //manager201Chimney = init201Chimney() ;
-             //if (manager201Chimney != null && manager201Chimney.isAllConnected)
+            manager201Chimney = init201Chimney();
+            if (manager201Chimney != null && manager201Chimney.isAllConnected)
+            {
+                Alarm("201烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+            }
+            //manager207Chimney = init207Chimney();
+            //if (manager207Chimney != null && manager207Chimney.isAllConnected)
+            //{
+            //    Alarm("207烟囱连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
+            //}
+             // manager208Chimney = init208Chimney();
+             //if (manager208Chimney != null && manager208Chimney.isAllConnected)
              //{
-             //    Alarm("201烟囱连接初始化成功！");
+             //    Alarm("208烟囱连接初始化成功！");
              //}
              //else
              //{
-             //    Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+             //    Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
              //}
-             //manager207Chimney = init207Chimney();
-             //if (manager207Chimney != null&& manager207Chimney.isAllConnected)
-             //{
-             //    Alarm("207烟囱连接初始化成功！");
-             //}
-             //else
-             //{
-             //    Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
-             //}
-              manager208Chimney = init208Chimney();
-             if (manager208Chimney != null && manager208Chimney.isAllConnected)
-             {
-                 Alarm("208烟囱连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
-             }
             //if (initPavilionEx1() != null)
             //{
             //    Alarm("亭子（运输部）连接初始化成功！");
@@ -457,21 +457,14 @@ namespace WpfApplication2.Controller
         private ConnectionManager init208Chimney()
         {
             Building b = GlobalMapForShow.getBuildingByName("208烟囱");
-            ConnectionManager manager208Chimney = null;
-            if (b != null)
-            {
-                List<Connection> cons = new List<Connection>();
-                foreach (Device d in b.Cabs[0].Devices)
-                {
-                    COMConnection con = new COMConnection(d);
-                    cons.Add(con);
-                }
-                manager208Chimney = new ConnectionManager(cons);
-                manager208Chimney.ManagerReceivedDataEvent += receiveData;
-                manager208Chimney.startConnections();
-            }
+            Cab c = b.Cabs[0];
+            UdpConnection uc208Chimney = new UdpConnection(c.Ip, c.Port);
+            conManagerList = new List<ConnectionManager>();
+            ConnectionManager manager208Chimney = new ConnectionManager(uc208Chimney);
+            manager208Chimney.ManagerReceivedDataEvent += receiveData;
             return manager208Chimney;
         }
+
         private ConnectionManager initMonitorVehicle()
         {
             Building b = GlobalMapForShow.getBuildingByName("检测车");
@@ -481,8 +474,8 @@ namespace WpfApplication2.Controller
             ConnectionManager managerMonitorVehicle = new ConnectionManager(ucMonitorVehicle);
             managerMonitorVehicle.ManagerReceivedDataEvent += receiveData;
             return managerMonitorVehicle;
-        
         }
+
         private ConnectionManager initPavilionEx1()
         {
             Building b = GlobalMapForShow.getBuildingByName("亭子（运输部）");

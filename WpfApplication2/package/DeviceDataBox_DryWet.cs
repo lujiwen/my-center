@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace WpfApplication2.package 
 {
-    public class DeviceDataDryWetBox : DeviceDataBox_Base, INotifyPropertyChanged
+    public class DeviceDataBox_DryWet : DeviceDataBox_Base, INotifyPropertyChanged
     {
         public const string classNameString = "DeviceDataBox_DryWet";
         public event PropertyChangedEventHandler PropertyChanged;

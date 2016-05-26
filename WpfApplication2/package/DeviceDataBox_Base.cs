@@ -99,7 +99,7 @@ namespace WpfApplication2.package
                                 deviceToChange = new DeviceASM02((DeviceDataASM02Box)this);
                                 break;
                             case "DeviceDataBox_DryWet":
-                                deviceToChange = new DeviceDryWet((DeviceDataDryWetBox)this);
+                                deviceToChange = new DeviceDryWet((DeviceDataBox_DryWet)this);
                                 break;
                             case "DeviceDataBox_Neutron":
                                 deviceToChange = new DeviceNeutron((DeviceDataBox_Neutron)this);

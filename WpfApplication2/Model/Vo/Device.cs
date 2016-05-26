@@ -362,7 +362,7 @@ namespace WpfApplication2.Model.Vo
         /// 亭子数据解析
         /// </summary>
         /// <param name="flowBytes"> 原始字节流 </param>
-        public virtual void AnalysisPavilionData(byte[] flowBytes, int len)
+        public virtual void AnalysisData(byte[] flowBytes, int len)
         {
         }
         /// <summary>
@@ -495,6 +495,15 @@ namespace WpfApplication2.Model.Vo
         }
 
         /// <summary>
+        /// 获取发送至远端的数据包
+        /// </summary>
+        /// <returns></returns>
+        public virtual Box getCommonDataPack()
+        {
+            return null;
+        }
+
+        /// <summary>
         /// 生成阿里云中转更新数据的sql
         /// </summary>
         /// <returns></returns>
@@ -572,15 +581,5 @@ namespace WpfApplication2.Model.Vo
         {
             return null;
         }
-
-        /// <summary>
-        /// 获取发送至远端的数据包
-        /// </summary>
-        /// <returns></returns>
-        public virtual Box getCommonDataPack()
-        {
-            return null;
-        }
-
     }
 }

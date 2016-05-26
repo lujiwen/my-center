@@ -100,7 +100,7 @@ namespace PavilionMonitor
 
 
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
-        public override void AnalysisPavilionData(byte[] flowBytes,int len)
+        public override void AnalysisData(byte[] flowBytes,int len)
         {
             byte [] buffer = new byte[flowBytes.Length-3];  // 去除首尾 无效 3字节
             Array.Copy(flowBytes,1,buffer,0,flowBytes.Length-3); // 结果为ASCII，去除头部多余1字节与尾部2字节
@@ -112,13 +112,14 @@ namespace PavilionMonitor
                 real_traffic = (float)Convert.ToDouble(str_arr[1]); //实时流量
                 sample_volume = (float)Convert.ToDouble(str_arr[2]); //采样体积
                 keep_time=str_arr[3];
-                //keep_time = 0;
-                //string[] time_arr = str_arr[3].Split(':');
-                //if (time_arr.Length == 3) {
-                //    keep_time += Convert.ToInt32(time_arr[0]) * 3600; // 小时数
-                //    keep_time += Convert.ToInt32(time_arr[1]) * 60;  //分钟数
-                //    keep_time += Convert.ToInt32(time_arr[2]);
-                //}
+                keep_time =  0+"";
+                string[] time_arr = str_arr[3].Split(':');
+                if (time_arr.Length == 3)
+                {
+                    keep_time += Convert.ToInt32(time_arr[0]) * 3600; // 小时数
+                    keep_time += Convert.ToInt32(time_arr[1]) * 60;  //分钟数
+                    keep_time += Convert.ToInt32(time_arr[2]);
+                }
             }
 
 

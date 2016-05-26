@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using WpfApplication2.Model.Vo;
 using System.Data.OracleClient;
+using WpfApplication2.package;
 
 namespace Project208Home.Model
 {
@@ -25,10 +26,12 @@ namespace Project208Home.Model
         {
              
         }
+
         public override byte[] ToReadDataCommand()
         {
-          return  getReadDoseNowCommands(this.DevLocalAddress);
+            return  getReadDoseNowCommands(this.DevLocalAddress);
         }
+
         //读取累计值，devlocalid为设备自带地址
         public Byte[] getReadDoseSumCommands(int devlocalid)
         {
@@ -78,7 +81,7 @@ namespace Project208Home.Model
         }
 
         // 解析数据
-        public override void AnalysisData(Byte[] datas)
+        public override void AnalysisData(Byte[] datas, int len)
         {
             double data;
             string datastr = null;
@@ -98,6 +101,15 @@ namespace Project208Home.Model
                 //报警位解析
                 devIsSafe = Convert.ToString(datas[datas.Count() - 1]);
             }
+        }
+
+        public override Box getCommonDataPack()
+        {
+            DeviceDataBox_KSJKSD box = new DeviceDataBox_KSJKSD();
+
+            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
+             doseNow.ToString(), doseSum.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            return box;
         }
 
         public double DoseNow

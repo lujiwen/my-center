@@ -8,6 +8,7 @@ using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
 using System.Data.OracleClient;
 using WpfApplication2.View.Windows;
+using System.Text;
 
 namespace PavilionMonitor
 {
@@ -958,172 +959,161 @@ namespace PavilionMonitor
             }
         }
 
-        //public override bool isDataRight(byte[] flowBytes,int len)
-        //{
-        //    String asm_str = Encoding.ASCII.GetString(flowBytes,0,len);
-        //    string[] items_arr = asm_str.Split(';');
-        //    if (items_arr.Length == 8)
-        //        return true;
-        //    else
-        //        return false;
-        //}
+        public override bool isDataRight(byte[] flowBytes, int len)
+        {
+            String asm_str = Encoding.ASCII.GetString(flowBytes, 0, len);
+            string[] items_arr = asm_str.Split(';');
+            if (items_arr.Length == 8)
+                return true;
+            else
+                return false;
+        }
 
 
 
 
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
-      //  Ab:,,,3.13E-003,,,,1.85E-002;Ec:;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001,
-        //public override void AnalysisPavilionData(byte[] flowBytes,int len)
-        //{
-        //    String asm_str = Encoding.ASCII.GetString(flowBytes,0,len);
-        //    val_str_set = asm_str; // 保存最新的数据字符串，数据库存取使用
-        //    string[] items_arr = asm_str.Split(';');
-        //    if (items_arr.Length == 8) {  // 总共8个数据项
-        //        for (int i = 0; i < 8;i++ )
-        //        {
-        //            int start_index = items_arr[i].IndexOf(':')+1;
-        //            if(start_index>0){
-        //                string target_str = items_arr[i].Substring(start_index, items_arr[i].Length - start_index);
-        //                string[] datas_detail = target_str.Split(',');
-        //                switch(i){
-        //                    case 0:
-        //                        if (datas_detail.Length == 8) { 
-        //                            // ab 8
-        //                            Ab_1 = datas_detail[0];
-        //                            Ab_2 = datas_detail[1];
-        //                            Ab_3 = datas_detail[2];
-        //                            Ab_4 = datas_detail[3];
-        //                            Ab_5 = datas_detail[4];
-        //                            Ab_6 = datas_detail[5];
-        //                            Ab_7 = datas_detail[6];
-        //                            Ab_8 = datas_detail[7];
-        //                        }
-        //                        break;
-        //                    case 1:
-        //                        if (datas_detail.Length == 8)
-        //                        {
-        //                            // ec 8
-        //                            Ec_1 = datas_detail[0];
-        //                            Ec_2 = datas_detail[1];
-        //                            Ec_3 = datas_detail[2];
-        //                            Ec_4 = datas_detail[3];
-        //                            Ec_5 = datas_detail[4];
-        //                            Ec_6 = datas_detail[5];
-        //                            Ec_7 = datas_detail[6];
-        //                            Ec_8 = datas_detail[7];
-        //                        }
-        //                        break;
-        //                    case 2:
-        //                        if (datas_detail.Length == 10)
-        //                        {
-        //                            // fl 10
-        //                            Fl_1 = datas_detail[0];
-        //                            Fl_2 = datas_detail[1];
-        //                            Fl_3 = datas_detail[2];
-        //                            Fl_4 = datas_detail[3];
-        //                            Fl_5 = datas_detail[4];
-        //                            Fl_6 = datas_detail[5];
-        //                            Fl_7 = datas_detail[6];
-        //                            Fl_8 = datas_detail[7];
-        //                            Fl_9 = datas_detail[8];
-        //                            Fl_10 = datas_detail[9];
-        //                        }
-        //                        break;
-        //                    case 3:
-        //                        if (datas_detail.Length == 7)
-        //                        {
-        //                            // ga 7
-        //                            Ga_1 = datas_detail[0];
-        //                            Ga_2 = datas_detail[1];
-        //                            Ga_3 = datas_detail[2];
-        //                            Ga_4 = datas_detail[3];
-        //                            Ga_5 = datas_detail[4];
-        //                            Ga_6 = datas_detail[5];
-        //                            Ga_7 = datas_detail[6];
-        //                        }
-        //                        break;
-        //                    case 4:
-        //                        if (datas_detail.Length == 7)
-        //                        {
-        //                            // gi 7
-        //                            Gi_1 = datas_detail[0];
-        //                            Gi_2 = datas_detail[1];
-        //                            Gi_3 = datas_detail[2];
-        //                            Gi_4 = datas_detail[3];
-        //                            Gi_5 = datas_detail[4];
-        //                            Gi_6 = datas_detail[5];
-        //                            Gi_7 = datas_detail[6];
-        //                        }
-        //                        break;
-        //                    case 5:
-        //                        if (datas_detail.Length == 10)
-        //                        {
-        //                            // me 10
-        //                            Me_1 = datas_detail[0];
-        //                            Me_2 = datas_detail[1];
-        //                            Me_3 = datas_detail[2];
-        //                            Me_4 = datas_detail[3];
-        //                            Me_5 = datas_detail[4];
-        //                            Me_6 = datas_detail[5];
-        //                            Me_7 = datas_detail[6];
-        //                            Me_8 = datas_detail[7];
-        //                            Me_9 = datas_detail[8];
-        //                            Me_10 = datas_detail[9];
-        //                        }
-        //                        break;
-        //                    case 6:
-        //                        if (datas_detail.Length == 7)
-        //                        {
-        //                            // oi 7
-        //                            Oi_1 = datas_detail[0];
-        //                            Oi_2 = datas_detail[1];
-        //                            Oi_3 = datas_detail[2];
-        //                            Oi_4 = datas_detail[3];
-        //                            Oi_5 = datas_detail[4];
-        //                            Oi_6 = datas_detail[5];
-        //                            Oi_7 = datas_detail[6];
-        //                        }
-        //                        break;
-        //                    case 7:
-        //                        if (datas_detail.Length == 6)
-        //                        {
-        //                            // rn 6
-        //                            Rn_1 = datas_detail[0];
-        //                            Rn_2 = datas_detail[1];
-        //                            Rn_3 = datas_detail[2];
-        //                            Rn_4 = datas_detail[3];
-        //                            Rn_5 = datas_detail[4];
-        //                            Rn_6 = datas_detail[5];
-        //                        }
-        //                        break;
-        //                }
-        //            }
-        //        }
-        //    }           
-        //}
+        //Ab:,,,3.13E-003,,,,1.85E-002;Ec:;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001,
+        public override void AnalysisData(byte[] flowBytes,int len)
+        {
+            String asm_str = Encoding.ASCII.GetString(flowBytes,0,len);
+            val_str_set = asm_str; // 保存最新的数据字符串，数据库存取使用
+            string[] items_arr = asm_str.Split(';');
+            if (items_arr.Length == 8) {  // 总共8个数据项
+                for (int i = 0; i < 8;i++ )
+                {
+                    int start_index = items_arr[i].IndexOf(':')+1;
+                    if(start_index>0){
+                        string target_str = items_arr[i].Substring(start_index, items_arr[i].Length - start_index);
+                        string[] datas_detail = target_str.Split(',');
+                        switch(i){
+                            case 0:
+                                if (datas_detail.Length == 8) { 
+                                    // ab 8
+                                    Ab_1 = datas_detail[0];
+                                    Ab_2 = datas_detail[1];
+                                    Ab_3 = datas_detail[2];
+                                    Ab_4 = datas_detail[3];
+                                    Ab_5 = datas_detail[4];
+                                    Ab_6 = datas_detail[5];
+                                    Ab_7 = datas_detail[6];
+                                    Ab_8 = datas_detail[7];
+                                }
+                                break;
+                            case 1:
+                                if (datas_detail.Length == 8)
+                                {
+                                    // ec 8
+                                    Ec_1 = datas_detail[0];
+                                    Ec_2 = datas_detail[1];
+                                    Ec_3 = datas_detail[2];
+                                    Ec_4 = datas_detail[3];
+                                    Ec_5 = datas_detail[4];
+                                    Ec_6 = datas_detail[5];
+                                    Ec_7 = datas_detail[6];
+                                    Ec_8 = datas_detail[7];
+                                }
+                                break;
+                            case 2:
+                                if (datas_detail.Length == 10)
+                                {
+                                    // fl 10
+                                    Fl_1 = datas_detail[0];
+                                    Fl_2 = datas_detail[1];
+                                    Fl_3 = datas_detail[2];
+                                    Fl_4 = datas_detail[3];
+                                    Fl_5 = datas_detail[4];
+                                    Fl_6 = datas_detail[5];
+                                    Fl_7 = datas_detail[6];
+                                    Fl_8 = datas_detail[7];
+                                    Fl_9 = datas_detail[8];
+                                    Fl_10 = datas_detail[9];
+                                }
+                                break;
+                            case 3:
+                                if (datas_detail.Length == 7)
+                                {
+                                    // ga 7
+                                    Ga_1 = datas_detail[0];
+                                    Ga_2 = datas_detail[1];
+                                    Ga_3 = datas_detail[2];
+                                    Ga_4 = datas_detail[3];
+                                    Ga_5 = datas_detail[4];
+                                    Ga_6 = datas_detail[5];
+                                    Ga_7 = datas_detail[6];
+                                }
+                                break;
+                            case 4:
+                                if (datas_detail.Length == 7)
+                                {
+                                    // gi 7
+                                    Gi_1 = datas_detail[0];
+                                    Gi_2 = datas_detail[1];
+                                    Gi_3 = datas_detail[2];
+                                    Gi_4 = datas_detail[3];
+                                    Gi_5 = datas_detail[4];
+                                    Gi_6 = datas_detail[5];
+                                    Gi_7 = datas_detail[6];
+                                }
+                                break;
+                            case 5:
+                                if (datas_detail.Length == 10)
+                                {
+                                    // me 10
+                                    Me_1 = datas_detail[0];
+                                    Me_2 = datas_detail[1];
+                                    Me_3 = datas_detail[2];
+                                    Me_4 = datas_detail[3];
+                                    Me_5 = datas_detail[4];
+                                    Me_6 = datas_detail[5];
+                                    Me_7 = datas_detail[6];
+                                    Me_8 = datas_detail[7];
+                                    Me_9 = datas_detail[8];
+                                    Me_10 = datas_detail[9];
+                                }
+                                break;
+                            case 6:
+                                if (datas_detail.Length == 7)
+                                {
+                                    // oi 7
+                                    Oi_1 = datas_detail[0];
+                                    Oi_2 = datas_detail[1];
+                                    Oi_3 = datas_detail[2];
+                                    Oi_4 = datas_detail[3];
+                                    Oi_5 = datas_detail[4];
+                                    Oi_6 = datas_detail[5];
+                                    Oi_7 = datas_detail[6];
+                                }
+                                break;
+                            case 7:
+                                if (datas_detail.Length == 6)
+                                {
+                                    // rn 6
+                                    Rn_1 = datas_detail[0];
+                                    Rn_2 = datas_detail[1];
+                                    Rn_3 = datas_detail[2];
+                                    Rn_4 = datas_detail[3];
+                                    Rn_5 = datas_detail[4];
+                                    Rn_6 = datas_detail[5];
+                                }
+                                break;
+                        }
+                    }
+                }
+            }           
+        }
         /// <summary>
         /// 2115房间数据或参数读取命令生成。
         /// </summary>
         /// <returns></returns>
-        //public override byte[] ToReadDataCommand()
-        //{
-        //    string req="req";
-        //    byte[] command = Encoding.ASCII.GetBytes(req);
-
-        //    // 固定内容
-        //    return command;
-        //}
-
-        public override void doWork()
+        public override byte[] ToReadDataCommand()
         {
-            while (true) {
+            string req="req";
+            byte[] command = Encoding.ASCII.GetBytes(req);
 
-                Thread.Sleep(800);
-            }
-
+            // 固定内容
+            return command;
         }
-
-
     }
 }
 

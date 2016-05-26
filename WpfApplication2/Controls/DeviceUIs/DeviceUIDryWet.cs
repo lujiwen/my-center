@@ -16,7 +16,7 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
     public class DeviceUIDryWet: DeviceUI 
     {
-        DeviceDataDryWetBox box;
+        DeviceDataBox_DryWet box;
         LabelAndText rainyStateLT;
         LabelAndText cabStateLT;
         LabelAndText rainTimeLT;
@@ -26,12 +26,12 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        {
            DeviceInUI.PropertyChanged += new PropertyChangedEventHandler(box_PropertyChanged);
            CurveEnable = false;
-           box = (DeviceDataDryWetBox)DeviceInUI.Value;
+           box = (DeviceDataBox_DryWet)DeviceInUI.Value;
        }
 
        void box_PropertyChanged(object sender, PropertyChangedEventArgs e)
        {
-           box = (DeviceDataDryWetBox)DeviceInUI.Value;
+           box = (DeviceDataBox_DryWet)DeviceInUI.Value;
            Dispatcher.BeginInvoke(new Action(updateLabels));
        }
 

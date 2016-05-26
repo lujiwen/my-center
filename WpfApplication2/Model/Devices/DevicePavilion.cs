@@ -107,7 +107,7 @@ namespace PavilionMonitor
         /// 亭子数据解析
         /// </summary>
         /// <param name="flowBytes"> 原始字节流 </param>
-        public virtual void AnalysisPavilionData(byte[] flowBytes,int len) { 
+        public virtual void AnalysisData(byte[] flowBytes,int len) { 
         }
         /// <summary>
         /// 生成插入数据的sql

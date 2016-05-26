@@ -213,18 +213,18 @@ namespace WpfApplication2.Controller
                             return false; //数据异常
                         }
                         //解析数据
-                        device.AnalysisPavilionData(receiveBuffer,recv_len);
+                        device.AnalysisData(receiveBuffer,recv_len);
                         //产生新的数据入库事件
                       //  newMonitorData(device.getHistoryDataSql());
                         
-                        //将收的正确数据发送给ConnectionManager
+                        //将收的正确数据 打包发给ConnectionManager
                         if (ReceiveListener != null)
                         {
-                            ReceiveListener.onDataReceive(receiveBuffer.ToString());
+                            ReceiveListener.onDataReceive(Utils.PackBox(device.getCommonDataPack()));
                         }
 
                         //产生新的阿里云数据更新事件
-                        device.getAliyunUpdateStr();
+                      //  device.getAliyunUpdateStr();
 
                         return true;
                     }

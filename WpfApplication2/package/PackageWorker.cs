@@ -76,9 +76,9 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
-                else if (elem.Name == DeviceDataDryWetBox.classNameString)
+                else if (elem.Name == DeviceDataBox_DryWet.classNameString)
                 {
-                    DeviceDataDryWetBox box = new DeviceDataDryWetBox();
+                    DeviceDataBox_DryWet box = new DeviceDataBox_DryWet();
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }

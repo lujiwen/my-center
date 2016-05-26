@@ -182,7 +182,7 @@ namespace PavilionMonitor
                 return false;
         }
 
-        public override void AnalysisPavilionData(byte[] flowBytes,int len)
+        public override void AnalysisData(byte[] flowBytes,int len)
         {
             byte [] buffer = new byte[24];  // 去除首尾 无效 1字节
             Array.Copy(flowBytes,1,buffer,0,23); // 结果为ASCII，去除头部多余1字节与尾部2字节

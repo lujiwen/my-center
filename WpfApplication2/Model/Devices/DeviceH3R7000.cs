@@ -99,7 +99,7 @@ namespace PavilionMonitor
 
 
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
-        public override void AnalysisPavilionData(byte[] flowBytes,int len)
+        public override void AnalysisData(byte[] flowBytes,int len)
         {
             byte [] buffer = new byte[flowBytes.Length-3];  // 去除首尾 无效 3字节
             Array.Copy(flowBytes,1,buffer,0,flowBytes.Length-3); // 结果为ASCII，去除头部多余1字节与尾部2字节

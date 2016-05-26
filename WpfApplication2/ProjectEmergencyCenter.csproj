@@ -127,6 +127,9 @@
     <Compile Include="package\DeviceCommandEchoBox.cs" />
     <Compile Include="package\DeviceDataBox_Gamma.cs" />
     <Compile Include="package\DeviceDataBox_Neutron.cs" />
+    <Compile Include="package\DeviceDataBox_KSJKSD.cs" />
+    <Compile Include="package\DeviceDataBox_593.cs" />
+    <Compile Include="package\DeviceDataBox_Xb2401.cs" />
     <Compile Include="Util\ErrorCode.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />
@@ -163,8 +166,8 @@
     <Compile Include="Model\Vo\DeviceData.cs" />
     <Compile Include="Model\Vo\QueueFixedLength.cs" />
     <Compile Include="package\DeviceDataASM02Box.cs" />
-    <Compile Include="package\DeviceDataDryWetBox.cs" />
-    <Compile Include="package\DeviceDataJL900Box.cs" />
+    <Compile Include="package\DeviceDataBox_DryWet.cs" />
+    <Compile Include="package\DeviceDataBox_JL900.cs" />
     <Compile Include="Util\BlockQueue.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ConvertByteAndHex.cs" />

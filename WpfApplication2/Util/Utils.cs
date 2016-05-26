@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using WpfApplication2.package;
+using System.Xml;
 
 namespace WpfApplication2.Util
 {
@@ -76,6 +78,33 @@ namespace WpfApplication2.Util
         {
             if (a <= b) return a;
             else return b;
+        }
+        /// <summary>
+        /// 组包
+        /// </summary>
+        /// <param name="boxes"></param>
+        /// <returns></returns>
+        public static string PackBoxes(List<Box> boxes)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = doc.CreateElement("package");
+            foreach (Box box in boxes)
+            {
+                XmlElement element = box.toXmlElement(doc);
+                root.AppendChild(element);
+            }
+            doc.AppendChild(root);
+            return doc.OuterXml;
+        }
+
+        public static string PackBox(Box box)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = doc.CreateElement("package");
+            XmlElement element = box.toXmlElement(doc);
+            root.AppendChild(element);
+            doc.AppendChild(root);
+            return doc.OuterXml;
         }
     }
 }
