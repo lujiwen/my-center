@@ -14,7 +14,6 @@ namespace Project208Home.Model
         double doseSum;//累计值
         String safeColor;
         String devIsSafe;
-
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,9 +23,12 @@ namespace Project208Home.Model
         public DeviceKSJKSD(OracleDataReader odr)
             :base(odr)
         {
-
+             
         }
-
+        public override byte[] ToReadDataCommand()
+        {
+          return  getReadDoseNowCommands(this.DevLocalAddress);
+        }
         //读取累计值，devlocalid为设备自带地址
         public Byte[] getReadDoseSumCommands(int devlocalid)
         {

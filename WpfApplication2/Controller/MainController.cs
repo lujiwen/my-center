@@ -215,7 +215,7 @@ namespace WpfApplication2.Controller
                                         case "KSJ":
                                             device = new DeviceKSJKSD(odr3);
                                             break;
-                                        case "593":
+                                        case "593氚检测系统":
                                             device = new Device593Tritium(odr3);
                                             break;
                                         default :
@@ -273,34 +273,34 @@ namespace WpfApplication2.Controller
 
         public void InitialConnection()  //初始化连接
         {
-             manager207c = init207cConnection();
-             if (manager207c != null && manager207c.isAllConnected)
-            {
-                Alarm("207c连接初始化成功！");
-            }
-            else 
-            {
-                Alarm("207c连接初始化失败："+manager207c.getConnectiosErr());
+            // manager207c = init207cConnection();
+            // if (manager207c != null && manager207c.isAllConnected)
+            //{
+            //    Alarm("207c连接初始化成功！");
+            //}
+            //else 
+            //{
+            //    Alarm("207c连接初始化失败："+manager207c.getConnectiosErr());
                 
-            }
-              manager208 = init208Connection();
-             if (manager208 != null)
-             {
-                 Alarm("208连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("208连接初始化失败！");
-             }
-             manager209 = init209Conection();
-             if (manager209 != null)
-             {
-                 Alarm("209连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("209连接初始化失败," + manager209.getConnectiosErr());
-             }
+            //}
+             // manager208 = init208Connection();
+             //if (manager208 != null)
+             //{
+             //    Alarm("208连接初始化成功！");
+             //}
+             //else
+             //{
+             //    Alarm("208连接初始化失败！");
+             //}
+             //manager209 = init209Conection();
+             //if (manager209 != null)
+             //{
+             //    Alarm("209连接初始化成功！");
+             //}
+             //else
+             //{
+             //    Alarm("209连接初始化失败," + manager209.getConnectiosErr());
+             //}
             //if (init2115Connection() != null)
             //{
             //    Alarm("2115连接初始化成功！");
@@ -309,25 +309,25 @@ namespace WpfApplication2.Controller
             //{
             //    Alarm("2115连接初始化失败！");
             //}
-             manager201Chimney = init201Chimney() ;
-             if (manager201Chimney != null && manager201Chimney.isAllConnected)
-             {
-                 Alarm("201烟囱连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
-             }
-             manager207Chimney = init207Chimney();
-             if (manager207Chimney != null&& manager207Chimney.isAllConnected)
-             {
-                 Alarm("207烟囱连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
-             }
-             manager208Chimney = init208Chimney();
+             //manager201Chimney = init201Chimney() ;
+             //if (manager201Chimney != null && manager201Chimney.isAllConnected)
+             //{
+             //    Alarm("201烟囱连接初始化成功！");
+             //}
+             //else
+             //{
+             //    Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+             //}
+             //manager207Chimney = init207Chimney();
+             //if (manager207Chimney != null&& manager207Chimney.isAllConnected)
+             //{
+             //    Alarm("207烟囱连接初始化成功！");
+             //}
+             //else
+             //{
+             //    Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
+             //}
+              manager208Chimney = init208Chimney();
              if (manager208Chimney != null && manager208Chimney.isAllConnected)
              {
                  Alarm("208烟囱连接初始化成功！");
@@ -352,24 +352,24 @@ namespace WpfApplication2.Controller
             //{
             //    Alarm("亭子（新桥）连接初始化失败！");
             //}
-             managerPavilionInnner = initPavilionInner() ;
-             if (managerPavilionInnner != null)
-             {
-                 Alarm("亭子（内网）连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("亭子（内网）连接初始化失败！");
-             }
-             managerMonitorVehicle = initMonitorVehicle() ;
-            if (managerMonitorVehicle != null)
-             {
-                 Alarm("监测车连接初始化成功！");
-             }
-             else
-             {
-                 Alarm("监测车连接初始化失败！");
-             }
+             //managerPavilionInnner = initPavilionInner() ;
+             //if (managerPavilionInnner != null)
+             //{
+             //    Alarm("亭子（内网）连接初始化成功！");
+             //}
+             //else
+             //{
+             //    Alarm("亭子（内网）连接初始化失败！");
+             //}
+            // managerMonitorVehicle = initMonitorVehicle() ;
+            //if (managerMonitorVehicle != null)
+            // {
+            //     Alarm("监测车连接初始化成功！");
+            // }
+            // else
+            // {
+            //     Alarm("监测车连接初始化失败！");
+            // }
         }
 
         /// <summary>

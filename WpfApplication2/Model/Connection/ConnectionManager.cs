@@ -36,7 +36,7 @@ namespace WpfApplication2.Controller
        {
            foreach(Connection c in connections)
            {
-               c.ReceiveListener = this;
+               c.setReceiveListener(this);
               // c.dataReceivedEvent += managerDataReceivedEvent ;
            }
            isAllConnected = false;
@@ -90,6 +90,7 @@ namespace WpfApplication2.Controller
 
        void DataReciveListner.onDataReceive(string message)
        {
+           Console.WriteLine("！！！收到数据（connectionManager）："+message);
            ManagerReceivedDataEvent(message);
        }
     }

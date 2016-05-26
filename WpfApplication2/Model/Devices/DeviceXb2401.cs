@@ -71,7 +71,19 @@ namespace Yancong
         /// <returns></returns>
         public override Byte[] ToReadParaCommands()
         {
-            return null;
+            byte[] command = new byte[6];
+
+            command[0] = 0xfe;//包头
+            command[1] = 0x05;//包长
+            command[2] = 0x00;//探头类型
+            command[3] = Convert.ToByte(2401);//监测仪编号
+            //读数据指令
+            command[4] = 0xf0;
+            //生成校验码
+            for (int i = 0; i < 5; i++)
+                command[5] ^= command[i];
+
+            return command;
         }
 
                 /// <summary>
@@ -164,8 +176,6 @@ namespace Yancong
 
             return "";
         }
-
-
     }
 
 

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using WpfApplication2.Model.Vo;
 using WpfApplication2.package;
 using WpfApplication2.View.Windows;
+using PavilionMonitor;
 
 namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
 {
@@ -22,10 +23,11 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
     /// </summary>
     public partial class DeviceUIASM02 : UserControl
     {
-       private Device asm02;
-       private DeviceDataASM02Box box;
-       public DeviceUIASM02(Device d, Frame fm)  
+        private DeviceASM02 asm02;
+        private DeviceDataASM02Box box;
+        public DeviceUIASM02(DeviceASM02 d, Frame fm)  
         {
+             
             InitializeComponent();
             this.asm02 = d;
             box = (DeviceDataASM02Box)d.Value;
@@ -40,6 +42,8 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI
        }
        private void updateLabels()
        {
+           if (box == null) return;
+           
            ab_1.Text = box.Ab_1;
            ab_2.Text = box.Ab_2;
            ab_3.Text = box.Ab_3;

@@ -17,7 +17,7 @@ namespace PavilionMonitor
      * 界面也得单独设计
      * 
      * ***/
-    class DeviceASM02 : Device, INotifyPropertyChanged
+    public class DeviceASM02 : Device, INotifyPropertyChanged
     {
         private string val_str_set=""; // 存放asm数据字符串
         public DeviceDataASM02Box asm02_box=new DeviceDataASM02Box();

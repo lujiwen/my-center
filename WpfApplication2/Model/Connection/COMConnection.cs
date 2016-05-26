@@ -147,6 +147,15 @@ namespace WpfApplication2.Controller
                 else
                 {
                     commands = device.ToReadDataCommand();
+
+                    //if (commands != null)
+                    //{
+                    //    Console.WriteLine(device.devPort + "端口发送命令：" + commands);
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine(device.devPort + "端口发送命令 为空！"   );
+                    //}
                 }
                 //发送数据
                 socket.Send(commands, commands.Length, 0);
@@ -180,6 +189,7 @@ namespace WpfApplication2.Controller
                 if (Succeed && count < receiveNullMaxCount)//正常接收
                 {
                     int recv_len = socket.Receive(receiveBuffer);
+                    Console.WriteLine(device.devPort+"端口收到数据"+receiveBuffer);
                     /** 参数解析 **/
                     if (device.ParaChanged) 
                     {
@@ -205,7 +215,13 @@ namespace WpfApplication2.Controller
                         //解析数据
                         device.AnalysisPavilionData(receiveBuffer,recv_len);
                         //产生新的数据入库事件
-                        newMonitorData(device.getHistoryDataSql());
+                      //  newMonitorData(device.getHistoryDataSql());
+                        
+                        //将收的正确数据发送给ConnectionManager
+                        if (ReceiveListener != null)
+                        {
+                            ReceiveListener.onDataReceive(receiveBuffer.ToString());
+                        }
 
                         //产生新的阿里云数据更新事件
                         device.getAliyunUpdateStr();

@@ -111,5 +111,9 @@ namespace WpfApplication2.Controller
             get { return device; } 
             set { device = value;}
         }
+        public void setReceiveListener(DataReciveListner l)
+        {
+            ReceiveListener = l;
+        }
     }
 }
