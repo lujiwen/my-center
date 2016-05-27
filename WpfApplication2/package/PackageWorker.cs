@@ -106,6 +106,18 @@ namespace WpfApplication2.package
                     box.fromXmlElement(elem);
                     boxes.Add(box);
                 }
+                else if (elem.Name == DeviceDataBox_KSJKSD.classNameString)
+                {
+                    DeviceDataBox_KSJKSD box = new DeviceDataBox_KSJKSD();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                }
+                else if (elem.Name == DeviceDataBox_Xb2401.classNameString)
+                {
+                    DeviceDataBox_Xb2401 box = new DeviceDataBox_Xb2401();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
+                } 
             }
             return boxes;
         }

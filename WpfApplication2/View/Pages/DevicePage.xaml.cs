@@ -18,6 +18,7 @@ using WpfApplication2.CustomMarkers.Controls.DeviceUIs;
 using Project208Home.Model;
 using WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI;
 using PavilionMonitor;
+using Yancong;
 
 namespace WpfApplication2.View.Pages
 {
@@ -104,7 +105,12 @@ namespace WpfApplication2.View.Pages
                          case "neutron":
                              deviceUI = new DeviceUINeutron((DeviceNeutron)d, systemFrame);
                              break;
-                  
+                         case "KSJ":
+                             deviceUI = new DeviceUIKSJKSD((DeviceKSJKSD)d, systemFrame);
+                             break;
+                         case "XB2401":
+                             deviceUI = new DeviceUIXB2401((DeviceXb2401)d, systemFrame);
+                             break;
                          default:
                              deviceUI = new DeviceUI(d, systemFrame);
                              break;

@@ -14,7 +14,7 @@ using WpfApplication2.package;
 
 namespace Yancong
 {
-    class DeviceXb2401:Device
+    public class DeviceXb2401:Device
     {
 
         private string deviceId;
@@ -168,6 +168,7 @@ namespace Yancong
             {
                  devUnit="Hz";
             }
+            this.devState = "Normal";
         }
         /// <summary>
         /// 生成插入数据的sql

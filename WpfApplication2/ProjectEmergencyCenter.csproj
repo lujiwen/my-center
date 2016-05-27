@@ -109,6 +109,8 @@
     </Compile>
     <Compile Include="Controls\DeviceUIs\DeviceUIGamma.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUINeutron.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIKSJKSD.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUIXB2401.cs" />
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\Device2115.cs" />

@@ -103,6 +103,14 @@ namespace Project208Home.Model
 
                 //报警位解析
                 devIsSafe = (datastr[datastr.Length - 1] & 0x00001111) == 0;
+                if (devIsSafe)
+                {
+                    devState = "Normal";
+                }
+                else
+                {
+                    devState = "Alert";
+                }
             }
         }
 
@@ -110,9 +118,30 @@ namespace Project208Home.Model
         {
             DeviceDataBox_KSJKSD box = new DeviceDataBox_KSJKSD();
 
-            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), "Normal", true),
+            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
              doseNow.ToString(), doseSum.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box;
+        }
+
+        public override string GenerateInsertSql(string tablename)
+        {
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + doseNow + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetString(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("实时值", dataset);
+            return dataDictionary;
         }
 
         public double DoseNow
@@ -157,7 +186,7 @@ namespace Project208Home.Model
             }
         }
 
-        public String DevIsSafe
+        public bool DevIsSafe
         {
             get
             {
@@ -172,5 +201,6 @@ namespace Project208Home.Model
                 }
             }
         }
+
     }
 }
