@@ -14,7 +14,7 @@ namespace Project208Home.Model
         double doseNow;//实时值
         double doseSum;//累计值
         String safeColor;
-        String devIsSafe;
+        bool devIsSafe;
         //判定值是否改变，用于实时显示
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -84,22 +84,25 @@ namespace Project208Home.Model
         public override void AnalysisData(Byte[] datas, int len)
         {
             double data;
-            string datastr = null;
+            Byte[] theData = new Byte[len];
+            for (int i = 0; i < len; i++)
+            {
+                theData[i] = datas[i];
+            }
             //判断数据是否符合要求.数据第一位是等号“=”
-            if (datas[0]!='=')
+            if (datas[0]=='=')
             {
                 //数据解析
-                for (int i = 2; i < datas.Count()-2; i++ )
-                {
-                    datastr += Convert.ToString(datas[i]);
-                }
-                data = Convert.ToDouble(datastr);
-                if (datas[1] == 45)//判断是否为负数
-                    data = -data;
+                string datastr = System.Text.Encoding.Default.GetString(theData);
+                datastr = datastr.Replace((string)"\n", "");
+                datastr = datastr.Replace((string)"\r", "");
+                data = Convert.ToDouble(datastr.Substring(1, datastr.Length - 2));
+                //if (datas[1] == '-')//判断是否为负数
+                //    data = -data;
                 DoseNow = data;
 
                 //报警位解析
-                devIsSafe = Convert.ToString(datas[datas.Count() - 1]);
+                devIsSafe = (datastr[datastr.Length - 1] & 0x00001111) == 0;
             }
         }
 
@@ -107,7 +110,7 @@ namespace Project208Home.Model
         {
             DeviceDataBox_KSJKSD box = new DeviceDataBox_KSJKSD();
 
-            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
+            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), "Normal", true),
              doseNow.ToString(), doseSum.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box;
         }

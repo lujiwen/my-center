@@ -188,7 +188,7 @@ namespace WpfApplication2.Controller
                 // 等待有数据或者预置时间，直接一次性读数据
                 if (Succeed && count < receiveNullMaxCount)//正常接收
                 {
-                    int recv_len = socket.Receive(receiveBuffer);
+                     int recv_len = socket.Receive(receiveBuffer);
                     Console.WriteLine(device.devPort+"端口收到数据"+receiveBuffer);
                     /** 参数解析 **/
                     if (device.ParaChanged) 
