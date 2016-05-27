@@ -111,6 +111,7 @@
     <Compile Include="Controls\DeviceUIs\DeviceUINeutron.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUIKSJKSD.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUIXB2401.cs" />
+    <Compile Include="Controls\DeviceUIs\DeviceUI2115.cs" />
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\Device2115.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="package\DeviceDataBox_KSJKSD.cs" />
     <Compile Include="package\DeviceDataBox_593.cs" />
     <Compile Include="package\DeviceDataBox_Xb2401.cs" />
+    <Compile Include="package\DeviceDataBox_2115.cs" />
     <Compile Include="Util\ErrorCode.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\WindowsUtils.cs" />

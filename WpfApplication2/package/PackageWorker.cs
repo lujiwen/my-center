@@ -117,6 +117,12 @@ namespace WpfApplication2.package
                     DeviceDataBox_Xb2401 box = new DeviceDataBox_Xb2401();
                     box.fromXmlElement(elem);
                     boxes.Add(box);
+                }
+                else if (elem.Name == DeviceDataBox_2115.classNameString)
+                {
+                    DeviceDataBox_2115 box = new DeviceDataBox_2115();
+                    box.fromXmlElement(elem);
+                    boxes.Add(box);
                 } 
             }
             return boxes;

@@ -81,6 +81,10 @@
                         devicePage = new DevicePage(this.getPageFrame(), building);
                         page.Content = devicePage;
                         break;
+                    case "2115楼":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
                     default:
                         cabspage = new CabsPage(this, building);
                         page.Content = cabspage;

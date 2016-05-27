@@ -35,6 +35,8 @@ namespace PavilionMonitor
         {
 
         }
+
+     
  
         public override void fromBoxToDevice(DeviceDataBox_Base box)
         {
@@ -969,13 +971,12 @@ namespace PavilionMonitor
                 return false;
         }
 
-
-
-
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
         //Ab:,,,3.13E-003,,,,1.85E-002;Ec:;Fl:01200,002.8,27.0,35.0,000.0,31.7,16.1,01.2,3,401;Ga:,,,,3.60E-001,,;Gi:,,,,1.98E-002,,;Me:0.00e+000,0.0,0,,+0.0,0.0,000,,,;Oi:;Rn:4.82E+000,2.12E-001,,1.31E-001,2.15E-001,
         public override void AnalysisData(byte[] flowBytes,int len)
         {
+            devState = "Normal";
+
             String asm_str = Encoding.ASCII.GetString(flowBytes,0,len);
             val_str_set = asm_str; // 保存最新的数据字符串，数据库存取使用
             string[] items_arr = asm_str.Split(';');
@@ -1114,6 +1115,14 @@ namespace PavilionMonitor
             // 固定内容
             return command;
         }
+
+        public override WpfApplication2.package.Box getCommonDataPack()
+        {
+            DeviceDataASM02Box box = new DeviceDataASM02Box();
+            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),val_str_set, this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            return box;
+        }
+
     }
 }
 

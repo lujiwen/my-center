@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using WpfApplication2.Model.Vo;
+using System.Data.OracleClient;
+using WpfApplication2.package;
 
 namespace Project2115Home.Model
 {
@@ -48,7 +50,12 @@ namespace Project2115Home.Model
             : base(id, ip, port)
         {
         }
- 
+
+        public Device2115(OracleDataReader odr)
+            :base(odr)
+        {
+
+        }
 
         //2115房间经过RF1000后的数据格式是否正确
         public override bool isDataRight(byte[] flowBytes, int len)
@@ -79,7 +86,7 @@ namespace Project2115Home.Model
 
  
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
-        public override void AnalysisData(byte[] flowBytes)
+        public override void AnalysisData(byte[] flowBytes,int len)
         {
             //获取包长度
             int size = (int)flowBytes[1];
@@ -142,7 +149,18 @@ namespace Project2115Home.Model
             {
                 state = "失效";
             }
+            devState = "Normal";
         }
+
+        public override WpfApplication2.package.Box getCommonDataPack()
+        {
+            DeviceDataBox_2115 box2115 = new DeviceDataBox_2115();
+             
+            box2115.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
+              doseNow, doseAvg,doseStd,rainValue,rainUnit, this.devUnit,this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            return box2115;
+        }
+
         /// <summary>
         /// 
         /// </summary>

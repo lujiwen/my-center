@@ -17,6 +17,7 @@ using WpfApplication2.View.Windows;
 using Project208Home.Model;
 using PavilionMonitor;
 using Yancong;
+using Project2115Home.Model;
 
 
 namespace WpfApplication2.Controller
@@ -218,6 +219,9 @@ namespace WpfApplication2.Controller
                                         case "593氚检测系统":
                                             device = new Device593Tritium(odr3);
                                             break;
+                                        case "2115":
+                                            device = new Device2115(odr3);
+                                            break;
                                         default :
                                             device = new Device(odr3);
                                             break;
@@ -273,15 +277,15 @@ namespace WpfApplication2.Controller
 
         public void InitialConnection()  //初始化连接
         {
-            // manager207c = init207cConnection();
-            // if (manager207c != null && manager207c.isAllConnected)
+            //manager207c = init207cConnection();
+            //if (manager207c != null && manager207c.isAllConnected)
             //{
             //    Alarm("207c连接初始化成功！");
             //}
-            //else 
+            //else
             //{
-            //    Alarm("207c连接初始化失败："+manager207c.getConnectiosErr());
-                
+            //    Alarm("207c连接初始化失败：" + manager207c.getConnectiosErr());
+
             //}
              // manager208 = init208Connection();
              //if (manager208 != null)
@@ -301,23 +305,24 @@ namespace WpfApplication2.Controller
              //{
              //    Alarm("209连接初始化失败," + manager209.getConnectiosErr());
              //}
-            //if (init2115Connection() != null)
-            //{
-            //    Alarm("2115连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("2115连接初始化失败！");
-            //}
-            manager201Chimney = init201Chimney();
-            if (manager201Chimney != null && manager201Chimney.isAllConnected)
+            manager2115 = init2115Connection();
+            if (manager2115 != null&&manager2115.isAllConnected)
             {
-                Alarm("201烟囱连接初始化成功！");
+                Alarm("2115连接初始化成功！");
             }
             else
             {
-                Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+                Alarm("2115连接初始化失败,"+manager2115.getConnectiosErr());
             }
+            //manager201Chimney = init201Chimney();
+            //if (manager201Chimney != null && manager201Chimney.isAllConnected)
+            //{
+            //    Alarm("201烟囱连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+            //}
             //manager207Chimney = init207Chimney();
             //if (manager207Chimney != null && manager207Chimney.isAllConnected)
             //{
@@ -515,12 +520,12 @@ namespace WpfApplication2.Controller
                 List<Connection> cons = new List<Connection>();
                 foreach (Device d in b.Cabs[0].Devices)
                 {
-                    UdpConnection con = new UdpConnection(d.devIp, d.devPort);
+                    COMConnection con = new COMConnection(d);
                     cons.Add(con);
                 }
-
                 manager2115 = new ConnectionManager(cons);
                 manager2115.ManagerReceivedDataEvent += receiveData;
+                manager2115.startConnections();
             }
             return manager2115;
         }

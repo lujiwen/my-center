@@ -179,6 +179,27 @@ namespace Yancong
             return "";
         }
 
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d = new DeviceData();
+                d.VALUE1 = odr.GetString(5);
+                d.Time = odr.GetString(2);
+                dataset.Add(d);
+                d = null;
+            }
+            dataDictionary.Add("实时值", dataset);
+            return dataDictionary;
+        }
+
+        public override string GenerateInsertSql(string tablename)
+        {
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + nowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+        }
+
         public override WpfApplication2.package.Box getCommonDataPack()
         {
             DeviceDataBox_Xb2401 box = new DeviceDataBox_Xb2401();
