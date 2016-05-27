@@ -175,7 +175,7 @@ namespace WpfApplication2.View.Pages
             Building b = (Building)sender ;
             this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate()
             {
-                if (!b.State.Equals(DeviceDataBox_Base.State.Normal.ToString()))
+                if (!b.State.Equals("Normal"))
                 {
                     status.Text = "异常";
                 }

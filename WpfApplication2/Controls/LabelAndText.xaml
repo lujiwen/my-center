@@ -7,7 +7,7 @@
              >
     <Grid>
         <StackPanel  Orientation="Horizontal" >
-            <Label  Name="Label" Content="lable"   FontSize="16" Canvas.Left="108" Canvas.Top="18" Foreground="Black" Width="auto"></Label>
+            <Label  Name="Label" Content="lable"   FontSize="16" Canvas.Left="108" Canvas.Top="18" Foreground="Black" Width="auto"  ></Label>
             <TextBlock Name="Value" Text="实时值" Foreground="Black" Height="23" Width="auto" Canvas.Left="266" Canvas.Top="26"  FontWeight="Normal" FontSize="16"></TextBlock>
             <TextBlock Name="units"  Text="单位" Foreground="Black" Height="23"  Width="auto" Canvas.Left="266" Canvas.Top="26" FontWeight="Normal" FontSize="16"></TextBlock>
         </StackPanel>

@@ -18,7 +18,7 @@ namespace WpfApplication2.package
         private string doseNow;//实时值
         private string doseSum;//累计值
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
            string dose_now, string dose_sum , string _unit, string _paraLow, string _paraHigh, string _correctFactor)
         {
             doseNow = dose_now;

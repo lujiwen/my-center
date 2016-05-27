@@ -162,7 +162,7 @@ namespace WpfApplication2.CustomMarkers
             this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate()
            {
               Building b = (Building)sender;
-              if (!b.State.Equals(DeviceDataBox_Base.State.Normal.ToString()))
+              if (!b.State.Equals("Normal"))
               {
                   MarkerBm = new BitmapImage(new Uri("/WpfApplication2;component/Images/red-dot.png", UriKind.Relative));
                   ((TrolleyTooltip)Popup.Child).setStatus("异常");

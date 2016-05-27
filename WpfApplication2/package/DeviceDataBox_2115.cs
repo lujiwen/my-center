@@ -71,7 +71,7 @@ namespace WpfApplication2.package
             rainUnit = element.GetAttribute("rainUnit");
         }
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
       float dose_now, float dose_avg, float dose_std, float rain_value, string rain_unit, string dev_unit,string _paraLow, string _paraHigh, string _correctFactor)
         {
             systemId = _systemId; // 部署在不同位置的程序，systemid不一样

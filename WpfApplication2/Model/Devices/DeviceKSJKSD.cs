@@ -118,7 +118,7 @@ namespace Project208Home.Model
         {
             DeviceDataBox_KSJKSD box = new DeviceDataBox_KSJKSD();
 
-            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
+            box.load(this.BuildingId, this.CabId, DeviceId, this.devState,
              doseNow.ToString(), doseSum.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box;
         }

@@ -20,7 +20,7 @@ namespace WpfApplication2.package
         public DeviceDataBox_Xb2401()
         { }
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
         string _value, string _unit, string _paraLow, string _paraHigh, string _correctFactor )
         {
             systemId = _systemId;

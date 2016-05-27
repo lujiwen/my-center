@@ -167,11 +167,11 @@ namespace WpfApplication2.Model.Vo
             if (NowValue!=null&&!NowValue.Equals(""))
             if (float.Parse(NowValue) > Highthreshold)
             {
-                State = DeviceDataBox_Base.State.H_Alert.ToString();
+                State = "高报";//DeviceDataBox_Base.State.H_Alert.ToString();
             }
             else if (float.Parse(NowValue) < Lowthreshold)
             {
-                State = DeviceDataBox_Base.State.L_Alert.ToString();
+                State = "低报"; //DeviceDataBox_Base.State.L_Alert.ToString();
             }
         }
     
@@ -514,15 +514,15 @@ namespace WpfApplication2.Model.Vo
         public virtual string GenerateAlarmMessage()
         {
             String alertInfomation = "";
-            if (State.ToString().Equals(DeviceDataBox_Base.State.L_Alert.ToString()))
+            if (State.ToString().Equals("低报"))
             {
                 alertInfomation = "当前值： \"" + NowValue + "\" 低于正常值";
             }
-            else if (State.ToString().Equals(DeviceDataBox_Base.State.H_Alert.ToString()))
+            else if (State.ToString().Equals("高报"))
             {
                 alertInfomation = "当前值： \"" + NowValue + "\" 高于正常值";
             }
-            else if (State.ToString().Equals(DeviceDataBox_Base.State.Fault.ToString()))
+            else if (State.ToString().Equals("Err"))
             {
                 alertInfomation = " 当前值出错 ";
             }

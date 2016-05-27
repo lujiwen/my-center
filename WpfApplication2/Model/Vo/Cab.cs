@@ -30,7 +30,7 @@ namespace WpfApplication2.Model.Vo
             cabId = "-1";
             buildingId = "-1";
             devices = new List<Device>();
-            state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+            state ="Normal";
         }
 
          public Cab(string cabId, string buildingId, string name, string office, string home, string ip, string port, List<Device> devices, string state)

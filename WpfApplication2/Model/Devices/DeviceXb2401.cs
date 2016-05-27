@@ -48,7 +48,13 @@ namespace Yancong
 
         }
 
-
+        DeviceDataBox_Xb2401  box;
+        public DeviceXb2401(DeviceDataBox_Xb2401 b)
+        {
+             box = b;
+            fromBoxToDevice((DeviceDataBox_Xb2401)b);
+            judgeState();
+        }
         /// <summary>
         ///
         /// </summary>
@@ -203,7 +209,7 @@ namespace Yancong
         public override WpfApplication2.package.Box getCommonDataPack()
         {
             DeviceDataBox_Xb2401 box = new DeviceDataBox_Xb2401();
-            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true), nowValue.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            box.load(this.BuildingId, this.CabId, DeviceId,this.devState, nowValue.ToString(), this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box;
         }
     }

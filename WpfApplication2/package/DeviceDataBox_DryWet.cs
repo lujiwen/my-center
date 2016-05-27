@@ -38,7 +38,7 @@ namespace WpfApplication2.package
         }
 
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
           string _cab_state, string _rainy_state, string _rain_time, string _unit, string _paraLow, string _paraHigh, string _correctFactor)
         {
             cab_state_=_cab_state;

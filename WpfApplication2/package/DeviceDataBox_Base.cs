@@ -9,6 +9,8 @@ using WpfApplication2.Model.Vo;
 using WpfApplication2.Util;
 using Project208Home.Model;
 using PavilionMonitor;
+using Project2115Home.Model;
+using Yancong;
 
 namespace WpfApplication2.package
 {
@@ -27,7 +29,7 @@ namespace WpfApplication2.package
             return classNameString;
         }
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
             string _value, string _unit, string _high_threshold, string _low_threshold, string _factor)
         {
             systemId_ = _systemId;
@@ -46,7 +48,7 @@ namespace WpfApplication2.package
             systemId = element.GetAttribute("systemId");
             cabId = element.GetAttribute("cabId");
             devId = element.GetAttribute("devId");
-            state = (State)Enum.Parse(typeof(State), element.GetAttribute("state"));
+            state =   element.GetAttribute("state");
             value = element.GetAttribute("value");
             unit = element.GetAttribute("unit");
             highThreshold = element.GetAttribute("highThreshold");
@@ -107,6 +109,15 @@ namespace WpfApplication2.package
                             case "DeviceDataBox_Gamma":
                                 deviceToChange = new DeviceGamma((DeviceDataBox_Gamma)this);
                                 break;
+                            case "DeviceDataBox_593":
+                                deviceToChange = new Device593Tritium((DeviceDataBox_593)this);
+                                break;
+                            case "DeviceDataBox_2115":
+                                deviceToChange = new Device2115((DeviceDataBox_2115)this);
+                                break;
+                            case "DeviceDataBox_Xb2401":
+                                deviceToChange = new DeviceXb2401((DeviceDataBox_Xb2401)this);
+                                break;
                             default :
                                 deviceToChange = new Device(this );
                                 break ;
@@ -114,7 +125,7 @@ namespace WpfApplication2.package
                         return deviceToChange;
         }
 
-        public enum State { Normal, Alert, H_Alert, L_Alert,Fault };
+     //   public enum State { Normal, Alert, H_Alert, L_Alert,Fault };
 
         public string systemId
         {
@@ -143,7 +154,7 @@ namespace WpfApplication2.package
             get { return cabId_; }
             set { cabId_ = value; }
         }
-        public State state
+        public string state
         {
             get { return state_; }
             set { state_ = value; }
@@ -184,7 +195,7 @@ namespace WpfApplication2.package
         protected string systemId_;
         protected string cabId_;
         protected string devId_;
-        protected State state_;
+        protected string state_;
         protected string value_;
         protected string unit_;
         protected string high_threshold_;

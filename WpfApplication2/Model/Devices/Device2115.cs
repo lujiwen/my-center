@@ -56,6 +56,13 @@ namespace Project2115Home.Model
         {
 
         }
+        DeviceDataBox_2115 gamma_box;
+        public Device2115(DeviceDataBox_2115 b)
+        {
+            gamma_box = b;
+            fromBoxToDevice((DeviceDataBox_2115)b);
+            judgeState();
+        }
 
         //2115房间经过RF1000后的数据格式是否正确
         public override bool isDataRight(byte[] flowBytes, int len)
@@ -156,7 +163,7 @@ namespace Project2115Home.Model
         {
             DeviceDataBox_2115 box2115 = new DeviceDataBox_2115();
              
-            box2115.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),
+            box2115.load(this.BuildingId, this.CabId, DeviceId,  this.devState,
               doseNow, doseAvg,doseStd,rainValue,rainUnit, this.devUnit,this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box2115;
         }

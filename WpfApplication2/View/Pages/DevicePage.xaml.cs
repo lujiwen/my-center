@@ -19,6 +19,7 @@ using Project208Home.Model;
 using WpfApplication2.CustomMarkers.Controls.DeviceUIs.PavilionUI;
 using PavilionMonitor;
 using Yancong;
+using Project2115Home.Model;
 
 namespace WpfApplication2.View.Pages
 {
@@ -110,6 +111,9 @@ namespace WpfApplication2.View.Pages
                              break;
                          case "XB2401":
                              deviceUI = new DeviceUIXB2401((DeviceXb2401)d, systemFrame);
+                             break;
+                         case "2115":
+                             deviceUI = new DeviceUI2115((Device2115)d, systemFrame);
                              break;
                          default:
                              deviceUI = new DeviceUI(d, systemFrame);

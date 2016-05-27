@@ -24,7 +24,7 @@ namespace WpfApplication2.Model.Vo
             name = "";
             systemId = "-1";
             cabs = new List<Cab>();
-            state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+            state = "Normal";//WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
         }
         
         public Building(string systemId, string name, string office, string location, double lat, double lng, List<Cab> cabs, string state,string mng)

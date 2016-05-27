@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using WpfApplication2.Model.Vo;
 using System.Data.OracleClient;
+using WpfApplication2.package;
 
 namespace Project208Home.Model
 {
@@ -286,6 +287,13 @@ namespace Project208Home.Model
             :base(odr)
         {
 
+        }
+        DeviceDataBox_593 box;
+        public Device593Tritium(DeviceDataBox_593 b)
+        {
+            box = b;
+            fromBoxToDevice((DeviceDataBox_Base)b);
+            judgeState();
         }
         public override Byte[] getParaReadCommands()
         {

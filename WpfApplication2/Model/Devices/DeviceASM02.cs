@@ -1119,7 +1119,7 @@ namespace PavilionMonitor
         public override WpfApplication2.package.Box getCommonDataPack()
         {
             DeviceDataASM02Box box = new DeviceDataASM02Box();
-            box.load(this.BuildingId, this.CabId, DeviceId, (DeviceDataBox_Base.State)Enum.Parse(typeof(DeviceDataBox_Base.State), this.devState, true),val_str_set, this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
+            box.load(this.BuildingId, this.CabId, DeviceId,   this.devState ,val_str_set, this.devUnit, this.Lowthreshold.ToString(), this.Highthreshold.ToString(), this.CorrectFactor.ToString());
             return box;
         }
 

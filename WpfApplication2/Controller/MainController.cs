@@ -109,7 +109,7 @@ namespace WpfApplication2.Controller
         private　OracleDataReader　readCabFromDb(DBManager dm,OracleDataReader odr)
         {
              try{
-                string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+                 string state = "Normal" ;
                 Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state,odr.GetString(6));
                 String sql2 = "select * from cabinfo where buildingid = " + building.SystemId + " ORDER BY C_ID";
                 OracleDataReader odr2 = null;
@@ -164,7 +164,7 @@ namespace WpfApplication2.Controller
                 {
                     while (odr.Read()) //找所有的building
                     {
-                        string state = WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+                        string state ="Normal" ;
                         Building building = new Building("" + odr.GetInt32(0), odr.GetString(1), odr.GetString(2), odr.GetString(3), odr.GetFloat(4), odr.GetFloat(5), new List<Cab>(), state,odr.GetString(6));
                         Console.WriteLine(building.Name);
                         odr2 = readCabFromDb(dbOfDevice, odr);
@@ -617,13 +617,13 @@ namespace WpfApplication2.Controller
                         {
                             if (float.Parse(deviceInMap.NowValue) > deviceInMap.Highthreshold)
                             {
-                                tempItem.state = DeviceDataBox_Base.State.H_Alert;
-                                deviceInMap.State = DeviceDataBox_Base.State.H_Alert.ToString();
+                                tempItem.state = "高报";
+                                deviceInMap.State = "高报"  ;
                             }
                             else if (float.Parse(deviceInMap.NowValue) < deviceInMap.Lowthreshold)
                             {
-                                tempItem.state = DeviceDataBox_Base.State.L_Alert;
-                                deviceInMap.State = DeviceDataBox_Base.State.L_Alert.ToString();
+                                tempItem.state = "低报" ;//DeviceDataBox_Base.State.L_Alert;
+                                deviceInMap.State = "低报"; //DeviceDataBox_Base.State.L_Alert.ToString();
                             }
                         }
                         
@@ -653,16 +653,16 @@ namespace WpfApplication2.Controller
 
                         deviceToChange = tempItem.fromBoxToDevice();
                         //收到状态不正常的数据时，触发警报，并把相应的cab和building的状态更改为相应的报警状态
-                        if (tempItem.state != DeviceDataBox_Base.State.Normal)
+                        if (tempItem.state != "Normal")
                         {
                             Alarm(deviceToChange);
                         }
                         //更改柜子的状态
                         GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].State =
-                            GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+                            GlobalMapForShow.globalMapForCab[tempItem.systemId + "_" + tempItem.cabId].isStateNormal() ?"Normal" : "Err";
 
                         //更改监测点的状态
-                        GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? DeviceDataBox_Base.State.Normal.ToString() : DeviceDataBox_Base.State.Alert.ToString();
+                        GlobalMapForShow.globalMapForBuiding[tempItem.systemId].State = GlobalMapForShow.globalMapForBuiding[tempItem.systemId].isStateNormal() ? "Normal" :"Err";
 
                         //遍历所有楼宇的状态，存在有一栋楼有异常状态 ，就报警或者维持报警状态，否则停止报警
                         if (GlobalMapForShow.isAllBuildingNormal())

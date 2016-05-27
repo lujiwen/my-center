@@ -47,9 +47,9 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
 
            valueDic = new Dictionary<int, string>();
            valueDic.Add(0, "实时值");
-           valueDic.Add(0, "平均值");
-           valueDic.Add(0, "标准差");
-           valueDic.Add(0, "雨量值");
+           valueDic.Add(1, "平均值");
+           valueDic.Add(2, "标准差");
+           valueDic.Add(3, "雨量值");
  
            dataSeries = new  DataSeries[valueDic.Count];
            values = new List<string>();
@@ -85,24 +85,32 @@ namespace WpfApplication2.CustomMarkers.Controls.DeviceUIs
            doseStdValueLT.getValueTextBlock().Text = box.DoseStd.ToString();
            rainValueLT.getValueTextBlock().Text = box.RainValue.ToString();
            stateLT.getValueTextBlock().Text = DeviceInUI.State.Equals("Normal") ? "正常" : "异常";
+
+
        }
 
        public override void initlabels()
        {
-           float rainValue;//雨量值
-           String rainUnit;//雨量单位
+ 
            stateLT = new LabelAndText("状态:", "", Colors.White);
            doseNowValueLT = new LabelAndText("实时值:", "", Colors.White);
            doseAvgValueLT = new LabelAndText("中位值:", "", Colors.White);
            doseStdValueLT = new LabelAndText("标准差:", "", Colors.White);
            rainValueLT = new LabelAndText("雨量值:", "", Colors.White);
-           //valueLT.getUnitTextBlock().Text = " "+DeviceInUI.DataUnit;
 
+
+           stateLT.setFontsize(13);
+           doseNowValueLT.setFontsize(13);
+           doseAvgValueLT.setFontsize(13);
+           doseStdValueLT.setFontsize(13);
+           rainValueLT.setFontsize(13);
+            
            getInoPanel().Children.Add(stateLT);
            getInoPanel().Children.Add(doseNowValueLT);
            getInoPanel().Children.Add(doseAvgValueLT);
            getInoPanel().Children.Add(doseStdValueLT);
            getInoPanel().Children.Add(rainValueLT);
+        
        }
        public override void startHistoryWindow()
        {

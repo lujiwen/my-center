@@ -32,7 +32,7 @@ namespace WpfApplication2.package
             AnalysisPavilionData(val_str_set_);
         }
 
-        public void load(string _systemId, string _cabId, string _devId, State _state,
+        public void load(string _systemId, string _cabId, string _devId, string _state,
          string _val_str_set, string _unit, string _paraLow, string _paraHigh, string _correctFactor)
         {
             val_str_set=_val_str_set;

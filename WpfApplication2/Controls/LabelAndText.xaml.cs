@@ -77,5 +77,11 @@ namespace WpfApplication2.CustomMarkers.Controls
         {
             return units;
         }
+        public void setFontsize(int size)
+        {
+            Label.FontSize = size;
+            Value.FontSize = size;
+            units.FontSize = size;
+        }
     }
 }
