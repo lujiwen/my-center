@@ -19,6 +19,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab407HPT500I.xaml 的交互逻辑
+    /// HPT500I工艺图
     /// </summary>
     public partial class Cab407HPT500I : UserControl
     {

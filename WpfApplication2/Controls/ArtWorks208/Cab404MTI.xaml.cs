@@ -19,6 +19,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab404MTI.xaml 的交互逻辑
+    /// MTI工艺图
     /// </summary>
     public partial class Cab404MTI : UserControl
     {

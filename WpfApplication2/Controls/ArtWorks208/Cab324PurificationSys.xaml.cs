@@ -21,6 +21,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab324PurificationSys.xaml 的交互逻辑
+    /// 纯化系统工艺图
     /// </summary>       
     public partial class Cab324PurificationSys : UserControl
     {

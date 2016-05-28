@@ -19,6 +19,7 @@ namespace Project208Home.Views.ArtWorks208
 {
     /// <summary>
     /// Cab422ThermalDesorptionSys.xaml 的交互逻辑
+    /// 热解析工艺图
     /// </summary>
     public partial class Cab422ThermalDesorptionSys : UserControl
     {
