@@ -118,7 +118,10 @@ namespace WpfApplication2.View.Windows
 
             mapPage = new MapPage(this);
             MainPage.Content = mapPage;
+
+            //页面加载完成之后,开始初始化和各个监测点的连接
             c.InitialConnection();
+            //初始化数据库连接
             c.InitialDBConnection();
         }
       

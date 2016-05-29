@@ -75,6 +75,8 @@ namespace WpfApplication2.Controls
             cab_name.Text = name;
         }
       
+
+        //初始化三个部分数值文字，工艺图和曲线图
         private void init()
         {
             initChart();
@@ -257,7 +259,6 @@ namespace WpfApplication2.Controls
 
         public void updateCabUI()
         {
-             //CabInUI = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
              Cab c = GlobalMapForShow.globalMapForCab[CabInUI.BuildingId + "_" + CabInUI.CabId];
              if (c.State.Equals("Normal"))
             {
@@ -271,7 +272,6 @@ namespace WpfApplication2.Controls
              stateLT.updateValue(c.State.Equals("Normal") ? "正常" : "异常");
             //更新曲线图
              UpdateChart(c);
-
         }
 
  

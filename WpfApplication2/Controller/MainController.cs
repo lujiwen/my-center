@@ -48,6 +48,8 @@ namespace WpfApplication2.Controller
         public MainController()
         {
             InitialData();
+
+            //需要在页面加载之后,在初始化连接,改为在MainWindow当中调用
           //  InitialConnection();
           //  InitialDBConnection();
             InitialThread();
@@ -86,6 +88,10 @@ namespace WpfApplication2.Controller
             Console.Write("after: " + flag);     
         }
         
+        /// <summary>
+        /// 从数据库当中读取检测点楼宇信息
+        /// </summary>
+        /// <returns></returns>
         private OracleDataReader readBuidingFromDb()
         {
             int errCode = 0 ;
@@ -106,6 +112,12 @@ namespace WpfApplication2.Controller
             return null ;
         }
 
+        /// <summary>
+        /// 从数据库当中读取柜子信息
+        /// </summary>
+        /// <param name="dm"></param>
+        /// <param name="odr"></param>
+        /// <returns></returns>
         private　OracleDataReader　readCabFromDb(DBManager dm,OracleDataReader odr)
         {
              try{
@@ -123,6 +135,13 @@ namespace WpfApplication2.Controller
             }         
         }
 
+        /// <summary>
+        /// 从监测点读取设备信息
+        /// </summary>
+        /// <param name="dm"></param>
+        /// <param name="odr2"></param>
+        /// <param name="cab"></param>
+        /// <returns></returns>
         private OracleDataReader readDeviceFromDb(DBManager dm,OracleDataReader odr2,Cab cab)
         {
             try{                
@@ -274,37 +293,42 @@ namespace WpfApplication2.Controller
         }
 
         private List<ConnectionManager> conManagerList;
-
-        public void InitialConnection()  //初始化连接
+        
+        /// <summary>
+        ///   初始化连接到各个监测点，部分为直连设备，那么不同的设备都要建立一个socket连接（comconnection）
+        ///   部分连接二级监测点，收到数据包进行解析，那么所有设备都使用柜子ip和统一的端口号，只建立一个socket（udpconnection）
+        ///   收数据
+        /// </summary>
+        public void InitialConnection() 
         {
-            //manager207c = init207cConnection();
-            //if (manager207c != null && manager207c.isAllConnected)
-            //{
-            //    Alarm("207c连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("207c连接初始化失败：" + manager207c.getConnectiosErr());
+            manager207c = init207cConnection();
+            if (manager207c != null && manager207c.isAllConnected)
+            {
+                Alarm("207c连接初始化成功！");
+            }
+            else
+            {
+                Alarm("207c连接初始化失败：" + manager207c.getConnectiosErr());
 
-            //}
-             // manager208 = init208Connection();
-             //if (manager208 != null)
-             //{
-             //    Alarm("208连接初始化成功！");
-             //}
-             //else
-             //{
-             //    Alarm("208连接初始化失败！");
-             //}
-             //manager209 = init209Conection();
-             //if (manager209 != null)
-             //{
-             //    Alarm("209连接初始化成功！");
-             //}
-             //else
-             //{
-             //    Alarm("209连接初始化失败," + manager209.getConnectiosErr());
-             //}
+            }
+            manager208 = init208Connection();
+            if (manager208 != null)
+            {
+                Alarm("208连接初始化成功！");
+            }
+            else
+            {
+                Alarm("208连接初始化失败！"+manager208.getConnectiosErr());
+            }
+            manager209 = init209Conection();
+            if (manager209 != null)
+            {
+                Alarm("209连接初始化成功！");
+            }
+            else
+            {
+                Alarm("209连接初始化失败," + manager209.getConnectiosErr());
+            }
             manager2115 = init2115Connection();
             if (manager2115 != null&&manager2115.isAllConnected)
             {
@@ -314,67 +338,67 @@ namespace WpfApplication2.Controller
             {
                 Alarm("2115连接初始化失败,"+manager2115.getConnectiosErr());
             }
-            //manager201Chimney = init201Chimney();
-            //if (manager201Chimney != null && manager201Chimney.isAllConnected)
-            //{
-            //    Alarm("201烟囱连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
-            //}
-            //manager207Chimney = init207Chimney();
-            //if (manager207Chimney != null && manager207Chimney.isAllConnected)
-            //{
-            //    Alarm("207烟囱连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
-            //}
-             // manager208Chimney = init208Chimney();
-             //if (manager208Chimney != null && manager208Chimney.isAllConnected)
-             //{
-             //    Alarm("208烟囱连接初始化成功！");
-             //}
-             //else
-             //{
-             //    Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
-             //}
-            //if (initPavilionEx1() != null)
-            //{
-            //    Alarm("亭子（运输部）连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("亭子（运输部）连接初始化失败！");
-            //}
-            //if (initPavilionEx2() != null)
-            //{
-            //    Alarm("亭子（新桥）连接初始化成功！");
-            //}
-            //else
-            //{
-            //    Alarm("亭子（新桥）连接初始化失败！");
-            //}
-             //managerPavilionInnner = initPavilionInner() ;
-             //if (managerPavilionInnner != null)
-             //{
-             //    Alarm("亭子（内网）连接初始化成功！");
-             //}
-             //else
-             //{
-             //    Alarm("亭子（内网）连接初始化失败！");
-             //}
-            // managerMonitorVehicle = initMonitorVehicle() ;
-            //if (managerMonitorVehicle != null)
-            // {
-            //     Alarm("监测车连接初始化成功！");
-            // }
-            // else
-            // {
-            //     Alarm("监测车连接初始化失败！");
-            // }
+            manager201Chimney = init201Chimney();
+            if (manager201Chimney != null && manager201Chimney.isAllConnected)
+            {
+                Alarm("201烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+            }
+            manager207Chimney = init207Chimney();
+            if (manager207Chimney != null && manager207Chimney.isAllConnected)
+            {
+                Alarm("207烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
+            }
+            manager208Chimney = init208Chimney();
+            if (manager208Chimney != null && manager208Chimney.isAllConnected)
+            {
+                Alarm("208烟囱连接初始化成功！");
+            }
+            else
+            {
+                Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
+            }
+            if (initPavilionEx1() != null)
+            {
+                Alarm("亭子（运输部）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（运输部）连接初始化失败！");
+            }
+            if (initPavilionEx2() != null)
+            {
+                Alarm("亭子（新桥）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（新桥）连接初始化失败！");
+            }
+            managerPavilionInnner = initPavilionInner();
+            if (managerPavilionInnner != null)
+            {
+                Alarm("亭子（内网）连接初始化成功！");
+            }
+            else
+            {
+                Alarm("亭子（内网）连接初始化失败！");
+            }
+            managerMonitorVehicle = initMonitorVehicle();
+            if (managerMonitorVehicle != null)
+            {
+                Alarm("监测车连接初始化成功！");
+            }
+            else
+            {
+                Alarm("监测车连接初始化失败！");
+            }
         }
 
         /// <summary>
@@ -529,22 +553,32 @@ namespace WpfApplication2.Controller
             }
             return manager2115;
         }
+
+        /// <summary>
+        ///    数据库连接
+        /// </summary>
+        /// <returns></returns>
         public bool InitialDBConnection()
         {
-            //数据库连接
             dataOfDevice = new DBManager();
             string errorCode = "";
             dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
             return true;
         }
 
-        public void InitialThread()  //初始化队列和线程
+        /// <summary>
+        /// 初始化队列和数据入库线程
+        /// </summary>
+        public void InitialThread()  
         {
             bq = new Queue<Device>(Constants.BlockQueueSize);
             new Thread(new ThreadStart(TakeDataFromQueueThread)).Start();  //启动从队列取数据的线程
         }
-      
-        public void TakeDataFromQueueThread()  //循环从队列里面取数据并存到数据库
+
+      /// <summary>
+        /// 循环从队列里面取数据并存到数据库
+      /// </summary>
+        public void TakeDataFromQueueThread()  
         {
             while (!Constants.stopFlag)
             {
@@ -568,8 +602,12 @@ namespace WpfApplication2.Controller
                 }
             }  
         }
-
-       public void receiveData(string data)  //收到二级发送过来的数据后触发
+        /// <summary>
+        /// 收到数据包之后进行解析，对二级发过来的数据包package进行解析
+        /// 直连设备的数据，组好包之后形成package 也在这里解析
+        /// </summary>
+        /// <param name="data"></param>
+       public void receiveData(string data)  
         {
             Console.WriteLine("收到数据:"+data);
              List<Box> boxes = new List<Box>();
@@ -690,6 +728,10 @@ namespace WpfApplication2.Controller
             }
         }
 
+        /// <summary>
+       /// 对设备进行报警，产生报警信息
+        /// </summary>
+        /// <param name="d"></param>
        private void Alarm(Device d)
        {
            string msg =  d.GenerateAlarmMessage();
@@ -699,6 +741,10 @@ namespace WpfApplication2.Controller
            amsg = null;
        }
 
+        /// <summary>
+        /// 将报警的字符串，显示到mappage 页面的下方
+        /// </summary>
+        /// <param name="alrm"></param>
        private void Alarm(String alrm)
        {
            AlarmMessage msg = new AlarmMessage(alrm + "(" + DateTime.Now.ToString() + ")");
@@ -706,6 +752,9 @@ namespace WpfApplication2.Controller
            msg = null ;
        }
 
+       /// <summary>
+       /// 将数据存入数据库当中的三张表
+       /// </summary>
        private void SaveDataToDataBase()
        {
            while (bq.Count > 0)
@@ -727,17 +776,6 @@ namespace WpfApplication2.Controller
            }  
        }
 
-       private void saveCommandToDataBase()
-       {
-
-       }
-
-        private void Update(String s)
-        {
-            // Dispatcher.Invoke(DispatcherPriority.Normal,new DelegateStrUpdateEvent(dataReceive), s);
-            Str = s;
-        }
-
         public String Str
         {
             get { return str; }
@@ -751,6 +789,8 @@ namespace WpfApplication2.Controller
             }
         }
 
+
+       //没用
         public static void sendCommand(String ip, String port, String data)
         {
             tcpConnection = new SocketConnection(ip, port);
@@ -761,6 +801,7 @@ namespace WpfApplication2.Controller
             tempSendData = data;
         }
 
+        //没用
         public static void receiveCommandData(string data)
         {
             List<Box> boxes = PackageWorker.unpack(data);
