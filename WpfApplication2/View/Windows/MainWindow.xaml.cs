@@ -99,13 +99,15 @@ namespace WpfApplication2.View.Windows
         CenterDaemon daemon;
         private void  init()
         {
-            //开启守护进程
-            //string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
-            //daemon = new CenterDaemon();
-            //daemon.startDaemon(DaemonExePath);
+            //开启守护进程,定时发心跳，若干次没收到心跳就将控制中心的程序重启
+            string DaemonExePath = System.Environment.CurrentDirectory + "/../../../center-daemon/center-daemon/Debug/center-daemon.exe";
+            daemon = new CenterDaemon();
+            daemon.startDaemon(DaemonExePath);
 
             instance = this ;
             c = new MainController();
+            
+            //初始化地图页面的所有的检测点
             initPoints();
  
             c.alarmMessage += new alarmMessageEventHandler(MainWindowShowAlarm );
@@ -121,7 +123,7 @@ namespace WpfApplication2.View.Windows
         }
       
         /// <summary>
-        ///  想大地图界面添加报警消息和报警时间
+        ///  向大地图界面添加报警消息和报警时间
         /// </summary>
         /// <param name="alarmMsg"></param>
         void MainWindowShowAlarm(AlarmMessage alarmMsg)
@@ -147,6 +149,7 @@ namespace WpfApplication2.View.Windows
         {
             pageNO = pageNum;
         }
+
         private void changePage(int num)
         {
             if (num == 1)
@@ -189,7 +192,11 @@ namespace WpfApplication2.View.Windows
         {
             return clickPoint;
         }
-
+        /// <summary>
+        /// 右上方菜单项的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         { 
             MenuItem item = (MenuItem)sender ;

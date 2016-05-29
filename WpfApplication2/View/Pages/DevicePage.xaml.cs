@@ -25,13 +25,14 @@ namespace WpfApplication2.View.Pages
 {
     /// <summary>
     /// DevicePage.xaml 的交互逻辑
+    /// 点击一个柜子，进入到这个柜子当中的所有设别页面的展示，如果一个监测点只有一个柜子则直接进入设备页面
     /// </summary>
     public partial class DevicePage : Page
     {
         private Frame systemFrame;
         private Cab cab;
         private Building building;
-        private List<Device> devices;
+        private List<Device> devices;//用来展示的所有的设备对象
         private Dictionary<String, List<UserControl>> subSystem;
         public DevicePage(Frame fm,Cab c)
         {
@@ -41,7 +42,11 @@ namespace WpfApplication2.View.Pages
             init();
         }
 
-        //针对一个监测点是多个设备 没有柜子概念
+        /// <summary>
+        /// 针对一个监测点是多个设备 没有柜子概念
+        /// </summary>
+        /// <param name="fm"></param>
+        /// <param name="b"></param>
         public DevicePage(Frame fm,Building b)
         {
             InitializeComponent();
@@ -57,6 +62,7 @@ namespace WpfApplication2.View.Pages
             this.systemFrame = fm;
             init();
         }
+
         private void init()
         {
             this.Unloaded += new RoutedEventHandler(DevicePage_Unloaded);
@@ -68,6 +74,8 @@ namespace WpfApplication2.View.Pages
                 {
                     Device d = cab.Devices[i];
                     UserControl deviceUI =null;
+
+                    //根据数据库中设备的handletype来初始化不同种类的设备
                      switch(d.HandleTypeInSystem)
                      {
                          case "6517AB":
@@ -134,6 +142,9 @@ namespace WpfApplication2.View.Pages
             showDeviceBySubSystem();
         }
  
+        /// <summary>
+        /// 如果一个柜子当中存在多个子系统（通道），按照不同的通道（不同的行 不同的通道）来进行显示
+        /// </summary>
         void showDeviceBySubSystem()
         {
             foreach (var dic in subSystem)
@@ -165,6 +176,5 @@ namespace WpfApplication2.View.Pages
         {
             Console.WriteLine("DevicePage_Unloaded");
         }
-        
     }
 }

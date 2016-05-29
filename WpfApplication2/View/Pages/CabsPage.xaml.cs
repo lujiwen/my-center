@@ -22,6 +22,7 @@ namespace WpfApplication2.View.Pages
 {
     /// <summary>
     /// CabsPage.xaml 的交互逻辑
+    /// 这个页面放在mainwindow中的frame 当中，被窗口管理，可以方便的支持前进和后退，展示柜子层的样式和逻辑
     /// </summary>
 
     public delegate void DataMonitor(int data);
@@ -35,6 +36,7 @@ namespace WpfApplication2.View.Pages
         private ArrayList cabListSource;
         public List<Building> selectBuildings;
         public List<Cab> selectCabs;
+
         public CabsPage(SystemPage page, Building b)
         {
             InitializeComponent();
@@ -73,7 +75,11 @@ namespace WpfApplication2.View.Pages
             ApplyDataBinding();
         }
 
-        //添加一个楼的柜子到当前页面
+        /// <summary>
+        /// 添加一个楼的柜子到当前页面
+        /// </summary>
+        /// <param name="sysFram"></param>
+        /// <param name="b"></param>
         public void insertCab(Frame sysFram, Building b)
         {
             selectBuildings.Add(b);
@@ -94,9 +100,9 @@ namespace WpfApplication2.View.Pages
         private void ApplyDataBinding()
         {
             CabList.ItemsSource = null;
-            // Bind ArrayList with the ListBox
             CabList.ItemsSource = cabListSource;
         }
+
         public void deleteCab(Frame sysFram, Building b)
         {
             for (int i = cabListSource.Count - 1; i >= 0; i--)
@@ -151,6 +157,10 @@ namespace WpfApplication2.View.Pages
         {
             Dispatcher.BeginInvoke(new Action(updateAllCharts));
         }
+
+        /// <summary>
+        /// 更新柜子页面上面所有柜子的曲线图
+        /// </summary>
         private void updateAllCharts()
         {
             if (cabListSource != null)

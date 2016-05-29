@@ -25,6 +25,7 @@
     {
     /// <summary>
     /// SystemView.xaml 的交互逻辑
+    /// 用来展示柜子页面或者设备页面
     /// </summary>
     public partial class SystemPage : Page
     {
@@ -41,6 +42,7 @@
             this.mainWindow = w;
             this.building = b;
             initSystemTreeView();
+            //个别监测点不要进入柜子页面，要直接进入到设备页面
             if (building != null)
             {
                 switch(building.Name)
@@ -104,6 +106,7 @@
         {
             InitializeComponent();
             this.mainWindow = w;
+            //左侧树状结构显示柜子和设备的树状结构
             initSystemTreeView();
             if (building != null)
             {
@@ -115,9 +118,10 @@
             }
             page.Content = cabspage;
             init();
-
         }
         
+
+        //选择了多个监测点，进入柜子页面的时候 需要用这个初始化函数
         public SystemPage(MainWindow w,bool isMutilChoose)
         {
             InitializeComponent();
@@ -142,6 +146,8 @@
             }
             init();
         }
+
+
         private void init()
         {
             markers = mainWindow.getMapMarkers();
@@ -244,7 +250,12 @@
             }
         }
 
-
+ 
+        /// <summary>
+        /// 点击左侧树状结构的的根节点事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void mainNode_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
@@ -260,6 +271,11 @@
             }
         }
 
+        /// <summary>
+        /// 点击柜子节点的事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void subSystemNode_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
@@ -280,6 +296,12 @@
             }
            
         }
+      
+        /// <summary>
+        /// 单击柜子控件的事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void cab_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled) return;
@@ -460,6 +482,9 @@
             }
         }
 
+        /// <summary>
+        /// 初始化几个前进后退，返回主页（地图）的事件监听
+        /// </summary>
         private void initEventListener()
         {
             map.MouseDoubleClick     += new MouseButtonEventHandler(map_double_click);
@@ -508,6 +533,11 @@
             }
         }
 
+        /// <summary>
+        /// 地图上的滚轮事件用来放缩地图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void map_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             Console.WriteLine("map zoom :"+map.Zoom );
