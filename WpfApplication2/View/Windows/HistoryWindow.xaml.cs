@@ -147,21 +147,21 @@ namespace WpfApplication2.View.Windows
         //开始查询
         private void Start_Query_Button_Click(object sender, RoutedEventArgs e)
         {
-            //String start = "'" + start_time.Value.ToString() + "'";
-            //String end = "'" + end_time.Value.ToString() + "'";
+            String start = "'" + start_time.Value.ToString() + "'";
+            String end = "'" + end_time.Value.ToString() + "'";
 
-            String start = "'2016/5/25 19:30:00'";
-            String end = "'2016/5/26 0:00:00'";
-             //if (start_time.Value == null || end_time.Value == null)
-             //{
-             //    MessageBox.Show("起止时间不可缺省！");
-             //    return;
-             //}
-             //else if (start_time.Value>=end_time.Value)
-             //{
-             //    MessageBox.Show("开始时间应早于结束时间！");
-             //    return;
-             //}
+            //String start = "'2016/5/25 19:30:00'";
+            //String end = "'2016/5/26 0:00:00'";
+            if (start_time.Value == null || end_time.Value == null)
+            {
+                MessageBox.Show("起止时间不可缺省！");
+                return;
+            }
+            else if (start_time.Value >= end_time.Value)
+            {
+                MessageBox.Show("开始时间应早于结束时间！");
+                return;
+            }
            
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";

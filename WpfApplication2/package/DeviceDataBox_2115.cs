@@ -31,7 +31,7 @@ namespace WpfApplication2.package
         public const string classNameString = "DeviceDataBox_2115";
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string className()
+        public override string className()
         {
             return classNameString;
         }

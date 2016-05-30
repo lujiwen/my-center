@@ -12,32 +12,23 @@ using WpfApplication2.package;
 
 namespace Project2115Home.Model
 {
-    //实时曲线显示的委托
-    public delegate void RealTimeCurveEvent(float[] value); 
-    public delegate void UpdateSuccessEvent(Boolean success);
+ 
     public class Device2115 : Device, INotifyPropertyChanged
     {
-        Int32 detetorType;//探头类型
-        Int32 monitorNumber;//检测仪编号
-        Int32 flag;//标志位
-        float doseNow;//实时值
-        float doseAvg;//平均值
-        float doseStd;//标准差
-        String dataUnit;//单位
+       private Int32 detetorType;//探头类型
+       private Int32 monitorNumber;//检测仪编号
+       private Int32 flag;//标志位
+       private float doseNow;//实时值
+       private float doseAvg;//平均值
+       private float doseStd;//标准差
+       private String dataUnit;//单位
 
-        float rainValue;//雨量值
-        String rainUnit;//雨量单位
+       private float rainValue;//雨量值
+       private String rainUnit;//雨量单位
 
-        float highThreshold;//高阈值
-        float lowThreshold;//低阈值
         float errorThreshold;//失效阈值
-        float correctFactor;//纠正因子
 
         String state = " "; //状态
-
-        //当有新数据产生时，通知实时曲线更新
-        Boolean rtPaint;//为true时，表示正在绘制实时曲线
-        RealTimeCurveEvent rtce;
 
         Boolean paraChanged;//参数是否被修改
         Boolean paraChangedSuccess;//参数修改成功
@@ -56,10 +47,11 @@ namespace Project2115Home.Model
         {
 
         }
-        DeviceDataBox_2115 gamma_box;
+
+        DeviceDataBox_2115  box2115;
         public Device2115(DeviceDataBox_2115 b)
         {
-            gamma_box = b;
+            box2115 = b;
             fromBoxToDevice((DeviceDataBox_2115)b);
             judgeState();
         }
@@ -91,6 +83,26 @@ namespace Project2115Home.Model
             return parasetright;
         }
 
+        public override void fromBoxToDevice(DeviceDataBox_Base box)
+        {
+            base.fromBoxToDevice(box);
+            if (box2115.DoseNow != null && !box2115.DoseNow.Equals(""))
+            {
+                DoseNow =  box2115.DoseNow ;
+            }
+            if (box2115.DoseAvg != null && !box2115.DoseAvg.Equals(""))
+            {
+                DoseAvg = box2115.DoseAvg;
+            }
+            if (box2115.DoseStd != null && !box2115.DoseStd.Equals(""))
+            {
+                DoseStd =  box2115.DoseStd;
+            }
+            if (box2115.RainValue != null && !box2115.RainValue.Equals(""))
+            {
+                RainValue = box2115.RainValue;
+            }
+        }
  
         //2115房间经过RF1000后的数据解析。输入：16进制数组，返回：data2115Packet数据包
         public override void AnalysisData(byte[] flowBytes,int len)
@@ -136,10 +148,7 @@ namespace Project2115Home.Model
             {
                 temprainValue = BitConverter.ToUInt16(flowBytes, i);
             }
-            DoseNow = instantValue;//剂量率瞬时值
-            DoseAvg = averageValue;//5分钟平均值
-            DoseStd = sdValue;//标准差值
-            RainValue = temprainValue;//雨量
+           
             if (flag == Convert.ToInt32(0x08))
             {
                 state = "正常";
@@ -157,6 +166,10 @@ namespace Project2115Home.Model
                 state = "失效";
             }
             devState = "Normal";
+            doseNow = instantValue;//剂量率瞬时值
+            doseAvg = averageValue;//5分钟平均值
+            doseStd = sdValue;//标准差值
+            rainValue = temprainValue;//雨量
         }
 
         public override WpfApplication2.package.Box getCommonDataPack()
@@ -168,29 +181,54 @@ namespace Project2115Home.Model
             return box2115;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override String getHistoryDataSql()
+        public override string GenerateInsertSql(string tablename)
         {
-            if (rtPaint){ //该设备正在绘制实时曲线
-                float[] dosevalues = new float[4];
-                dosevalues[0] = DoseNow;//实时值
-                dosevalues[1] = DoseAvg;//平均值
-                dosevalues[2] = DoseStd;//标准差值
-                dosevalues[3] = RainValue;//雨量
-
-                Rtce(dosevalues); 
-            }
-            //DateTime dt = DateTime.Now;
-            //String[] colums = {"DevId","DataTime","DoseNow","DoseAvg","DoseStd","RainValue","State"};
-            //Object[] values = {DevId,"'"+dt.ToString()+"'",DoseNow,DoseAvg,DoseStd,RainValue,"'"+State+"'"};
-            //String sql = DBHelper.getInsertCommands("devicehistorydata",colums,values);
-            String sql = "";
-            return sql;
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1,VALUE2, VALUE3,VALUE4,VALUE_OPTION,UNITS,SAFESTATE)" + 
+                " VALUES(" + tablename + "_sequence" + ".nextval" + ", " +
+                DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + DoseNow + ", " + DoseAvg + ", " + DoseStd + ", " + RainValue + ", " + "'"
+                + State + "'" + ", " + "'" 
+                + DataUnit + "'" + ", " + "'" + State + "' )";
         }
-        
+
+        public override Dictionary<string, List<DeviceData>> getHistoryDataSet(OracleDataReader odr)
+        {
+            Dictionary<string, List<DeviceData>> dataDictionary = new Dictionary<string, List<DeviceData>>();
+            List<DeviceData> dataset1 = new List<DeviceData>();
+            List<DeviceData> dataset2 = new List<DeviceData>();
+            List<DeviceData> dataset3 = new List<DeviceData>();
+            List<DeviceData> dataset4 = new List<DeviceData>();
+            while (odr.Read())
+            {
+                DeviceData d1 = new DeviceData();
+                DeviceData d2 = new DeviceData();
+                DeviceData d3 = new DeviceData();
+                DeviceData d4 = new DeviceData();
+                d1.VALUE1 = odr.GetFloat(5).ToString();
+                d2.VALUE1 = odr.GetFloat(6).ToString();
+                d3.VALUE1 = odr.GetFloat(7).ToString();
+                d4.VALUE1 = odr.GetFloat(8).ToString();
+                d1.Time = odr.GetString(2);
+                d2.Time = odr.GetString(2);
+                d3.Time = odr.GetString(2);
+                d4.Time = odr.GetString(2);
+                dataset1.Add(d1);
+                dataset2.Add(d2);
+                dataset3.Add(d3);
+                dataset4.Add(d4);
+                d1 = null;
+                d2 = null;
+                d3 = null;
+                d4 = null;
+            }
+            dataDictionary.Add("实时值", dataset1);
+            dataDictionary.Add("平均值", dataset2);
+            dataDictionary.Add("标准差", dataset3);
+            dataDictionary.Add("雨量", dataset4);
+            return dataDictionary;
+        }
+
+       
+
         /// <summary>
         /// 2115房间数据或参数读取命令生成。
         /// </summary>
@@ -248,13 +286,13 @@ namespace Project2115Home.Model
             command[4] = 0xf7;
 
             //高值阈值
-            Byte[] tempvalue = BitConverter.GetBytes(highThreshold);
+            Byte[] tempvalue = BitConverter.GetBytes(Highthreshold);
             command[5] = tempvalue[0];
             command[6] = tempvalue[1];
             command[7] = tempvalue[2];
             command[8] = tempvalue[3];
             //低值阈值
-            tempvalue = BitConverter.GetBytes(lowThreshold);
+            tempvalue = BitConverter.GetBytes(Lowthreshold);
             command[9] = tempvalue[0];
             command[10] = tempvalue[1];
             command[11] = tempvalue[2];
@@ -272,27 +310,7 @@ namespace Project2115Home.Model
 
             return command;
         }
-        /// <summary>
-        /// 更改当前参数的值
-        /// </summary>
-        public void ChangeDevPara(float[] values)
-        {
-            if (highThreshold != values[0] || lowThreshold != values[1] || errorThreshold != values[2])//修改的参数
-            {
-                highThreshold = values[0];
-                lowThreshold = values[1];
-                errorThreshold = values[2];
-                paraChanged = true;
-            }
-            else//修改的修正因子
-            {
-                rainValue = values[3];
-                ParaChangedSuccess = true;
-                Thread.Sleep(500);
-            }
-  
-        }
-
+        
         public Boolean ParaChanged
         {
             get { return paraChanged; }
@@ -307,17 +325,16 @@ namespace Project2115Home.Model
                 use(paraChangedSuccess);
             }
         }
-        public UpdateSuccessEvent Use
-        {
-            get { return use; }
-            set { use = value; }
-        }
-
 
         public Int32 DetetorType
         {
             get { return detetorType; }
-            set { detetorType = value; }
+            set { detetorType = value;
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("DetetorType"));
+            }
+            }
         }
         public float DoseNow
         {
@@ -327,7 +344,7 @@ namespace Project2115Home.Model
                 doseNow = value;
                 if (PropertyChanged != null)
                 {
-  
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("DoseNow"));
                 }
             }
         }
@@ -371,33 +388,11 @@ namespace Project2115Home.Model
             }
         }
 
-        public float HighThreshold
-        {
-            get { return highThreshold; }
-            set { highThreshold = value;}
-        }
-        public float LowThreshold
-        {
-            get { return lowThreshold; }
-            set { lowThreshold = value; }
-        }
         public float ErrorThreshold
         {
             get { return errorThreshold; }
             set { errorThreshold = value; }
         }
-
-        public RealTimeCurveEvent Rtce
-        {
-            get { return rtce; }
-            set { rtce = value; }
-        }
-        public Boolean RtPaint
-        {
-            get { return rtPaint; }
-            set { rtPaint = value; }
-        }
-
 
         public String State
         {

@@ -48,12 +48,22 @@ namespace Yancong
 
         }
 
-        DeviceDataBox_Xb2401  box;
+        DeviceDataBox_Xb2401  box2401;
         public DeviceXb2401(DeviceDataBox_Xb2401 b)
         {
-             box = b;
+            box2401 = b;
             fromBoxToDevice((DeviceDataBox_Xb2401)b);
             judgeState();
+        }
+        public override void fromBoxToDevice(DeviceDataBox_Base box)
+        {
+            base.fromBoxToDevice(box);
+            if (box2401.value != null && !box2401.value.Equals(""))
+            {
+                nowValue = double.Parse(box2401.value);
+                devState = box2401.state;
+            }
+            
         }
         /// <summary>
         ///
@@ -203,7 +213,7 @@ namespace Yancong
 
         public override string GenerateInsertSql(string tablename)
         {
-            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + nowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + State + "' )";
+            return "INSERT INTO " + tablename + "( DD_ID, DEVID, DATATIME, VALUE1, UNITS,SAFESTATE)" + " VALUES(" + tablename + "_sequence" + ".nextval" + ", " + DeviceId + ", " + "'" + DateTime.Now + "'" + ", " + nowValue + ", " + "'" + DataUnit + "'" + ", " + "'" + devState + "' )";
         }
 
         public override WpfApplication2.package.Box getCommonDataPack()
