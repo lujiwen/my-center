@@ -107,6 +107,9 @@
     <Compile Include="Controls\ArtWorks208\Sys208CabArtWork.xaml.cs">
       <DependentUpon>Sys208CabArtWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeviceUIs\DeviceUI.xaml.cs">
+      <DependentUpon>DeviceUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DeviceUIs\DeviceUIGamma.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUINeutron.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUIKSJKSD.cs" />
@@ -194,9 +197,6 @@
       <DependentUpon>PositionMarker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PowerControl.cs" />
-    <Compile Include="Controls\DeviceUI.xaml.cs">
-      <DependentUpon>DeviceUI.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="View\Windows\Asm02HistoryTable.xaml.cs">
       <DependentUpon>Asm02HistoryTable.xaml</DependentUpon>
@@ -290,10 +290,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\DeviceUI.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\DeviceGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,6 +297,10 @@
     <Page Include="Controls\DeviceInfoPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DeviceUIs\DeviceUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DeviceUIs\DeviceUIASM02.xaml">
       <SubType>Designer</SubType>
