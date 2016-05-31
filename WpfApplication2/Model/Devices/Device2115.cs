@@ -113,6 +113,12 @@ namespace Project2115Home.Model
             int detetorType = (int)flowBytes[2];
             //获取检测仪编号
             int monitorNumber = (int)flowBytes[3];
+            if(this.monitorNumber!=monitorNumber)
+            {
+                IsUpdate = false; 
+                return;
+            }
+
             //获取标志位
             int flag = (int)flowBytes[5];
 
@@ -170,6 +176,7 @@ namespace Project2115Home.Model
             doseAvg = averageValue;//5分钟平均值
             doseStd = sdValue;//标准差值
             rainValue = temprainValue;//雨量
+            IsUpdate = true;
         }
 
         public override WpfApplication2.package.Box getCommonDataPack()

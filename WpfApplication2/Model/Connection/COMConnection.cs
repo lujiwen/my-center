@@ -218,9 +218,13 @@ namespace WpfApplication2.Controller
                       //  newMonitorData(device.getHistoryDataSql());
                         
                         //将收的正确数据 打包发给ConnectionManager
-                        if (ReceiveListener != null)
+                        if (ReceiveListener != null&&device.IsUpdate)
                         {
-                            ReceiveListener.onDataReceive(Utils.PackBox(device.getCommonDataPack()));
+                            string pack = Utils.PackBox(device.getCommonDataPack()) ;
+                            if (!pack.Equals(""))
+                            {
+                                ReceiveListener.onDataReceive(pack);
+                            }
                         }
 
                         //产生新的阿里云数据更新事件

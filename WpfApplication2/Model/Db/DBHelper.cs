@@ -105,7 +105,6 @@ namespace WpfApplication2.Model.Db
             }
         }
 
-
         /**
          * 根据传入的参数生成创建数据表的sql
          * */
