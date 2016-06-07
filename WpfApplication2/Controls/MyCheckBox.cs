@@ -18,6 +18,9 @@ namespace WpfApplication2.CustomMarkers.Controls
 
         public MyTreeViewItem TreeNode { get { return _treeNode; } set { _treeNode = value; } }
 
+        public MyCheckBox()
+        { 
+        }
         public MyCheckBox(CheckBoxType t, MyTreeViewItem treeNode )
         {
             VerticalAlignment = System.Windows.VerticalAlignment.Center;

@@ -33,7 +33,7 @@
         GMapMarker[] markers;
         GMapMarker currentMarker;
         Building building;  //map 上点击 需要查看的楼 
-        private Boolean[] roomchoose;
+        private List<Building> roomchoose;
         private CabsPage cabspage;
         private DevicePage devicePage;
         public SystemPage(MainWindow w,Building b)
@@ -167,19 +167,19 @@
         /// 由选择多个检测点进来 看到的左侧的树状结构
         /// </summary>
         /// <param name="choosedArr"></param>
-        private void initSystemTreeView(Boolean[] choosedArr)
+        private void initSystemTreeView(List<Building> choosedArr)
         {
             Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
             MyTreeViewItem mainNode = new MyTreeViewItem(null);
             mainNode.IsExpanded = true;
             mainNode.Header = createTreeViewItem("请选择需要查看的柜子", null, false, 0, mainNode);
             system_tree.Items.Add(mainNode);
-            
-            for (int i = 0; i < buildings.Count; i++) //不同的房间
+
+            for (int i = 0; i < choosedArr.Count; i++) //不同的房间
             {
-                if(choosedArr[i])
+                if(choosedArr[i]!=null)
                 {
-                    Building b= buildings[(i + 1)+""];
+                    Building b = choosedArr[i];
                     MyTreeViewItem roomNode = new MyTreeViewItem(b);
                     roomNode.Header = createTreeViewItem(b.Name, null, true, 1, roomNode);
                     roomNode.MouseDoubleClick +=  mainNode_MouseDoubleClick ;

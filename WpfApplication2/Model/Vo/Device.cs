@@ -471,7 +471,7 @@ namespace WpfApplication2.Model.Vo
             {
                 DeviceData d = new DeviceData();
                 d.VALUE1 = odr.GetString(5);
-                d.Time = odr.GetString(2);
+                d.Time = odr.GetFloat(2).ToString();
                 dataset.Add(d);
                 d = null;
             }

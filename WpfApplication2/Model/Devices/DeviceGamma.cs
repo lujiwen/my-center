@@ -93,7 +93,6 @@ namespace Project208Home.Model
             {
                 DeviceData d1 = new DeviceData();
                 DeviceData d2 = new DeviceData();
-                Console.WriteLine(odr.GetFloat(5));
                 d1.VALUE1 = odr.GetFloat(5).ToString();
                 d1.Time = odr.GetString(2);
                 dataset1.Add(d1);

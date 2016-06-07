@@ -301,104 +301,104 @@ namespace WpfApplication2.Controller
         /// </summary>
         public void InitialConnection() 
         {
-            manager207c = init207cConnection();
-            if (manager207c != null && manager207c.isAllConnected)
-            {
-                Alarm("207c连接初始化成功！");
-            }
-            else
-            {
-                Alarm("207c连接初始化失败：" + manager207c.getConnectiosErr());
+            //manager207c = init207cConnection();
+            //if (manager207c != null && manager207c.isAllConnected)
+            //{
+            //    Alarm("207c连接初始化成功！");
+            //}
+            //else
+            //{
+            //    Alarm("207c连接初始化失败：" + manager207c.getConnectiosErr());
 
-            }
-            manager208 = init208Connection();
-            if (manager208 != null)
-            {
-                Alarm("208连接初始化成功！");
-            }
-            else
-            {
-                Alarm("208连接初始化失败！"+manager208.getConnectiosErr());
-            }
-            manager209 = init209Conection();
-            if (manager209 != null)
-            {
-                Alarm("209连接初始化成功！");
-            }
-            else
-            {
-                Alarm("209连接初始化失败," + manager209.getConnectiosErr());
-            }
-            manager2115 = init2115Connection();
-            if (manager2115 != null&&manager2115.isAllConnected)
-            {
-                Alarm("2115连接初始化成功！");
-            }
-            else
-            {
-                Alarm("2115连接初始化失败,"+manager2115.getConnectiosErr());
-            }
-            manager201Chimney = init201Chimney();
-            if (manager201Chimney != null && manager201Chimney.isAllConnected)
-            {
-                Alarm("201烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
-            }
-            manager207Chimney = init207Chimney();
-            if (manager207Chimney != null && manager207Chimney.isAllConnected)
-            {
-                Alarm("207烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
-            }
-            manager208Chimney = init208Chimney();
-            if (manager208Chimney != null && manager208Chimney.isAllConnected)
-            {
-                Alarm("208烟囱连接初始化成功！");
-            }
-            else
-            {
-                Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
-            }
-            if (initPavilionEx1() != null)
-            {
-                Alarm("亭子（运输部）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（运输部）连接初始化失败！");
-            }
-            if (initPavilionEx2() != null)
-            {
-                Alarm("亭子（新桥）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（新桥）连接初始化失败！");
-            }
-            managerPavilionInnner = initPavilionInner();
-            if (managerPavilionInnner != null)
-            {
-                Alarm("亭子（内网）连接初始化成功！");
-            }
-            else
-            {
-                Alarm("亭子（内网）连接初始化失败！");
-            }
-            managerMonitorVehicle = initMonitorVehicle();
-            if (managerMonitorVehicle != null)
-            {
-                Alarm("监测车连接初始化成功！");
-            }
-            else
-            {
-                Alarm("监测车连接初始化失败！");
-            }
+            //}
+        //    manager208 = init208Connection();
+        //    if (manager208 != null)
+        //    {
+        //        Alarm("208连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("208连接初始化失败！"+manager208.getConnectiosErr());
+        //    }
+        //    manager209 = init209Conection();
+        //    if (manager209 != null)
+        //    {
+        //        Alarm("209连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("209连接初始化失败," + manager209.getConnectiosErr());
+        //    }
+        //    manager2115 = init2115Connection();
+        //    if (manager2115 != null&&manager2115.isAllConnected)
+        //    {
+        //        Alarm("2115连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("2115连接初始化失败,"+manager2115.getConnectiosErr());
+        //    }
+        //    manager201Chimney = init201Chimney();
+        //    if (manager201Chimney != null && manager201Chimney.isAllConnected)
+        //    {
+        //        Alarm("201烟囱连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("201烟囱连接初始化失败," + manager201Chimney.getConnectiosErr());
+        //    }
+        //    manager207Chimney = init207Chimney();
+        //    if (manager207Chimney != null && manager207Chimney.isAllConnected)
+        //    {
+        //        Alarm("207烟囱连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("207烟囱连接初始化失败," + manager207Chimney.getConnectiosErr());
+        //    }
+        //    manager208Chimney = init208Chimney();
+        //    if (manager208Chimney != null && manager208Chimney.isAllConnected)
+        //    {
+        //        Alarm("208烟囱连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("208烟囱连接初始化失败," + manager208Chimney.getConnectiosErr());
+        //    }
+        //    if (initPavilionEx1() != null)
+        //    {
+        //        Alarm("亭子（运输部）连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("亭子（运输部）连接初始化失败！");
+        //    }
+        //    if (initPavilionEx2() != null)
+        //    {
+        //        Alarm("亭子（新桥）连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("亭子（新桥）连接初始化失败！");
+        //    }
+        //    managerPavilionInnner = initPavilionInner();
+        //    if (managerPavilionInnner != null)
+        //    {
+        //        Alarm("亭子（内网）连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("亭子（内网）连接初始化失败！");
+        //    }
+        //    managerMonitorVehicle = initMonitorVehicle();
+        //    if (managerMonitorVehicle != null)
+        //    {
+        //        Alarm("监测车连接初始化成功！");
+        //    }
+        //    else
+        //    {
+        //        Alarm("监测车连接初始化失败！");
+        //    }
         }
 
         /// <summary>

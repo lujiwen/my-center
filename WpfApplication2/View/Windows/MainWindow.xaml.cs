@@ -32,8 +32,8 @@ namespace WpfApplication2.View.Windows
         PointLatLng clickPoint;
         public  MainController c ;
         public PageChooserWindow chooser;
-        private Boolean[] _roomChoosed;
-        public Boolean[] RoomChoosed { get { return _roomChoosed; } set { _roomChoosed = value; } }
+        private List<Building> _roomChoosed;
+        public List<Building> RoomChoosed { get { return _roomChoosed; } set { _roomChoosed = value; } }
         private Boolean isEmergencyStatus;
         private String[] _roomNames = { "208室", "201室", "208烟囱", "208室A楼" };
         public String[] RoomNames { get { return _roomNames; }  set { _roomNames = value; } }
@@ -74,27 +74,19 @@ namespace WpfApplication2.View.Windows
             Dictionary<string, Building> buildings = GlobalMapForShow.globalMapForBuiding;
             markers = new GMapMarker[buildings.Count];
             _buildings = new List<Building>();
-            try { 
-                for (int i = 0; i < buildings.Count;i++ )
-                {
-                    if (buildings.ContainsKey((i + 1) + ""))
-                    {
-                        Building b = buildings[(i + 1) + ""];
-                        _buildings.Add(b);
-                        markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
-                        markers[i].Tag = b.Name;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }            
-            }
-            catch(Exception e)
+
+            int i = 0;
+            foreach (var build in buildings)
             {
-                LogUtil.Log(true, e.Message , (int)ErrorCode.ERR_CODE.MAP_POINTS_INIT_ERR);
+                if(build.Value!=null)
+                {
+                    Building b = build.Value;
+                    _buildings.Add(b);
+                    markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
+                    markers[i].Tag = b.Name;
+                    i++;
+                }
             }
-            
         }
         CenterDaemon daemon;
         private void  init()
@@ -283,10 +275,10 @@ namespace WpfApplication2.View.Windows
              
         }
 
-        void window_roomChose(bool[] chooseArr)
+        void window_roomChose(List<Building> buildings)
         {
-            _roomChoosed = chooseArr;    
-
+            _roomChoosed = buildings;    
+       
             MainPage.Content = new SystemPage(this,true);
         }
 

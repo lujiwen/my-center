@@ -55,6 +55,7 @@ namespace WpfApplication2.View.Windows
             Axis axisX = new Axis();//图表X轴
             Axis axisY = new Axis(); //图表Y轴
             axisX.Title = "时间";//横坐标单位
+            axisX.Interval = 20;
             axisY.Title = "单位:xxx";//纵坐标单位
 
             history_chart.Titles.Add(title);//添加标题
