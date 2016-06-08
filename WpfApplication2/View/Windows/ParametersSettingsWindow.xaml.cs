@@ -34,27 +34,31 @@ namespace WpfApplication2.View.Windows
 
         private List<string> deviceName;
         private Dictionary<string, Device> deviceDictionary;
-        public ParametersSettingsWindow()
+        User user;//修改设置的用户名
+        public ParametersSettingsWindow(User u,Device d)
         {
             InitializeComponent();
             type = paraSettingsWindowType.OnMainMenu;
             init();
+            user = u;
+            device = d;
+            type = paraSettingsWindowType.onDevice;
         }
 
-        public ParametersSettingsWindow(Cab c)
-        {
-            InitializeComponent();
-            type = paraSettingsWindowType.onCab;
-            this.cab = c;
-            init();
-        }
-        public ParametersSettingsWindow(Device d)
-        {
-            InitializeComponent();
-            this.device = d;
-            type = paraSettingsWindowType.onDevice;
-            init();
-        }
+        //public ParametersSettingsWindow(Cab c)
+        //{
+        //    InitializeComponent();
+        //    type = paraSettingsWindowType.onCab;
+        //    this.cab = c;
+        //    init();
+        //}
+        //public ParametersSettingsWindow(Device d)
+        //{
+        //    InitializeComponent();
+        //    this.device = d;
+        //    type = paraSettingsWindowType.onDevice;
+        //    init();
+        //}
         
         private void init()
         {
@@ -70,7 +74,7 @@ namespace WpfApplication2.View.Windows
                 buildings.Add(var.Value);
                 buildingName.Add(var.Value.Name);
             }
-            Building_Combox.ItemsSource = buildingName;
+          //  Building_Combox.ItemsSource = buildingName;
         //    Building_Combox.SelectedIndex = 0;
             //初始化柜子
               cabs = new List<Cab>();
@@ -82,7 +86,7 @@ namespace WpfApplication2.View.Windows
                 cabName.Add(var.Value.Name);
             }
 
-             Cab_Combox.ItemsSource = cabName;
+             //Cab_Combox.ItemsSource = cabName;
          //   Cab_Combox.SelectedIndex = 0;
             //初始化设备
              devices = new List<Device>();
@@ -94,49 +98,49 @@ namespace WpfApplication2.View.Windows
                 deviceName.Add(var.Value.SubSystemName);
             }
 
-            Device_Combox.ItemsSource = deviceName;
+            //Device_Combox.ItemsSource = deviceName;
          //   Device_Combox.SelectedIndex = 0;
 
             switch (type)
             {
-                case paraSettingsWindowType.OnMainMenu:
+                //case paraSettingsWindowType.OnMainMenu:
 
-                    break;
-                case paraSettingsWindowType.onCab:
-                    Cab c = this.cab;
+                //    break;
+                //case paraSettingsWindowType.onCab:
+                //    Cab c = this.cab;
 
-                    this.building = build[c.BuildingId + ""];
-                    string buidingname = building.Name;
-                    Building_Combox.Text = buidingname;
-                    Building_Combox.IsEnabled = false;
+                //    this.building = build[c.BuildingId + ""];
+                //    string buidingname = building.Name;
+                //    Building_Combox.Text = buidingname;
+                //    Building_Combox.IsEnabled = false;
 
                     
-                    Cab_Combox.Text = c.Name;
-                    Cab_Combox.IsEnabled = false;
+                //    Cab_Combox.Text = c.Name;
+                //    Cab_Combox.IsEnabled = false;
                     
-                    List<string> devicename = new List<string>();
-                    devices.Clear();
-                    for (int i = 0; i < c.Devices.Count; i++)
-                    {
-                        devicename.Add(c.Devices[i].SubSystemName);
-                        devices.Add(c.Devices[i]);
-                    }
+                //    List<string> devicename = new List<string>();
+                //    devices.Clear();
+                //    for (int i = 0; i < c.Devices.Count; i++)
+                //    {
+                //        devicename.Add(c.Devices[i].SubSystemName);
+                //        devices.Add(c.Devices[i]);
+                //    }
 
-                    Device_Combox.ItemsSource = devicename;
-                    break;
+                //    Device_Combox.ItemsSource = devicename;
+                //    break;
                 case paraSettingsWindowType.onDevice:
                     this.building = build[this.device.BuildingId + ""];
                     string buid = this.building.Name;
-                    Building_Combox.Text = buid;
-                    Building_Combox.IsEnabled = false;
+                    //Building_Combox.Text = buid;
+                    //Building_Combox.IsEnabled = false;
 
-                    this.cab = cab[this.device.BuildingId + "_" + this.device.CabId];
-                    string cabname = this.cab.Name;
-                    Cab_Combox.Text = cabname;
-                    Cab_Combox.IsEnabled = false;
+                    //this.cab = cab[this.device.BuildingId + "_" + this.device.CabId];
+                    //string cabname = this.cab.Name;
+                    //Cab_Combox.Text = cabname;
+                    //Cab_Combox.IsEnabled = false;
                     
-                    Device_Combox.Text = this.device.SubSystemName;
-                    Device_Combox.IsEnabled = false;
+                    //Device_Combox.Text = this.device.SubSystemName;
+                    //Device_Combox.IsEnabled = false;
                     break;
             }
         }
@@ -152,7 +156,7 @@ namespace WpfApplication2.View.Windows
             string low_threshold =  Low_Threshold.Text;
             string param1 = Parameters1.Text;
             string factor = Correct_Factor.Text;
-            int selctDevice = Device_Combox.SelectedIndex;
+       //     int selctDevice = Device_Combox.SelectedIndex;
             if (high_threshold.Equals("") || low_threshold.Equals("") || param1.Equals("") || factor.Equals(""))
             {
                 MessageBox.Show("请补全所有设置项！");
@@ -167,10 +171,10 @@ namespace WpfApplication2.View.Windows
                 }
                 else
                 {
-                    d = devices[selctDevice];
+                  //  d = devices[selctDevice];
                 }
 
-                resetParams(d, high_threshold, low_threshold, param1, factor);
+                resetParams(device, high_threshold, low_threshold, param1, factor);
                 MessageBox.Show("设置成功！");
                 Close();
             }
@@ -189,68 +193,52 @@ namespace WpfApplication2.View.Windows
             lb.Add(dcb);
             String data = PackageWorker.pack(lb);
             MainController.sendCommand("192.168.0.105", "6003", data);
-
-            //SocketConnection con = new SocketConnection("127.0.0.1", "58888");
-            //con.Connect();
-            //DeviceCommandBox box = new DeviceCommandBox();
-            //box.load(d.DeviceId, d.CabId, high_threshold, low_threshold, param1, factor);
-            //List<Box> boxes = new List<Box>();
-            //boxes.Add(box);
-            //string package = PackageWorker.pack(boxes);
-            //con.Send(package);
-            //con.exit();
-            //Console.WriteLine("发送参数！");
-
-
-
-          
-            
         }
 
         
         private void Building_Combox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Cab_Combox.ItemsSource = null;
-            Device_Combox.ItemsSource = null;
-            ComboBox c = (ComboBox)sender ;
-            int select = c.SelectedIndex;
-            if (select < 0)
-            {
-                return;
-            }
-            Building b = buildings[select];
-            List<string> cabsname = new List<string>();
-            cabs.Clear();
-            devices.Clear();
-            for (int i = 0; i < b.Cabs.Count;i++ )
-            {
-                cabsname.Add(b.Cabs[i].Name);
-                cabs.Add(b.Cabs[i]);
-            }
+            //Cab_Combox.ItemsSource = null;
+            //Device_Combox.ItemsSource = null;
+            //ComboBox c = (ComboBox)sender ;
+            //int select = c.SelectedIndex;
+            //if (select < 0)
+            //{
+            //    return;
+            //}
+            //Building b = buildings[select];
+            //List<string> cabsname = new List<string>();
+            //cabs.Clear();
+            //devices.Clear();
+            //for (int i = 0; i < b.Cabs.Count;i++ )
+            //{
+            //    cabsname.Add(b.Cabs[i].Name);
+            //    cabs.Add(b.Cabs[i]);
+            //}
 
-            Cab_Combox.ItemsSource = cabsname;
+            //Cab_Combox.ItemsSource = cabsname;
         }
 
         private void Cab_Combox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
           //  Cab_Combox.ItemsSource = null;
-            Device_Combox.ItemsSource = null;
-            ComboBox c = (ComboBox)sender;
-            int select = c.SelectedIndex;
-            if(select<0)
-            {
-                return;
-            }
-            Cab cab = cabs[select];
-            List<string> devicename = new List<string>();
-            devices.Clear();
-            for (int i = 0; i < cab.Devices.Count; i++)
-            {
-                devicename.Add(cab.Devices[i].SubSystemName);
-                devices.Add( cab.Devices[i]);
-            }
+            //Device_Combox.ItemsSource = null;
+            //ComboBox c = (ComboBox)sender;
+            //int select = c.SelectedIndex;
+            //if(select<0)
+            //{
+            //    return;
+            //}
+            //Cab cab = cabs[select];
+            //List<string> devicename = new List<string>();
+            //devices.Clear();
+            //for (int i = 0; i < cab.Devices.Count; i++)
+            //{
+            //    devicename.Add(cab.Devices[i].SubSystemName);
+            //    devices.Add( cab.Devices[i]);
+            //}
 
-            Device_Combox.ItemsSource = devicename;
+            //Device_Combox.ItemsSource = devicename;
 
        //     Console.WriteLine("Cab_Combox_SelectionChanged");
         }
@@ -258,7 +246,7 @@ namespace WpfApplication2.View.Windows
         private void Device_Combox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Console.WriteLine("");
+            //Console.WriteLine("");
         }
 
        

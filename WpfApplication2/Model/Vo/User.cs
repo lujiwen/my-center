@@ -16,6 +16,11 @@ namespace WpfApplication2.Model.Vo
  
         }
 
+        public User(string name, string pw)
+        {
+            username = name;
+            password = pw;
+        }
         public User(string name, string pw, List<string> privilege)
         {
             username = name;

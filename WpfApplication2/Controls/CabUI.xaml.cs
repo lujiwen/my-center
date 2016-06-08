@@ -312,18 +312,18 @@ namespace WpfApplication2.Controls
          private void settings_btn_Click(object sender, RoutedEventArgs e)
          {
             PasswordWindow pw = new PasswordWindow("");
-            pw.PasswordCorrect += new isPasswordCorrect(pw_PasswordCorrect);
+         //   pw.PasswordCorrect += new isPasswordCorrect(pw_PasswordCorrect);
             pw.Show();
          }
 
-         void pw_PasswordCorrect(bool isCorrect)
-         {
-             if(isCorrect)
-             {
-                 ParametersSettingsWindow w = new ParametersSettingsWindow(CabInUI);
-                 w.Show();
-             }
-         }
+         //void pw_PasswordCorrect(bool isCorrect)
+         //{
+         //    if(isCorrect)
+         //    {
+         //        ParametersSettingsWindow w = new ParametersSettingsWindow(CabInUI);
+         //        w.Show();
+         //    }
+         //}
 
          public String CabName
          {

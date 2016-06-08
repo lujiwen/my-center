@@ -297,17 +297,17 @@ namespace WpfApplication2.View.Windows
             MainPage.Content = new SystemPage(this,true);
         }
 
-        private void soft_settings_Click_1(object sender, RoutedEventArgs e)
-        {
-            ParametersSettingsWindow w = new ParametersSettingsWindow();
-            w.Show();
-        }
+        //private void soft_settings_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    ParametersSettingsWindow w = new ParametersSettingsWindow();
+        //    w.Show();
+        //}
 
-        void w_PasswordCorrect(bool isCorrect)
-        {
-            ParametersSettingsWindow w = new ParametersSettingsWindow();
-            w.Show();
-        }
+        //void w_PasswordCorrect(bool isCorrect)
+        //{
+        //    ParametersSettingsWindow w = new ParametersSettingsWindow();
+        //    w.Show();
+        //}
 
         private void exit(object sender, RoutedEventArgs e)
         {

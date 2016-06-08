@@ -268,14 +268,18 @@ namespace WpfApplication2.Controls
             pw.Show();
         }
 
-        void pw_PasswordCorrect(bool isCorrect)
+        void pw_PasswordCorrect(User  user)
         {
-            if (isCorrect)
-            {
-                ParametersSettingsWindow w = new ParametersSettingsWindow(this._device);
-                w.Show();
-            }
+            //查询数据库中是否存在该用户，返回用户的信息+权限
+            
+            //有权限修改修改
+            ParametersSettingsWindow win = new ParametersSettingsWindow(user,DeviceInUI);
+            win.Show();
+            //返回修改结果
+            MessageBox.Show(DeviceInUI.Type + " 参数修改成功！");
+            LogUtil.Log(false,user.UserName+"修改"+DeviceInUI.BuildingId+","+ DeviceInUI.Type+DeviceInUI.DeviceId+" 成功！",0);
         }
+
         private void history_btn_Click(object sender, RoutedEventArgs e)
         {
             startHistoryWindow();

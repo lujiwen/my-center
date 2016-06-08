@@ -10,13 +10,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApplication2.Model.Vo;
 
 namespace WpfApplication2.CustomMarkers.Controls
 {
     /// <summary>
     /// PasswordWindow.xaml 的交互逻辑
     /// </summary>
-    public  delegate void isPasswordCorrect(bool isCorrect);
+    public  delegate void isPasswordCorrect(User user);
     public partial class PasswordWindow : Window
     {
         private String passwordTip ;
@@ -38,20 +39,21 @@ namespace WpfApplication2.CustomMarkers.Controls
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBox.Password.Equals(correctPassword))
-            {
-                Console.WriteLine("正确!");
+            PasswordCorrect(new User(username.Text, passwordBox.Password));
+            //if (passwordBox.Password.Equals(correctPassword))
+            //{
+            //    Console.WriteLine("正确!");
                
-                PasswordCorrect(true);
-                Close();
-            }
-            else
-            {
-                Console.WriteLine("错误！");
-                passwordtip.Content = "密码不正确,请重新输入！";
-                passwordBox.Clear();
-                PasswordCorrect(false);
-            }
+            //    PasswordCorrect(true);
+            //    Close();
+            //}
+            //else
+            //{
+            //    Console.WriteLine("错误！");
+            //    passwordtip.Content = "密码不正确,请重新输入！";
+            //    passwordBox.Clear();
+            //    PasswordCorrect(false);
+            //}
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)

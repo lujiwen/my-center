@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Grid.ContextMenu >
             <ContextMenu Background="#FF565656" BorderBrush="#FF565656" >
-                <MenuItem Header="参数设置"  Background="#FF565656" Click="settings_btn_Click" Foreground="White" />
+                <MenuItem Header="参数设置"  Background="#FF565656"  Foreground="White" />
                 <MenuItem Header="查看历史曲线" Background="#FF565656"  Click="history_btn_Click"  Foreground="White" BorderBrush="#FF565656" />
             </ContextMenu>
         </Grid.ContextMenu>
