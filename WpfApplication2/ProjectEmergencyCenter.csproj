@@ -115,6 +115,9 @@
     <Compile Include="Controls\DeviceUIs\DeviceUIKSJKSD.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUIXB2401.cs" />
     <Compile Include="Controls\DeviceUIs\DeviceUI2115.cs" />
+    <Compile Include="Controls\PositionView.xaml.cs">
+      <DependentUpon>PositionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\Device2115.cs" />
@@ -253,6 +256,9 @@
     <Compile Include="View\Windows\ParametersSettingsWindow.xaml.cs">
       <DependentUpon>ParametersSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\UpdatePositionWindow.xaml.cs">
+      <DependentUpon>UpdatePositionWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AlarmBuzzer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -314,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LabelAndText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PositionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,6 +392,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\ParametersSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\UpdatePositionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -436,5 +436,10 @@ namespace WpfApplication2.View.Pages
             alarmMessages.add(msg);
             msg = null;
         }
+
+        private void Update_positio_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

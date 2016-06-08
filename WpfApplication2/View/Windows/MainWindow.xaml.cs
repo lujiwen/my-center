@@ -232,6 +232,10 @@ namespace WpfApplication2.View.Windows
                     win.Show();
                     win.adduser += new AddUserWindow.AddUser(win_adduser);
                     break;
+                case "update_position":
+                    UpdatePositionWindow updatePositionWindow = new UpdatePositionWindow();
+                    updatePositionWindow.Show();
+                    break;
                 default: 
                     break;
              }

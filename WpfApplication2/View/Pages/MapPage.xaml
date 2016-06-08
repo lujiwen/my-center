@@ -17,8 +17,8 @@
                 <ColumnDefinition Width="120*" />
                 <ColumnDefinition Width="423*" />
         </Grid.ColumnDefinitions>
-
-        <StackPanel Name="info_panel" Background="#FF116EAA" AllowDrop="True" DragDrop.DragOver="OnDragOver" DragDrop.Drop="OnDrop">
+        
+            <StackPanel Name="info_panel" Background="#FF116EAA" AllowDrop="True" DragDrop.DragOver="OnDragOver" DragDrop.Drop="OnDrop">
             <StackPanel.ContextMenu>
                 <ContextMenu Name="info_menu">
                     <MenuItem Name="clear" Header="清除" Click="MenuItem_Click"></MenuItem>
@@ -43,8 +43,8 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-         
-            <Canvas  Name="info3"    Grid.Column="1" Grid.Row="0"  Background="#FF565656" /> 
+ 
+        <Canvas  Name="info3"    Grid.Column="1" Grid.Row="0"  Background="#FF565656" /> 
         <src:Map x:Name="MainMap" MapType="ArcGIS_Map"  MaxZoom="14" MinZoom="12" Zoom="5" Grid.Column="1" />
         </Grid>
     <!--</Canvas>-->

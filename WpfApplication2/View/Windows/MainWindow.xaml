@@ -91,6 +91,7 @@
                 <MenuItem Header="参数设置"  />
             </MenuItem>
             <MenuItem Header="操作" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="15" FlowDirection="LeftToRight">
+                <MenuItem Header="修改坐标" Name="update_position" Click="MenuItem_Click" />
                 <MenuItem Header="添加用户" Name="add_user" Click="MenuItem_Click" />
                 <MenuItem Header="合并显示" Name="MultiRoomshow" Click="MenuItem_Click" />
                 <MenuItem Header="应急状态" Name="emergency_status" Click="MenuItem_Click" />
