@@ -126,6 +126,7 @@
     <Compile Include="Model\Devices\DeviceXb2401.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />
+    <Compile Include="Model\Vo\User.cs" />
     <Compile Include="package\DeviceDataBox_XH3125.cs" />
     <Compile Include="package\Box.cs" />
     <Compile Include="package\DeviceDataBox.cs" />
@@ -198,6 +199,12 @@
     </Compile>
     <Compile Include="Controls\PowerControl.cs" />
     <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="View\Pages\FactoryPlantPage.xaml.cs">
+      <DependentUpon>FactoryPlantPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\Asm02HistoryTable.xaml.cs">
       <DependentUpon>Asm02HistoryTable.xaml</DependentUpon>
     </Compile>
@@ -307,6 +314,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LabelAndText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\FactoryPlantPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,7 +27,6 @@ namespace WpfApplication2.View.Windows
     {
         // marker
         GMapMarker currentMarker;
-        // marker1, marker2, marker3, marker4;
         GMapMarker[] markers;
         PointLatLng clickPoint;
         public  MainController c ;
@@ -47,7 +46,7 @@ namespace WpfApplication2.View.Windows
         private SystemPage systemPage;
         public  MapPage MainWindowMapPage { get { return mapPage; } set { mapPage = value; } }
         public  SystemPage MainWindowSyspage { get { return systemPage; } set { systemPage = value; } }
-
+       
         public static  MainWindow getInstance()
         {
             if (instance != null)
@@ -228,9 +227,25 @@ namespace WpfApplication2.View.Windows
                     string path = System.Environment.CurrentDirectory + @"\log\";
                     Utils.openDir(path);
                     break;
+                case "add_user":
+                    AddUserWindow win = new AddUserWindow();
+                    win.Show();
+                    win.adduser += new AddUserWindow.AddUser(win_adduser);
+                    break;
                 default: 
                     break;
              }
+        }
+
+        //Todo:
+        void win_adduser(User user)
+        {
+            //判断是不是超级用户
+
+            //插入数据库
+
+            MessageBox.Show("增添用户"+user.UserName+"成功!");
+            LogUtil.Log(false, "添加超级用户" + user.UserName, 0);
         }
 
         private void switchEmergentStatus(Boolean e)
@@ -321,7 +336,7 @@ namespace WpfApplication2.View.Windows
                 {
                     if (alarmer.IsAlarming)
                     {
-                        Console.WriteLine("    alarmer.stopAlarm();");
+                        Console.WriteLine("  alarmer.stopAlarm();");
                         alarmer.Visibility = System.Windows.Visibility.Hidden;
                         alarmer.stopAlarm();
                     }
