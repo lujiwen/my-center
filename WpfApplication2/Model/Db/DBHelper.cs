@@ -156,6 +156,7 @@ namespace WpfApplication2.Model.Db
             + "INTERFACEID NUMBER(38,0), CORRECTFACTOR float(126), DATAUNIT VARCHAR2(255 BYTE), INPUTARG1 float(126), INPUTARG2 float(126), INPUTARG3 float(126), BUILDINGID NUMBER(38,0), HANDLETYPEINSYSTEM VARCHAR2(45 BYTE),PORT VARCHAR2(32 BYTE) , CONSTRAINT DEVICEINFO_PK PRIMARY KEY (D_ID))";
             String createExceptionTableSql = "CREATE TABLE EXCEPTIONINFO (E_ID NUMBER(38,0) NOT NULL ENABLE, B_ID NUMBER(38,0), C_ID NUMBER(38,0), D_ID NUMBER(38,0), CONTENT VARCHAR2(256 BYTE), DATATIME VARCHAR2(25 BYTE), CONSTRAINT EXCEPTIONINFO_PK PRIMARY KEY (E_ID))";
             String createExceptionSequence = "CREATE SEQUENCE " + "exceptioninfo_sequence" + " INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE CACHE 10";
+            String createUserTabel = "CREATE TABLE  USER  (USER_NAME VARCHAR2(255 BYTE) NOT NULL ,USER_PASSWORD VARCHAR2(255 BYTE) NOT NULL )";
             OracleCommand command1 = new OracleCommand(createBuildingTableSql, initialDB.GetConnection());
             OracleCommand command2 = new OracleCommand(createCabTableSql, initialDB.GetConnection());
             OracleCommand command3 = new OracleCommand(createDeviceTableSql, initialDB.GetConnection());

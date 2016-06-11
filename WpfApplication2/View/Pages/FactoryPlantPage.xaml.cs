@@ -41,20 +41,28 @@ namespace WpfApplication2.View.Pages
             this.cab = c;
             init();
         }
+        public FactoryPlantPage(Frame fm, Building b)
+        {
+            InitializeComponent();
+            building = b;
 
+            //this.systemFrame = fm;
+            //this.cab = c;
+            //init();
+        }
         /// <summary>
         /// 针对一个监测点是多个设备 没有柜子概念
         /// </summary>
         /// <param name="fm"></param>
         /// <param name="b"></param>
-        public FactoryPlantPage(Frame fm,Building b)
-        {
-            InitializeComponent();
-            this.systemFrame = fm;
-            this.building = b ; //如果没有柜子可以把所有需要显示的设备放在一个柜子里面进行显示
-            this.cab = b.Cabs[0];
-            init();
-        }
+        //public FactoryPlantPage(Frame fm,Building b)
+        //{
+        //    InitializeComponent();
+        //    this.systemFrame = fm;
+        //    this.building = b ; //如果没有柜子可以把所有需要显示的设备放在一个柜子里面进行显示
+        //    this.cab = b.Cabs[0];
+        //    init();
+        //}
 
         public FactoryPlantPage(Frame fm)
         {
