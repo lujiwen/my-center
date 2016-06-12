@@ -9,9 +9,9 @@
         <StackPanel Orientation="Horizontal" >
             <Label Name="position_name" Margin="5" Foreground="White" HorizontalAlignment="Left" Width="100">工号名称</Label>
             <Label Margin="5" Foreground="White" HorizontalAlignment="Left">经度： </Label>
-            <TextBox Margin="5" Name="position_lat" Width="100" Foreground="Black"  ></TextBox>
+            <TextBox Margin="5" Name="position_lon" Width="100" Foreground="Black"  ></TextBox>
             <Label Margin="5" Foreground="White">维度： </Label>
-            <TextBox Margin="5" Name="position_lon" Width="100" Foreground="Black"></TextBox>
+            <TextBox Margin="5" Name="position_lat" Width="100" Foreground="Black"></TextBox>
         </StackPanel>
     </Grid>
 </UserControl>

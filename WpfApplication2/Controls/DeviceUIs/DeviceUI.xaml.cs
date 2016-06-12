@@ -277,7 +277,7 @@ namespace WpfApplication2.Controls
             win.Show();
             //返回修改结果
             MessageBox.Show(DeviceInUI.Type + " 参数修改成功！");
-            LogUtil.Log(false,user.UserName+"修改"+DeviceInUI.BuildingId+","+ DeviceInUI.Type+DeviceInUI.DeviceId+" 成功！",0);
+            LogUtil.Log(false,user.Id+"修改"+DeviceInUI.BuildingId+","+ DeviceInUI.Type+DeviceInUI.DeviceId+" 成功！",0);
         }
 
         private void history_btn_Click(object sender, RoutedEventArgs e)

@@ -129,5 +129,60 @@ namespace WpfApplication2.Model.Db
             odr.Close();
             return datas;
         }
+
+        public List<User> GetUsers()
+        {
+            List<User> users = new List<User>();
+            string sql = "select * from users";
+            OracleCommand command = Conn.CreateCommand();
+            command.CommandText = sql;
+            OracleDataReader odr = command.ExecuteReader();
+            while (odr.Read())
+            {
+                User user = new User();
+                user.Id = odr.GetString(0).ToString();
+                user.Password = odr.GetString(1).ToString();
+                user.Power = odr.GetString(2).ToString();
+                user.Privileges = new List<string>(odr.GetString(3).ToString().Split('|'));
+                users.Add(user);
+            }
+
+            return users;
+        }
+
+        public int DeleteUser(string id)
+        {
+            String sql = "delete from users where id = '" + id + "'";
+            OracleCommand command = new OracleCommand(sql, Conn);
+            int result = command.ExecuteNonQuery();
+            return result;
+        }
+
+        public int InsertUser(User user)
+        {
+            string powerOfBuildingid = string.Join("|", user.Privileges.ToArray());
+            //String sql = "insert into users values('" + user.Id + "', '" + user.Password + "', '" + user.Power +
+            //    "', '" + powerOfBuildingid + "')";
+            String sql = "insert into users values('" + user.Id + "', '" + user.Password + "', '"  + powerOfBuildingid + "')";
+            OracleCommand command = new OracleCommand(sql, Conn);
+            int result = command.ExecuteNonQuery();
+            return result;
+        }
+
+        public int updateBuildingPosition(List<Building> buildings)
+        {
+            String sql = "";
+            foreach(Building b in buildings)
+            {
+                sql  = " UPDATE BUILDINGINFO set LOCATION_LAT =" + b.Lat + " , LOCATION_LNG=" + b.Lng + " where B_ID=" + b.SystemId+" ";
+                OracleCommand command = new OracleCommand(sql, Conn);
+                int result = command.ExecuteNonQuery();
+                if(result!=1)
+                {
+                    break;
+                }
+            }
+            return 1;
+        }
     }
 }

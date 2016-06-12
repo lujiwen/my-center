@@ -7,29 +7,68 @@ namespace WpfApplication2.Model.Vo
 {
     public class User
     {
-        string username;
-        string password;
-        List<string> privileges;//添加该用户所能操作的工号的名称
+        private string id;
+        private string pwd;
+        private string power;
+        List<string> privileges;
+
 
         public User()
         {
- 
         }
 
-        public User(string name, string pw)
+        public User(string id, string pwd, string power = "normal", List<string> powerOfBuildingId = null)
         {
-            username = name;
-            password = pw;
-        }
-        public User(string name, string pw, List<string> privilege)
-        {
-            username = name;
-            password = pw;
-            privileges = privilege;
+            this.id = id;
+            this.pwd = pwd;
+            this.power = power;
+            this.privileges = powerOfBuildingId;
         }
 
-        public string UserName { get { return username; } set { username = value; } }
-        public string Passord { get { return password; } set { password = value; } }
-        public List<string> Privileges { get { return privileges; } set { privileges = value; } }
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Password
+        {
+            get { return pwd; }
+            set { pwd = value; }
+        }
+
+        public string Power
+        {
+            get { return power; }
+            set { power = value; }
+        }
+
+        public bool IsAdmin
+        {
+            get { return power.Equals("admin",StringComparison.CurrentCultureIgnoreCase); }
+        }
+
+        public bool IsAdministrator()
+        {
+            return this.id.Equals("admin",StringComparison.CurrentCultureIgnoreCase); 
+        }
+        public List<string> Privileges
+        {
+            get { return privileges;  }
+            set { privileges = value; }
+        }
+        
+        /// <summary>
+        ///判断非空和是否可以入库
+        /// </summary>
+        /// <returns></returns>
+        public bool CanBeInsertDB()
+        {
+            if(!id.Equals("")&&!Password.Equals("")&&!privileges.Equals(""))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

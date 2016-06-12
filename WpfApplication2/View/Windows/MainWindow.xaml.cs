@@ -21,8 +21,6 @@ namespace WpfApplication2.View.Windows
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    /// d
-    
     public partial class MainWindow : Window
     {
         // marker
@@ -46,7 +44,8 @@ namespace WpfApplication2.View.Windows
         private SystemPage systemPage;
         public  MapPage MainWindowMapPage { get { return mapPage; } set { mapPage = value; } }
         public  SystemPage MainWindowSyspage { get { return systemPage; } set { systemPage = value; } }
-       
+        public delegate void NewUserIntoDb(User user);
+       // public 
         public static  MainWindow getInstance()
         {
             if (instance != null)
@@ -111,7 +110,7 @@ namespace WpfApplication2.View.Windows
             MainPage.Content = mapPage;
 
             //页面加载完成之后,开始初始化和各个监测点的连接
-            c.InitialConnection();
+        //    c.InitialConnection();
             //初始化数据库连接
             c.InitialDBConnection();
         }
@@ -228,28 +227,77 @@ namespace WpfApplication2.View.Windows
                     Utils.openDir(path);
                     break;
                 case "add_user":
-                    AddUserWindow win = new AddUserWindow();
-                    win.Show();
-                    win.adduser += new AddUserWindow.AddUser(win_adduser);
+                    PasswordWindow passwin = new PasswordWindow();
+                    passwin.Show();
+                    passwin.PasswordCorrect += new isPasswordCorrect(passwin_PasswordCorrect_adduser);
                     break;
                 case "update_position":
-                    UpdatePositionWindow updatePositionWindow = new UpdatePositionWindow();
-                    updatePositionWindow.Show();
+                    PasswordWindow passwin2 = new PasswordWindow();
+                    passwin2.Show();
+                    passwin2.PasswordCorrect += new isPasswordCorrect(passwin_PasswordCorrect_position);
+                   
                     break;
                 default: 
                     break;
              }
         }
 
+        void  passwin_PasswordCorrect_adduser(User user)
+        {
+            if (user.IsAdministrator())
+            {
+                AddUserWindow win = new AddUserWindow();
+                win.Show();
+                win.adduser += new AddUserWindow.AddUser(win_adduser);
+            }
+            else
+            {
+                MessageBox.Show("非管理员，无权添加用户！");
+            }
+        }
+
+        void passwin_PasswordCorrect_position(User user)
+        {
+            if (user.IsAdministrator())
+            {
+                UpdatePositionWindow updatePositionWindow = new UpdatePositionWindow();
+                updatePositionWindow.Show();
+                updatePositionWindow.updatePosition += new UpdatePositionWindow.UpdatePosition(updatePositionWindow_updatePosition);
+            }
+            else
+            {
+                MessageBox.Show("非管理员，无权修改地图坐标！");
+            }
+        }
+
+        void updatePositionWindow_updatePosition(List<Building> buildings)
+        {
+            DBManager dataOfDevice = new DBManager();
+            string errorCode = "";
+            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+            if(dataOfDevice.updateBuildingPosition(buildings)>0)
+            {
+                MessageBox.Show("修改工号坐标成功，请重启程序使新坐标生效！");
+            }
+            dataOfDevice.CloseConnection();
+        }
+
         //Todo:
         void win_adduser(User user)
         {
-            //判断是不是超级用户
-
+            DBManager dataOfDevice = new DBManager();
+            string errorCode = "";
+            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
             //插入数据库
-
-            MessageBox.Show("增添用户"+user.UserName+"成功!");
-            LogUtil.Log(false, "添加超级用户" + user.UserName, 0);
+            if(user.CanBeInsertDB())
+            {
+                if (dataOfDevice.InsertUser(user) > 0)
+                {
+                    MessageBox.Show("增添用户" + user.Id + "成功!");
+                    LogUtil.Log(false, "添加超级用户" + user.Id, 0);
+                }
+            }
+            dataOfDevice.CloseConnection();
         }
 
         private void switchEmergentStatus(Boolean e)

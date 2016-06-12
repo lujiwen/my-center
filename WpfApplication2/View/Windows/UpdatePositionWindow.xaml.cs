@@ -21,6 +21,8 @@ namespace WpfApplication2.View.Windows
     /// </summary>
     public partial class UpdatePositionWindow : Window
     {
+        public delegate void UpdatePosition(List<Building> buildings);
+        public event UpdatePosition updatePosition;
         public UpdatePositionWindow()
         {
             InitializeComponent();
@@ -43,6 +45,16 @@ namespace WpfApplication2.View.Windows
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             //入库
+            List<Building> buildings = new List<Building>();
+            foreach (PositionView view in building_position_panel.Children)
+            {
+                Building b = view.Building;
+                b.Lat = double.Parse(view.position_lat.Text);
+                b.Lng = double.Parse(view.position_lon.Text);
+                buildings.Add(b);
+            }
+            updatePosition(buildings);
+            Close();
         }
     }
 }

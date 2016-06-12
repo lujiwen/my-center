@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using WpfApplication2.Model.Vo;
+
+namespace WpfApplication2.CustomMarkers.Controls
+{
+    /// <summary>
+    /// PasswordWindow.xaml 的交互逻辑
+    /// </summary>
+    public  delegate void isPasswordCorrect(User user);
+    public partial class UpdatePasswordWindow : Window
+    {
+        private String passwordTip ;
+        private string correctPassword ;
+        public UpdatePasswordWindow()
+        {
+            InitializeComponent();
+          
+            Topmost = true;
+        }
+        public event isPasswordCorrect PasswordCorrect;
+        public UpdatePasswordWindow(string pwd)
+        {
+            InitializeComponent();
+            passwordTip = "";
+            Topmost = true;
+            this.correctPassword = pwd;
+        }
+
+        private void ok_Click(object sender, RoutedEventArgs e)
+        {
+           // PasswordCorrect(new User(username.Text, passwordBox.Password));
+            Close();
+            //if (passwordBox.Password.Equals(correctPassword))
+            //{
+            //    Console.WriteLine("正确!");
+               
+            //    PasswordCorrect(true);
+            //    Close();
+            //}
+            //else
+            //{
+            //    Console.WriteLine("错误！");
+            //    passwordtip.Content = "密码不正确,请重新输入！";
+            //    passwordBox.Clear();
+            //    PasswordCorrect(false);
+            //}
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        public void setPasswordTip(String pwdTip)
+        {
+            passwordtip.Content = pwdTip;
+        }
+
+        public void clearPassword()
+        {
+            passwordBox.Clear() ;
+        }
+       
+
+       
+    }
+}

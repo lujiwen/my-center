@@ -72,7 +72,7 @@ namespace WpfApplication2.View.Windows
                 i++;
             }
            
-            User user = new User(usernameTB.Text, passwordTB.Password, privilege);
+            User user = new User(usernameTB.Text, passwordTB.Password, "normal", privilege);
             adduser(user);
             Close();
         }

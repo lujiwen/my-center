@@ -22,13 +22,13 @@ namespace WpfApplication2.CustomMarkers.Controls
     {
         private String passwordTip ;
         private string correctPassword ;
-        //public PasswordWindow()
-        //{
-        //    InitializeComponent();
-        //    passwordTip = "";
-        //    Topmost = true;
-        //}
-        public event  isPasswordCorrect PasswordCorrect;
+        public PasswordWindow()
+        {
+            InitializeComponent();
+            passwordTip = "";
+            Topmost = true;
+        }
+        public event isPasswordCorrect PasswordCorrect;
         public PasswordWindow(string pwd)
         {
             InitializeComponent();
@@ -40,6 +40,7 @@ namespace WpfApplication2.CustomMarkers.Controls
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             PasswordCorrect(new User(username.Text, passwordBox.Password));
+            Close();
             //if (passwordBox.Password.Equals(correctPassword))
             //{
             //    Console.WriteLine("正确!");

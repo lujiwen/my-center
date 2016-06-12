@@ -21,20 +21,27 @@ namespace WpfApplication2.Controls
     /// </summary>
     public partial class PositionView : UserControl
     {
-        private Building building;
+        private Building build;
+        public Building Building {
+            get { 
+                return build;
+            } 
+            set {
+                build = value;
+            }
+        }
         public PositionView(Building build)
         {
            InitializeComponent();
            init(build);
         }
 
-        private void init(Building build)
+        private void init(Building b)
         {
-            building = build;
+            build = b;
             position_name.Content = build.Name;
             position_lat.Text = build.Lat.ToString();
             position_lon.Text = build.Lng.ToString();
         }
-
     }
 }
