@@ -184,5 +184,12 @@ namespace WpfApplication2.Model.Db
             }
             return 1;
         }
+        public int updatePassowrd(User user)
+        {
+            string sql = "update USERS set USER_PASSWORD='"+ user.Password + "' where USER_NAME='"+ user.Id + "'";
+            OracleCommand command = new OracleCommand(sql, Conn);
+            int result = command.ExecuteNonQuery();
+            return result;
+        }
     }
 }

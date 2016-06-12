@@ -17,10 +17,10 @@ namespace WpfApplication2.CustomMarkers.Controls
     /// <summary>
     /// PasswordWindow.xaml 的交互逻辑
     /// </summary>
-    public  delegate void isPasswordCorrect(User user);
+    public  delegate void UpdatePassword(User user);
     public partial class UpdatePasswordWindow : Window
     {
-        private String passwordTip ;
+        public event UpdatePassword updatePassword;
         private string correctPassword ;
         public UpdatePasswordWindow()
         {
@@ -28,33 +28,25 @@ namespace WpfApplication2.CustomMarkers.Controls
           
             Topmost = true;
         }
-        public event isPasswordCorrect PasswordCorrect;
         public UpdatePasswordWindow(string pwd)
         {
             InitializeComponent();
-            passwordTip = "";
             Topmost = true;
             this.correctPassword = pwd;
         }
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-           // PasswordCorrect(new User(username.Text, passwordBox.Password));
+           if(username.Text.Equals("")||oldPasswordBox.Password.Equals("")||newPasswordBox.Equals("")||comfirmPasswordBox.Equals(""))
+           {
+               MessageBox.Show("任意一项不得为空！");
+               return ;
+           }
+           if(newPasswordBox.Password.Equals(comfirmPasswordBox.Password))
+           {
+               updatePassword(new User(username.Text,newPasswordBox.Password));
+           }
             Close();
-            //if (passwordBox.Password.Equals(correctPassword))
-            //{
-            //    Console.WriteLine("正确!");
-               
-            //    PasswordCorrect(true);
-            //    Close();
-            //}
-            //else
-            //{
-            //    Console.WriteLine("错误！");
-            //    passwordtip.Content = "密码不正确,请重新输入！";
-            //    passwordBox.Clear();
-            //    PasswordCorrect(false);
-            //}
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -62,16 +54,7 @@ namespace WpfApplication2.CustomMarkers.Controls
             this.Close();
         }
 
-        public void setPasswordTip(String pwdTip)
-        {
-            passwordtip.Content = pwdTip;
-        }
-
-        public void clearPassword()
-        {
-            passwordBox.Clear() ;
-        }
-       
+ 
 
        
     }

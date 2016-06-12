@@ -259,6 +259,9 @@
     <Compile Include="View\Windows\UpdatePositionWindow.xaml.cs">
       <DependentUpon>UpdatePositionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\UpdatePasswordWindow.xaml.cs">
+      <DependentUpon>UpdatePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AlarmBuzzer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,6 +401,10 @@
     <Page Include="View\Windows\UpdatePositionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\UpdatePasswordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

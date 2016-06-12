@@ -16,7 +16,11 @@ namespace WpfApplication2.Model.Vo
         public User()
         {
         }
-
+        public User(string id, string pwd)
+        {
+            this.id = id;
+            this.pwd = pwd;
+        }
         public User(string id, string pwd, string power = "normal", List<string> powerOfBuildingId = null)
         {
             this.id = id;

@@ -235,11 +235,27 @@ namespace WpfApplication2.View.Windows
                     PasswordWindow passwin2 = new PasswordWindow();
                     passwin2.Show();
                     passwin2.PasswordCorrect += new isPasswordCorrect(passwin_PasswordCorrect_position);
-                   
+                    break;
+                case "new_password":
+                    UpdatePasswordWindow updatePassWin = new UpdatePasswordWindow();
+                    updatePassWin.Show();
+                    updatePassWin.updatePassword += new UpdatePassword(updatePassWin_updatePassword);
                     break;
                 default: 
                     break;
              }
+        }
+
+        void updatePassWin_updatePassword(User user)
+        {
+            DBManager dataOfDevice = new DBManager();
+            string errorCode = "";
+            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
+            if (dataOfDevice.updatePassowrd(user) > 0)
+            {
+                MessageBox.Show("修改"+user.Id+"密码成功！");
+            }
+            dataOfDevice.CloseConnection();
         }
 
         void  passwin_PasswordCorrect_adduser(User user)
