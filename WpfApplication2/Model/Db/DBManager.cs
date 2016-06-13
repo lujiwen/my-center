@@ -133,7 +133,7 @@ namespace WpfApplication2.Model.Db
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            string sql = "select * from users";
+            string sql = "select * from USERS";
             OracleCommand command = Conn.CreateCommand();
             command.CommandText = sql;
             OracleDataReader odr = command.ExecuteReader();
@@ -142,8 +142,8 @@ namespace WpfApplication2.Model.Db
                 User user = new User();
                 user.Id = odr.GetString(0).ToString();
                 user.Password = odr.GetString(1).ToString();
-                user.Power = odr.GetString(2).ToString();
-                user.Privileges = new List<string>(odr.GetString(3).ToString().Split('|'));
+                user.Privileges = new List<string>(odr.GetString(2).ToString().Split('|'));
+               // user.Privileges = new List<string>(odr.GetString(3).ToString().Split('|'));
                 users.Add(user);
             }
 

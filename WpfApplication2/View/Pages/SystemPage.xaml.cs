@@ -41,68 +41,68 @@
         {
             InitializeComponent();
             this.mainWindow = w;
-            facoryPage = new FactoryPlantPage(getPageFrame(),b);
 
-            //this.building = b;
-            //initSystemTreeView();
-            ////个别监测点不要进入柜子页面，要直接进入到设备页面
-            //if (building != null)
-            //{
-            //    switch(building.Name)
-            //    {
-            //        case "亭子（运输部）":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "检测车":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break; 
-            //        case "209楼":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "208烟囱":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "201烟囱":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "207烟囱":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "207楼C":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "亭子（新桥）":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "亭子（内网）":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        case "2115楼":
-            //            devicePage = new DevicePage(this.getPageFrame(), building);
-            //            page.Content = devicePage;
-            //            break;
-            //        default:
-            //            cabspage = new CabsPage(this, building);
-            //            page.Content = cabspage;
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    cabspage = new CabsPage(this);
-            //    page.Content = cabspage;
-            //}
-           
-            //init();
+           // facoryPage = new FactoryPlantPage(getPageFrame(),b);
+            this.building = b;
+            initSystemTreeView();
+            //个别监测点不要进入柜子页面，要直接进入到设备页面
+            if (building != null)
+            {
+                switch (building.Name)
+                {
+                    case "亭子（运输部）":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "检测车":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "209楼":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "208烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "201烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "207烟囱":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "207楼C":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "亭子（新桥）":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "亭子（内网）":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    case "2115楼":
+                        devicePage = new DevicePage(this.getPageFrame(), building);
+                        page.Content = devicePage;
+                        break;
+                    default:
+                        cabspage = new CabsPage(this, building);
+                        page.Content = cabspage;
+                        break;
+                }
+            }
+            else
+            {
+                cabspage = new CabsPage(this);
+                page.Content = cabspage;
+            }
+
+            init();
            
         }
         public SystemPage(MainWindow w )

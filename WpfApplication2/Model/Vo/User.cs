@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WpfApplication2.Util;
 
 namespace WpfApplication2.Model.Vo
 {
@@ -54,7 +55,7 @@ namespace WpfApplication2.Model.Vo
 
         public bool IsAdministrator()
         {
-            return this.id.Equals("admin",StringComparison.CurrentCultureIgnoreCase); 
+            return this.id.Equals("admin", StringComparison.CurrentCultureIgnoreCase) && this.Password.Equals(GlobalMapForShow.getPasswordByName("admin")); 
         }
         public List<string> Privileges
         {

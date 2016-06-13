@@ -129,6 +129,7 @@
     <Compile Include="Model\Devices\DeviceXb2401.cs" />
     <Compile Include="Model\Connection\COMConnection.cs" />
     <Compile Include="Model\Connection\Connection.cs" />
+    <Compile Include="Model\Vo\DeviceFactory.cs" />
     <Compile Include="Model\Vo\User.cs" />
     <Compile Include="package\DeviceDataBox_XH3125.cs" />
     <Compile Include="package\Box.cs" />

@@ -109,7 +109,7 @@ namespace WpfApplication2.View.Windows
             mapPage = new MapPage(this);
             MainPage.Content = mapPage;
 
-            //在子线程中完成初始化连接 ，否则占用
+            //在子线程中完成初始化连接 ，否则占用界面导致界面卡死
             Thread thread = new Thread(initConnections);
             thread.Start();
         }
@@ -210,7 +210,6 @@ namespace WpfApplication2.View.Windows
                 case "pageChooser":
                     PageChooserWindow w = new PageChooserWindow();
                     w.pageClick += new PageBtnClick(changePage);
-                   // w_pageClick
                     w.Show();
                     break; 
                 case"emergency_status":
@@ -257,11 +256,22 @@ namespace WpfApplication2.View.Windows
         {
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";
-            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-            if (dataOfDevice.updatePassowrd(user) > 0)
+            if (dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode) == 0)
             {
-                MessageBox.Show("修改"+user.Id+"密码成功！");
+                if (dataOfDevice.updatePassowrd(user) > 0)
+                {
+                    MessageBox.Show("修改" + user.Id + "密码成功！");
+                }
+                else
+                {
+                    MessageBox.Show("修改密码失败！");
+                }
             }
+            else
+            {
+                MessageBox.Show("连接数据库失败！");
+            }
+            GlobalMapForShow.getUserByName(user.Id).Password = user.Password;
             dataOfDevice.CloseConnection();
         }
 
@@ -297,11 +307,22 @@ namespace WpfApplication2.View.Windows
         {
             DBManager dataOfDevice = new DBManager();
             string errorCode = "";
-            dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode);
-            if(dataOfDevice.updateBuildingPosition(buildings)>0)
+            if (dataOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port, DBHelper.db_name, ref errorCode) == 0)
             {
-                MessageBox.Show("修改工号坐标成功，请重启程序使新坐标生效！");
+                if (dataOfDevice.updateBuildingPosition(buildings) > 0)
+                {
+                    MessageBox.Show("修改工号坐标成功，请重启程序使新坐标生效！");
+                }
+                else 
+                {
+                    MessageBox.Show("修改工号坐标失败！");
+                }
             }
+            else
+            {
+                MessageBox.Show("连接数据库失败！");
+            }
+
             dataOfDevice.CloseConnection();
         }
 
@@ -314,6 +335,7 @@ namespace WpfApplication2.View.Windows
             //插入数据库
             if(user.CanBeInsertDB())
             {
+                GlobalMapForShow.users.Add(user);
                 if (dataOfDevice.InsertUser(user) > 0)
                 {
                     MessageBox.Show("增添用户" + user.Id + "成功!");

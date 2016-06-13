@@ -13,7 +13,7 @@ namespace WpfApplication2.Util
         public static Dictionary<string, List<DeviceDataBox_Base>> globalMapWithCab = new Dictionary<string, List<DeviceDataBox_Base>>();
         public static Dictionary<string, List<DeviceDataBox>> globalMapWithoutCab = new Dictionary<string, List<DeviceDataBox>>();
         public static List<string> whiteLists = new List<string>() { "2013" };
-
+       
         /**
          * 上面三个弃用，后期用下面的三个Dictionary
          *
@@ -21,7 +21,7 @@ namespace WpfApplication2.Util
         public static Dictionary<string, Building> globalMapForBuiding = new Dictionary<string, Building>();  //这个map键值分别是“systemId”，Building对象
         public static Dictionary<string, Cab> globalMapForCab = new Dictionary<string, Cab>();//这个map键值分别是“systemId_cabId”，Cab对象
         public static Dictionary<string, Device> globalMapForDevice = new Dictionary<string, Device>();//这个map键值分别是“systemId_deviceId”，device对象
-
+        public static List<User> users;
 
         public static Dictionary<String, String> cabId_typeInSystem = new Dictionary<String, string>() { 
         { "2_2", "324PurificationSys" },{  "2_1", "324WasteProcessSys" },{  "2_5", "404HPT500II" },
@@ -59,6 +59,29 @@ namespace WpfApplication2.Util
                 }
             }
             return true;
+        }
+        public static string getPasswordByName(string name)
+        {
+            string password = "";
+            foreach(User u in users)
+            {
+                if(u.Id.Equals(name))
+                {
+                    return u.Password;
+                }
+            }
+            return password;
+        }
+        public static User getUserByName(string name)
+        {
+            foreach (User u in users)
+            {
+                if (u.Id.Equals(name))
+                {
+                    return u;
+                }
+            }
+            return null;
         }
     }
 }

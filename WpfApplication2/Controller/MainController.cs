@@ -63,7 +63,6 @@ namespace WpfApplication2.Controller
 
         }
 
-
         public DataUpdatedEventHandler DataUpdate
         {
             set { dataChartUpdate = value; }
@@ -169,7 +168,7 @@ namespace WpfApplication2.Controller
             OracleDataReader odr = null;
             OracleDataReader odr2 = null;
             OracleDataReader odr3 = null;
-
+            
             try
             {
                 errCode = dbOfDevice.OpenConnection(DBHelper.db_userName, DBHelper.db_userPassWord, DBHelper.db_ip, DBHelper.db_port,                           DBHelper.db_name, ref errorCode);
@@ -197,54 +196,7 @@ namespace WpfApplication2.Controller
                                 while (odr3.Read())
                                 {
                                     Device device = null;
-                                    switch (odr3.GetString(15))
-                                    {
-                                        case "XH3125":
-                                            device = new DeviceXH31253127(odr3);
-                                            break;
-                                        case "Pump":
-                                            device = new DevicePump(odr3);
-                                            break;
-                                        case "6517AB":
-                                            device = new Device6517AB(odr3);
-                                            break;
-                                        case "Quality":
-                                            device = new DeviceQuality(odr3);
-                                            break;
-                                        case "DryWet":
-                                             device = new DeviceDryWet(odr3);
-                                            break;
-                                        case "Asm02":
-                                            device = new DeviceASM02(odr3);
-                                            break;
-                                        case "Jl900":
-                                            device = new DeviceJL900(odr3);
-                                            break;
-                                        case "gamma":
-                                            device = new DeviceGamma(odr3);
-                                            break;
-                                        case "neutron":
-                                            device = new DeviceNeutron(odr3);
-                                            break;
-                                        case "XB2401":
-                                            device = new DeviceXb2401(odr3);
-                                            break;
-                                        case "MARC7000":
-                                            device = new DeviceMARC7000(odr3);
-                                            break;
-                                        case "KSJ":
-                                            device = new DeviceKSJKSD(odr3);
-                                            break;
-                                        case "593氚检测系统":
-                                            device = new Device593Tritium(odr3);
-                                            break;
-                                        case "2115":
-                                            device = new Device2115(odr3);
-                                            break;
-                                        default :
-                                            device = new Device(odr3);
-                                            break;
-                                    }
+                                    device = DeviceFactory.createDevice(odr3.GetString(15),odr3);
                                     device.devIp = cab.Ip;
                                     cab.Devices.Add(device);
                                     Console.WriteLine(building.Name + " :" + cab.Name+":"+device.Type);
@@ -260,6 +212,9 @@ namespace WpfApplication2.Controller
                     }
                 }
                 odr.Close();
+
+                //初始化用户
+                GlobalMapForShow.users = dbOfDevice.GetUsers();
                 dbOfDevice.CloseConnection();
                 Console.WriteLine("MainController,InitialData, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
             }
