@@ -109,12 +109,19 @@ namespace WpfApplication2.View.Windows
             mapPage = new MapPage(this);
             MainPage.Content = mapPage;
 
+            //在子线程中完成初始化连接 ，否则占用
+            Thread thread = new Thread(initConnections);
+            thread.Start();
+        }
+
+        public void initConnections()
+        {
             //页面加载完成之后,开始初始化和各个监测点的连接
-        //    c.InitialConnection();
+            c.InitialConnection();
             //初始化数据库连接
             c.InitialDBConnection();
+            MessageBox.Show("初始化连接完毕！");
         }
-      
         /// <summary>
         ///  向大地图界面添加报警消息和报警时间
         /// </summary>
