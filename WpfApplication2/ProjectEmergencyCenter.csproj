@@ -209,6 +209,9 @@
     <Compile Include="View\Pages\FactoryPlantPage.xaml.cs">
       <DependentUpon>FactoryPlantPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\SimpleDevicePage.xaml.cs">
+      <DependentUpon>SimpleDevicePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
@@ -341,6 +344,10 @@
     <Page Include="View\Pages\FactoryPlantPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\SimpleDevicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\AddUserWindow.xaml">
       <SubType>Designer</SubType>

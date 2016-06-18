@@ -122,14 +122,6 @@ namespace WpfApplication2.View.Pages
         /// </summary>
         private void initPoints()
         {
-          //  currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
-          //  {
-              //  TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-                // trolleyToolTip.setStatus("异常");
-                // currentMarker.Offset = new System.Windows.Point(0,0);
-           //     currentMarker.ZIndex = int.MaxValue;
-            //    MainMap.Markers.Add(currentMarker);
-                //currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
             markers = new GMapMarker[buildings.Count];
             for (int i = 0; i < markers.Length; i++)
             {
@@ -212,31 +204,6 @@ namespace WpfApplication2.View.Pages
                        pageIndex = 1;
                    }
               }
-             
-             //if(level==0 )
-             //{
-             //   currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
-             //   {
-             //       TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-             //       // trolleyToolTip.setStatus("异常");
-             //       // currentMarker.Offset = new System.Windows.Point(0,0);
-             //       currentMarker.ZIndex = int.MaxValue;
-             //       MainMap.Markers.Add(currentMarker);
-             //       // currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
-
-             //       for (int i = 0; i < markers.Length; i++)
-             //       {
-             //           markers[i].ZIndex = int.MaxValue;
-             //           trolleyToolTip = new TrolleyTooltip(buildings[i]);
-             //           markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
-             //           markers[i].Shape.MouseLeftButtonUp += marker_Click;
-             //           markers[i].Shape.AllowDrop = true;
-             //           markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
-             //           markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
-             //           MainMap.Markers.Add(markers[i]);
-             //       }
-             //   }
-            // }
         }
 
         void refresMap()
@@ -424,14 +391,13 @@ namespace WpfApplication2.View.Pages
             Console.WriteLine("点击了一下marker");
             if (e.LeftButton == MouseButtonState.Released)
             {
- 
-
                 Dictionary<string, Building> globalMapForBuiding = GlobalMapForShow.globalMapForBuiding;  
                 PositionMarker marker = (PositionMarker)sender;
                 System.Windows.Point p = e.GetPosition(MainMap);
                 mainWindow.setClickPoint(MainMap.FromLocalToLatLng((int)p.X, (int)p.Y));
                 mainWindow.setCurrentMarker(marker.getGmapMarker());
                 Building b = marker.building;
+
                 if (b.Name.Equals("NP基地"))
                 {
                     switchMap(1);

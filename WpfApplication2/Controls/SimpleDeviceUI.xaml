@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="90" Width="170" Background="#FF565656" Foreground="White">
+             mc:Ignorable="d" Height="87" Width="160"   Foreground="White" Background="#FF565656">
     <StackPanel Orientation="Vertical">
-        <Label Content="设备名称" FontSize="17" Margin="2" HorizontalAlignment="Center" Foreground="#FF0DA7F9" ></Label>
-        <TextBlock Name="value" Text="接收的当前值" FontSize="18" Margin="2" HorizontalAlignment="Left"></TextBlock>
+        <Label Content="设备名称" FontSize="16" Margin="2" HorizontalAlignment="Center" Foreground="#FF0DA7F9"></Label>
+        <TextBlock Name="value" Text="接收的当前值" FontSize="16" Margin="2" HorizontalAlignment="Left"></TextBlock>
         <TextBlock Name="unit" Text="单位" FontSize="15" Margin="2" HorizontalAlignment="Center"></TextBlock>
     </StackPanel>
 </UserControl>
