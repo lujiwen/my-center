@@ -38,6 +38,8 @@ namespace WpfApplication2.View.Pages
     {
         static int count_item = 0;
         GMapMarker[] markers;
+        List<GMapMarker> NPmarkers;
+        List<GMapMarker> NonewNPmarkers;
         GMapMarker currentMarker;
         MainWindow mainWindow;
         PositionMarker dragMarker;
@@ -61,6 +63,8 @@ namespace WpfApplication2.View.Pages
         private void init()
         {
             buildings = mainWindow.Buildings;
+            NPmarkers = new List<GMapMarker>();
+            NonewNPmarkers = new List<GMapMarker>();
             alarmMessages = new QueueFixedLength<AlarmMessage>(20);
             listBox1.ItemsSource = alarmMessages.Queue;
         }
@@ -90,7 +94,7 @@ namespace WpfApplication2.View.Pages
             Console.WriteLine("initMap");
             
             this.MouseMove += new MouseEventHandler(Window_MouseMove);
-          //  this.MouseUp += new MouseButtonEventHandler(Window_MouseUp);
+          //this.MouseUp += new MouseButtonEventHandler(Window_MouseUp);
             MainMap.OnCurrentPositionChanged += new CurrentPositionChanged(MainMap_OnCurrentPositionChanged);
             MainMap.MouseMove += new System.Windows.Input.MouseEventHandler(MainMap_MouseMove);
             MainMap.Loaded += new RoutedEventHandler(MainMap_Loaded);
@@ -100,34 +104,54 @@ namespace WpfApplication2.View.Pages
             MainMap.MaxZoom = 40;
             MainMap.MinZoom = 2;
             MainMap.Zoom = 6;
-             MainMap.MapType = MapType.ArcGIS_Map;
+            MainMap.MapType = MapType.ArcGIS_Map;
             MainMap.Manager.Mode = AccessMode.ServerOnly;
-         //   MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
-          //MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
+         // MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
+         // MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
             MainMap.CanDragMap = true;
             MainMap.DragButton = MouseButton.Right;
-            currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
-            {
-                TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-              // trolleyToolTip.setStatus("异常");
-             //   currentMarker.Offset = new System.Windows.Point(0,0);
-                currentMarker.ZIndex = int.MaxValue;
-                MainMap.Markers.Add(currentMarker);
-              //  currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
+            switchMap(0);
+        }
 
-                for (int i = 0; i < markers.Length; i++)
+        /// <summary>
+        /// 切换地图level = 0/1;
+        /// </summary>
+        /// <param name="level"></param>
+        private void switchMap(int level)
+        {
+             if(level==0 )
+             {
+                currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
                 {
-                    markers[i].ZIndex = int.MaxValue;
-                    trolleyToolTip = new TrolleyTooltip(buildings[i]);
-                    markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
-                    markers[i].Shape.MouseLeftButtonUp += marker_Click;
-                    markers[i].Shape.AllowDrop = true;
-                    markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
-                    markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
-                    MainMap.Markers.Add(markers[i]);
+                    TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
+                    // trolleyToolTip.setStatus("异常");
+                    // currentMarker.Offset = new System.Windows.Point(0,0);
+                    currentMarker.ZIndex = int.MaxValue;
+                    MainMap.Markers.Add(currentMarker);
+                    // currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
+
+                    for (int i = 0; i < markers.Length; i++)
+                    {
+                        //markers[i].ZIndex = int.MaxValue;
+                        //trolleyToolTip = new TrolleyTooltip(buildings[i]);
+                        //markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
+                        //markers[i].Shape.MouseLeftButtonUp += marker_Click;
+                        //markers[i].Shape.AllowDrop = true;
+                        //markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
+                        //markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
+                        //MainMap.Markers.Add(markers[i]);
+                    }
                 }
+             }
+        }
+
+        void refresMap(List<GMapMarker> markers)
+        {
+            //MainMap.Markers.
+            foreach(GMapMarker m in markers)
+            {
+
             }
-          //  Console.WriteLine("initMap, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
         }
 
         void OnDragOver(object sender, DragEventArgs e)
@@ -354,6 +378,7 @@ namespace WpfApplication2.View.Pages
             MainMap.ZoomAndCenterMarkers(null);
         }
 
+
         /// <summary>
         /// 初始化所有点检测点
         /// </summary>
@@ -366,6 +391,14 @@ namespace WpfApplication2.View.Pages
                 Building b = buildings[i];
                 markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
                 markers[i].Tag = b.Name;
+                if (b.Location.Equals("NP基地"))
+                {
+                    NPmarkers.Add(markers[i]);
+                }
+                else
+                {
+                    NonewNPmarkers.Add(markers[i]);
+                }
             }
          }
 
@@ -437,9 +470,6 @@ namespace WpfApplication2.View.Pages
             msg = null;
         }
 
-        private void Update_positio_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
     }
 }

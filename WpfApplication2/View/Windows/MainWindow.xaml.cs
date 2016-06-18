@@ -44,8 +44,8 @@ namespace WpfApplication2.View.Windows
         private SystemPage systemPage;
         public  MapPage MainWindowMapPage { get { return mapPage; } set { mapPage = value; } }
         public  SystemPage MainWindowSyspage { get { return systemPage; } set { systemPage = value; } }
-        public delegate void NewUserIntoDb(User user);
-       // public 
+        public  delegate void NewUserIntoDb(User user);
+        public  CenterDaemon daemon;
         public static  MainWindow getInstance()
         {
             if (instance != null)
@@ -80,13 +80,14 @@ namespace WpfApplication2.View.Windows
                 {
                     Building b = build.Value;
                     _buildings.Add(b);
+                  
                     markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
                     markers[i].Tag = b.Name;
                     i++;
                 }
             }
         }
-        CenterDaemon daemon;
+
         private void  init()
         {
             //开启守护进程,定时发心跳，若干次没收到心跳就将控制中心的程序重启
