@@ -98,6 +98,7 @@
                 <MenuItem Header="应急状态" Name="emergency_status" Click="MenuItem_Click" />
                 <MenuItem Header="报警静音" Name="alarm_mute" Click="alarmMute" />
                 <MenuItem Header="查看日志" Name="check_logs" Click="MenuItem_Click" />
+                <MenuItem Header="地图切换" Name="change_map" Click="MenuItem_Click" />
             </MenuItem>
         </Menu>
         <Grid  Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" >

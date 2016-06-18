@@ -26,7 +26,15 @@ namespace WpfApplication2.Model.Vo
             cabs = new List<Cab>();
             state = "Normal";//WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
         }
-        
+
+        public Building(String name)
+        {
+            this.name = name;
+        //    systemId = "-1";
+            cabs = new List<Cab>();
+            state = "Normal";//WpfApplication2.package.DeviceDataBox_Base.State.Normal.ToString();
+        }
+
         public Building(string systemId, string name, string office, string location, double lat, double lng, List<Cab> cabs, string state,string mng)
         {
             this.systemId = systemId;

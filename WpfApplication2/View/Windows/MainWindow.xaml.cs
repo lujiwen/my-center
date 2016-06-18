@@ -248,6 +248,9 @@ namespace WpfApplication2.View.Windows
                     updatePassWin.Show();
                     updatePassWin.updatePassword += new UpdatePassword(updatePassWin_updatePassword);
                     break;
+                case "change_map":
+                    mapPage.SwitchMap();
+                    break;
                 default: 
                     break;
              }

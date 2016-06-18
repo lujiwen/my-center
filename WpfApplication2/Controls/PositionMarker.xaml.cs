@@ -15,6 +15,7 @@ using WpfApplication2.Controller;
 using System.Windows.Threading;
 using System.Threading;
 using WpfApplication2.package;
+using System.Collections.Generic;
 
 
 namespace WpfApplication2.CustomMarkers
@@ -31,7 +32,6 @@ namespace WpfApplication2.CustomMarkers
         PointLatLng point;
         private GMapMarker marker;
         private GMapMarker[] markers;
-        public onPositionMarkerClickLisener RedMarkerClickLisener;
         private BitmapImage MarkerBm;
 
         public delegate void MarkerClick(object args);
@@ -59,7 +59,53 @@ namespace WpfApplication2.CustomMarkers
             point = Marker.Position;
         }
 
+        public PositionMarker(List<Building> buildings,List<GMapMarker> markers)
+        {
+            InitializeComponent();
+            point = markers[0].Position;
 
+        }
+
+        public PositionMarker(Window window, List<GMapMarker> markers, UIElement ui, List<Building> builds)
+        {
+            InitializeComponent();
+            MarkerBm = new BitmapImage();
+            building = new Building("NP基地"); 
+            MarkerBm = new BitmapImage(new Uri("/WpfApplication2;component/Images/bigMarkerGreen.png", UriKind.Relative));
+            if (MarkerBm != null)
+            {
+                icon.Source = MarkerBm;
+            }
+            this.MapWindow = window;
+            this.Marker = markers[0];
+
+            Popup = new Popup();
+            Label = new Label();
+            point = markers[0].Position;
+
+            this.Loaded += new RoutedEventHandler(CustomMarkerDemo_Loaded);
+            this.SizeChanged += new SizeChangedEventHandler(CustomMarkerDemo_SizeChanged);
+            this.MouseEnter += new MouseEventHandler(MarkerControl_MouseEnter);
+            this.MouseLeave += new MouseEventHandler(MarkerControl_MouseLeave);
+
+            if (ui != null)
+            {
+                ((TrolleyTooltip)ui).setStatus("异常");
+                Popup.Placement = PlacementMode.Mouse;
+                {
+                    Label.Background = Brushes.Blue;
+                    Label.Foreground = Brushes.White;
+                    Label.BorderBrush = Brushes.WhiteSmoke;
+                    Label.BorderThickness = new Thickness(2);
+                    Label.Padding = new Thickness(5);
+                    Label.FontSize = 22;
+                    // Label.Content = title;
+                    Label.Content = "lable content!";
+                }
+                Popup.AllowsTransparency = true;
+                Popup.Child = ui;
+            }
+        }
 
         public PositionMarker(Window window, GMapMarker marker, UIElement ui, Building b)
         {
@@ -91,42 +137,6 @@ namespace WpfApplication2.CustomMarkers
             this.MouseEnter += new MouseEventHandler(MarkerControl_MouseEnter);
             this.MouseLeave += new MouseEventHandler(MarkerControl_MouseLeave);
 
-            if (ui != null)
-            {
-                ((TrolleyTooltip)ui).setStatus("异常");
-                Popup.Placement = PlacementMode.Mouse;
-                {
-                    Label.Background = Brushes.Blue;
-                    Label.Foreground = Brushes.White;
-                    Label.BorderBrush = Brushes.WhiteSmoke;
-                    Label.BorderThickness = new Thickness(2);
-                    Label.Padding = new Thickness(5);
-                    Label.FontSize = 22;
-                    // Label.Content = title;
-                    Label.Content = "lable content!";
-                }
-                Popup.AllowsTransparency = true;
-                Popup.Child = ui;
-
-            }
-        }
-        public PositionMarker(Window window, GMapMarker marker, UIElement ui, onPositionMarkerClickLisener listener)
-        {
-            this.InitializeComponent();
-
-            this.MapWindow = window;
-            this.Marker = marker;
-
-            Popup = new Popup();
-            Label = new Label();
-            point = marker.Position;
-
-            this.Loaded += new RoutedEventHandler(CustomMarkerDemo_Loaded);
-            this.SizeChanged += new SizeChangedEventHandler(CustomMarkerDemo_SizeChanged);
-            this.MouseEnter += new MouseEventHandler(MarkerControl_MouseEnter);
-            this.MouseLeave += new MouseEventHandler(MarkerControl_MouseLeave);
-            //   this.MouseMove += new MouseEventHandler(CustomMarkerDemo_MouseMove);
-            this.RedMarkerClickLisener = listener;
             if (ui != null)
             {
                 ((TrolleyTooltip)ui).setStatus("异常");
@@ -249,14 +259,7 @@ namespace WpfApplication2.CustomMarkers
         {
 
         }
-        public interface onPositionMarkerClickLisener
-        {
-            void onRedMarkerclick(PointLatLng point);
-        }
-        public void setOnRedMarkerClick(onPositionMarkerClickLisener listener)
-        {
-            this.RedMarkerClickLisener = listener;
-        }
+       
 
         public GMapMarker getGmapMarker()
         {

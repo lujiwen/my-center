@@ -40,6 +40,8 @@ namespace WpfApplication2.View.Pages
         GMapMarker[] markers;
         List<GMapMarker> NPmarkers;
         List<GMapMarker> NonewNPmarkers;
+        List<Building> NPBuildings;
+        List<Building> NonewNPBuildings;
         GMapMarker currentMarker;
         MainWindow mainWindow;
         PositionMarker dragMarker;
@@ -65,6 +67,8 @@ namespace WpfApplication2.View.Pages
             buildings = mainWindow.Buildings;
             NPmarkers = new List<GMapMarker>();
             NonewNPmarkers = new List<GMapMarker>();
+            NPBuildings = new List<Building>();
+            NonewNPBuildings = new List<Building>();
             alarmMessages = new QueueFixedLength<AlarmMessage>(20);
             listBox1.ItemsSource = alarmMessages.Queue;
         }
@@ -114,43 +118,132 @@ namespace WpfApplication2.View.Pages
         }
 
         /// <summary>
-        /// 切换地图level = 0/1;
+        /// 初始化所有点检测点
         /// </summary>
-        /// <param name="level"></param>
-        private void switchMap(int level)
+        private void initPoints()
         {
-             if(level==0 )
-             {
-                currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
+          //  currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
+          //  {
+              //  TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
+                // trolleyToolTip.setStatus("异常");
+                // currentMarker.Offset = new System.Windows.Point(0,0);
+           //     currentMarker.ZIndex = int.MaxValue;
+            //    MainMap.Markers.Add(currentMarker);
+                //currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
+            markers = new GMapMarker[buildings.Count];
+            for (int i = 0; i < markers.Length; i++)
+            {
+                Building b = buildings[i];
+                markers[i] = markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng)); ;
+                markers[i].ZIndex = int.MaxValue;
+                TrolleyTooltip trolleyToolTip = new TrolleyTooltip(buildings[i]);
+                markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
+                markers[i].Shape.MouseLeftButtonUp += marker_Click;
+                markers[i].Shape.AllowDrop = true;
+                markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
+                markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
+                if (b.Location.Equals("NP基地"))
                 {
-                    TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
-                    // trolleyToolTip.setStatus("异常");
-                    // currentMarker.Offset = new System.Windows.Point(0,0);
-                    currentMarker.ZIndex = int.MaxValue;
-                    MainMap.Markers.Add(currentMarker);
-                    // currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
-
-                    for (int i = 0; i < markers.Length; i++)
-                    {
-                        //markers[i].ZIndex = int.MaxValue;
-                        //trolleyToolTip = new TrolleyTooltip(buildings[i]);
-                        //markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
-                        //markers[i].Shape.MouseLeftButtonUp += marker_Click;
-                        //markers[i].Shape.AllowDrop = true;
-                        //markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
-                        //markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
-                        //MainMap.Markers.Add(markers[i]);
-                    }
+                    NPmarkers.Add(markers[i]);
+                    NPBuildings.Add(b);
                 }
-             }
+                else
+                {
+                    NonewNPmarkers.Add(markers[i]);
+                    NonewNPBuildings.Add(b);
+                }
+            }
+            NonewNPmarkers.Add(getNpMarker());
         }
 
-        void refresMap(List<GMapMarker> markers)
+        public GMapMarker getNpMarker()
         {
-            //MainMap.Markers.
-            foreach(GMapMarker m in markers)
-            {
+            GMapMarker marker = new GMapMarker(new PointLatLng(NPBuildings[0].Lat, NPBuildings[0].Lng));
+            marker.ZIndex = int.MaxValue;
+            TrolleyTooltip trolleyToolTip = new TrolleyTooltip(new Building("NP基地"));
+            marker.Shape = new PositionMarker(mainWindow, NPmarkers, trolleyToolTip, NPBuildings);
+            marker.Shape.MouseLeftButtonUp += marker_Click;
+            marker.Shape.AllowDrop = true;
+            marker.Shape.PreviewMouseMove += Shape_PreviewMouseMove;
+            marker.Shape.QueryContinueDrag += Shape_QueryContinueDrag;
+            return marker;
+        }
 
+
+        public void SwitchMap()
+        {
+            if (pageIndex == 0)
+            {
+                switchMap(1);
+            }
+            else
+            {
+                switchMap(0);
+            }
+        }
+        int pageIndex = 0;
+        /// <summary>
+        /// 切换地图level = 0/1; 
+        /// 0:各个厂区的大地图，  1 表示np的地图
+        /// </summary>
+        /// <param name="level"></param>
+        public  void switchMap(int level)
+        {
+              refresMap();
+              for(int i =0;i<MainMap.Markers.Count;i++)
+              {
+                  MainMap.Markers.RemoveAt(i);
+              }
+              //全局地图
+              if(level==0)
+              {
+                  foreach(GMapMarker m in NonewNPmarkers)
+                  {
+                      MainMap.Markers.Add(m);
+                      pageIndex = 0;
+                  }
+              }
+              else if (level == 1)  //np地图
+              {
+                   foreach (GMapMarker m in NPmarkers)
+                   {
+                       MainMap.Markers.Add(m);
+                       MainMap.Zoom = 7 ;
+                       pageIndex = 1;
+                   }
+              }
+             
+             //if(level==0 )
+             //{
+             //   currentMarker = new GMapMarker(new PointLatLng(31.540871, 104.804598));
+             //   {
+             //       TrolleyTooltip trolleyToolTip = new TrolleyTooltip();
+             //       // trolleyToolTip.setStatus("异常");
+             //       // currentMarker.Offset = new System.Windows.Point(0,0);
+             //       currentMarker.ZIndex = int.MaxValue;
+             //       MainMap.Markers.Add(currentMarker);
+             //       // currentMarker.Shape = new PositionMarker(mainWindow, currentMarker, trolleyToolTip, false);
+
+             //       for (int i = 0; i < markers.Length; i++)
+             //       {
+             //           markers[i].ZIndex = int.MaxValue;
+             //           trolleyToolTip = new TrolleyTooltip(buildings[i]);
+             //           markers[i].Shape = new PositionMarker(mainWindow, markers[i], trolleyToolTip, buildings[i]);
+             //           markers[i].Shape.MouseLeftButtonUp += marker_Click;
+             //           markers[i].Shape.AllowDrop = true;
+             //           markers[i].Shape.PreviewMouseMove += Shape_PreviewMouseMove;
+             //           markers[i].Shape.QueryContinueDrag += Shape_QueryContinueDrag;
+             //           MainMap.Markers.Add(markers[i]);
+             //       }
+             //   }
+            // }
+        }
+
+        void refresMap()
+        {
+            for (int i = 0; i < MainMap.Markers.Count;i++ )
+            {
+                MainMap.Markers.RemoveAt(i);
             }
         }
 
@@ -327,18 +420,27 @@ namespace WpfApplication2.View.Pages
        /// <param name="e"></param>
         public void marker_Click(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("marker_Click, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
+          //  Console.WriteLine("marker_Click, .........." + GlobalMapForShow.globalMapForBuiding["13"].Cabs[0].Devices[1].CabId);
             Console.WriteLine("点击了一下marker");
             if (e.LeftButton == MouseButtonState.Released)
             {
+ 
+
                 Dictionary<string, Building> globalMapForBuiding = GlobalMapForShow.globalMapForBuiding;  
                 PositionMarker marker = (PositionMarker)sender;
                 System.Windows.Point p = e.GetPosition(MainMap);
                 mainWindow.setClickPoint(MainMap.FromLocalToLatLng((int)p.X, (int)p.Y));
                 mainWindow.setCurrentMarker(marker.getGmapMarker());
                 Building b = marker.building;
-                SystemPage page = new SystemPage(mainWindow,b);
-                mainWindow.getMainPage().Content = page;
+                if (b.Name.Equals("NP基地"))
+                {
+                    switchMap(1);
+                }
+                else 
+                {
+                    SystemPage page = new SystemPage(mainWindow, b);
+                    mainWindow.getMainPage().Content = page;
+                }
             }
         }
 
@@ -379,29 +481,7 @@ namespace WpfApplication2.View.Pages
         }
 
 
-        /// <summary>
-        /// 初始化所有点检测点
-        /// </summary>
-        private void initPoints()
-        {
-            markers = new GMapMarker[buildings.Count];
-            for (int i = 0; i < buildings.Count;i++ )
-            {
-
-                Building b = buildings[i];
-                markers[i] = new GMapMarker(new PointLatLng(b.Lat, b.Lng));
-                markers[i].Tag = b.Name;
-                if (b.Location.Equals("NP基地"))
-                {
-                    NPmarkers.Add(markers[i]);
-                }
-                else
-                {
-                    NonewNPmarkers.Add(markers[i]);
-                }
-            }
-         }
-
+      
         // zoo max & center markers
         private void button13_Click(object sender, RoutedEventArgs e)
         {
@@ -470,6 +550,9 @@ namespace WpfApplication2.View.Pages
             msg = null;
         }
 
-     
+
+
+
+        
     }
 }

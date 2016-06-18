@@ -266,6 +266,8 @@ namespace GMap.NET.WindowsPresentation
          Position = new PointLatLng();
       }
 
+      
+       
       /// <summary>
       /// calls Dispose on shape if it implements IDisposable, sets shape to null and clears route
       /// </summary>

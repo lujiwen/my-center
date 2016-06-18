@@ -14,7 +14,7 @@
             <RowDefinition Height="90*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120*" />
+                <ColumnDefinition Width="90*" />
                 <ColumnDefinition Width="423*" />
         </Grid.ColumnDefinitions>
         
@@ -45,9 +45,7 @@
         </StackPanel>
  
         <Canvas  Name="info3"    Grid.Column="1" Grid.Row="0"  Background="#FF565656" />
-        <Frame Name="PageFrame"  NavigationUIVisibility="Hidden" Grid.RowSpan="1"  ScrollViewer.CanContentScroll="False"   VerticalAlignment="Stretch" VerticalContentAlignment="Top">
-            <!--<src:Map x:Name="Map" MapType="ArcGIS_Map"  MaxZoom="14" MinZoom="12" Zoom="5" />-->
-        </Frame>
+         
         <src:Map x:Name="MainMap" MapType="ArcGIS_Map"  MaxZoom="14" MinZoom="12" Zoom="5" Grid.Column="1" />
         </Grid>
     <!--</Canvas>-->
