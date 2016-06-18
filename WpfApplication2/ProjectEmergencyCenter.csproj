@@ -118,6 +118,9 @@
     <Compile Include="Controls\PositionView.xaml.cs">
       <DependentUpon>PositionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SimpleDeviceUI.xaml.cs">
+      <DependentUpon>SimpleDeviceUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daemon\Daemon.cs" />
     <Compile Include="Model\Connection\ConnectionManager.cs" />
     <Compile Include="Model\Devices\Device2115.cs" />
@@ -328,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PositionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleDeviceUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -56,7 +56,7 @@
                  
             </StackPanel>
         </Canvas>
-        <my:Chart Name="device_chart" Grid.Row="2" Margin="5,5,5,5"  View3D="False" AnimationEnabled="False" AnimatedUpdate="False" Watermark="False" Background="#FF565656"  IndicatorEnabled="True" />
+        <my:Chart  Name="device_chart" Grid.Row="2"   Margin="5,5,5,5"  View3D="False" AnimationEnabled="False" AnimatedUpdate="False" Watermark="False" Background="#FF565656"  IndicatorEnabled="True" />
     </Grid>
 
 </UserControl>

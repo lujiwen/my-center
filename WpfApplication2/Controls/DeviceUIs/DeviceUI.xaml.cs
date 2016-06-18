@@ -104,6 +104,7 @@ namespace WpfApplication2.Controls
         }
         private void init()
         {
+           
            initlabels();
            maxPointSize = 40;
            DeviceBuzzer.MouseLeftButtonDown += new MouseButtonEventHandler(DeviceBuzzer_MouseLeftButtonDown);
@@ -141,6 +142,7 @@ namespace WpfApplication2.Controls
         {
             return device_chart;
         }
+
         public virtual void initlabels()
         { 
 
@@ -149,7 +151,7 @@ namespace WpfApplication2.Controls
 
         private void initDeviceChart()
         {
-            device_chart.Visibility = System.Windows.Visibility.Visible;
+            device_chart.Visibility = System.Windows.Visibility.Collapsed;
             title = new Visifire.Charts.Title();
             Axis axisX = new Axis();//图表X轴
             Axis axisY = new Axis(); //图表Y轴
