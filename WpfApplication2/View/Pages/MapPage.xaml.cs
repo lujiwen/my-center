@@ -108,7 +108,7 @@ namespace WpfApplication2.View.Pages
             MainMap.MaxZoom = 40;
             MainMap.MinZoom = 2;
             MainMap.Zoom = 6;
-            MainMap.MapType = MapType.ArcGIS_Map;
+            MainMap.MapType = MapType.ArcGIS_Mianyang;
             MainMap.Manager.Mode = AccessMode.ServerOnly;
          // MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
          // MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。

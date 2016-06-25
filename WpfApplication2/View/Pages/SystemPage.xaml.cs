@@ -511,9 +511,9 @@
             map.MaxZoom = 40;
             map.MinZoom = 1;
             map.Zoom = 7;
-            //  map.MapType = MapType.GoogleHybridChina ;
-            map.MapType = MapType.ArcGIS_Map;
-            map.Manager.Mode = AccessMode.ServerOnly;
+           
+            map.MapType = MapType.ArcGIS_Mianyang;
+            map.Manager.Mode = AccessMode.ServerAndCache;
             //   map.BoundsOfMap = new RectLatLng(29.540871 , 104.804598 , 20.025, 20.018); //北纬30.67度，东经104.06度。
             map.CanDragMap = true;
             map.MouseWheel += new MouseWheelEventHandler(map_MouseWheel);
