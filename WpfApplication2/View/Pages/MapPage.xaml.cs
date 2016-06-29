@@ -58,7 +58,7 @@ namespace WpfApplication2.View.Pages
             InitializeComponent();
             this.mainWindow = w ;
             init();
-            initPoints();
+          //initPoints();
             initMap();
         }
       

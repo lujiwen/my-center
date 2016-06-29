@@ -465,7 +465,7 @@ namespace GMap.NET
             case MapType.ArcGIS_Map:
             case MapType.ArcGIS_Satellite:
             case MapType.ArcGIS_ShadedRelief:
-            case MapType.ArcGIS_Mianyang:
+          //  case MapType.ArcGIS_Mianyang:
             case MapType.ArcGIS_Terrain:
             {
                if(false == (Projection is PlateCarreeProjection))
@@ -475,7 +475,14 @@ namespace GMap.NET
                maxZoom = 13;
             }
             break;
-
+            case MapType.ArcGIS_Mianyang:
+            {
+                if (false == (Projection is MianYangProjection))
+                {
+                    Projection = new MianYangProjection();
+                }
+                break;
+            }
             case MapType.MapsLT_Map_Hybrid:
             case MapType.MapsLT_Map_Labels:
             case MapType.MapsLT_Map:
@@ -1378,8 +1385,9 @@ namespace GMap.NET
             {
                 //return string.Format("http://server.arcgisonline.com/ArcGIS/rest/services/NGS_Topo_US_2D/MapServer/tile/{0}/{1}/{2}", zoom, pos.Y, pos.X);
              //   return string.Format("http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{0}/{1}/{2}", zoom, pos.Y, pos.X);   
-                return string.Format("http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/2/3/3");
-                //http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer
+                 //return string.Format("http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/2/3/3");
+              // http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer
+                return string.Format("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/tile/{0}/{1}/{2}", zoom, pos.Y, pos.X);
             }
                  
 #if TESTpjbcoetzer

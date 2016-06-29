@@ -111,8 +111,8 @@ namespace WpfApplication2.View.Windows
             MainPage.Content = mapPage;
 
             //在子线程中完成初始化连接 ，否则占用界面导致界面卡死
-            Thread thread = new Thread(initConnections);
-            thread.Start();
+            //Thread thread = new Thread(initConnections);
+            //thread.Start();
         }
 
         public void initConnections()
