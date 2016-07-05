@@ -481,6 +481,7 @@ namespace GMap.NET
                 {
                     Projection = new MianYangProjection();
                 }
+                maxZoom = 7;
                 break;
             }
             case MapType.MapsLT_Map_Hybrid:

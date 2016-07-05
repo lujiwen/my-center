@@ -97,5 +97,65 @@ namespace GMap.NET.Projections
            return new Size(0, 0);
        }
 
+       public override double GetGroundResolution(int zoom, double latitude)
+       {
+           return GetTileMatrixResolution(zoom);
+       }
+
+       public double GetTileMatrixResolution(int zoom)
+       {  
+           double ret = 0;
+           switch (zoom)
+           {
+               case 0:
+                   {
+                       ret = 5.843171008187242E-4;
+                   }
+                   break;
+
+               case 1:
+                   {
+                       ret = 8.592704825332295E-5;
+                   }
+                   break;
+
+               case 2:
+                   {
+                       ret = 4.2963524126661473E-5;
+                   }
+                   break;
+
+               case 3:
+                   {
+                       ret = 3.212272357870877E-5;
+                   }
+                   break;
+
+               case 4:
+                   {
+                       ret = 2.1481773960635764E-5;
+                   }
+                   break;
+
+               case 5:
+                   {
+                       ret = 1.0740886980317882E-5;
+                   }
+                   break;
+
+               case 6:
+                   {
+                       ret = 5.370443490158941E-6;
+                   }
+                   break;
+
+               case 7:
+                   {
+                       ret = 2.6840320145765553E-6;
+                   }
+                   break;
+           }
+           return ret;
+       }
    }
 }
