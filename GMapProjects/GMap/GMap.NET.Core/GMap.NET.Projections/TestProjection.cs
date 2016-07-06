@@ -42,10 +42,11 @@ namespace GMap.NET.Projections
        public override Point FromLatLngToPixel(double lat, double lng, int zoom)
        {
            Point ret = Point.Empty;
-
+           Console.WriteLine("在FromLatLngToPixel ：lat:" + lat + "   MinLatitude:" + MinLatitude + " MaxLatitude:"+MaxLatitude);
+           Console.WriteLine("在FromLatLngToPixel ：lng:" + lng + "   MinLongitude:" + MinLongitude + " MaxLongitude:" + MaxLongitude);
            lat = Clip(lat, MinLatitude, MaxLatitude);
            lng = Clip(lng, MinLongitude, MaxLongitude);
-
+         
            Size s = GetTileMatrixSizePixel(zoom);
            double mapSizeX = s.Width;
            double mapSizeY = s.Height;
