@@ -484,6 +484,15 @@ namespace GMap.NET
                 maxZoom = 7;
                 break;
             }
+            case MapType.ArcGIS_Test:
+            {
+                if (false == (Projection is TestProjection))
+                {
+                    Projection = new TestProjection();
+                }
+                maxZoom = 15;
+                break;
+            }
             case MapType.MapsLT_Map_Hybrid:
             case MapType.MapsLT_Map_Labels:
             case MapType.MapsLT_Map:
@@ -1389,6 +1398,11 @@ namespace GMap.NET
                  //return string.Format("http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/2/3/3");
               // http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer
                 return string.Format("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/tile/{0}/{1}/{2}", zoom, pos.Y, pos.X);
+            }
+            case MapType.ArcGIS_Test:
+            {
+                return string.Format("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/tile/{0}/{1}/{2}", zoom, pos.Y, pos.X);
+                break;
             }
                  
 #if TESTpjbcoetzer

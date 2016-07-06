@@ -47,12 +47,12 @@ namespace WpfApplication2.Controller
                  managerPavilionTransport, managerPavilionBridge, managerPavilionInnner, manager2115;
         public MainController()
         {
-            InitialData();
+            
 
             //需要在页面加载之后,在初始化连接,改为在MainWindow当中调用
           //  InitialConnection();
           //  InitialDBConnection();
-            InitialThread();
+         //   InitialThread();
 
             //while (true)
             //{
@@ -63,6 +63,14 @@ namespace WpfApplication2.Controller
 
         }
 
+        public void Init()
+        {
+            InitialData();
+            InitialConnection();
+            //初始化数据库连接
+            InitialDBConnection();
+            InitialThread();
+        }
         public DataUpdatedEventHandler DataUpdate
         {
             set { dataChartUpdate = value; }

@@ -108,7 +108,7 @@ namespace WpfApplication2.View.Pages
             MainMap.MaxZoom = 40;
             MainMap.MinZoom = 2;
             MainMap.Zoom = 6;
-            MainMap.MapType = MapType.ArcGIS_Mianyang;
+            MainMap.MapType = MapType.ArcGIS_Test;
             MainMap.Manager.Mode = AccessMode.ServerOnly;
          // MainMap.CacheLocation = System.Environment.SystemDirectory+"/cache/";
          // MainMap.BoundsOfMap = new RectLatLng(31.540871, 104.804598, 2.025, 2.018); //北纬30.67度，东经104.06度。
@@ -427,17 +427,17 @@ namespace WpfApplication2.View.Pages
         }
         void MainMap_MouseWheelScroll(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            //12 14
-            if (MainMap.Zoom > 14)
-            {
-                MainMap.Zoom = 14;
-            }
-            else if (MainMap.Zoom <= MainMap.MinZoom)
-            {
-                MainMap.Zoom = MainMap.MinZoom;
-            }
-
-            Console.WriteLine("main.maxzoom:" + MainMap.MaxZoom + "   MainMap zoom:" + MainMap.Zoom + "MainMap Minzoom" + MainMap.MinZoom);
+            ////12 14
+            //if (MainMap.Zoom > 14)
+            //{
+            //    MainMap.Zoom = 14;
+            //}
+            //else if (MainMap.Zoom <= MainMap.MinZoom)
+            //{
+            //    MainMap.Zoom = MainMap.MinZoom;
+            //}
+            Console.WriteLine( "当前zoom是："+MainMap.Zoom);
+           // Console.WriteLine("main.maxzoom:" + MainMap.MaxZoom + "   MainMap zoom:" + MainMap.Zoom + "MainMap Minzoom" + MainMap.MinZoom);
         }
 
         // center markers on load 

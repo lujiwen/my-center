@@ -37,6 +37,7 @@ namespace GMap.NET
       ArcGIS_ShadedRelief=799,
       ArcGIS_Terrain=811,
       ArcGIS_Mianyang = 812,
+      ArcGIS_Test     = 813 ,
       // use these numbers to clean up old stuff
       //ArcGIS_MapsLT_Map_Old= 877,
       //ArcGIS_MapsLT_OrtoFoto_Old = 888,

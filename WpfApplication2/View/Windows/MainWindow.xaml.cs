@@ -118,9 +118,7 @@ namespace WpfApplication2.View.Windows
         public void initConnections()
         {
             //页面加载完成之后,开始初始化和各个监测点的连接
-            c.InitialConnection();
-            //初始化数据库连接
-            c.InitialDBConnection();
+            c.Init();
             MessageBox.Show("初始化连接完毕！");
         }
         /// <summary>
